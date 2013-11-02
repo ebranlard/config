@@ -1,6 +1,7 @@
 
 alias ls='ls -F --color=always --group-directories-first'
 alias grep='grep --color=always'
+export PS1='\[[1m[33m\]\u\[[32m\]@\[[33m\]\h:\[[32m\]\w \[[33m\]\$ \[[32m\]\[[m\]'
 
 if [ $HOSTNAME == 'work' ]
 then
@@ -14,7 +15,6 @@ then
     export OMNIVOR_OBJ_DIR='/work/lib/OmniVor_lib/fortran/'
 
 
-    export PS1='\[[1m[33m\]\u\[[32m\]@\[[33m\]\h:\[[32m\]\w \[[33m\]\$ \[[32m\]\[[m\]'
 
     #export PS1='\[\033[1m\]\[\033[1;33m\]\u:\[\e[32;1m\]\w \[\e[33;1m\]\$\[\033[m\] '
     #export PS1="\033[33;40m[\u@\h \w]\\$\007 \033[0m\007"
