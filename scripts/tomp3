@@ -1,0 +1,55 @@
+#!/bin/bash
+#############################################################
+# To MP3 
+#############################################################
+# Description : au2mp3 m4a2mp3 wma2mp3 mp32mp3 flv2mp3 anything2mp3
+# Written by : Emmanuel Branlard
+# Date : Feb 2011
+# Dependencies : ffpmeg, lame, sox, faad ,mplayer
+# License : Feel free to modify and adapt it
+#############################################################
+for i 
+do
+        # Out File
+        j=`echo "$i"|tr '_' ' '`
+        j=${j%.*}.mp3
+        echo "File $j"
+
+        if [ -f "$j" ] 
+        then
+                echo "File exists $j -> skipping"
+        else
+                echo "File does not exists"
+                if [[ "$i" == *.au ]]
+                then
+                    sox "$i" "$i".wav
+                    ffmpeg -i "$i".wav -vn -acodec libmp3lame -y "$j"
+                    rm "$i".wav
+                elif [[ "$i" == *.m4a ]]
+                then
+                    faad -o - "$i" | lame -h -b 192 - "$j"
+                elif [[ "$i" == *.wav ]]
+                then
+                        lame -h "$i" "$j"
+                elif [[ "$i"  == *.wma ]]
+                then
+                        #wma > mp3 Rip with Mplayer / encode with LAME
+                        mplayer -vo null -vc dummy -af resample=44100 -ao pcm:waveheader "$i" ;
+                        lame -h "audiodump.wav" "$j";
+                        rm "audiodump.wav"
+                elif [[ "$i"  == *.mid* ]]
+                then
+                       #
+                       echo To be done
+                elif [[ "$i" == *.mp3 ]]
+                then
+                        #mp3 > mp3
+                        lame -h "$i" "audiodump.mp3"
+                        mv "audiodump.mp3" "$j"
+                else
+                        echo "Format unknown" ;
+                        avconv -i "$i" -vn -ab 320k -f mp3 "$j">/dev/null ;
+                fi
+        fi
+done
+

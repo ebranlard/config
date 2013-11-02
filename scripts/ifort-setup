@@ -1,0 +1,4 @@
+#!/bin/bash
+
+source /opt/intel/Compiler/11.1/069/bin/ifortvars.sh  ia32 
+

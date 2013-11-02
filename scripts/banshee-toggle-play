@@ -1,0 +1,20 @@
+#! /bin/bash
+if [ -d /media/ManuZik/Music ]
+then #echo "Ok, disk already mounted"
+#     rhythmbox-client --play-pause
+    banshee --toggle-playing
+else
+    res=`ls -l /dev/disk/by-uuid|grep 1105BE213AEBE2F6|wc -l`
+    if [[ $res == 1 ]]
+    then #echo "Device is plugged($DEV), mounting it"
+        res=`ls -l /dev/disk/by-uuid|grep 1105BE213AEBE2F6|awk '{print $11}'`
+        DEV=`basename $res`
+#         pmount -t ntfs-3g /dev/$DEV ManuZik
+#         rhythmbox-client --play-pause
+    banshee --toggle-playing
+#     else #echo "Device is not even plugged, aborting"
+    fi
+
+fi
+
+

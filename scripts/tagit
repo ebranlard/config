@@ -1,0 +1,55 @@
+#!/bin/bash
+#############################################################
+# Tag IT! Should use mp3info to do the job 
+#############################################################
+# Description : 
+# Written by : Emmanuel Branlard
+# Date :  NOT YET
+# Dependencies : mp3info
+# License : Feel free to modify and adapt it
+#############################################################
+# for i 
+# do
+#         # Out File
+#         j=`echo "$i"|tr '_' ' '`
+#         j=${j%.*}.mp3
+#         echo "File $j"
+# 
+#         if [ -f "$j" ] 
+#         then
+#                 echo "File exists $j -> skipping"
+#         else
+#                 echo "File does not exists"
+#                 if [[ "$i" == *.au ]]
+#                 then
+#                     sox "$i" "$i".wav
+#                     ffmpeg -i "$i".wav -vn -acodec libmp3lame -y "$j"
+#                     rm "$i".wav
+#                 elif [[ "$i" == *.m4a ]]
+#                 then
+#                     faad -o - "$i" | lame -h -b 192 - "$j"
+#                 elif [[ "$i" == *.wav ]]
+#                 then
+#                         lame "$i" "$j"
+#                 elif [[ "$i"  == *.wma ]]
+#                 then
+#                         #wma > mp3 Rip with Mplayer / encode with LAME
+#                         mplayer -vo null -vc dummy -af resample=44100 -ao pcm:waveheader "$i" ;
+#                         lame "audiodump.wav" "$j";
+#                         rm "audiodump.wav"
+#                 elif [[ "$i"  == *.mid* ]]
+#                 then
+#                        #
+#                        echo To be done
+#                 elif [[ "$i" == *.mp3 ]]
+#                 then
+#                         #mp3 > mp3
+#                         lame "$i" "audiodump.mp3"
+#                         mv "audiodump.mp3" "$j"
+#                 else
+#                         echo "Format unknown" ;
+#                         ffmpeg -i "$i" -vn -ab 128k -ac 2 -ar 44100 -y "$j">/dev/null ;
+#                 fi
+#         fi
+# done
+# 

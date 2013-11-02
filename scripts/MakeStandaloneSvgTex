@@ -1,0 +1,48 @@
+#!/bin/bash 
+# Emmanuel Branlard = April 2013
+#
+if [ $# != 4 ]; 
+then 
+    echo "Usage: `basename $0` Master FigName Scale1 Scale2";
+    exit
+fi
+
+#
+# Takes as first input the name of the master file(without tex), and as second argument the name of the svg figure(without extension) and then the two "scales"
+#
+# The script generates a file called tmp_svgtex, and compiles it with pdflatex. 
+#
+#
+#
+# For reference:
+# SVGTOPDF=inkscape -D -A
+echo "Converting..."
+inkscape -z -D --file="$2.svg" --export-pdf="tmp_svgtexfig.pdf" --export-latex
+mv "tmp_svgtexfig.pdf_tex" "tmp_svgtexfig.tex"
+#
+# set -vx
+ln=`grep --colour=none -n -T begin{document} $1.tex|awk -F: '{print $1}'|sed 's/\ //g'|tr -d ' '|tr -d -c '[0-9]'`
+# echo $ln
+# awk "NR<$ln"' {print}' $1.tex 
+awk -v line="$ln" 'NR<line {print}' $1.tex >tmp_svgtex.tex
+echo "\\usepackage[xetex,active,displaymath,tightpage]{preview}" >> tmp_svgtex.tex
+# echo "\\usepackage[xetex,active,displaymath]{preview}" >> tmp_svgtex.tex
+echo "\\PreviewEnvironment{picture}" >> tmp_svgtex.tex
+echo "\\def\\svgwidth{$3\\columnwidth}" >> tmp_svgtex.tex
+echo "\\begin{document}" >> tmp_svgtex.tex
+echo "\\pagestyle{empty} \\thispagestyle{empty}" >> tmp_svgtex.tex
+echo "\\scalebox{$4}{\\input{tmp_svgtexfig}}" >> tmp_svgtex.tex
+# echo "\\input{$2}" >> tmp_svgtex.tex
+echo "\\end{document}" >> tmp_svgtex.tex
+# 
+echo "Compiling..."
+pdflatex --interaction=nonstopmode tmp_svgtex.tex > /dev/null
+
+
+echo "Cleaning"
+mv tmp_svgtex.pdf `basename $2`.pdf
+
+
+echo "Done"
+#  Uncomment me if debugging required
+# rm tmp_svgtex*

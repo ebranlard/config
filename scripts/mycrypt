@@ -1,0 +1,28 @@
+#!/bin/bash
+#############################################################
+# Default script:
+#############################################################
+# Description :
+# Written by : Emmanuel Branlard
+# Date : March 2012
+# Dependencies : gpg
+# License : Feel free to modify and adapt it
+# Note : 
+#############################################################
+FILE=/home/manu/Config/simplekey
+if [[ $1 == "-c" ]] || [[ $1 == "-e" ]]
+then
+    gpg --batch --output $2"m" --passphrase-file $FILE -c $2 
+    mv $2 ~/.local/share/Trash/files/
+elif [[ $1 == "-d" || $1 == "-x" ]]
+then
+#     gpg --batch --passphrase-file $FILE --status-fd 1 --decrypt $2 | grep '\[GNUPG:\] GOODSIG'
+#     if [ $? -eq 0 ]; then
+#         echo "I'm here"
+        gpg --batch --passphrase-file $FILE --output ${2%*m} --decrypt $2 
+#     fi
+else
+    echo "Wrong input"
+fi
+
+

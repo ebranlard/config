@@ -1,0 +1,14 @@
+#!/bin/sh
+#############################################################
+# :
+#############################################################
+# Description :
+# Written by : Emmanuel Branlard
+# Date : 
+# Dependencies : 
+# License : Feel free to modify and adapt it
+# Note : 
+#     pdftk file.pdf burst
+#############################################################
+$@
+/bin/bash

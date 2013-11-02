@@ -1,0 +1,169 @@
+#!/bin/bash
+#
+# Conversion de toute une arborescence d'un encodage dans un autre.
+# Exemple d'utilisation : 
+#  mise a jour de sa distribution Linux de iso-8859-1 vers UTF-8
+#
+# Necessite : convmv et iconv
+#
+# Utilisation :
+# $ ./convertEnc.sh Documents/Divers 
+#
+# IMPORTANT : faites une copie de vos donnees et travaillez sur cette copie !!
+# (Je ne peux etre tenu responsable si vous corrompez vos donnees, soyez prudents)
+#
+# Ce script ne demande qu'a etre ameliore...
+#
+## Protection contre les espaces (JacquesF -> guillemets autour des variables ou cela n'etait pas fait)
+#
+# Sebastien de Boissieu (c) 2006
+# $Id: convertEnc.sh,v 1.8.2.1 2007/03/17 22:39:29 sebastien Exp $
+# Licence : GPL 2
+
+FROM="iso-8859-1"
+TO="UTF-8"
+
+echo "Conversion de $FROM en $TO"
+
+# Procedure pour renommer un fichier si nom deja existant
+renomme()
+{
+nbe=0
+num="_$nbe"
+nouvnom="$1"
+while [ -e "$nouvnom" ];
+do
+	let nbe=nbe+1
+	num="_$nbe"
+	nouvnom="$1$num"
+done
+export nouvnom
+}
+
+# Conversion recursive des noms de fichiers et repertoires
+convert_names()
+{
+echo "Conversion des NOMS de fichiers et repertoires"
+#convmv -r -f $FROM -t $TO --qfrom --qto --notest "$1"
+convmv -r -f $FROM -t $TO --notest "$1"
+echo ""
+}
+
+# Routine de conversion du contenu d'un fichier
+do_convert()
+{
+fic="$1"
+echo "  Fichier $fic"
+# Lecture du type mime
+encForm=`file -bi "$fic" | awk -F "charset=" '{ print $2 }'`
+if [ !  "$encForm" = "" ]; then
+	# le fichier possede un charset
+	echo "  -> $encForm"
+	if [ ! "$encForm" = "$TO" ]; then
+		# ce charset est different de celui vise
+		# nom du fichier converti temporaire
+		renomme "$fic"_"$TO"
+		nouv_fic="$nouvnom"
+		# la conversion
+		iconv -f "$encForm" -t $TO "$fic" -o "$nouv_fic"
+        # reussite ou echec de la commande cruciale ?
+        status=$?
+        if [ $status == 0 ]; then
+            # Pour conserver la/les date(s) :
+            touch -r "$fic" "$nouv_fic"
+            # Pour conserver le proprietaire
+            chown --reference "$fic" "$nouv_fic"
+            # pour conserver les droits :
+            chmod --reference "$fic" "$nouv_fic"
+            # on ecrase l'ancien fichier par le nouveau
+            if [ -w "$fic" ] ; then
+                ### JacquesF
+                ### Sur mes tests, si le fichier n'est pas accessible en ecriture
+                ### un mv -f sur le fichier remplace pourtant celui-ci (droits d'ecriture dans le repertoire)
+                mv -f "$nouv_fic" "$fic"
+            else
+                echo "Le fichier $fic n'est pas accessible en ecriture"
+                echo "Le fichier converti se nomme $nouv_fic"
+            fi
+        else
+            echo "   -> Echec: $nouv_fic corrompu ?"
+            echo "             $fic conserve."
+        fi
+	fi
+fi
+
+}
+
+# Conversion recursive du contenu des fichiers texte
+convert_content()
+{
+#echo "Conversion du contenu des fichiers"
+if [ -d "$1" ]; then
+	# c'est un repertoire
+	if [ -x "$1" ]; then
+		# On peut entrer dans le repertoire
+		echo "Entree dans : $1"
+        ### Protection si le repertoire contient un espace 
+		chemin_orig="`pwd`"
+		cd -- "$1"
+		
+		# liste complete (avec fichiers caches)
+        # Attention : si liste trop longue ca peut planter 
+        # passer par xargs --> man xargs
+		 for fic in `ls * .* | xargs` ; do 
+		   if [ $fic != "." -a $fic != ".." ]; then
+                base_fic=$(basename -- "$fic")
+                #echo "$fic -> $base_fic"
+                echo " Analyse de : $base_fic"
+                # recursivite
+                if [ -d "$base_fic" ]; then
+                # Si repertoire, on execute la procedure dessus
+                convert_content "$base_fic"
+                else
+                # sinon on fait la conversion
+                do_convert "$base_fic"
+                fi
+            fi
+		done
+		echo "Sortie de : $1"
+		cd "$chemin_orig"
+	else
+		echo "Entree INTERDITE dans : $1"
+	fi
+else
+	# On fait la conversion sur le fichier
+	do_convert "$1"
+fi
+
+}
+#=======================================
+
+# Debut execution
+if [ $# -gt 0 ]; then
+    ### Alerte avant lancement du script
+    clear
+    echo -e "\n\nATTENTION : ne travaillez jamais sur les donnees d'origine !"
+    echo -e "\nEtes-vous certain de vouloir modifier ces fichiers ?"
+    echo -e "\tAppuyez sur Ctrl-C pour annuler ou sur Return pour continuer \c"
+    read Tempo
+    echo
+    ### Fin de l'alerte 
+	# pour l'instant on ne considere que le 1er argument
+	echo "Sur: $1"
+	echo ""
+    ###   On n'est pas a l'abri d'un repertoire avec des espaces dans le nom 
+	convert_names "$1"
+	echo "============="
+	# Remarque : si $1 est un repertoire dont le nom a ete converti
+	#  le contenu de $1 est obsolete.
+	#  on le converti :
+	nom=$(echo "$1" | iconv -f $FROM -t $TO)
+    convert_content "$nom"
+	
+	echo "Fini"
+else
+	echo "Utilisation :"
+	echo "$0 chemin/repertoire"
+    ### Alerte par precaution
+    echo "Ne travaillez jamais sur les donnees d'origine mais seulement sur une copie de celles-ci" 
+fi

@@ -1,0 +1,35 @@
+#!/bin/sh
+#############################################################
+# Send It
+#############################################################
+# Description : Send file by email
+# Written by : Emmanuel Branlard
+# Date : October 2011
+# Dependencies : mutt
+# License : Feel free to modify and adapt it
+#############################################################
+#notify-send "Email to:$a $1"
+
+export mydate=$(date +%Y-%m-%d-%H%M-%S);
+xterm -geometry 30x2+550+400 +sb -e 'echo "email address";read a;echo $a>/tmp/sendit$mydate.tmp';
+#xterm -geometry 30x2+550+400 +sb -e 'a=EMAIL@gmail.com;mydate=$(date +%Y-%m-%d-%H%M-%S); echo $a>/tmp/sendit$mydate.tmp;a';
+
+to=`cat /tmp/sendit$mydate.tmp`;
+
+notify-send "$to
+
+$@" -i mail-attachment -t 3000;
+echo "Hi
+I attached $# File(s) to this email. 
+Best,
+Emmanuel
+
+
+
+
+Sent with my geeky shell script " | mutt -a "$@" -s "Sent file(s) ($1)" -- $to ;
+
+rm /tmp/sendit$mydate.tmp
+notify-send "File sent!
+$@" -t 3000 -i mail-forward
+

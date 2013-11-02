@@ -1,0 +1,116 @@
+#!/usr/bin/env python
+#############################################################
+# Clean-bash-hsitory: remove specific commands from your bash history
+#############################################################
+# Description :
+# Written by : Emmanuel Branlard
+# Date : October 2014
+# Dependencies : python
+# License : Feel free to modify and adapt it
+# Usage : 
+#     ./clean-bash-history
+#############################################################
+
+#############################################################
+# Modify me
+#############################################################
+forbidden_commands = ['ls','la','ll','su','cd','rm','mv','fg','bg','make','bash','clear','man','git status','git add','git rm','git commit','git init','git checkout','git push','git diff','api','aps','apc','ref','sudo cp','sudo rm','cat','gfortran','locate','groups','gitk']
+
+
+import argparse
+import shutil
+import os
+import sys
+
+DESCRIPTION="""Description: 
+    Remove duplicates and user requested commands from bash
+    history.  Optional username may be provided to specify which bash_history
+    file to clean: /home/USER/.bash_history
+ 
+    The scripts comes with some default commands to remove, but they can easily
+    be edited at the top of the script from the variable: "forbidden_commands".
+
+    A "forbidden_command" can consist of several words, in which case the lines
+    of the bash_history file that starts with all the same successive words
+    will be removed.
+   
+    """
+
+def main(argv):
+    #############################################################
+    # Parsing arguments
+    #############################################################
+    # Configure argument parser
+    parser = argparse.ArgumentParser(formatter_class=argparse.RawDescriptionHelpFormatter,description=DESCRIPTION)
+    parser.add_argument('user', nargs='?', help='USER: /home/USER/.bash_history will be cleaned')
+    args = parser.parse_args()
+
+    ## show values ##
+    if args.user==None:
+        print 'No specific user provided, using current user'
+        BASHFILE   =os.path.expanduser('~/.bash_history')
+    else:
+        BASHFILE   ='/home/'+args.user.strip()+'/.bash_history'
+
+    BASHFILETMP=BASHFILE+'_tmp'
+    print ("Cleaning file: %s" % BASHFILE )
+    #############################################################
+    OldFile=open(BASHFILE,'r')
+    NewFile=open(BASHFILETMP,'w')
+
+    lines_seen = set() # holds lines already seen to avoid duplicate
+    nDuplicate=0;
+    nKept=0;
+    nLineTotal=0;
+    # Looping on file lines
+    for line in OldFile:
+        nLineTotal=nLineTotal+1;
+        # We first avoid duplicates
+        if line not in lines_seen: 
+            command_words=line.split(' ')
+            keep_command=True
+
+            # Looping on forbidden commands
+            for forbidden_command in forbidden_commands:
+                forbidden_command_words=forbidden_command.split(' ')
+                nMatches=0;
+                # Looping on commands words
+                for word,forbidden_word in zip(command_words,forbidden_command_words):
+                    if word.strip() == forbidden_word.strip():
+                        nMatches=nMatches+1
+                    else:
+                        break
+                # If the n first words of the command matches the forbidden one, discard it
+                if nMatches==len(forbidden_command_words):
+                    keep_command=False
+                    break
+
+            # If keep command is still true after the above we write it to file
+            if keep_command:
+                nKept=nKept+1;
+                NewFile.write(line)
+                lines_seen.add(line)
+        else:
+            nDuplicate=nDuplicate+1;
+    # Closing files
+    OldFile.close()     
+    NewFile.close()     
+
+    # Remove backup copy
+    shutil.copy2(BASHFILETMP,BASHFILE)
+    os.remove(BASHFILETMP)
+
+    # Print summary
+    nRemoved=nLineTotal-nKept
+    print ''
+    print 'Bash history cleaned.'
+    print ''
+    print 'Lines before:',nLineTotal
+    print 'Lines after :',nKept
+    print 'Duplicates  :',nDuplicate
+    print 'Removed     :',nRemoved
+
+
+if __name__ == "__main__":
+    main(sys.argv[1:])
+

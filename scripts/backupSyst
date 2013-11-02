@@ -1,0 +1,132 @@
+#!/bin/sh
+# Has to be run as root
+
+#initialization
+user=manu   ;                           #<<<<<<<<<< change me
+thunderbird=icedove   ;                           #<<<<<<<<<< change me
+HOME=/home/$user
+folder=backup_data/
+mydate=$(date +%Y-%m-%d-%H%M)
+folder=$HOME"/Config/"$folder$mydate  ; # <<<<<<<<<< change me
+mkdir -p $folder
+cd $folder
+echo $folder
+echo "Mozilla folder might not be backed up... check it"
+
+
+#creating arborescence
+mkdir -p home/config
+mkdir -p home/ssh
+mkdir -p home/filezilla
+mkdir -p home/local/share/rhythmbox
+mkdir -p home/mozilla/firefox/
+mkdir -p etc/network
+mkdir -p log
+mkdir etc/apt
+mkdir etc/cups
+mkdir etc/event.d
+mkdir etc/grub.d/
+mkdir etc/cron.daily/
+mkdir etc/cron.weekly/
+mkdir etc/X11
+mkdir -p etc/texmf/texmf.d
+mkdir etc/samba
+mkdir etc/default
+mkdir etc/ssh
+mkdir etc/apache2
+mkdir etc/logrotate.d
+mkdir -p lib/lsb/
+mkdir etc/proftpd
+mkdir etc/fail2ban
+#mkdir -p etc/gdm/Init/
+
+
+# liste des paquets
+sudo dpkg --get-selections > liste-paquets.dpkg
+
+
+
+#home folder
+sudo cp $HOME/Config/profiles/bash* home/
+cp $HOME/.vimrc home/vimrc
+cp -r $HOME/.vim/ home/vim
+cp $HOME/.xinitrc home/xinitrc
+cp $HOME/.Xdefaults home/Xdefaults
+cp $HOME/.conkyrc home/conkyrc
+cp $HOME/.asoundrc home/asoundrc
+cp $HOME/.ctags home/ctags
+cp -r $HOME/.config/* home/config/
+cp -r $HOME/.ssh/* home/ssh/
+cp -r $HOME/.filezilla/* home/filezilla/
+cp -r $HOME/.$thunderbird/* home/$thunderbird/
+cp $HOME/.local/share/rhythmbox/*.xml home/local/share/rhythmbox/
+# cp -r $HOME/.mozilla/firefox home/mozilla/firefox                  # important, can be big..
+
+
+
+#system
+sudo cp /etc/fstab etc/fstab
+sudo cp /etc/modules etc/modules
+# sudo #cp /etc/event.d/tty1 etc/event.d/tty1
+sudo cp /etc/issue etc/issue
+sudo cp /etc/hosts etc/hosts
+sudo cp /etc/inittab etc/
+sudo cp /etc/sudoers etc
+sudo cp /etc/group etc/
+sudo cp /etc/passwd etc/passwd
+sudo cp /etc/cron.daily/* etc/cron.daily/
+sudo cp /etc/cron.weekly/* etc/cron.weekly/
+sudo cp /etc/logrotate.conf etc/logrotate.conf
+sudo cp /etc/logrotate.d/rsyslog etc/logrotate.d/rsyslog
+sudo cp /etc/network/interfaces etc/network/interfaces
+sudo cp /etc/X11/xorg.conf  etc/X11/xorg.conf
+sudo cp /etc/apt/sources.list etc/apt/sources.list
+sudo cp /etc/apt/preferences etc/apt/preferences
+# sudo cp /boot/grub/menu.lst  menu.lst
+sudo cp /boot/grub/grub.cfg grub.cfg
+sudo cp /etc/grub.d/* etc/grub.d/
+sudo cp /etc/sysctl.conf etc/
+sudo cp /etc/default/rcS etc/default/rcS
+sudo cp /etc/default/keyboard etc/default/keyboard
+sudo cp /lib/lsb/init-functions lib/lsb/
+
+
+#programs
+sudo cp /etc/latex2html.conf etc/
+sudo cp /etc/texmf/texmf.d/*  etc/texmf/texmf.d/
+sudo cp /etc/cups/*  etc/cups/
+sudo cp /etc/samba/smb.conf etc/samba/
+sudo cp -R /etc/apache2/* etc/apache2/
+sudo cp /etc/ssh/sshd_config etc/ssh/
+# sudo #cp /etc/gdm/Init/Default etc/gdm/Init/Default
+# sudo cp /etc/proftpd/proftpd.conf etc/proftpd/
+# sudo cp /etc/proftpd/msg/* etc/proftpd
+# sudo cp /etc/fail2ban/jail.local etc/fail2ban
+
+
+
+#processus init
+sudo cp -R /etc/init.d etc/init.d
+sudo cp -R /etc/rc0.d etc/rc0.d
+sudo cp -R /etc/rc1.d etc/rc1.d
+sudo cp -R /etc/rc2.d etc/rc2.d
+sudo cp -R /etc/rc3.d etc/rc3.d
+sudo cp -R /etc/rc4.d etc/rc4.d
+sudo cp -R /etc/rc5.d etc/rc5.d
+sudo cp -R /etc/rc6.d etc/rc6.d
+sudo cp -R /etc/rcS.d etc/rcS.d
+
+#logs (might be big if not logrotate...)
+sudo cp /var/log/dmesg log/dmesg
+sudo cp /var/log/daemon.log log/daemon.log
+sudo cp /var/log/messages log/messages
+sudo cp /var/log/syslog log/syslog
+sudo cp /var/log/kern.log log/kern.log
+sudo cp /var/log/aptitude log/
+
+
+#Giving back rights to all files
+cd ../../
+sudo chown -R $user:$user $folder
+
+# wouldn't hurt to tar

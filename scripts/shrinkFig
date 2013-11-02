@@ -1,0 +1,15 @@
+#!/bin/sh
+#############################################################
+# Shrink Fig
+#############################################################
+# Description : Shrink Figure to 40%
+# Written by : Emmanuel Branlard
+# Date : March 2011
+# Dependencies : image magick
+# License : Feel free to modify and adapt it
+#############################################################
+for i 
+do
+        mogrify -resize 40% $i
+done
+

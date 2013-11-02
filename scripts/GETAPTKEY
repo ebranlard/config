@@ -1,0 +1,24 @@
+#!/bin/sh
+# @(#) TITLE MESSAGE: Recuperation des cles GPG et exportation vers apt
+# @(#) Feilong version 05/01/2009
+# @(#) Syntaxe: GETKEY KEY
+# @(#) MACHINE VM DEBIAN lenny
+if [ $(id -u) != "0" ]; then
+echo “Seul root peut executer ce shell” >&2
+exit 1
+fi
+if [ $# -ne 1 ]; then
+echo “syntaxe : GETKEY <votre cle>”
+exit 1
+fi
+gpg –keyserver hkp://wwwkeys.eu.pgp.net –recv-keys $1
+if [ $? -ne 0 ]; then
+echo ” Une erreur est survenu pendant le téléchargement de la clé”
+exit 1
+fi
+gpg –armor –export $1 | apt-key add -
+if [ $? -ne 0 ]; then
+echo ” Une erreur est survenu pendant l’export de la clé vers apt”
+exit 1
+fi
+apt-get update

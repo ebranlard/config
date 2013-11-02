@@ -1,0 +1,3 @@
+#!/bin/sh
+cd /home/manu/Config/bin/Alarmaniac/
+java -jar alarmaniac.jar

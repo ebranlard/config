@@ -1,0 +1,30 @@
+#!/bin/sh
+#~ 
+#~ cd Debianuel
+#~ cp -r debianuel debianuel-bkp
+#~ 
+#~ cd debianuel
+#~ 
+#~ 
+#~ rename "s/html/php/g" *.html
+#~ sed -i "s/[.]html/.php/g" *.php
+#~ sed -i "s:</HEAD>::g" *.php
+#~ 
+#~ 
+#~ old_value="<BODY >";
+#~ new_value="<? include('../_includes/haut.php');?>";
+#~ sed -i "s:$old_value:$new_value:g" *.php
+#~ 
+#~ old_value="<ADDRESS>";
+#~ new_value="<? include('../_includes/bas.php'); ?>";
+#~ 
+#~ sed -i "s:$old_value:$new_value:g" *.php
+#~ 
+#~ 
+#~ old_value="</ADDRESS>";
+#~ new_value="";
+#~ sed -i "s:$old_value:$new_value:g" *.php
+#~ 
+#~ 
+#~ 
+

@@ -1,0 +1,43 @@
+#! /bin/bash
+#############################################################
+# Refc 
+#############################################################
+# Description : uses locate to search through references, Case Sensitive!!!
+# Written by : Emmanuel Branlard
+# Date : Dec 2011
+# Dependencies : 
+# License : Feel free to modify and adapt it
+# Use: ref Word1 Word2 etc.
+#############################################################
+
+function asURL() {
+        # PREFIX="file://$(pwd)/";
+        PREFIX="file://";
+         sed "s*^*$PREFIX*" #|
+#         sed 's/ /%20/g'; 
+}
+
+function direcho() {
+    prevdir=''
+    while read data; do
+        curdir=`dirname "$data"`
+        if [[ $curdir != $prevdir ]]
+        then
+            echo $curdir
+        fi
+        echo "$data"
+        prevdir=$curdir
+    done
+}
+
+a="";
+# looping over arguments
+for i
+do
+    a=$a" "$i;
+    b=$b"|"$i;
+done
+# locate -iA $a |grep --colour=never _Refs|cut -b 13-|grep --colour=auto -i -E "$b"
+# locate -iA $a |grep --colour=never _Refs|grep -i -E "$b" |asURL |grep --colour=auto -i -E "$b"
+locate -A $a |grep --colour=never _Refs|grep -E "$b" |asURL|direcho|grep --colour=auto -E "$b"
+# locate -iA $a |grep -i -E "$b" |asURL |grep --colour=auto -i -E "$b"

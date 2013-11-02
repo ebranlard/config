@@ -1,0 +1,30 @@
+#!/bin/sh
+# Sould be run as user
+
+if [[ `cat /etc/hostname` == "olympe" ]]
+then
+    #variables
+    OPTS="-av"
+    DEST=/media/Storage
+
+    ##############
+    # DATAWIN
+    ##############
+    SRC=/media/DataWin
+    #without deletion
+    rsync $OPTS $SRC/Pictures/ $DEST/Pictures/
+    #with delete propagation
+    rsync $OPTS --delete $SRC/Musique/ $DEST/Musique/
+    rsync $OPTS --delete "$SRC/Musique - Data/" "$DEST/Musique - Data/"
+    rsync $OPTS --delete "$SRC/Musique Classique/" "$DEST/Musique Classique/"
+    ##############
+    # Linux
+    ##############
+    SRC=/home/manu
+    #without deletion
+    rsync $OPTS $SRC/Sites/ $DEST/Sites/
+    #with delete propagation
+    rsync $OPTS --delete $SRC/Config/ "$DEST/Config-Home/"
+else 
+    echo "Wrong environment"
+fi

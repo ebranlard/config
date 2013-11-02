@@ -1,0 +1,41 @@
+#!/bin/sh
+#############################################################
+# Altern Rotation :
+#############################################################
+# Rotate by 180 degrees every other page of a pdf
+# written by Emmanuel Branlard
+# Oct 2009
+# This script uses pdftk
+# Feel free to modify and adapt it
+# To separate 'file.pdf' into single page files :
+#     pdftk file.pdf burst
+#############################################################
+echo 'Every other pdf file in the current directory will be rotated'
+echo 'Warning : do a backup of the pdf files first'
+echo '	Press Ctrl+C to cancel'
+echo '	Press Enter to Continue';
+read reply
+
+j=0
+# looping on all pdf files in the folder
+for i in *.pdf ; do
+  	j=`expr $j + 1`;
+	printf 'File %d : %s ' $j $i
+	if [ `expr $j % 2` -eq 0 ]; then
+		printf ' -> Rotating... ';
+		cp $i $i.bkp
+		pdftk $i.bkp cat 1S output $i
+		rm $i.bkp
+	fi
+	echo ''
+done	
+
+echo 'Do you want to concatenate the file ?'
+echo '	Press Ctrl+C to cancel'
+echo '	Press Enter to Continue';
+read reply
+ 
+echo 'Binding...'
+pdftk *.pdf cat output bind.pdf
+
+echo "Done. File 'bind.pdf' created"

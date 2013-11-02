@@ -1,0 +1,193 @@
+#!/bin/bash
+unalias grep
+########################################################################
+# Preliminary tests
+########################################################################
+if [ $# == 0 ]
+then
+	echo "No arguments !";
+	exit;
+fi
+cpt=`ls /usr/bin 2>/dev/null |grep gawk|wc -l`
+if [ $cpt == 0 ]
+then
+	echo "Install gawk !";
+	exit;
+fi
+
+cpt=`ls /usr/bin 2>/dev/null |grep latex2html|wc -l`
+if [ $cpt == 0 ]
+then
+	echo "Install latex2html !";
+	exit;
+fi
+
+
+#
+echo "Entering folder $1"
+cd $1
+#
+echo "Trying *report*.tex"
+cpt=`ls *eport*.tex 2>/dev/null|wc -l`
+echo $cpt
+if [ $cpt -ne 1 ]
+then
+	if [ $cpt -gt 0 ]
+	then
+		ls *eport*.tex
+		echo "Ambiguity on the main file name !"
+		exit;
+	else
+		echo "Trying *.tex"
+		cpt=`ls *.tex 2>/dev/null|wc -l`
+		echo $cpt
+		if [ $cpt -ne 1 ]
+		then
+			ls *.tex
+			echo "Ambiguity on the main file name !"
+		exit;
+		else
+			f=`echo *.tex`;
+		fi
+	fi
+else
+	f=`echo *eport*.tex`;
+fi
+
+echo ""
+echo "Main file: $f"
+cp $f ${f/tex/backuptex}
+title=`grep titlea $f |awk -v FS="[{}]" '{print $4}' | xargs`
+echo "Title: $title\n"
+echo ""
+echo "Press ENTER if every thing's OK , Ctrl+C otherwise"
+read
+
+
+########################################################################
+# Removing pdf
+########################################################################
+echo "##################################################################"
+echo "Converting pdf to png"
+echo "##################################################################"
+rm *.pdf 2>/dev/null
+../pdf2pngCleanUp
+
+
+
+########################################################################
+# latex work
+########################################################################
+echo "##################################################################"
+echo "Formatting"
+echo "##################################################################"
+
+
+echo "Modifying figure width"
+grep -nHFR \\\newcommand{\\\fitfig} ./* > tmp.tmp
+ff=`gawk -F: '{print $1}' tmp.tmp`
+if `test -e $ff`
+then
+	sed -i "s/{\\\fitfig}\[1\]{[#0-9\\\a-zA-Z]*}/{\\\fitfig}[1]{14cm}/g" $ff
+fi
+
+echo "Commenting xcolor"
+grep -nHR .*{xcolor} ./* > tmp.tmp
+ff=`gawk -F: '{print $1}' tmp.tmp`
+if `test -e $ff`
+then
+	sed -i "s/.*usepackage.*{xcolor}*/%\\\usepackage[table]{xcolor} /g" $ff
+fi
+
+echo "Modifying for parshape"
+grep -nHR .*\\\parshape ./* > tmp.tmp
+ff=`gawk -F: '{print $1}' tmp.tmp`
+if `test -e $ff`
+then
+	sed -i "s/.*\\\parshape/%/g" $ff
+fi
+
+
+rm tmp.tmp
+echo "Modifying $f for undefined commands before \begin{document}"
+old_value=".*\\\begin{document}";
+new_value="\\\newcommand{\\\rowcolors}[3]{} \\\renewcommand{\\\arrayrulecolor}[1]{} \\\renewcommand{\\\rhead}[1]{} \\\renewcommand{\\\hypersetup}[1]{} \\\renewcommand{\\\lstset}[1]{} \\\renewcommand{\\\framebox}[1]{#1}  \\\renewcommand{\\\script}[1]{} \\\renewcommand{\\\command}[1]{} \\\renewcommand{\\\dtutext}[1]{#1\\\par} \\\begin{document}";
+sed -i "s/$old_value/$new_value/g" $f
+
+
+echo "##################################################################"
+echo "Running pdflatex a first time on $f"
+echo "##################################################################"
+pdflatex $f
+
+echo "##################################################################"
+echo "Running bibtex on $f"
+echo "##################################################################"
+ff=*.aux
+bibtex $ff
+
+echo "##################################################################"
+echo "Running pdflatex a second time on $f"
+echo "##################################################################"
+pdflatex $f
+
+########################################################################
+# latex 2 html and postformatting
+########################################################################
+echo "##################################################################"
+echo "Now Running latex2html"
+echo "##################################################################"
+
+echo "Running latex2html on folder $1"
+latex2html -html_version 4.0,ISO-8859-1 -address " " -split 2 $f -dir $1 -mkdir -t "$title"
+
+echo "Done. If results are bad, check that the package xcolor has been commented."
+
+echo "Formatting"
+cp -r $1 "$1-bkp"
+cd $1
+rename "s/html/php/g" *.html
+sed -i "s/[.]html/.php/g" *.php
+sed -i "s:</HEAD>::g" *.php
+
+
+old_value="<BODY >";
+new_value="<? include('../_includes/haut.php');?>";
+sed -i "s:$old_value:$new_value:g" *.php
+
+old_value="<ADDRESS>";
+new_value="<? include('../_includes/bas.php'); ?>";
+sed -i "s:$old_value:$new_value:g" *.php
+
+old_value="</ADDRESS>";
+new_value="";
+sed -i "s:$old_value:$new_value:g" *.php
+
+
+old_value="</ADDRESS>";
+new_value="";
+sed -i "s:$old_value:$new_value:g" *.php
+
+########################################################################
+# Keywords
+########################################################################
+echo "##################################################################"
+echo "Keywords"
+echo "##################################################################"
+keywords=`cat *php* | sed -e :a -e 's/<[^>]*>//g;/</N;//ba' | tr ' ' '\n'  | tr -d '[:punct:]' | grep -v '[^a-z]'| grep -E '[a-z]{3,}' | tr '[:upper:]' '[:lower:]' | grep -v -w -E 'the|and|for|from|with|used|which|are|that|this|will|can|been|should|using|all|one|two|three|has|taken|where|made|also|thus|though|have|when|not|such|figure|table|these|could|seen|given|nbsp|les|des|from|different|est|dans|une|our|qui|between|next|would|sont|its|see|son|plus|case|que|pour|suivant|nous|par|sur|each|but|than|only|other|main|figures|tables|more|there|value|values|were|was|low|high|around|since|very|order|per|into|first|because|found|them|done|good|their|really|here|got|big|better|well|away|shown|over|like|while|within|take|due|any|then|under|same|much|most|both|second|lot|use|get|pas|mais|alors|peut|plot|left|right' | sort | uniq -c| sort -rn|head -50 |sed 's/'[\ 0-9]'//g' |xargs |sed 's/[\ ]/,/g' `
+
+
+
+echo "Keywords: $keywords"
+
+../../keywordsSetUp.sh
+
+old_value='KEYWORDSSHOULDGOHERE';
+new_value="$keywords";
+sed -i "s:$old_value:$new_value:g" *.php
+
+cd ../
+
+
+#final cleaning
+texclean 2>/dev/null

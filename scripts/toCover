@@ -1,0 +1,10 @@
+#! /bin/sh
+# toCover, for renaming album thumbnail in music library 
+# takes a picture in argument, and copy it to cover.jpg...
+a=$1
+echo "$a"
+path=`dirname "$a"`
+echo "$path"
+cp "$a" "$path/cover.jpg"
+echo ""
+

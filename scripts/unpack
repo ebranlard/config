@@ -1,0 +1,18 @@
+#!/usr/bin/perl -w
+
+use warnings;
+
+$numArgs = $#ARGV + 1;
+print "thanks, you gave me $numArgs command-line arguments.\n";
+
+foreach $argnum (0 .. $#ARGV) {
+    print "$ARGV[$argnum]\n";
+
+}
+# initialize a string 
+# my $str = "Hello World!";
+# my $str = "$@"
+my $str = $ARGV[0] ;
+my @array = unpack("C*", $str);
+print "@array\n";
+# it displays: 72 101 108 108 111 32 87 111 114 108 100 33 

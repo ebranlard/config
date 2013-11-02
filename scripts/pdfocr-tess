@@ -1,0 +1,86 @@
+#!/bin/bash
+echo "usage: pdfocr.sh document.pdf \"author\" \"title\""
+# Adapted from http://blog.konradvoelkel.de/2010/01/linux-ocr-and-pdf-problem-solved/ 
+# NOTE: This script has been substantially modified/simplified from the original. 
+# This version does not allow rotation, language selection or cropping.
+# Those parameters were all required in the original, but I don't really need them.
+# If you can think of a way to make them optional, please share. 
+# This version also uses Tesseract, which I find to be substantially more
+# accurate than Cuneiform for English text. 
+# usage examples:
+#echo "InfoKey: Author" > in.info
+#echo "InfoValue: $2" >> in.info
+#echo "InfoKey: Title" >> in.info
+#echo "InfoValue: $3" >> in.info
+#echo "InfoKey: Creator" >> in.info
+#echo "InfoValue: PDF OCR scan script" >> in.info
+#pdfjoin --fitpaper --tidy --outfile "$1.ocr1.pdf" "pg_*-ocr.pdf"
+#rm -f pg_*
+#pdftk "$1.ocr1.pdf" update_info doc_data.txt output "$1.ocr2.pdf"
+#pdftk "$1.ocr2.pdf" update_info in.info output "$1-ocr.pdf"
+#rm -f "$1.ocr1.pdf" "$1.ocr2.pdf" doc_datax.txt in.info
+#!/bin/bash
+echo "Usage: pdf2ocr.sh FILE.pdf lang"
+if [ -e tmp ] ;
+then
+	echo "Folder tmp/ exists - Continue anyway ?" ;
+	echo "	YES : Press Enter  ";
+	echo "	NO :  Press Ctrl+C ";
+	read reply
+else
+	mkdir tmp
+fi
+
+echo " "
+echo "- Entering folder tmp"
+cd tmp
+ERRORS=0
+
+echo " "
+echo "- Bursting with pdftk..."
+pdftk "../$1" burst dont_ask
+
+echo " "
+for f in pg_*.pdf
+do
+	echo "- Pre-processing $f ...";
+#	convert -quiet -monochrome -normalize -density 300 "$f" "$f.png";
+        convert -quiet -density 300 -depth 8 "$f" "$f.tif"
+done
+
+echo " "
+for f in pg_*.tif
+do
+	echo "- Processing $f ..."
+	tesseract "$f" "$f" hocr
+	echo "Merging BMP and hOCR into PDF file..."
+	hocr2pdf -i "$f" -o "$f-ocr.pdf" <"$f.html"
+	OUT=$?
+	if [ $OUT -gt 127 ] ;
+	 then
+		 echo "$f" >> ../errors.log ;
+		 ERRORS=`expr $ERRORS + 1` ;
+		 cp "${f%%.png}" "$f.pdf"
+	 fi	
+done
+
+
+echo " "
+echo "- Binding with pdftk..."
+pdftk pg_*.png.pdf output "../$1-OCR.pdf"
+
+
+echo " "
+if [ $ERRORS -gt 0 ] ;
+then
+	echo "- Number of errors $ERRORS"
+	cat ../errors.log
+fi
+echo "Done, should I delete all the temporary files?"
+
+echo "	YES : Press Enter  ";
+echo "	NO :  Press Ctrl+C ";
+read reply
+
+rm -r pg_*
+
