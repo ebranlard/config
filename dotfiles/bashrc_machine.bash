@@ -20,9 +20,21 @@ then
     #export PS1="\033[33;40m[\u@\h \w]\\$\007 \033[0m\007"
     #export PS1='\[\033[33;40m\][\u@\h \[\e[33;40m\]\w]\[\e[33;1m\]\$\[\033[m\] '
 
-elif [ $HOSTNAME == '' ]
+elif [ $HOSTNAME == 'g-000.risoe.dk' ]
 then
-    source /opt/intel-fortran/bin/ifortvars.sh  ia32 
+    ehco "gorm"
+elif [ $HOSTNAME == 'hpc-fe1' ]
+then
+    echo "hpc"
+
+elif [ $HOSTNAME == 'n-62-28-19' ]
+then
+    ehco "hpc node"
+    source /opt/intel/2013.0.028/bin/ifortvars.sh intel64
+    source /opt/intel/2013.0.028/vtune_amplifier_xe_2013/amplxe-vars.sh
+
+    alias gonode='qrsh -q mic_interactive -X'
+
 else
     echo "No bashrc specific commands for this hosts."
 fi

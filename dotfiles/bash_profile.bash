@@ -2,7 +2,7 @@ echo "--------------------------------------------------------------------"
 echo "----------------------- BASH PROFILE -------------------------------"
 echo "--------------------------------------------------------------------"
 
-export PATH=$PATH:/home/manu/Config/scripts/
+# export PATH=$PATH:/home/manu/Config/scripts/
 # Disable caps lock
 # setxkbmap -option ctrl:nocaps  
 # setxkbmap -option grab:break_actions
@@ -19,17 +19,17 @@ export PATH=$PATH:/home/manu/Config/scripts/
 #source .bashrc
 
 #For your .xinit you may want to use 'exec ck-launch-session dbus-launch --sh-syntax --exit-with-session startxfce4', it's what I have found to work better.
- if [ "$(tty)" = "/dev/tty1" ] ; then
-     if [ `ps -le|grep xinit|wc -l` == 0 ];	then
-          exec ck-launch-session startxfce4 ;
-#           exec startxfce4 --with-ck-launch;
-         #xinit; 
-         echo "";
-         echo "Bye Bye";
-         echo ""
-         source .bashrc
-     fi
- fi
+#  if [ "$(tty)" = "/dev/tty1" ] ; then
+#      if [ `ps -le|grep xinit|wc -l` == 0 ];	then
+#           exec ck-launch-session startxfce4 ;
+# #           exec startxfce4 --with-ck-launch;
+#          #xinit; 
+#          echo "";
+#          echo "Bye Bye";
+#          echo ""
+#          source .bashrc
+#      fi
+#  fi
 
 # && [ $(tty) == /dev/tty1 ]; then
 #	startx& 
