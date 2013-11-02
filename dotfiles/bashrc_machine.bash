@@ -23,6 +23,7 @@ then
 elif [ $HOSTNAME == 'g-000.risoe.dk' ]
 then
     echo "gorm"
+    alias ls='ls -F --color=always '
 elif [ $HOSTNAME == 'hpc-fe1' ]
 then
     echo "hpc"
