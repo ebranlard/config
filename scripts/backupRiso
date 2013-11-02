@@ -1,0 +1,39 @@
+#!/bin/sh
+# Sould be run as user
+
+#variables
+OPTS="-av"
+ROOTDEST=/work/_bkp
+ROOTDEST2=/mnt/R-home/_bkp
+ROOTSRC=/work/
+SRCS="bin code lib publications"
+
+mydate=$(date +%Y-%m-%d-%H%M)
+DEST=$ROOTDEST/$mydate
+DEST2=$ROOTDEST2/$mydate
+mkdir -p $DEST
+mkdir -p $DEST2
+
+cd $ROOTSRC
+for SRC in $SRCS
+do
+    echo $SRC
+    tar -czhf $SRC"_"$mydate.tar.gz $SRC
+    cp $SRC"_"$mydate.tar.gz $DEST  #local version
+    cp $SRC"_"$mydate.tar.gz $DEST2 #server version
+    rm $SRC"_"$mydate.tar.gz 
+#     mycrypt -c $SRC"_"$mydate.tar.gz
+#     mv $SRC"_"$mydate.tar.gzm $DEST2 #network version
+done
+
+
+#without deletion
+# rsync $OPTS $SRC/Etudes/ $DEST/Etudes/
+# rsync $OPTS $SRC/Images/ $DEST/Images/
+
+#with delete propagation
+# rsync $OPTS --delete $SRC/Config/ $DEST/Config/
+
+
+
+

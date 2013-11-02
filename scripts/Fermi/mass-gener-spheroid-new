@@ -1,0 +1,30 @@
+#!/bin/sh
+casefile="gener-ellipse.in"
+q=0.25
+ipart=50000
+ekin=15
+
+temp=$casefile"-tmp";
+cp $casefile $temp;
+awk -f changeParam $temp Q_total=$q > $casefile ;cp $casefile $temp;
+awk -f changeParam $temp IPart=$ipart > $casefile ;cp $casefile $temp;
+awk -f changeParam $temp Ref_Ekin=$ekin > $casefile ;cp $casefile $temp;
+
+for sz in 1 2 3 4 
+	do
+	for sr in 1 2 3 4
+	do
+            delta=`expr $sr \* 100000 / 141421 \* 10000`
+            num=`expr $sr \* 1000000000 / 141421`
+            dec=`expr $num - $delta`
+            ent=`expr $num / 10000`
+		filename="ellipse"$sr"0"$sz"-Ek"$ekin"-"$ipart".ini"
+		awk -f changeParam $temp sig_x=$ent"."$dec > $casefile ;cp $casefile $temp;
+		awk -f changeParam $temp sig_y=$ent"."$dec > $casefile ; cp $casefile $temp;
+		awk -f changeParam $temp sig_z="0."$sz > $casefile ; cp $casefile $temp;
+ 		awk -f changeParam $temp FNAME=\'$filename\'    > $casefile ; cp $casefile $temp;
+		echo $filename
+		generator $casefile > /dev/null
+	done
+done
+rm $temp
