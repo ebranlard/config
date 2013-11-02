@@ -1,0 +1,16 @@
+Bootchart/
+NVIDIA*
+backup_data/
+bin/
+builds/
+doc/
+docnew/
+dtu/
+look/
+mime/
+patches/
+profiles/
+snd/
+syst/
+
+simplekey

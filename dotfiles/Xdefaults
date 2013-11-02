@@ -1,0 +1,30 @@
+! xterm ----------------------------------------------------------------------
+xterm*faceName:           monospace:pixelsize=14
+!xterm*dynamicColors:      true
+!xterm*utf8:               2
+!xterm*eightBitInput:      true
+xterm*scrollTtyKeypress:  true
+xterm*scrollTtyOutput:    false
+xterm*scrollBar:          true
+xterm*rightScrollBar:     true
+xterm*jumpScroll:         true
+xterm*multiScroll:        true
+xterm*background: black
+xterm*foreground: green
+xterm*title : xterm
+xterm*vt100.geometry : 79x27
+XTerm*reverseVideo : off
+XTerm*SaveLines: 1000
+!xterm*iconPixmap:       /home/share/Config/_Apparence/xapp.xbm
+!xterm*iconMask:         /home/share/Config/_Apparence/xapp-mask.xbm
+
+
+! Xcursor --------------------------------------------------------------------
+Xcursor*theme: Vanilla-DMZ-AA
+Xcursor.size:  22
+
+! VIM stuffs
+! Vim*foreground:	Black
+! Vim.background: white
+
+
