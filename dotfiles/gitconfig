@@ -1,6 +1,3 @@
-#[user]
-#	email = ebra@dtu.dk
-#	name = "Emmanuel Branlard"
 [color]
 	branch = auto
 	diff = auto
@@ -16,11 +13,3 @@
 	file-view-vpane-position = 686
 [help]
 	autocorrect = -1
-[identity "work"]
-	name = Emmanuel Branlard
-	email = ebra@dtu.dk
-[identity "home"]
-	name = elmanuelito
-	email = elmanuelito.github@gmail.com
-[push]
-	default = simple
