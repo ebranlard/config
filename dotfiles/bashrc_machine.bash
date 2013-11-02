@@ -28,7 +28,8 @@ then
 elif [ $HOSTNAME == 'hpc-fe1' ]
 then
     echo "hpc"
-    alias gonode='qrsh -q mic_interactive -X'
+    alias gonodeX='qrsh -q mic_interactive-X'
+    alias gonode='qrsh -q mic_interactive '
 
 elif [ $HOSTNAME == 'n-62-28-19' ]
 then
