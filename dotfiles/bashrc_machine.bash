@@ -27,6 +27,7 @@ then
 elif [ $HOSTNAME == 'hpc-fe1' ]
 then
     echo "hpc"
+    alias gonode='qrsh -q mic_interactive -X'
 
 elif [ $HOSTNAME == 'n-62-28-19' ]
 then
@@ -34,7 +35,6 @@ then
     source /opt/intel/2013.0.028/bin/ifortvars.sh intel64
     source /opt/intel/2013.0.028/vtune_amplifier_xe_2013/amplxe-vars.sh
 
-    alias gonode='qrsh -q mic_interactive -X'
 
 else
     echo "No bashrc specific commands for this hosts."
