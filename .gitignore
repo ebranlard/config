@@ -3,6 +3,7 @@ NVIDIA*
 backup_data/
 bin/
 builds/
+build/
 doc/
 docnew/
 dtu/

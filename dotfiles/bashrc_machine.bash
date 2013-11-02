@@ -1,4 +1,6 @@
 
+alias ls='ls -F --color=always --group-directories-first'
+alias grep='grep --color=always'
 
 if [ $HOSTNAME == 'work' ]
 then
@@ -11,8 +13,6 @@ then
     export OMNIVOR_LIB_DIR='/work/lib/OmniVor_lib/fortran/'
     export OMNIVOR_OBJ_DIR='/work/lib/OmniVor_lib/fortran/'
 
-    alias ls='ls -F --color=always --group-directories-first'
-    alias grep='grep --color=always'
 
     export PS1='\[[1m[33m\]\u\[[32m\]@\[[33m\]\h:\[[32m\]\w \[[33m\]\$ \[[32m\]\[[m\]'
 
@@ -22,14 +22,14 @@ then
 
 elif [ $HOSTNAME == 'g-000.risoe.dk' ]
 then
-    ehco "gorm"
+    echo "gorm"
 elif [ $HOSTNAME == 'hpc-fe1' ]
 then
     echo "hpc"
 
 elif [ $HOSTNAME == 'n-62-28-19' ]
 then
-    ehco "hpc node"
+    echo "hpc node"
     source /opt/intel/2013.0.028/bin/ifortvars.sh intel64
     source /opt/intel/2013.0.028/vtune_amplifier_xe_2013/amplxe-vars.sh
 
