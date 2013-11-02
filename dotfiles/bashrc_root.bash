@@ -1,8 +1,8 @@
-export PATH=$PATH:$HOME/Config/scripts/
+export HOMEMANU=/home/manu
+export PATH=$PATH:$HOMEMANU/Config/scripts/
 
-export HOME2=$HOME/
 # source $HOME2"Config/dotfiles/bashrc_machine.bash"
-source $HOME2"Config/dotfiles/bashrc_common.bash"
+source $HOMEMANU/"Config/dotfiles/bashrc_common.bash"
 # source $HOME2"Config/bash/git-completion.bash"
 
 alias ls='ls -F --color=always --group-directories-first'

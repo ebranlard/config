@@ -5,7 +5,8 @@ export PS1='\[[1m[33m\]\u\[[32m\]@\[[33m\]\h:\[[32m\]\w \[[33m\]\$ \[[32m
 
 if [ $HOSTNAME == 'work' ]
 then
-    source /opt/intel-fortran/bin/ifortvars.sh  ia32 
+    source /opt/intel/bin/ifortvars.sh  ia32 
+    source /opt/intel/vtune_amplifier_xe_2013/amplxe-vars.sh
 
     export PATH=$PATH:/work/lib/OmniVor_lib/fortran/_bin/linux-ia32
     export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
