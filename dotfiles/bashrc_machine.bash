@@ -6,7 +6,7 @@ export PS1='\[[1m[33m\]\u\[[32m\]@\[[33m\]\h:\[[32m\]\w \[[33m\]\$ \[[32m
 if [ $HOSTNAME == 'work' ]
 then
     source /opt/intel/bin/ifortvars.sh  ia32 
-    source /opt/intel/vtune_amplifier_xe_2013/amplxe-vars.sh
+    alias vtune='source /opt/intel/vtune_amplifier_xe_2013/amplxe-vars.sh'
 
     export PATH=$PATH:/work/lib/OmniVor_lib/fortran/_bin/linux-ia32
     export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
@@ -23,22 +23,19 @@ then
 
 elif [ $HOSTNAME == 'g-000.risoe.dk' ]
 then
-    echo "gorm"
     alias ls='ls -F --color=always '
 elif [ $HOSTNAME == 'hpc-fe1' ]
 then
-    echo "hpc"
     alias gonodeX='qrsh -q mic_interactive-X'
     alias gonode='qrsh -q mic_interactive '
 
 elif [ $HOSTNAME == 'n-62-28-19' ]
 then
-    echo "hpc node"
     source /opt/intel/2013.0.028/bin/ifortvars.sh intel64
-    source /opt/intel/2013.0.028/vtune_amplifier_xe_2013/amplxe-vars.sh
+    alias vtune='source /opt/intel/2013.0.028/vtune_amplifier_xe_2013/amplxe-vars.sh'
+
 elif [ $HOSTNAME == 'gray1' ]
 then
-    echo "gray1"
     alias ls='ls -F  '
 
 
