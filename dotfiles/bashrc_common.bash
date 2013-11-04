@@ -29,7 +29,7 @@ alias grepnoco='grep --color=none'
 
 # more ls aliases
 alias ll='ls -lhb'
-alias la='ls -lAXh' 
+alias la='ls -lAh'    # used to have a X options as well
 alias lag='ls -lAgXh|grep' 
 alias lsd='ls -l|grep drwx'
 alias dir='ls -1'

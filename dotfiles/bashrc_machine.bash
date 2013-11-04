@@ -36,6 +36,10 @@ then
     echo "hpc node"
     source /opt/intel/2013.0.028/bin/ifortvars.sh intel64
     source /opt/intel/2013.0.028/vtune_amplifier_xe_2013/amplxe-vars.sh
+elif [ $HOSTNAME == 'gray1' ]
+then
+    echo "gray1"
+    alias ls='ls -F  '
 
 
 else

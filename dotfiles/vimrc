@@ -179,7 +179,11 @@ map ,cd :lcd %:p:h <CR>:pwd<CR>
 "n : recognize numbered lists 1.
 "q : allow formatting of comment paragraph
 "r : insert comment leader when pressing enter
-autocmd FileType * setlocal formatoptions-=o formatoptions+=n formatoptions+=q formatoptions+=r formatoptions+=j
+if version>=704
+    autocmd FileType * setlocal formatoptions-=o formatoptions+=n formatoptions+=q formatoptions+=r formatoptions+=j
+else
+    autocmd FileType * setlocal formatoptions-=o formatoptions+=n formatoptions+=q formatoptions+=r
+endif
 
 " For formatting of latex paragraph using qglp
 omap lp ?^$\\|^\s*\(\\begin\\|\\end\\|\\label\)?1<CR>//-1<CR>.<CR>
