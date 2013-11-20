@@ -3,4 +3,4 @@
 chmod +x Setup*
 chmod +x update
 
-./SetupDotFiles.sh
+./SetupDotFiles
