@@ -4,6 +4,7 @@ if [[ `git remote 2>/dev/null|wc -l` == 0 ]]
 then
     git init
     git git remote add origin git@github:elmanuelito/config.git
+    git config core.fileMode false
     git pull origin master
 #     git clone git@github:elmanuelito/config.git .
 fi
