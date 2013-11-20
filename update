@@ -1,0 +1,8 @@
+#!/bin/bash
+
+if [[ `git remote 2>/dev/null|wc -l` == 0 ]] 
+then
+    git clone git@github:elmanuelito/config.git .
+else
+    git pull origin master
+fi
