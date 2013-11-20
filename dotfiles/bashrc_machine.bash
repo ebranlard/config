@@ -12,8 +12,9 @@ then
     export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
 
     export OMNIVOR_MKF_DIR='/work/lib/OmniVor_lib/fortran/_includes/'
-    export OMNIVOR_LIB_DIR='/work/lib/OmniVor_lib/fortran/'
-    export OMNIVOR_OBJ_DIR='/work/lib/OmniVor_lib/fortran/'
+    export OMNIVOR_LIB_DIR='/work/lib/OmniVor_lib/fortran/_lib/linux-ia32/'
+    export OMNIVOR_OBJ_DIR='/work/lib/OmniVor_lib/fortran/_build/linux-ia32/'
+    export OMNIVOR_SRC_DIR='/work/lib/OmniVor_lib/fortran/'
 
 
 

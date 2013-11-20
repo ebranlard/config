@@ -15,7 +15,7 @@
 #############################################################
 SINK=0 # might be changed
 DELTAVOL=3277 #is 5% of the total volume, you can change this to suit your needs
-MAXVOL=75875 # this is 115%. Max is 95536
+MAXVOL=189875 # this is 115%. Max is 95536
 REFVOL=65536 # this is by definition 100%. Used to compute percentage
 #### Creation of files/folders if dont exist
 test ! -d ~/.pulse        && mkdir ~/.pulse
@@ -60,7 +60,9 @@ else
         fi
     fi
     ## SETTING VOLUME
+    echo $CURVOL
     pactl set-sink-volume $SINK $CURVOL
+#     pactl set-sink-volume 1 $CURVOL
     echo $CURVOL > ~/.pulse/volume # Write the new volume to disk to be read the next time the script is run.
 fi
 

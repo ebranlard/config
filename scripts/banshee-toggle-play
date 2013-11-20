@@ -1,20 +1,27 @@
 #! /bin/bash
-if [ -d /media/ManuZik/Music ]
-then #echo "Ok, disk already mounted"
-#     rhythmbox-client --play-pause
-    banshee --toggle-playing
-else
-    res=`ls -l /dev/disk/by-uuid|grep 1105BE213AEBE2F6|wc -l`
-    if [[ $res == 1 ]]
-    then #echo "Device is plugged($DEV), mounting it"
-        res=`ls -l /dev/disk/by-uuid|grep 1105BE213AEBE2F6|awk '{print $11}'`
-        DEV=`basename $res`
-#         pmount -t ntfs-3g /dev/$DEV ManuZik
-#         rhythmbox-client --play-pause
-    banshee --toggle-playing
-#     else #echo "Device is not even plugged, aborting"
-    fi
-
+if [[ `ps -le|grep banshee|wc -l` == 0 ]] 
+then
+    # banshee is not started, launch pulseaudio and launch it
+    pulseaudio&
 fi
+banshee --toggle-playing
 
+# if [ -d /media/ManuZik/Music ]
+# then #echo "Ok, disk already mounted"
+# #     rhythmbox-client --play-pause
+#     banshee --toggle-playing
+# else
+#     res=`ls -l /dev/disk/by-uuid|grep 1105BE213AEBE2F6|wc -l`
+#     if [[ $res == 1 ]]
+#     then #echo "Device is plugged($DEV), mounting it"
+#         res=`ls -l /dev/disk/by-uuid|grep 1105BE213AEBE2F6|awk '{print $11}'`
+#         DEV=`basename $res`
+# #         pmount -t ntfs-3g /dev/$DEV ManuZik
+# #         rhythmbox-client --play-pause
+#     banshee --toggle-playing
+# #     else #echo "Device is not even plugged, aborting"
+#     fi
+# 
+# fi
+# 
 

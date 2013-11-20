@@ -24,10 +24,10 @@ set textwidth=0
 function! FortranFolds()
     let thisline = getline(v:lnum)
 "      if match(thisline,'^[\ ]*\(subroutine\|module\|function\|program\)') >=0
-    if match(thisline,'^[\ ]*\(integer function\|logical function\|subroutine\|function\|program\)') >=0
+    if match(thisline,'^[\ ]*\(integer(.*) function\|integer function\|logical function\|subroutine\|function\|program\)') >=0
         return ">1"
-"      elseif match(thisline,'') >=0
-"          return ">1"
+    elseif match(thisline,'end module') >=0
+         return "0"
     else
         return "="
     endif
@@ -36,8 +36,8 @@ setlocal foldmethod=expr
 setlocal foldexpr=FortranFolds()
 "  setlocal foldtext=FortranFoldText()
 
-" let s:extfname = expand("%:e")
-" if s:extfname ==? "f90"
+let s:extfname = expand("%:e")
+if s:extfname ==? "f90"
     let fortran_free_source=1
     unlet! fortran_fixed_source
     let g:fortran_have_tabs=1 
@@ -45,10 +45,10 @@ setlocal foldexpr=FortranFolds()
     let b:fortran_fixed_source=0 
     let b:fortran_dialect="f90" 
     let b:fortran_do_enddo=1 
-" else
-"     let fortran_fixed_source=1
-"     unlet! fortran_free_source
-" endif
+else
+    let fortran_fixed_source=1
+    unlet! fortran_free_source
+endif
 set cc=132
 set textwidth=132
 

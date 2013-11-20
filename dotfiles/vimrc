@@ -518,11 +518,16 @@ nnoremap ,j :LustyJuggler <CR>
 
 
 " searching by filename (as opposed to full path) as the
-let g:ctrlp_by_filename = 1
+let g:ctrlp_by_filename = 0
 "  let g:ctrlp_match_window_bottom = 1
 let g:ctrlp_max_depth = 5
-
-
+let g:ctrlp_custom_ignore = {
+            \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+            \ 'file': '\v\.(dat|vtk|exe|so|dll|pyc)$',
+            \ 'link': 'some_bad_symbolic_links',
+            \ }
+let g:ctrlp_working_path_mode = 'a'
+let g:ctrlp_max_height = 20
 
 " Increasing numbers in column ( extend the functionality of <C-A>, but not <C-X> yet)
 function! Incr()
@@ -540,7 +545,7 @@ vnoremap <C-a> :call Incr()<CR>
 let &makeprg = 'make '
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-""" Matlab -> see after plugin
+""" Matlab (see also after plugin)
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 source $VIMRUNTIME/macros/matchit.vim 
 
