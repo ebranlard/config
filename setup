@@ -2,5 +2,9 @@
 
 chmod +x Setup*
 chmod +x update
+chmod +x scripts/*
+chmod +x dotfiles/vim/SetupVim.sh
 
 ./SetupDotFiles
+
+./dotfiles/vim/SetupVim.sh
