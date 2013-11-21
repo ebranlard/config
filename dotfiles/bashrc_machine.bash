@@ -63,7 +63,8 @@ then
     export OMNIVOR_SRC_DIR='/home/ebra/omnivor/'
 
 else
-    echo "No bashrc specific commands for this hosts."
+    alias ls='ls -F --color=always '
+    #echo "No bashrc specific commands for this hosts."
 fi
 # PROGRAM PATHS and VARIABLES
 # export PATH=$PATH:/opt/cuda/bin/
