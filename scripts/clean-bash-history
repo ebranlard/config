@@ -14,7 +14,7 @@
 #############################################################
 # Modify me
 #############################################################
-forbidden_commands = ['ls','la','ll','su','cd','rm','mv','fg','bg','make','bash','clear','man','git status','git add','git rm','git commit','git init','git checkout','git push','git diff','api','aps','apc','ref','sudo cp','sudo rm','cat','gfortran','locate','groups','gitk']
+forbidden_commands = ['ls','la','ll','lg','su','cd','rm','mv','fg','bg','make','bash','clear','man','git status','git add','git rm','git commit -m','git commit -a','git init','git checkout','git push','git diff','api','aps','apc','ref','sudo cp','sudo rm','cat','gfortran','locate','groups','gitk','history','gvim','vim','f','touch','mkdir','cp','python','pwd','echo','chmod']
 
 
 import argparse

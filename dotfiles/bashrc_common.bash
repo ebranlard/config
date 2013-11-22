@@ -142,6 +142,10 @@ export HISTFILESIZE=10000
 shopt -s histappend
 # every time bash generates a fresh command prompt, it should append the last run command to the history file, and load any new commands written to that file (from other shells) into the current history list.
 export PROMPT_COMMAND="history -a; history -n; $PROMPT_COMMAND"
+if [[ `wc -l ~/.bash_history|awk '{print $1}'`  -gt 4500 ]]; then
+    echo "Time to clean your bash history, with: clean-bash-history"
+fi
+
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
