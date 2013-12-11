@@ -7,6 +7,7 @@ git clone https://github.com/elmanuelito/vim-simple-compile
 git clone https://github.com/elmanuelito/vim-simple-comment
 git clone https://github.com/kien/rainbow_parentheses.vim
 git clone https://github.com/vim-scripts/Align
+git clone https://github.com/bling/vim-airline
 if [ $HOSTNAME == 'work' ]
 then
     echo "Work"
