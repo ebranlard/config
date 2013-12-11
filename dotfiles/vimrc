@@ -104,7 +104,11 @@ au Syntax * RainbowParenthesesLoadSquare
 au Syntax * RainbowParenthesesLoadBraces
 
 
-
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""" Gitgutter
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:gitgutter_realtime = 0
+let g:gitgutter_eager = 0
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ Syntastic options
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -132,15 +136,15 @@ let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#branch#empty_message = 'no-branch'
 let g:airline#extensions#syntastic#enabled = 1
 " * enable/disable detection of whitespace errors. >
-" let g:airline#extensions#whitespace#enabled = 0
-" let g:airline#extensions#whitespace#checks = []
-" let g:airline#extensions#whitespace#show_message = 0
+let g:airline#extensions#whitespace#enabled = 0
+let g:airline#extensions#whitespace#checks = []
+let g:airline#extensions#whitespace#show_message = 0
 " let g:airline#extensions#whitespace#checks = [ 'indent', 'trailing' ]
 " " * configure whether a message should be displayed. >
 "   let g:airline#extensions#whitespace#show_message = 1
 "   let g:airline#extensions#whitespace#trailing_format = 'trailing[%s]'
 "   let g:airline#extensions#whitespace#mixed_indent_format = 'mixed-indent[%s]'
-let g:airline#extensions#tabline#enabled = 1
+" let g:airline#extensions#tabline#enabled = 0
 " " * enable/disable displaying buffers with a single tab. >
 " let g:airline#extensions#tabline#show_buffers = 1
 

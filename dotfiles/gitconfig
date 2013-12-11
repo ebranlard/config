@@ -13,3 +13,5 @@
 	file-view-vpane-position = 686
 [help]
 	autocorrect = -1
+[push]
+	default = simple

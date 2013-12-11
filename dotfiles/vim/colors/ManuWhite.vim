@@ -332,6 +332,13 @@ call <SID>X("DiffDelete",		"",	"fdc3c3",	"bold")
 call <SID>X("DiffChange",		"",	"e4e9f0",	"none")
 call <SID>X("DiffText",		    "", "c0d0f0",	"none")
 
+call <SID>X("GitGutterAdd",	    		"218a21",   "d6d3d6",	"none")
+call <SID>X("GitGutterChange",			"00407b",   "d6d3d6",	"bold")
+call <SID>X("GitGutterDelete",			"7b0000",   "d6d3d6",	"bold")
+" " call <SID>X("GitGutterChangeDeleteLine",		    "", "c0d0f0",	"none")
+ 
+" hi GitGutterAddLine	     guifg=darkmagenta ctermfg=magenta
+" hi GitGutterChangeLine	     guifg=darkmagenta ctermfg=magenta
 " --------------------------------------------------------------------------------
 " --- TODO
 " --------------------------------------------------------------------------------
