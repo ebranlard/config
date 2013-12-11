@@ -6,8 +6,10 @@ path="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 # Going to user home directory
 cd ~
 
-# Removing files
-rm -f .xinitrc .bashrc .bash_logout .bash_profile .vimrc .vim .gitconfig
+# Moving existing files to a backup folder
+BKP_FOLDER=_bkp_dotfiles
+mkdir -p $BKP_FOLDER 
+mv .xinitrc .bashrc .bash_logout .bash_profile .vimrc .vim .gitconfig .fonts $BKP_FOLDER
 
 # Removing files
 ln -s $path/dotfiles/xinitrc .xinitrc
@@ -18,5 +20,6 @@ ln -s $path/dotfiles/gitconfig .gitconfig
 ln -s $path/dotfiles/vimrc .vimrc
 ln -s $path/dotfiles/vim .vim
 
-
-# 
+# Fonts
+ln -s $path/fonts .fonts
+fc-cache -vf ~/.fonts

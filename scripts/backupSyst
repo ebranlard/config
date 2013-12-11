@@ -1,8 +1,8 @@
-#!/bin/sh
+#!/bin/bash
 # Has to be run as root
 
 #initialization
-user=manu   ;                           #<<<<<<<<<< change me
+user=$USER
 thunderbird=icedove   ;                           #<<<<<<<<<< change me
 HOME=/home/$user
 folder=backup_data/
@@ -16,6 +16,7 @@ echo "Mozilla folder might not be backed up... check it"
 
 #creating arborescence
 mkdir -p home/config
+mkdir -p home/fonts
 mkdir -p home/ssh
 mkdir -p home/filezilla
 mkdir -p home/local/share/rhythmbox
@@ -59,6 +60,7 @@ cp -r $HOME/.config/* home/config/
 cp -r $HOME/.ssh/* home/ssh/
 cp -r $HOME/.filezilla/* home/filezilla/
 cp -r $HOME/.$thunderbird/* home/$thunderbird/
+cp -r $HOME/.fonts/* home/fonts/
 cp $HOME/.local/share/rhythmbox/*.xml home/local/share/rhythmbox/
 # cp -r $HOME/.mozilla/firefox home/mozilla/firefox                  # important, can be big..
 

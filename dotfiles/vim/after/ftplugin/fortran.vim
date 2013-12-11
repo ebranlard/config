@@ -12,6 +12,7 @@ vmap ,av :Align Ip0p1= :: !<CR>
 vmap ,aa :Align Ip0p1= = !<CR>
 vmap ,ae :Align Ip0p0= = !<CR>
 vmap ,ac :Align Ip0p0= !<CR>
+vmap ,au :Align Ip0p0= only:<CR>
 
 """ Misc
 " Don't higlight fortran tabs

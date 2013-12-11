@@ -80,12 +80,14 @@ colorscheme ManuWhite
 set nospell 
 
 if has("gui_running")
-    set guifont=Monospace\ 10  " use this font 
+"     set guifont=Monospace\ 10 
+"     set guifont="DejaVu Sans Mono for Powerline"
+    set guifont=DejaVu\ Sans\ Mono\ for\ Powerline
 "     set guifont=Inconsolata\ for\ Powerline
 "     set guifont=MyFont\ for\ Powerline
     set guioptions-=m  "remove menu bar
     set guioptions-=T  "remove toolbar
-    set guioptions-=b  "add horizontal bar
+    set guioptions-=b  "remove horizontal bar
     set go+=a "copy and mouse selection
 else
     set t_Co=256 " Explicitly tell Vim that the terminal supports 256 colors
@@ -123,22 +125,42 @@ set encoding=utf-8 " Necessary to show Unicode glyphs
 set laststatus=2    "always show status line
 "  set fillchars+=stl:\ ,stlnc:\
 
+" --- Airline options 
 let g:airline_powerline_fonts = 1
+" --- Airline extensions
+let g:airline#extensions#branch#enabled = 1
+let g:airline#extensions#branch#empty_message = 'no-branch'
+let g:airline#extensions#syntastic#enabled = 1
 " * enable/disable detection of whitespace errors. >
-let g:airline#extensions#whitespace#enabled = 0
-let g:airline#extensions#whitespace#checks = []
-let g:airline#extensions#whitespace#show_message = 0
+" let g:airline#extensions#whitespace#enabled = 0
+" let g:airline#extensions#whitespace#checks = []
+" let g:airline#extensions#whitespace#show_message = 0
+" let g:airline#extensions#whitespace#checks = [ 'indent', 'trailing' ]
+" " * configure whether a message should be displayed. >
+"   let g:airline#extensions#whitespace#show_message = 1
+"   let g:airline#extensions#whitespace#trailing_format = 'trailing[%s]'
+"   let g:airline#extensions#whitespace#mixed_indent_format = 'mixed-indent[%s]'
+let g:airline#extensions#tabline#enabled = 1
+" " * enable/disable displaying buffers with a single tab. >
+" let g:airline#extensions#tabline#show_buffers = 1
+
+
+" --- Airline Theme
 " let g:airline_theme='lucius'
 let g:airline_theme='sol'
-let g:airline_section_x='TYPE=%{airline#util#wrap(airline#parts#filetype(),0)}'
-let g:airline_section_y='ENC=%{airline#util#wrap(airline#parts#ffenc(),0)}'
+" --- Airline Sections
 " let g:airline_section_a='%#__accent_bold#%{airline#util#wrap(airline#parts#mode(),0)}%#__restore__#%{airline#util#append(airline#parts#paste(),0)}%{airline#util#append(airline#parts#iminsert(),0)}'
 " let g:airline_section_b='%{airline#util#wrap(airline#extensions#branch#get_head(),0)}'
-" let g:airline_section_c='%{getcwd()} -- %f -- %<%t%m %#__accent_red#%{airline#util#wrap(airline#parts#readonly(),0)}%#__restore__#'
-let g:airline_section_c='%{getcwd()} -- %f %<%m %#__accent_red#%{airline#util#wrap(airline#parts#readonly(),0)}%#__restore__#'
-" let g:airline_section_z=''
-let g:airline_section_warning='%{airline#util#wrap(airline#extensions#syntastic#get_warnings(),1)}'
-" let g:airline#extensions#tabline#enabled=1
+let g:airline_section_c='%{getcwd()} -- %f -- %<%t%m %#__accent_red#%{airline#util#wrap(airline#parts#readonly(),0)}%#__restore__#'
+" let g:airline_section_c='%{getcwd()} -- %f %<%m %#__accent_red#%{airline#util#wrap(airline#parts#readonly(),0)}%#__restore__#'
+let g:airline_section_x='TYPE=%{airline#util#wrap(airline#parts#filetype(),0)}'
+let g:airline_section_y='ENC=%{airline#util#wrap(airline#parts#ffenc(),0)}'
+" let g:airline_section_z='%3p%%_%{g:airline_symbols.linenr}%#__accent_bold#%4l%#__restore__#:%3c'
+" let g:airline_section_warning='%{airline#util#wrap(airline#extensions#syntastic#get_warnings(),1)}'
+
+
+
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ Sessions
@@ -149,13 +171,13 @@ set sessionoptions=blank,tabpages,winsize,resize,winpos,sesdir,buffers  "session
 set nobackup
 set noswapfile
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-""" Editor general 
+""" Editor general
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " let mapleader = ","
 " line numbering
-set number "toggle line numbering: 
+set number "toggle line numbering:
 "  set foldcolumn=1 " to visually see folds on the left hand side
-nnoremap ,tn :set invnumber number?<CR> 
+nnoremap ,tn :set invnumber number?<CR>
 " avoid the promt 'press enter or type command to continue'
 set shortmess=atI
 
@@ -207,7 +229,7 @@ set foldtext=MyFoldText()  " can be customized later
 """ Compilation
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Automatically open, but do not go to (if there are errors) the quickfix /
-" location list window, or close it when is has become empty. 
+" location list window, or close it when is has become empty.
 " Note: Must allow nesting of autocmds to enable any customizations for quickfix
 " buffers. 
 " Note: Normally, :cwindow jumps to the quickfix window if the command opens it
