@@ -3,8 +3,11 @@ echo "----------------------- BEGIN XSESSIONRC ---------------------------"
 echo "--------------------------------------------------------------------"
 #############################
 # This file is not used by nodm, see .xsession
+# This file is not used by xdm (I think)
+# This file is used by lightdm
 #############################
-
+# PATH="$PATH:$HOME/Config/scripts"
+. $HOME/.profile 
 #if [ -x /usr/bin/numlockx ]
 #then
 #   /usr/bin/numlockx on

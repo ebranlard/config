@@ -2,7 +2,7 @@ echo "--------------------------------------------------------------------"
 echo "----------------------- BASH PROFILE -------------------------------"
 echo "--------------------------------------------------------------------"
 
-export PATH=$PATH:$HOME/Config/scripts/
+source /home/manu/.profile
 # Disable caps lock
 # setxkbmap -option ctrl:nocaps  
 # setxkbmap -option grab:break_actions

@@ -1,14 +1,13 @@
-"Pathogen
-"  call pathogen#runtime_append_all_bundles()
-execute pathogen#infect()
-" call pathogen#helptags()
-" call pathogen#runtime_append_all_bundles()
-
 set nocompatible
+set visualbell t_vb=    " turn off error beep/flash
+set novisualbell    " turn off visual bell
 
+"Pathogen
+execute pathogen#infect()
+" call pathogen#helptags() "run: Helptags directly
 " for personal mapping (I keep "\", while using "," as my leader, so that I'm not pulluted by all
 " the plugins commands
-"  let mapleader='\' 
+let mapleader='\' 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ Indent 
@@ -20,7 +19,7 @@ set nocompatible
 "		different indenting styles.
 "'indentexpr'	The most flexible of all: Evaluates an expression to compute
 "		the indent of a line.  When non-empty this method overrides
-"		the other ones.  See |indent-expression|.
+" 		the other ones.  See |indent-expression|.
 set smartindent
 set cindent
 set tabstop=4
@@ -33,22 +32,13 @@ set et " expand tab
 " allow backspacing over everything in insert mode
 set backspace=indent,eol,start whichwrap+=<,>,[,]
 set history=200	" keep 50 lines of command line history
-set ruler		" show the cursor position all the time
-"  set cursorline
-
-
-let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-let &t_EI = "\<Esc>]50;CursorShape=0\x7"
-
-
+"set ruler		" show the cursor position all the time
+""  set cursorline
 set mouse=a
 
 " Only do this part when compiled with support for autocommands.
 if has("autocmd")
     " Enable file type detection.
-    " Use the default filetype settings, so that mail gets 'tw' set to 72,
-    " 'cindent' is on in C files, etc.
-    " Also load indent files, to automatically do language-dependent indenting.
     filetype plugin indent on
     " Put these in an autocmd group, so that we can delete them easily.
     augroup vimrcEx
@@ -65,7 +55,7 @@ if has("autocmd")
     augroup END
 else
     set autoindent		" always set autoindenting on
-endif " has("autocmd")
+endif 
 
 
 " Convenient command to see the difference between the current buffer and the
@@ -75,26 +65,49 @@ command! DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis | wincmd p | d
 " Detect filetype nd use syntax highlighting syntax enable
 syntax on           " syntax highlighing     !!!! should be after filetype plugin indent on
 " filetype on
-set background=light   " adapt colors for background
-colorscheme ManuWhite
 set nospell 
 
 if has("gui_running")
+    colorscheme ManuWhite
+    set background=light   " adapt colors for background
 "     set guifont=Monospace\ 10 
-"     set guifont="DejaVu Sans Mono for Powerline"
     set guifont=DejaVu\ Sans\ Mono\ for\ Powerline
-"     set guifont=Inconsolata\ for\ Powerline
-"     set guifont=MyFont\ for\ Powerline
     set guioptions-=m  "remove menu bar
     set guioptions-=T  "remove toolbar
     set guioptions-=b  "remove horizontal bar
     set go+=a "copy and mouse selection
 else
-    set t_Co=256 " Explicitly tell Vim that the terminal supports 256 colors
-"     colorscheme wombat256    " use this color scheme
-    set background=light   " adapt colors for background
-    colorscheme ManuWhite
+    " Using Escape to leave insert mode in the terminal, it will by
+    augroup FastEscape
+        autocmd!
+        au InsertEnter * set timeoutlen=0
+        au InsertLeave * set timeoutlen=1000
+    augroup END
+    let term=$TERM
+    if term=="linux"
+        set t_Co=8 " Explicitly tell Vim that the terminal supports 8 colors
+        colorscheme wombat256    " use this color scheme
+    else
+        set t_Co=256 " Explicitly tell Vim that the terminal supports 256 colors
+        set background=light   " adapt colors for background
+        set guifont=DejaVu\ Sans\ Mono\ for\ Powerline
+        colorscheme ManuWhite
+        set background=light   " adapt colors for background
+    endif
 endif
+" let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+" let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+" let &t_SI .= "\<Esc>[4 q"
+" " solid block
+" let &t_EI .= "\<Esc>[2 q"
+ " 1 or 0 -> blinking block
+ " 3 -> blinking underscore
+ " Recent versions of xterm (282 or above) also support
+ " 5 -> blinking vertical bar
+" 6 -> solid vertical bar
+
+
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ Color Parenthesis
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -102,7 +115,7 @@ au VimEnter * RainbowParenthesesToggle
 au Syntax * RainbowParenthesesLoadRound
 au Syntax * RainbowParenthesesLoadSquare
 au Syntax * RainbowParenthesesLoadBraces
-
+ 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ Gitgutter
@@ -139,14 +152,7 @@ let g:airline#extensions#syntastic#enabled = 1
 let g:airline#extensions#whitespace#enabled = 0
 let g:airline#extensions#whitespace#checks = []
 let g:airline#extensions#whitespace#show_message = 0
-" let g:airline#extensions#whitespace#checks = [ 'indent', 'trailing' ]
-" " * configure whether a message should be displayed. >
-"   let g:airline#extensions#whitespace#show_message = 1
-"   let g:airline#extensions#whitespace#trailing_format = 'trailing[%s]'
-"   let g:airline#extensions#whitespace#mixed_indent_format = 'mixed-indent[%s]'
 " let g:airline#extensions#tabline#enabled = 0
-" " * enable/disable displaying buffers with a single tab. >
-" let g:airline#extensions#tabline#show_buffers = 1
 
 
 " --- Airline Theme
@@ -162,10 +168,10 @@ let g:airline_section_y='ENC=%{airline#util#wrap(airline#parts#ffenc(),0)}'
 " let g:airline_section_z='%3p%%_%{g:airline_symbols.linenr}%#__accent_bold#%4l%#__restore__#:%3c'
 " let g:airline_section_warning='%{airline#util#wrap(airline#extensions#syntastic#get_warnings(),1)}'
 
-
-
-
-
+ 
+ 
+ 
+ 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ Sessions
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -280,9 +286,7 @@ function! ToggleHorizontalScrollbar()
 endfunc
 set lbr " line break
 noremap <F10> :set nowrap! <CR>
-"~ map <F9> :set guioptions+=b <CR>
 noremap <F11> :call ToggleHorizontalScrollbar()<CR>
-" noremap <F6> :set guioptions+=m <CR> 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ Search
@@ -323,13 +327,6 @@ set foldlevel=1     " fold from the beginning
 " noremap <C-L> :bn<CR>
 noremap <C-H> :tabprevious<CR>
 noremap <C-L> :tabnext<CR>
-" nmap <C-t> :tabnew<CR>
-" nmap <C-S-tab> :tabprevious<CR>
-" nmap <C-tab> :tabnext<CR>
-" map <C-S-tab> :tabprevious<CR>
-" map <C-tab> :tabnext<CR>
-" imap <C-S-tab> <Esc>:tabprevious<CR>
-" imap <C-tab> <Esc>:tabnext<CR>
 set showtabline=2  " always tabs visible
 nnoremap <silent> <A-Left> :execute 'silent! tabmove ' . (tabpagenr()-2)<CR>
 nnoremap <silent> <A-Right> :execute 'silent! tabmove ' . tabpagenr()<CR>
@@ -695,6 +692,14 @@ function! GuiTabLabelManu()
 endfunction
 
 set guitablabel=%!GuiTabLabelManu()
+
+
+
+" --------------------------------------------------------------------------------
+" --- Environment variables, local
+" --------------------------------------------------------------------------------
+let $OMNIVOR_MKF_DIR='/work/lib/OmniVor_lib/fortran/_includes/'
+let $OMNIVOR_LIB_DIR='/work/lib/OmniVor_lib/fortran/_lib/linux-ia32/'
 
 " --------------------------------------------------------------------------------
 " --- Typos - spelling - abbreviations

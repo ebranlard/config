@@ -11,10 +11,10 @@ git clone https://github.com/bling/vim-airline
 if [ $HOSTNAME == 'work' ]
 then
     echo "Work"
+
 # syntastic/
 # tlib_vim/
 # vim-addon-mw-utils/
-# vim-airline/
 # vim-easymotion/
 # vim-fugitive/
 # vim-markdown-folding/

@@ -1,2 +1,2 @@
 
-export PATH=$PATH:$HOME/Config/scripts/
+PATH="$PATH:$HOME/Config/scripts"

@@ -15,8 +15,11 @@
 #############################################################
 SINK=0 # might be changed
 DELTAVOL=3277 #is 5% of the total volume, you can change this to suit your needs
-MAXVOL=189875 # this is 115%. Max is 95536
+# MAXVOL=189875 # this is 115%. Max is 95536
+MAXVOL=89875 # this is 115%. Max is 95536
+MINVOL=14000 # 
 REFVOL=65536 # this is by definition 100%. Used to compute percentage
+REFVOL=89875 # this is by definition 100%. Used to compute percentage
 #### Creation of files/folders if dont exist
 test ! -d ~/.pulse        && mkdir ~/.pulse
 test ! -f ~/.pulse/mute   && echo "false" > ~/.pulse/mute
@@ -24,7 +27,7 @@ test ! -f ~/.pulse/volume && echo "65536" > ~/.pulse/volume
 test ! -f ~/.pulse/nid    && echo "0" > ~/.pulse/nid
 
 #### READING FILES 
-CURVOL=`cat ~/.pulse/volume`     #Reads in the current volume
+CURVOL=`cat ~/.pulse/volume|awk 'NR<2 {print $1}'`     #Reads in the current volume
 MUTE=`cat ~/.pulse/mute`         #Reads mute state
 NID_PREVIOUS=`cat ~/.pulse/nid`  #Reads previous nid
 
@@ -46,6 +49,7 @@ then
 else
     if [[ $1 == "increase" ]]
     then
+        echo $CURVOL
         CURVOL=$(($CURVOL + $DELTAVOL)) 
         if [[ $CURVOL -ge $MAXVOL ]]
         then
@@ -54,14 +58,15 @@ else
     elif [[ $1 == "decrease" ]]
     then
         CURVOL=$(($CURVOL - $DELTAVOL))
-        if [[ $CURVOL -le 0 ]]
+        if [[ $CURVOL -le $MINVOL ]]
         then
-            CURVOL=0        
+            CURVOL=$MINVOL        
         fi
     fi
     ## SETTING VOLUME
     echo $CURVOL
     pactl set-sink-volume $SINK $CURVOL
+    sleep 0.1
 #     pactl set-sink-volume 1 $CURVOL
     echo $CURVOL > ~/.pulse/volume # Write the new volume to disk to be read the next time the script is run.
 fi

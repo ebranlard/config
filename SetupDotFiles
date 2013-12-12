@@ -9,17 +9,24 @@ cd ~
 # Moving existing files to a backup folder
 BKP_FOLDER=_bkp_dotfiles
 mkdir -p $BKP_FOLDER 
-mv .xinitrc .bashrc .bash_logout .bash_profile .vimrc .vim .gitconfig .fonts $BKP_FOLDER
+mv .xinitrc .bashrc .bash_logout .bash_profile .vimrc .vim .gitconfig .profile .fonts $BKP_FOLDER
 
 # Removing files
 ln -s $path/dotfiles/xinitrc .xinitrc
 ln -s $path/dotfiles/bashrc_user.bash .bashrc
 ln -s $path/dotfiles/bash_profile.bash .bash_profile
 ln -s $path/dotfiles/bash_logout .bash_logout
-ln -s $path/dotfiles/gitconfig .gitconfig
 ln -s $path/dotfiles/vimrc .vimrc
 ln -s $path/dotfiles/vim .vim
+ln -s $path/dotfiles/profile .profile
 
+if [ $HOSTNAME == 'work' ]
+then
+    echo "Work"
+    ln -s $path/dotfiles/gitconfig-work .gitconfig
+else
+    ln -s $path/dotfiles/gitconfig .gitconfig
+fi
 # Fonts
 ln -s $path/fonts .fonts
 fc-cache -vf ~/.fonts

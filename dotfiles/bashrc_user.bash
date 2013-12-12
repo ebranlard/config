@@ -1,4 +1,4 @@
-export PATH=$PATH:$HOME/Config/scripts/
+# export PATH=$PATH:$HOME/Config/scripts/
 
 export HOME2=$HOME/
 source $HOME2"Config/dotfiles/bashrc_machine.bash"
