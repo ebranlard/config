@@ -2,7 +2,7 @@ echo "--------------------------------------------------------------------"
 echo "----------------------- BASH PROFILE -------------------------------"
 echo "--------------------------------------------------------------------"
 
-source /home/manu/.profile
+source $HOME/.profile
 # Disable caps lock
 # setxkbmap -option ctrl:nocaps  
 # setxkbmap -option grab:break_actions
