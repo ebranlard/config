@@ -1,0 +1,5 @@
+#!/bin/bash
+
+grep -Insri TODO ./* |wc -l
+cat ./*.m |wc -l
+

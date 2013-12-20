@@ -67,7 +67,7 @@ else
     echo $CURVOL
     pactl set-sink-volume $SINK $CURVOL
     sleep 0.1
-#     pactl set-sink-volume 1 $CURVOL
+    pactl set-sink-volume 1 $CURVOL
     echo $CURVOL > ~/.pulse/volume # Write the new volume to disk to be read the next time the script is run.
 fi
 

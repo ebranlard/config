@@ -1,2 +1,5 @@
 
 PATH="$PATH:$HOME/Config/scripts"
+
+setxkbmap -option terminate:ctrl_alt_bksp
+# setxkbmap -option compose:ralt
