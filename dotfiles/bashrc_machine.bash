@@ -38,6 +38,7 @@ then
     # hpc root
     alias gonodeX='qrsh -q mic_interactive-X'
     alias gonode='qrsh -q mic_interactive '
+    alias gonodecuda='qsub -I -l nodes=n-62-24-50'
     export OMNIVOR_MKF_DIR='/home/ebra/omnivor/_includes/'
     export OMNIVOR_LIB_DIR='/home/ebra/omnivor/_lib/linux-amd64/'
     export OMNIVOR_OBJ_DIR='/home/ebra/omnivor/_build/linux-amd64/'
