@@ -2,6 +2,7 @@ a2ps
 acetoneiso
 acroread
 amule
+apt-show-versions
 avidemux
 banshee
 brasero
@@ -31,6 +32,8 @@ lazarus
 less
 meld
 octave
+openconnect
+vpnc
 p7zip
 p7zip-full
 p7zip-rar
@@ -46,6 +49,7 @@ r-base
 rhythmbox
 subversion
 sysv-rc-conf
+tagtool
 texlive-base
 texlive-binaries
 texlive-extra-utils
@@ -55,6 +59,8 @@ texlive-latex-base
 texlive-pstricks
 texlive-science
 timidity
+thunar-media-tags-plugin 
+thunar-archive-plugin
 transmission-gtk
 unzip
 valgrind
@@ -71,6 +77,13 @@ xfce4-power-manager-data
 xfce4-power-manager-plugins
 xfce4-quicklauncher-plugin
 xfce4-screenshooter
+xfce4-taskmanager
 xfce4-terminal
 xfce4-volumed
 zip
+
+
+
+font-manager
+tilda
+xdotool

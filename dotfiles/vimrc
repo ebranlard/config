@@ -701,7 +701,7 @@ set guitablabel=%!GuiTabLabelManu()
 " --- Environment variables, local
 " --------------------------------------------------------------------------------
 let $OMNIVOR_MKF_DIR='/work/lib/OmniVor_lib/fortran/_includes/'
-let $OMNIVOR_LIB_DIR='/work/lib/OmniVor_lib/fortran/_lib/linux-ia32/'
+let $OMNIVOR_LIB_DIR='/work/lib/OmniVor_lib/fortran/_lib/linux-amd64/'
 
 " --------------------------------------------------------------------------------
 " --- Typos - spelling - abbreviations
