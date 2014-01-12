@@ -13,6 +13,16 @@ patches/
 profiles/
 snd/
 syst/
+fonts/*/
+dotfiles/vim/.*
+dotfiles/vim/_matlab
+tmp/
+_bkp_dotfiles
+_src_and_deb
+dotfiles/gitconfig-work
+SetupSyst
+
+
 
 simplekey
 scripts/Riso*
