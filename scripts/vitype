@@ -1,0 +1,5 @@
+#!/bin/bash
+file=`mytype $1`
+echo "Opening in vim:" $file
+
+vim $file

@@ -1,0 +1,12 @@
+#!/bin/bash
+# Just return the address of a file returned by the standard type
+a=`type $1`
+is_hashed=`echo $a|grep hashed|wc -l`
+
+if [[ $is_hashed == 0 ]]
+then
+    file=`echo $a|awk '{print $3}'`
+else
+    file=`echo $a|awk '{print $4}'|sed 's/[()]//g'`
+fi
+echo $file

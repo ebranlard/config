@@ -3,10 +3,6 @@ echo "----------------------- BASH PROFILE -------------------------------"
 echo "--------------------------------------------------------------------"
 
 source $HOME/.profile
-# Disable caps lock
-# setxkbmap -option ctrl:nocaps  
-# setxkbmap -option grab:break_actions
-
 
 #if [ `tty` = "/dev/tty1" ]; then
 #	startx&
