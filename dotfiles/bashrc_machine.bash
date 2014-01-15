@@ -42,30 +42,30 @@ then
     alias gonodeX='qrsh -q mic_interactive-X'
     alias gonode='qrsh -q mic_interactive '
     alias gonodecuda='qsub -I -l nodes=n-62-24-50'
-    export OMNIVOR_MKF_DIR='$HOME/ebra/omnivor/_includes/'
-    export OMNIVOR_LIB_DIR='$HOME/ebra/omnivor/_lib/linux-amd64/'
-    export OMNIVOR_OBJ_DIR='$HOME/ebra/omnivor/_build/linux-amd64/'
-    export OMNIVOR_BIN_DIR='$HOME/ebra/omnivor/_bin/linux-amd64/'
-    export OMNIVOR_SRC_DIR='$HOME/ebra/omnivor/'
+    export OMNIVOR_MKF_DIR=$HOME'/omnivor/_includes/'
+    export OMNIVOR_LIB_DIR=$HOME'/omnivor/_lib/linux-amd64/'
+    export OMNIVOR_OBJ_DIR=$HOME'/omnivor/_build/linux-amd64/'
+    export OMNIVOR_BIN_DIR=$HOME'/omnivor/_bin/linux-amd64/'
+    export OMNIVOR_SRC_DIR=$HOME'/omnivor/'
 
 elif [ $HOSTNAME == 'n-62-28-19' ]
 then
     # hpc node
     #source /opt/intel/2013.0.028/bin/ifortvars.sh intel64
     alias vtune='source /opt/intel/2013.0.028/vtune_amplifier_xe_2013/amplxe-vars.sh'
-    export OMNIVOR_MKF_DIR='$HOME/omnivor/_includes/'
-    export OMNIVOR_LIB_DIR='$HOME/omnivor/_lib/linux-amd64/'
-    export OMNIVOR_OBJ_DIR='$HOME/omnivor/_build/linux-amd64/'
-    export OMNIVOR_BIN_DIR='$HOME/omnivor/_bin/linux-amd64/'
-    export OMNIVOR_SRC_DIR='$HOME/omnivor/'
+    export OMNIVOR_MKF_DIR=$HOME'/omnivor/_includes/'
+    export OMNIVOR_LIB_DIR=$HOME'/omnivor/_lib/linux-amd64/'
+    export OMNIVOR_OBJ_DIR=$HOME'/omnivor/_build/linux-amd64/'
+    export OMNIVOR_BIN_DIR=$HOME'/omnivor/_bin/linux-amd64/'
+    export OMNIVOR_SRC_DIR=$HOME'/omnivor/'
 elif [ $HOSTNAME == 'gray1' ]
 then
     alias ls='ls -F  '
-    export OMNIVOR_MKF_DIR='$HOME/omnivor/_includes/'
-    export OMNIVOR_LIB_DIR='$HOME/omnivor/_lib/linux-amd64/'
-    export OMNIVOR_OBJ_DIR='$HOME/omnivor/_build/linux-amd64/'
-    export OMNIVOR_BIN_DIR='$HOME/omnivor/_bin/linux-amd64/'
-    export OMNIVOR_SRC_DIR='$HOME/omnivor/'
+    export OMNIVOR_MKF_DIR=$HOME'/omnivor/_includes/'
+    export OMNIVOR_LIB_DIR=$HOME'/omnivor/_lib/linux-amd64/'
+    export OMNIVOR_OBJ_DIR=$HOME'/omnivor/_build/linux-amd64/'
+    export OMNIVOR_BIN_DIR=$HOME'/omnivor/_bin/linux-amd64/'
+    export OMNIVOR_SRC_DIR=$HOME'/omnivor/'
 
 else
     alias ls='ls -F --color=always '
