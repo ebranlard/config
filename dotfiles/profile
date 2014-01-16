@@ -1,11 +1,14 @@
 
 PATH="$PATH:$HOME/Config/scripts"
 
-# restart x
-setxkbmap -option terminate:ctrl_alt_bksp
-# special characters
-setxkbmap -option compose:ralt
-# Disable caps lock
-setxkbmap -option ctrl:nocaps  
-# x problems Ctrl+Alt+/
-setxkbmap -option grab:break_actions
+# X specific commands
+if xset q &>/dev/null; then
+    # restart x
+    setxkbmap -option terminate:ctrl_alt_bksp
+    # special characters
+    setxkbmap -option compose:ralt
+    # Disable caps lock
+    setxkbmap -option ctrl:nocaps  
+    # x problems Ctrl+Alt+/
+    setxkbmap -option grab:break_actions
+fi

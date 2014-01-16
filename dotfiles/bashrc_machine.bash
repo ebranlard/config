@@ -8,7 +8,7 @@ then
     source /opt/intel/bin/compilervars.sh intel64
     alias vtune='source /opt/intel/vtune_amplifier_xe_2013/amplxe-vars.sh'
 
-    export PATH=$PATH:/work/lib/OmniVor_lib/fortran/_bin/linux-ia32
+    export PATH=$PATH:/work/lib/OmniVor_lib/fortran/_bin/linux-amd64
     export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
     
     export PATH=/home/manu/Work/cuda/bin:$PATH
