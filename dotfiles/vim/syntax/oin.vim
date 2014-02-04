@@ -22,9 +22,10 @@ endif
 " Keywords
 syn keyword oKeyword Wind Environment CommonData Algo Param Coupling Field
 
-syn keyword oIdentifier b3D bBuildMatrix bComputeGrad bConvertToPart bDistortPart bExport bForceOneInfiniteWakePanel bForceWakePanelAlongU0 bGridVelocity bHybridWake bNoRollUp tRollUpStart bPlaceConcentratedShedVorticity bPlotGeometry bPlots bPrescribedGamma bProfilesData bRemoveFarWake bSteady bViscousDiffusion EmissionMethod HGridnx HGridny HGridnz HGridPbur HGridPtll IprescribedIntensities nTGridVelocity pNumericalScheme pDiffusionScheme PanlSmooth PartSmooth SgmtSmooth Model Param1 Param2 ParamMethod PrescribedIntensities ProfileSolving crit MaxIter relax RelSizeNWPanel SmoothAlpha tConvertToPart pConvertToPart tHybridEnd tHybridStart tRemoveFarWake UGridnx UGridny UGridnz UGridPbur UGridPtll bProfiles2PiAlpha bProfiles2PiSinAlpha bHawcWind bProfilesNoInduction bNoShedding bExportPlotVtk bExportPlotBin bExportPlotVtkBin bExportLoads nTExportPlot nTExportLoads bProfilesAlphaSmooth  bProfilesNoInduction  bProfilesAlphaSmooth 
+syn keyword oIdentifier b3D bBuildMatrix bComputeGrad bConvertToPart bDistortPart bExport bForceOneInfiniteWakePanel bForceWakePanelAlongU0 bGridVelocity bHybridWake bNoRollUp tRollUpStart bPlaceConcentratedShedVorticity bPlotGeometry bPlots bPrescribedGamma bProfilesData bRemoveFarWake bSteady bViscousDiffusion bViscousBoundaries EmissionMethod HGridnx HGridny HGridnz HGridPbur HGridPtll IprescribedIntensities nTGridVelocity pNumericalScheme pDiffusionScheme PanlSmooth PartSmooth SgmtSmooth Model Param1 Param2 ParamMethod PrescribedIntensities ProfileSolving crit MaxIter relax RelSizeNWPanel SmoothAlpha tConvertToPart pConvertToPart tHybridEnd tHybridStart tRemoveFarWake UGridnx UGridny UGridnz UGridPbur UGridPtll bProfiles2PiAlpha bProfiles2PiSinAlpha bHawcWind bProfilesNoInduction bNoShedding bExportPlotVtk bExportPlotBin bExportPlotVtkBin bExportLoads nTExportPlot nTExportLoads bProfilesAlphaSmooth  bProfilesNoInduction  bProfilesAlphaSmooth 
 
-syn keyword oIdentifier bTIMING bDEBUGMIN bSTOP_ALLOWED prefix sim_folder nExportStates bExportStates bMemoryAnalyser bMemorySaver bTimeEstimator bSILENT_WARN bSILENT_ERROR bSILENT_INFO bExportConverged bConstantUiExternalPerStep state_file bExportPlot bExportLoads pExportPlotFormat pExportVelocityFormat nTExportPlot nTExportLoads  nExportPlot nExportLoads pCoupling 
+syn keyword oIdentifier bTIMING bDEBUGMIN bSTOP_ALLOWED prefix sim_folder nExportStates bExportStates bMemoryAnalyser bMemorySaver bTimeEstimator bSILENT_WARN bSILENT_ERROR bSILENT_INFO bExportConverged bConstantUiExternalPerStep state_file bExportPlot bExportLoads pExportPlotFormat pExportVelocityFormat nTExportPlot nTExportLoads  nExportPlot nExportLoads
+syn keyword oIdentifier pVortexSplittingScheme bVortexSplitting VortexSplittingParam1 VortexSplittingParam2
 
 syn keyword oIdentifier bHybridWake HGrid_n1 HGrid_n2 HGrid_n3 HGrid_l1 HGrid_l2 HGrid_l3 HGrid_PO_g HGrid_e1_g HGrid_e2_g  HGrid_tStart  HGrid_tEnd
 syn keyword oIdentifier bMGrid MGrid_bComputeGrad nTMGrid nMGrid MGrid_n1 MGrid_n2 MGrid_n3 MGrid_l1 MGrid_l2 MGrid_l3 MGrid_PO_g MGrid_e1_g MGrid_e2_g 
@@ -39,6 +40,7 @@ syn keyword oIdentifier KinVisc rho rho_water
 
 syn keyword oIdentifier dt tmax bDEBUG
 
+syn keyword oIdentifier pCoupling bWall bNacelle bOtherTurbine
 
 " syn keyword celTodo contained TODO FIXME XXX NOTE HACK
 syn keyword oTodo TODO FIXME XXX NOTE HACK

@@ -1,0 +1,9 @@
+#!/bin/bash
+TMPDIR=$(mktemp -d /tmp/git-latexdiff.XXXXXX)
+cp *.b* $TMPDIR
+cp *.aux $TMPDIR
+latexdiff "$1" "$2" > $TMPDIR/$2
+pdflatex -interaction batchmode -output-directory $TMPDIR $TMPDIR/$2
+evince $TMPDIR/${2%.*}.pdf
+# rm -rf $TMPDIR 
+trap $(rm -rf $TMPDIR) EXIT
