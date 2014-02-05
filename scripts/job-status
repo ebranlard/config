@@ -13,6 +13,6 @@ do
     echo "-----------------------------------------------------------------------------"
     echo "NODE: $machine JOB: ${jobnames[$i]} - PID:${jobpbsid[$i]} - UP:${runtimes[$i]}"
     echo "-----------------------------------------------------------------------------"
-    ssh ebra@$machine 'tail -n 8 /scratch/ebra/*/sim_*/*.log'
+    ssh ebra@$machine 'tail -n 20 /scratch/ebra/*/sim_*/*.log'
 
 done
