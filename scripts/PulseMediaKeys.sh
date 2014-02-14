@@ -66,9 +66,8 @@ else
     ## SETTING VOLUME
     echo $CURVOL
     pactl set-sink-volume $SINK $CURVOL
-    sleep 0.1
-    pactl set-sink-volume 1 $CURVOL
     echo $CURVOL > ~/.pulse/volume # Write the new volume to disk to be read the next time the script is run.
+#     pactl set-sink-volume 1 $CURVOL
 fi
 
 ## CHOSING ICON
@@ -92,3 +91,4 @@ fi
 # notify-send -t 500 -i $icon "$p%"
 NID=$(notify-send -r $NID_PREVIOUS -p -t 500 -i $icon -h int:value:$p -h string:synchronous:volume "$p%")
 echo "$NID" > ~/.pulse/nid    
+sleep 0.1

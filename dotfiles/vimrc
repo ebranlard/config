@@ -467,12 +467,12 @@ let g:Tex_IgnoredWarnings =
 let g:Tex_IgnoreLevel = 11
 
 "Latex Folding
-let g:Tex_FoldedSections='part,chapter,section'
+let g:Tex_FoldedSections='part,chapter,section,subsection'
 let g:Tex_FoldedEnvironments=''
 let g:Tex_FoldedCommands=''
 let g:Tex_FoldedMisc=''
 let g:Tex_AutoFolding=1 
-let g:Tex_Folding=1
+let g:Tex_Folding=2
 
 "To put in a *.latexmain to override for a project
 "let Tex_DefaultTargetFormat = 'pdf'
