@@ -1,1 +1,186 @@
-/work/lib/OmniVor_lib/fortran/_includes/_tools/hawc-change-param
+#!/usr/bin/env python
+#############################################################
+# hawc-change-param:
+#############################################################
+# Written by   : Emmanuel Branlard
+# Date         : 02 February 2014
+# Dependencies : python
+# Website      : http://vind-gitlab.win.dtu.dk/ebra/omnivor-includes
+#
+# License      : Feel free to modify and adapt it.
+# Revisions    : see gitlab repository
+# Usage        : See description below
+#
+#############################################################
+import fileinput
+import re
+import sys
+import os
+
+# --------------------------------------------------------------------------------
+# --- Parameters  
+# --------------------------------------------------------------------------------
+
+
+
+
+
+# --------------------------------------------------------------------------------
+# --- Pseudo description
+# --------------------------------------------------------------------------------
+DESCRIPTION="""usage: hawc-change-param [file] param-list
+
+Description: change different parameters of an htc file and prints output to screen
+
+Arguments:
+    file:       an htc file (optional if input given by stdin)
+    param-list: a space-separated list of the form `key=values`
+                where:
+                   - `values` is a comma-separated list of values, e.g.:
+                           `key=value1`
+                           `key=value1,value2,etc`
+                   - `key`  locate the given parameter (slash-separated), e.g.:
+                           `param=values`
+                           `section/param=values`
+                           `section/subsection/param=values`
+
+Example:
+    hawc-change-param test.htc wsp=10 wind/shear_format=4,0.2 output/filename='./res/data' > out.htc
+
+    cat file.htc | hawc-change-param wsp=10 shear_format=4,0.2  > out.htc
+"""
+
+
+# --------------------------------------------------------------------------------
+# ---  Code
+# --------------------------------------------------------------------------------
+pattern_hawc_comment  = re.compile(r'(\s*);.*') # matching comments 
+
+def help():
+    print(DESCRIPTION)
+    
+
+
+def change_params(Stream,paramlist):
+    # Checking that param list is a list of "param=values"
+    param_check=all([p.find('=')>0 for p in paramlist])
+    if not param_check:
+        sys.stderr.write('ERROR: param-list has the wrong format:\n'+str(paramlist)+'\n\n')
+        help()
+        sys.exit(-1)
+    else:
+        # Splitting the parameter=value list
+        param_split   = [p.split('=') for p in paramlist]
+        param_value   = [p[1].strip() for p in param_split]
+        param_namesec = [p[0].strip() for p in param_split]
+        param_name=[]
+        param_sec =[]
+        for p in param_namesec:
+            split=p.split('/')
+            param_name.append(split[-1]);
+            if len(split)>0:
+                param_sec.append(split[0:-1])
+            else:
+                param_sec.append([])
+
+        # Processing input line by line
+        current_section=''
+        sections=[] 
+        for line in Stream:
+            l=line.strip()
+
+            if pattern_hawc_comment.match(l):
+                # line of comments are discarded
+                pass
+            else:
+                # Saving line indentation
+                n_indent= len(line)-len(line.lstrip()); # number of identating space
+                # Breaking line into parameters and comment
+                ic=l.find(';')
+                params  =l[0:ic].strip()
+                comments=l[ic:]
+                # Spliting words
+                words=params.split()
+
+                # looping on all param names to see if the current line match one of them
+                found=None
+                if words[0]=='begin':
+                    current_section=words[1] # might be useful one day if keyword is section specific
+                    sections.append(current_section)
+                if words[0]=='end':
+                    sections=sections[0:-1]
+                    if len(sections)>0:
+                        current_section=sections[-1]
+                    else:
+                        current_section=''
+                for p,v,sec,ip in zip(param_name,param_value,param_sec,range(len(param_name))):
+                    if words[0]==p:
+                        if sec==[] or sections == sec:
+#                             sys.stderr.write('>Changing param: %s to value %s in section %s \n' % (p,v,sections))
+#                         print(words)
+#                         print(params)
+#                         print(comments)
+                            values=v.split(',')
+                            for i in range(len(values)):
+                                if i+1<len(words):
+                                    words[i+1]=values[i]
+                                else:
+                                    sys.stderr.write('ERROR: Too much values given for param %s\n'% p)
+                                    sys.exit(-1)
+                                    break
+                            # reconstructing input
+                            line=' '*n_indent+' '.join(words)+' '+comments
+                            #
+                            found=ip
+                            #
+                            break
+
+                # We remove the param that has been found
+                if found is not None:
+                    param_name.pop(found)
+                    param_value.pop(found)
+                    param_sec.pop(found)
+
+
+            # writing to standard output
+            sys.stdout.write(line.rstrip()+'\n')
+
+        if len(param_name)>0:
+            sys.stderr.write('ERROR: the following parameters could not be replaced: %s\n'% param_name)
+            sys.exit(-1)
+
+
+
+if __name__ == "__main__":
+    #############################################################
+    # Parsing arguments
+    #############################################################
+#     # Configure argument parser
+#     parser = argparse.ArgumentParser(formatter_class=argparse.RawDescriptionHelpFormatter,description=DESCRIPTION)
+#     parser.add_argument('user', nargs='?', help='USER: /home/USER/.bash_history will be cleaned')
+#     args = parser.parse_args()
+# 
+#     ## show values ##
+#     if args.user==None:
+
+    if len(sys.argv)>1:
+        if os.path.isfile(sys.argv[1]):
+            if len(sys.argv)>2:
+                #print('Using input file: '+sys.argv[1])
+                Stream=fileinput.input(sys.argv[1]);
+                change_params(Stream,sys.argv[2:])
+            else:
+                sys.stderr.write('ERROR: not enough input arguments\n')
+                help()
+                sys.exit(-1)
+        else:
+            #print('Reading from stdin')
+            Stream=fileinput.input('-');
+            change_params(Stream,sys.argv[1:])
+
+    
+    else:
+        sys.stderr.write('ERROR: not enough input arguments\n')
+        help()
+        sys.exit(-1)
+    
