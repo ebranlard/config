@@ -1,0 +1,131 @@
+#!/usr/bin/env python
+
+#############################################################
+# symlink:
+#############################################################
+# Description : use ./SCRIPT -h for help and description
+# Written by : Emmanuel Branlard
+# Date : February 2014
+# Dependencies : python
+# License : Feel free to modify and adapt it
+#############################################################
+import os, re
+import sys
+
+import argparse
+
+STORE_FILE='/tmp/symlink_store'
+
+DESCRIPTION="""Description:
+        Create symlink from src to destination. 
+        If only the source is provided, then the name of the source is temporary stored.
+        If only the destination is provided, then the previously stored symlink source is used.
+        Useful for creating symlink with curstum actions in Thunar for instance.
+
+    """
+def folder(string):
+    if not os.path.isdir(string):
+        raise argparse.ArgumentTypeError('Directory %r does not exist.',string)
+        string='Null'
+    else:
+        print('Ok folder exists')
+
+    return(string)
+
+def file_or_folder(string):
+    if not os.path.exists(string):
+        raise argparse.ArgumentTypeError('Directory %r does not exist.',string)
+        string='Null'
+    else:
+        print('Ok src exists')
+
+    return(string)
+def main(argv):
+    # Configure argument parser
+    parser = argparse.ArgumentParser(formatter_class=argparse.RawDescriptionHelpFormatter,description=DESCRIPTION,prefix_chars='-')
+    parser.add_argument('--version', action='version', version='%(prog)s 1.0')
+    parser.add_argument('--src', type=file_or_folder,  help='Specify source for symlink')
+    parser.add_argument('--dest_folder', type=folder, help='Specify destination folder for symlink (name will be basename of SRC)')
+#     parser.add_argument('--dest_name', type=str, help='Specify destination name for symlink')
+#     parser.add_argument('num', type=int, nargs=1, help='Integer increment (can be negative)')
+#     parser.add_argument('files', nargs='+', help='List of files')
+
+    args = parser.parse_args(argv)
+    src         = args.src
+    dest_folder = args.dest_folder
+#     dest_name   = args.dest_name
+    print('%s %s'%(src,dest_folder))
+    if src is None:
+        print('Attempting to read from previously stored link source')
+        try:
+            f=open(STORE_FILE,'r')
+            src=f.readline()
+            f.close()
+            print('Src is :%s'%src)
+        except Exception,e:
+            print('Failed!')
+
+    else:
+        if (dest_folder is None):#or (dest_name is None):
+            print('Storing link source')
+            f=open(STORE_FILE,'w')
+            f.write(src)
+            f.close()
+
+    if (not(src is None)) and (not (dest_folder is None)):
+        print('Creating symlink')
+        try:
+            os.system('ln -s \"%s\" \"%s\"'%(src,dest_folder))
+        except:
+            print('Failed!')
+
+
+
+#     # Sorting input files 
+#     files.sort()
+#     if shiftnum>0:
+#         # if we need to increment by a number, and move files, we need to go in reversed order in order not to ovewrite files
+#         file_list=reversed(files)
+#     else:
+#         #
+#         file_list=files
+# 
+#     # Looping through files 
+#     for f in file_list:
+#         print "-----------------------------------------------------"
+#         (head,filebase)=os.path.split(f)
+#         try:
+#             # Extracting number
+#             num_str = re.findall('[0-9]+', filebase)
+#             num_new=int(num_str[0])+shiftnum
+#             if num_new<0:
+#                 print "Warning: Negative number found for the following renaming."
+#             # Respecting number of significant digits (if leading zeros)
+#             num_len=len(num_str[0])
+#             string_format="%%0%dd"%num_len
+#             num_new_str=string_format %  num_new
+#            
+#             # Replacement in string
+#             filebase_new=re.sub(num_str[0], num_new_str, filebase, count=1, flags=0)
+#             f_new=os.path.join(head,filebase_new)
+#             
+#             # Renaming
+#             print "Renaming:", f, "into",f_new
+#             if os.path.exists(f_new):
+#                 raise NameError('File exists')
+#             else:
+#                 os.rename(f,f_new)
+#         except IndexError:
+#             print "Warning: No number found in file: ", filebase
+#             pass
+#         except NameError:
+#             print "Error: can't rename", f, "into",f_new,". File exists."
+#             print "Aborting"
+#             sys.exit(2)
+
+if __name__ == "__main__":
+    main(sys.argv[1:])
+
+
+
+

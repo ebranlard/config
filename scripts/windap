@@ -1,0 +1,2 @@
+#!/bin/bash
+wine /home/manu/Config/scripts/WINDAP.EXE &
