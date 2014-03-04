@@ -1,4 +1,10 @@
 #!/bin/bash
+# qjob: display compact infos about user's PBS jobs, including full job-name
+#
+# E. Branlard - March 2014
+# 
+# usage: qjob [username]
+
 
 if [ $# -ne 1 ];
 then
