@@ -1,0 +1,39 @@
+#!/bin/bash
+
+if [ $# -ne 1 ];
+then
+    user=$USER
+else
+    user=$1
+fi
+
+echo User: $user
+echo "-----------------------------------------------------------------------------"
+# --------------------------------------------------------------------------------
+# --- Getting job PBS id
+# --------------------------------------------------------------------------------
+jobpbsid=(`qstat -u $user|awk 'NR>5'|awk '{print $1}'|awk -F. '{print $1}'`); 
+
+# jobnames=(`qstat -u $user|awk 'NR>5'|awk '{print $4}'`); 
+# runtimes=(`qstat -u $user|awk 'NR>5'|awk '{print $11}'`); 
+# machines=(`qstat -nu $user|awk 'NR>6'|awk 'NR % 2 ' |awk '{print $1}'|awk -F+ '{print $1}'`); 
+
+# number of jobs
+n=`expr ${#jobpbsid[@]} - 1`
+
+# --------------------------------------------------------------------------------
+# --- Getting job specific info  
+# --------------------------------------------------------------------------------
+for i in `seq 0 $n`
+do 
+    machines=(`qstat -n ${jobpbsid[$i]} |awk -F- 'NR > 6 {print $2}'|cut -c 2-3|xargs`)
+    nnodes=${#machines[@]}
+    ALLINFO=`qstat -f ${jobpbsid[$i]}`
+    wall_used=`echo "$ALLINFO"|grep used.walltime|awk '{print $3}'|awk -F: '{print $1"h"$2}'`
+    wall_rqst=`echo "$ALLINFO"|grep List.walltime|awk '{print $3}'|awk -F: '{print $1"h"$2}'`
+    jobname=`echo "$ALLINFO"|grep Name|awk '{printf("%-40s",$3)}'` # CHOOSE NUMBER OF CHARACTERS
+    ppn=`echo "$ALLINFO"|grep ppn|awk -Fppn= '{print $2}'`
+    cpus=`expr $nnodes \* $ppn`
+    echo -e "${jobpbsid[$i]}  g-0${machines[0]}  $jobname $wall_used/$wall_rqst\t$nnodes($cpus)\t(g-0${machines[@]})"
+done
+echo "-----------------------------------------------------------------------------"
