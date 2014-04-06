@@ -15,8 +15,7 @@ import subprocess
 if (len(sys.argv)>1):
     user=sys.argv[1]
 else:
-#     user=$USER
-    user='ebra'
+    user=os.getenv('USER', '')
 
 print('User: %s'%user)
 print("-----------------------------------------------------------------------------")
