@@ -32,7 +32,7 @@ for id in jobpbsid[0:-1]:
     nodes_str=list(set([x[2:5] for x in cpu_list]))
     n_cpus=len(cpu_list)
     n_nodes=len(nodes)
-    main_node=cpu_list[0][0:2]+str(nodes[0])
+    main_node=cpu_list[0][0:2]+"%03d"%nodes[0]
     job_name=''
     wall_used=''
     wall_rqst=''
@@ -53,9 +53,9 @@ for id in jobpbsid[0:-1]:
        elif (option=='Job_Name'):
            job_name='%-40s'%value
     s=id+' '+main_node+'  '+job_name+'  '+wall_used+'/'+wall_rqst+'\t'+str(n_nodes)+'('+str(n_cpus)+')\t'+'('+' '.join(nodes_str)+')'
-    print("-----------------------------------------------------------------------------")
+    print("------------------------------------------------------------------------------------")
     print("NODE: %s JOB: %s - PID:%s - UP:%s"%(main_node,job_name,id,wall_used))
-    print("-----------------------------------------------------------------------------")
+    print("------------------------------------------------------------------------------------")
     cmd="ssh %s@%s 'tail -n 20 /scratch/ebra/*/sim_*/*.log'"%(user,main_node)
     print(os.popen(cmd).read())
-print("-----------------------------------------------------------------------------")
+print("------------------------------------------------------------------------------------")
