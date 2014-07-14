@@ -37,11 +37,18 @@ n_jobs=len(jobpbsid)-1
 for id in jobpbsid[0:-1]:
     cmd="qstat -n %s |awk -F- 'NR > 6 {print $0}'|xargs"%id
     cpu_list = os.popen(cmd).read().replace(' ','').replace('\n','').split('+')
-    nodes=list(set([int(x[2:5]) for x in cpu_list]))
-    nodes_str=list(set([x[2:5] for x in cpu_list]))
-    n_cpus=len(cpu_list)
-    n_nodes=len(nodes)
-    main_node=cpu_list[0][0:2]+str(nodes[0])
+    if cpu_list[0]=='--':
+        nodes=0
+        nodes_str='--'
+        n_cpus=0
+        n_nodes=0
+        main_node='----'
+    else:
+        nodes=list(set([int(x[2:5]) for x in cpu_list]))
+        nodes_str=list(set([x[2:5] for x in cpu_list]))
+        n_cpus=len(cpu_list)
+        n_nodes=len(nodes)
+        main_node=cpu_list[0][0:2]+str(nodes[0])
     job_name=''
     wall_used=''
     wall_rqst=''
