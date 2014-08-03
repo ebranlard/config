@@ -1,23 +1,23 @@
 #! /bin/bash
-rm *.aux
-rm *.toc
-rm *.log
-rm *.bbl
-rm *.out
-rm *.cb
-rm *.blg
-rm *.lot
-rm *.lof
-rm *.tps
-rm *.maf
-rm *.ilg
-rm *.glo
-rm *.mtc*
-rm *.ptc*
-rm *.bmt
-rm *.idx
-rm *.ind
-rm *.snm
-rm *.nav
-rm *.cb2
-rm *synctex.gz
+rm -f *.aux
+rm -f *.toc
+rm -f *.log
+rm -f *.bbl
+rm -f *.out
+rm -f *.cb
+rm -f *.blg
+rm -f *.lot
+rm -f *.lof
+rm -f *.tps
+rm -f *.maf
+rm -f *.ilg
+rm -f *.glo
+rm -f *.mtc*
+rm -f *.ptc*
+rm -f *.bmt
+rm -f *.idx
+rm -f *.ind
+rm -f *.snm
+rm -f *.nav
+rm -f *.cb2
+rm -f *synctex.gz
