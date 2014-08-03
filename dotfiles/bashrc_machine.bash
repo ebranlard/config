@@ -1,6 +1,7 @@
 
 alias ls='ls -F --color=always --group-directories-first'
-alias grep='grep --color=always'
+# alias grep='grep --color=always'
+alias grep='grep --color=auto'
 export PS1='\[[1m[33m\]\u\[[32m\]@\[[33m\]\h:\[[32m\]\w \[[33m\]\$ \[[32m\]\[[m\]'
 
 if [ $HOSTNAME == 'work' ]
@@ -20,6 +21,8 @@ then
     export OMNIVOR_BIN_DIR='/work/lib/OmniVor_lib/fortran/_bin/linux-amd64/'
     export OMNIVOR_SRC_DIR='/work/lib/OmniVor_lib/fortran/'
 
+    
+    export PYTHONPATH="$PYTHONPATH:$HOME/Config/path/PythonPath/"
 
 
     #export PS1='\[\033[1m\]\[\033[1;33m\]\u:\[\e[32;1m\]\w \[\e[33;1m\]\$\[\033[m\] '

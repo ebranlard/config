@@ -125,7 +125,7 @@ else
 fi
 }
 #alias gvim=gv
-# alias gvim='gvim -p --remote-tab-silent'
+alias gvimt='gvim --remote-tab-silent'
 
 #########################################################
 # Bash params
