@@ -1,45 +1,76 @@
-#!/bin/bash
+#!/usr/bin/env python
 # qjob: display compact infos about user's PBS jobs, including full job-name
 #
 # E. Branlard - March 2014
 # 
 # usage: qjob [username]
 
+import sys
+import os
+import subprocess
 
-if [ $# -ne 1 ];
-then
-    user=$USER
-else
-    user=$1
-fi
 
-echo User: $user
-echo "-----------------------------------------------------------------------------"
+# if __name__ == "__main__":
+
+if (len(sys.argv)>1):
+    user=sys.argv[1]
+else:
+    user=os.getenv('USER', '')
+
+print('User: %s'%user)
+print("-----------------------------------------------------------------------------")
 # --------------------------------------------------------------------------------
 # --- Getting job PBS id
 # --------------------------------------------------------------------------------
-jobpbsid=(`qstat -u $user|awk 'NR>5'|awk '{print $1}'|awk -F. '{print $1}'`); 
-
-# jobnames=(`qstat -u $user|awk 'NR>5'|awk '{print $4}'`); 
-# runtimes=(`qstat -u $user|awk 'NR>5'|awk '{print $11}'`); 
-# machines=(`qstat -nu $user|awk 'NR>6'|awk 'NR % 2 ' |awk '{print $1}'|awk -F+ '{print $1}'`); 
+# =(``); 
+cmd="qstat -u %s|awk 'NR>5'|awk '{print $1}'|awk -F. '{print $1}'"%user
+# proc= subprocess.Popen(cmd, stdout=subprocess.PIPE)
+# jobpbsid = proc.stdout.read()
+jobpbsid = os.popen(cmd).read().split('\n')
 
 # number of jobs
-n=`expr ${#jobpbsid[@]} - 1`
+n_jobs=len(jobpbsid)-1
 
 # --------------------------------------------------------------------------------
-# --- Getting job specific info  
+# --- Looping and Getting job specific info  
 # --------------------------------------------------------------------------------
-for i in `seq 0 $n`
-do 
-    machines=(`qstat -n ${jobpbsid[$i]} |awk -F- 'NR > 6 {print $2}'|cut -c 2-3|xargs`)
-    nnodes=${#machines[@]}
-    ALLINFO=`qstat -f ${jobpbsid[$i]}`
-    wall_used=`echo "$ALLINFO"|grep used.walltime|awk '{print $3}'|awk -F: '{print $1"h"$2}'`
-    wall_rqst=`echo "$ALLINFO"|grep List.walltime|awk '{print $3}'|awk -F: '{print $1"h"$2}'`
-    jobname=`echo "$ALLINFO"|grep Name|awk '{printf("%-40s",$3)}'` # CHOOSE NUMBER OF CHARACTERS
-    ppn=`echo "$ALLINFO"|grep ppn|awk -Fppn= '{print $2}'`
-    cpus=`expr $nnodes \* $ppn`
-    echo -e "${jobpbsid[$i]}  g-0${machines[0]}  $jobname $wall_used/$wall_rqst\t$nnodes($cpus)\t(g-0${machines[@]})"
-done
-echo "-----------------------------------------------------------------------------"
+for id in jobpbsid[0:-1]:
+    cmd="qstat -n %s |awk -F- 'NR > 6 {print $0}'|xargs"%id
+    cpu_list = os.popen(cmd).read().replace(' ','').replace('\n','').split('+')
+    if cpu_list[0]=='--':
+        nodes=0
+        nodes_str='--'
+        n_cpus=0
+        n_nodes=0
+        main_node='----'
+    else:
+        nodes=list(set([int(x[2:5]) for x in cpu_list]))
+        nodes_str=list(set([x[2:5] for x in cpu_list]))
+        n_cpus=len(cpu_list)
+        n_nodes=len(nodes)
+        main_node=cpu_list[0][0:2]+str(nodes[0])
+        if cpu_list[0][0]=='j':
+            # hack for jess (nodes above change order due to set)
+            main_node=cpu_list[0][0:5]
+    job_name=''
+    wall_used=''
+    wall_rqst=''
+    # Parsing the qstat info
+    cmd="qstat -f %s"%id
+    ALLINFO = os.popen(cmd).read().split('\n')
+    for l in ALLINFO:
+       splt=l.split('=')
+       if(len(splt)>1):
+           option =splt[0].strip()
+           value  =("=".join(splt[1:])).strip()
+       else:
+           option=''
+       if (option=='Resource_List.walltime'):
+           wall_rqst="h".join(value.split(':')[0:2])
+       elif (option=='resources_used.walltime'):
+           wall_used="h".join(value.split(':')[0:2])
+       elif (option=='Job_Name'):
+           job_name='%-40s'%value
+    s=id+' '+main_node+'  '+job_name+'  '+wall_used+'/'+wall_rqst+'\t'+str(n_nodes)+'('+str(n_cpus)+')\t'+'('+' '.join(nodes_str)+')'
+    print(s)
+print("-----------------------------------------------------------------------------")

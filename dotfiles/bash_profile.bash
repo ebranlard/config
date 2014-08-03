@@ -4,6 +4,9 @@ echo "--------------------------------------------------------------------"
 
 source $HOME/.profile
 
+#switcher mpi = impi_4.1.1.036_intelv14.0.0
+
+
 #if [ `tty` = "/dev/tty1" ]; then
 #	startx&
 #fi
