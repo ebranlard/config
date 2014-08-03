@@ -36,6 +36,17 @@ then
     export OMNIVOR_BIN_DIR='/home/ebra/omnivor/_bin/linux-amd64/'
     export OMNIVOR_SRC_DIR='/home/ebra/omnivor/'
     export PATH="/home/ebra/anaconda/bin:$PATH"
+
+elif [ $HOSTNAME == 'jess.dtu.dk' ]
+then
+    # JESS
+    export OMNIVOR_MKF_DIR='/home/ebra/omnivor/_includes/'
+    export OMNIVOR_LIB_DIR='/home/ebra/omnivor/_lib/linux-amd64/'
+    export OMNIVOR_OBJ_DIR='/home/ebra/omnivor/_build/linux-amd64/'
+    export OMNIVOR_BIN_DIR='/home/ebra/omnivor/_bin/linux-amd64/'
+    export OMNIVOR_SRC_DIR='/home/ebra/omnivor/'
+    export PATH="/home/ebra/anaconda/bin:$PATH"
+
 elif [ $HOSTNAME == 'hpc-fe1' ]
 then
     # hpc root
