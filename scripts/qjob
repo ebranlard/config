@@ -46,6 +46,9 @@ for id in jobpbsid[0:-1]:
     else:
         nodes=list(set([int(x[2:5]) for x in cpu_list]))
         nodes_str=list(set([x[2:5] for x in cpu_list]))
+        if len(nodes_str)>10:
+            nodes_str=nodes_str[0:10]
+            nodes_str.append('...')
         n_cpus=len(cpu_list)
         n_nodes=len(nodes)
         main_node=cpu_list[0][0:2]+str(nodes[0])

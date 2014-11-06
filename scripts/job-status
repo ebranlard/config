@@ -64,7 +64,7 @@ for id in jobpbsid[0:-1]:
            job_name='%-40s'%value
     s=id+' '+main_node+'  '+job_name+'  '+wall_used+'/'+wall_rqst+'\t'+str(n_nodes)+'('+str(n_cpus)+')\t'+'('+' '.join(nodes_str)+')'
     print("------------------------------------------------------------------------------------")
-    print("NODE: %s JOB: %s - PID:%s - UP:%s"%(main_node,job_name,id,wall_used))
+    print("NODE: %s JOB: %s - PID: %s - UP:%s"%(main_node,job_name,id,wall_used))
     print("------------------------------------------------------------------------------------")
     if n_nodes>0:
         cmd="ssh %s@%s 'tail -n 20 /scratch/ebra/*/sim_*/*.log'"%(user,main_node)
