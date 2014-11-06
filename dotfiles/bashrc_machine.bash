@@ -21,10 +21,6 @@ then
     export OMNIVOR_BIN_DIR='/work/lib/OmniVor_lib/fortran/_bin/linux-amd64/'
     export OMNIVOR_SRC_DIR='/work/lib/OmniVor_lib/fortran/'
 
-    
-    export PYTHONPATH="$PYTHONPATH:$HOME/Config/path/PythonPath/"
-
-
     #export PS1='\[\033[1m\]\[\033[1;33m\]\u:\[\e[32;1m\]\w \[\e[33;1m\]\$\[\033[m\] '
     #export PS1="\033[33;40m[\u@\h \w]\\$\007 \033[0m\007"
     #export PS1='\[\033[33;40m\][\u@\h \[\e[33;40m\]\w]\[\e[33;1m\]\$\[\033[m\] '

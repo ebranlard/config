@@ -78,8 +78,10 @@ command! Gfortran compiler gfortran
 " set efm=%f(%l):%m,%-G$.%#
 
 
-let g:syntastic_fortran_flags=' -I /work/lib/OmniVor_lib/fortran/_build/linux-amd64/ -I _build/ -J/work/lib/OmniVor_lib/fortran/_build/linux-amd64/'
+let g:syntastic_fortran_compiler_options=' -I /work/lib/OmniVor_lib/fortran/_build/linux-amd64/ -I _build/ -J/work/lib/OmniVor_lib/fortran/_build/linux-amd64/'
 let g:syntastic_fortran_include_dirs = ['/work/lib/OmniVor_lib/fortran/_build/linux-amd64/','_build']
+" let g:syntastic_fortran_flags=' -I /work/lib/OmniVor_lib/fortran/_build/linux-amd64/ -I _build/ -J/work/lib/OmniVor_lib/fortran/_build/linux-amd64/'
+" let g:syntastic_fortran_include_dirs = ['/work/lib/OmniVor_lib/fortran/_build/linux-amd64/','_build']
 compiler! gfortran
 
 

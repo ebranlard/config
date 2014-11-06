@@ -4,7 +4,8 @@
 if [[ `cat /etc/hostname` == "work" ]]
 then
     #variables
-    OPTS="-av"
+#     OPTS="-av"
+    OPTS="-avlr"
     DEST=/media/Storage2
 
     ##############
