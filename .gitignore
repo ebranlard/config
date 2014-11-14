@@ -23,6 +23,9 @@ dotfiles/gitconfig-work
 SetupSyst
 
 
+sbin/
+scripts/tests/
+scripts/windap.con
 
 simplekey
 scripts/Riso*

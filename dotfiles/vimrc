@@ -755,6 +755,7 @@ set guitablabel=%!GuiTabLabelManu()
 " --------------------------------------------------------------------------------
 let $OMNIVOR_MKF_DIR='/work/lib/OmniVor_lib/fortran/_includes/'
 let $OMNIVOR_LIB_DIR='/work/lib/OmniVor_lib/fortran/_lib/linux-amd64/'
+let $OMNIVOR_SRC_DIR='/work/lib/OmniVor_lib/fortran/'
 let $PYTHONPATH='/home/manu/Config/path/PythonPath/'
 
 " --------------------------------------------------------------------------------

@@ -14,7 +14,9 @@
 #############################################################
 # Modify me
 #############################################################
-forbidden_commands = ['ls','la','ll','lg','su','cd','rm','mv','fg','bg','make','bash','clear','man','git status','git add','git rm','git commit -m','git commit -a','git init','git checkout','git push','git diff','api','aps','apc','ref','sudo cp','sudo rm','cat','gfortran','locate','groups','gitk','history','gvim','vim','f','touch','mkdir','cp','python','pwd','echo','chmod']
+# forbidden_commands = ['ls','la','ll','lg','su','cd','rm','mv','fg','bg','make','bash','clear','man','git status','git add','git rm','git commit -m','git commit -a','git init','git checkout','git push','git diff','api','aps','apc','ref','sudo cp','sudo rm','cat','gfortran','locate','groups','gitk','history','gvim','vim','f','touch','mkdir','cp','python','pwd','echo','chmod']
+#'rm','mv',
+forbidden_commands = ['ls','la','ll','cd','rm','mv','git commit -m','git commit -a','git checkout','ref','sudo cp','sudo rm','cat','locate','groups','gitk','history','f','touch','mkdir','cp','python','pwd','echo','chmod']
 
 
 import argparse
@@ -64,34 +66,37 @@ def main(argv):
     nLineTotal=0;
     # Looping on file lines
     for line in OldFile:
+        line=line.strip()
         nLineTotal=nLineTotal+1;
-        # We first avoid duplicates
-        if line not in lines_seen: 
-            command_words=line.split(' ')
-            keep_command=True
+        # First we trash anything with less than 3 characters
+        if len(line)>2:
+            # then we avoid duplicates
+            if line not in lines_seen: 
+                command_words=line.split(' ')
+                keep_command=True
 
-            # Looping on forbidden commands
-            for forbidden_command in forbidden_commands:
-                forbidden_command_words=forbidden_command.split(' ')
-                nMatches=0;
-                # Looping on commands words
-                for word,forbidden_word in zip(command_words,forbidden_command_words):
-                    if word.strip() == forbidden_word.strip():
-                        nMatches=nMatches+1
-                    else:
+                # Looping on forbidden commands
+                for forbidden_command in forbidden_commands:
+                    forbidden_command_words=forbidden_command.split(' ')
+                    nMatches=0;
+                    # Looping on commands words
+                    for word,forbidden_word in zip(command_words,forbidden_command_words):
+                        if word.strip() == forbidden_word.strip():
+                            nMatches=nMatches+1
+                        else:
+                            break
+                    # If the n first words of the command matches the forbidden one, discard it
+                    if nMatches==len(forbidden_command_words):
+                        keep_command=False
                         break
-                # If the n first words of the command matches the forbidden one, discard it
-                if nMatches==len(forbidden_command_words):
-                    keep_command=False
-                    break
 
-            # If keep command is still true after the above we write it to file
-            if keep_command:
-                nKept=nKept+1;
-                NewFile.write(line)
-                lines_seen.add(line)
-        else:
-            nDuplicate=nDuplicate+1;
+                # If keep command is still true after the above we write it to file
+                if keep_command:
+                    nKept=nKept+1;
+                    NewFile.write(line+'\n')
+                    lines_seen.add(line)
+            else:
+                nDuplicate=nDuplicate+1;
     # Closing files
     OldFile.close()     
     NewFile.close()     

@@ -31,6 +31,7 @@ else
     PATH.Mesh       ='/work/lib/Mesh/';
     PATH.Environment='/work/lib/OmniVor_lib/matlab/Environment/';
     PATH.OMNIVORLINK='/work/lib/OmniVor_lib/matlab/Link/';
+    PATH.SpecAn     ='/work/lib/SpectralAnalysis/';
 
 
     PATH.WTlib='/work/lib/WTlib/';
