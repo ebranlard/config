@@ -50,7 +50,9 @@ else
     let fortran_fixed_source=1
     unlet! fortran_free_source
 endif
-set cc=132
+if version>720
+    set cc=132
+endif
 set textwidth=132
 
 " gfotran: suitable error format for quickfix window
