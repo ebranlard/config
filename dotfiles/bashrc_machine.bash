@@ -49,6 +49,7 @@ then
     export OMNIVOR_BIN_DIR='/home/ebra/omnivor/_bin/linux-amd64/'
     export OMNIVOR_SRC_DIR='/home/ebra/omnivor/'
     export PATH="/home/ebra/anaconda/bin:$PATH"
+    export PATH="/home/ebra/omnivor/_bin/linux-amd64/:$PATH"
 
 elif [ $HOSTNAME == 'hpc-fe1' ]
 then
