@@ -67,7 +67,7 @@ for id in jobpbsid[0:-1]:
     print("NODE: %s JOB: %s - PID: %s - UP:%s"%(main_node,job_name,id,wall_used))
     print("------------------------------------------------------------------------------------")
     if n_nodes>0:
-        cmd="ssh %s@%s 'tail -n 20 /scratch/ebra/*/sim_*/*.log'"%(user,main_node)
+        cmd="ssh %s@%s 'tail -n 20 /scratch/ebra/*/*/*.log'"%(user,main_node)
         print(os.popen(cmd).read())
         
 print("------------------------------------------------------------------------------------")
