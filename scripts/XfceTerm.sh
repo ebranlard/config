@@ -17,7 +17,7 @@ xfce4-terminal \
     -T TERM-PhDThesis --working-directory=/work/publications/phdthesis/ --command='run-cmd git status' --tab \
     -T TERM-WORK --working-directory=/work/ --tab\
     -T TERM-VC-PRESC --working-directory=/work/vc-prescr/omnvor --tab\
-    -T TERM-OMNIVOR_JOBS --working-directory=/work/lib/OmniVor_lib/jobs/  --tab\
+    -T TERM-OMNIVOR_JOBS --working-directory=/work/jobs/  --tab\
     -T TERM-OMNIVOR_TESTS --working-directory=/work/lib/OmniVor_lib/fortran/__tests__/ --command='run-cmd git status' --tab\
     -T TERM-OMNIVOR --working-directory=/work/lib/OmniVor_lib/fortran --command='run-cmd git status'\
     --maximize

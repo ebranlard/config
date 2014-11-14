@@ -1,5 +1,6 @@
 
 PATH="$PATH:$HOME/Config/scripts"
+PYTHONPATH="$PYTHONPATH:$HOME/Config/path/PythonPath"
 
 # X specific commands
 if xset q &>/dev/null; then

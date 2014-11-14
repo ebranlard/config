@@ -130,8 +130,8 @@ let g:gitgutter_eager = 0
 let g:syntastic_error_symbol='✗>'
 let g:syntastic_warning_symbol='⚠>'
 let g:syntastic_enable_balloons = 0
-let g:syntastic_quiet_warnings=1
-
+" let g:syntastic_quiet_warnings=1
+" let g:syntastic_quiet_messages = {'level': 'warnings'}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ Statusline
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -755,6 +755,7 @@ set guitablabel=%!GuiTabLabelManu()
 " --------------------------------------------------------------------------------
 let $OMNIVOR_MKF_DIR='/work/lib/OmniVor_lib/fortran/_includes/'
 let $OMNIVOR_LIB_DIR='/work/lib/OmniVor_lib/fortran/_lib/linux-amd64/'
+let $OMNIVOR_SRC_DIR='/work/lib/OmniVor_lib/fortran/'
 let $PYTHONPATH='/home/manu/Config/path/PythonPath/'
 
 " --------------------------------------------------------------------------------

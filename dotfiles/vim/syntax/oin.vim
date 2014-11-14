@@ -22,21 +22,36 @@ endif
 " Keywords
 syn keyword oKeyword Wind Environment CommonData Algo Param Coupling Field
 
-syn keyword oIdentifier b3D bBuildMatrix bComputeGrad bConvertToPart bDistortPart bExport bForceOneInfiniteWakePanel bForceWakePanelAlongU0 bGridVelocity bHybridWake bNoRollUp tRollUpStart bPlaceConcentratedShedVorticity bPlotGeometry bPlots bPrescribedGamma bProfilesData bRemoveFarWake bNoShedding bViscousDiffusion bViscousBoundaries EmissionMethod HGridnx HGridny HGridnz HGridPbur HGridPtll IprescribedIntensities nTGridVelocity pNumericalScheme pDiffusionScheme PanlSmooth PartSmooth SgmtSmooth Model Param1 Param2 ParamMethod PrescribedIntensities ProfileSolving crit MaxIter relax RelSizeNWPanel SmoothAlpha tConvertToPart pConvertToPart tHybridEnd tHybridStart tRemoveFarWake UGridnx UGridny UGridnz UGridPbur UGridPtll bProfiles2PiAlpha bProfiles2PiSinAlpha bHawcWind bProfilesNoInduction bNoShedding bExportPlotVtk bExportPlotBin bExportPlotVtkBin bExportLoads nTExportPlot nTExportLoads bProfilesAlphaSmooth  bProfilesNoInduction  bProfilesAlphaSmooth bRemoveZeroVorticity
+syn keyword oIdentifier nDim bBuildMatrix bComputeGrad bConvertToPart bDistortPart bForceOneInfiniteWakePanel bForceWakePanelAlongmX bForceWakePanelAlongU0 bGridVelocity bHybridWake bNoRollUp tRollUpStart bPlaceConcentratedShedVorticity bPlotGeometry bPlots bPrescribedGamma bProfilesData bRemoveFarWake bNoShedding bViscousBoundaries EmissionMethod IprescribedIntensities nTGridVelocity pNumericalScheme PanlSmooth PartSmooth SgmtSmooth Model Param1 Param2 ParamMethod PrescribedIntensities ProfileSolving pSolverMatrixMethod bNWCPatTE crit MaxIter relax RelSizeNWPanel tConvertToPart pConvertToPart tRemoveFarWake bHawcWind bProfilesNoInduction bNoShedding bProfilesAlphaSmooth bProfilesNoInduction  bProfilesAlphaSmooth bRemoveZeroVorticity
 
-syn keyword oIdentifier bTIMING bDEBUGMIN bSTOP_ALLOWED prefix sim_folder nExportStates bExportStates bMemoryAnalyser bMemorySaver bTimeEstimator bSILENT_WARN bSILENT_ERROR bSILENT_INFO bExportConverged bConstantUiExternalPerStep state_file bExportPlot bExportLoads pExportPlotFormat pExportVelocityFormat nTExportPlot nTExportLoads  nExportPlot nExportLoads
+syn keyword oIdentifier bExportPlot bExportLoads pExportPlotFormat pExportVelocityFormat nTExportPlot nTExportLoads nExportPlot bExportLoads  nExportLoads bExportPlotLight bExportPlotBodiesOnly bExportConverged 
+
+syn keyword oIdentifier bTIMING bDEBUGMIN bSTOP_ALLOWED prefix sim_folder nExportStates bExportStates bMemoryAnalyser bMemorySaver bTimeEstimator bSILENT_WARN bSILENT_ERROR bSILENT_INFO bConstantUiExternalPerStep state_file
+
 syn keyword oIdentifier pVortexSplittingScheme bVortexSplitting VortexSplittingParam1 VortexSplittingParam2
 
-syn keyword oIdentifier bHybridWake HGrid_n1 HGrid_n2 HGrid_n3 HGrid_l1 HGrid_l2 HGrid_l3 HGrid_PO_g HGrid_e1_g HGrid_e2_g  HGrid_tStart  HGrid_tEnd
-syn keyword oIdentifier bMGrid MGrid_bComputeGrad nTMGrid nMGrid MGrid_n1 MGrid_n2 MGrid_n3 MGrid_l1 MGrid_l2 MGrid_l3 MGrid_PO_g MGrid_e1_g MGrid_e2_g 
-syn keyword oIdentifier bUGrid1 UGrid1_bComputeGrad nTUGrid1 nUGrid1 UGrid1_n1 UGrid1_n2 UGrid1_n3 UGrid1_l1 UGrid1_l2 UGrid1_l3 UGrid1_PO_g UGrid1_e1_g UGrid1_e2_g  UGrid1_bPolar 
-syn keyword oIdentifier bUGrid2 UGrid2_bComputeGrad nTUGrid2 nUGrid2 UGrid2_n1 UGrid2_n2 UGrid2_n3 UGrid2_l1 UGrid2_l2 UGrid2_l3 UGrid2_PO_g UGrid2_e1_g UGrid2_e2_g  UGrid2_bPolar 
-syn keyword oIdentifier Field_bComputeGrad Field_bPolar Field_e1_g Field_e1_g Field_PO_g Field_n1 Field_n1 Field_n3 Field_l1 Field_l1 Field_l3 Field_pType Field_v1_g Field_v1_g Field_v3_g 
+syn keyword oIdentifier nTConvertToPart bReduceSegments tReduceSegments nTReduceSegments
+
+syn keyword oIdentifier bProfiles2PiAlpha bProfiles2PiSinAlpha
+
+" Grid related Inputs
+syn keyword oIdentifier pMG pHW pU1 pU2 pField AI GI Remeshing
+
+" Diffusion
+syn keyword oIdentifier bDiffusion pDiffusion Scheme SchemeSgmt pPSE pCoreSpread delta t0 max_radius
+
+" Grid Inputs
+syn keyword oIdentifier n1 n2 n3 l1 l2 l3 filename PO_g e1_g e2_g e3_g range1 range2 range3 range1_high range2_high range3_high h_high bPolar
+
+" ActionTimeInfo
+syn keyword oIdentifier bActive n nT tStart tEnd
+
+syn keyword oIdentifier pCoupling SmoothBEM bUseBEM
 
 syn keyword oIdentifier nu V0 Model 
 syn keyword oIdentifier bTurb_box Turb_box_file_u Turb_box_file_v Turb_box_file_w Turb_box_n1 Turb_box_n2 Turb_box_n3 Turb_box_d1 Turb_box_d2 Turb_box_d3 Turb_box_e1_g Turb_box_e2_g Turb_box_P1_g Turb_box_P2_g 
 
-syn keyword oIdentifier KinVisc rho rho_water
+syn keyword oIdentifier KinVisc rho rho_water min_scale max_scale typical_scale
 
 syn keyword oIdentifier dt tmax bDEBUG
 
