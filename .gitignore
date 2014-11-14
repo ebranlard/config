@@ -1,3 +1,4 @@
+*.pyc
 Bootchart/
 NVIDIA*
 backup_data/
