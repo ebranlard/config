@@ -1,4 +1,6 @@
 
+export PYTHONPATH="$PYTHONPATH:$HOME/Config/path/PythonPath"
+
 alias ls='ls -F --color=always --group-directories-first'
 # alias grep='grep --color=always'
 alias grep='grep --color=auto'

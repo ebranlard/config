@@ -7,8 +7,12 @@ def require(library=None,version=None):
     if library:
         try:
             path=eval('p.%s'%library)
-            sys.path.insert(0,path)
-            print('require: adding path %s'%path)
+            if path in sys.path:
+                # Possibly display library asked, handle multiple library versions etc..
+                pass
+            else:
+                sys.path.insert(0,path)
+                print('require: %s (%s)'%(library,path))
         except Exception,e:
             raise e
 
