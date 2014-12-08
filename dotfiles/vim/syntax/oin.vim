@@ -26,7 +26,7 @@ syn keyword oIdentifier nDim bBuildMatrix bComputeGrad bConvertToPart bDistortPa
 
 syn keyword oIdentifier bExportPlot bExportLoads pExportPlotFormat pExportVelocityFormat nTExportPlot nTExportLoads nExportPlot bExportLoads  nExportLoads bExportPlotLight bExportPlotBodiesOnly bExportConverged 
 
-syn keyword oIdentifier bTIMING bDEBUGMIN bSTOP_ALLOWED prefix sim_folder nExportStates bExportStates bMemoryAnalyser bMemorySaver bTimeEstimator bSILENT_WARN bSILENT_ERROR bSILENT_INFO bConstantUiExternalPerStep state_file
+syn keyword oIdentifier bTIMING bDEBUGMIN bSTOP_ALLOWED prefix sim_folder nExportStates bExportStates bMemoryAnalyser bMemorySaver bTimeEstimator bSILENT_WARN bSILENT_ERROR bSILENT_INFO bConstantUiExternalPerStep state_file bSmartTicToc SmartTicTocVal
 
 syn keyword oIdentifier pVortexSplittingScheme bVortexSplitting VortexSplittingParam1 VortexSplittingParam2
 
@@ -34,8 +34,14 @@ syn keyword oIdentifier nTConvertToPart bReduceSegments tReduceSegments nTReduce
 
 syn keyword oIdentifier bProfiles2PiAlpha bProfiles2PiSinAlpha
 
+" UI related
+syn keyword oIdentifier pTree_k_factor pTree_small_branch
+
 " Grid related Inputs
-syn keyword oIdentifier pMG pHW pU1 pU2 pField AI GI Remeshing
+syn keyword oIdentifier pMG pRM pHW pU1 pU2 pField AI GI PE nx ny nz vx ny nz Scaling bScaling
+
+" Box and Domains
+syn keyword oIdentifier MainDomain ConvectionDomain Box rangeX rangeY rangeZ
 
 " Diffusion
 syn keyword oIdentifier bDiffusion pDiffusion Scheme SchemeSgmt pPSE pCoreSpread delta t0 max_radius
@@ -49,9 +55,9 @@ syn keyword oIdentifier bActive n nT tStart tEnd
 syn keyword oIdentifier pCoupling SmoothBEM bUseBEM
 
 syn keyword oIdentifier nu V0 Model 
-syn keyword oIdentifier bTurb_box Turb_box_file_u Turb_box_file_v Turb_box_file_w Turb_box_n1 Turb_box_n2 Turb_box_n3 Turb_box_d1 Turb_box_d2 Turb_box_d3 Turb_box_e1_g Turb_box_e2_g Turb_box_P1_g Turb_box_P2_g 
+syn keyword oIdentifier bTurb_box Turb_box_file_u Turb_box_file_v Turb_box_file_w Turb_box_n1 Turb_box_n2 Turb_box_n3 Turb_box_d1 Turb_box_d2 Turb_box_d3 Turb_box_e1_g Turb_box_e2_g Turb_box_P1_g Turb_box_P2_g  TurbPart basename file_format 
 
-syn keyword oIdentifier KinVisc rho rho_water min_scale max_scale typical_scale
+syn keyword oIdentifier KinVisc rho rho_water min_scale max_scale typical_scale ShearLayerHeight
 
 syn keyword oIdentifier dt tmax bDEBUG
 
