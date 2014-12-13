@@ -34,7 +34,9 @@ n_jobs=len(jobpbsid)-1
 # --------------------------------------------------------------------------------
 # --- Looping and Getting job specific info  
 # --------------------------------------------------------------------------------
+cpt=-1
 for id in jobpbsid[0:-1]:
+    cpt=cpt+1
     cmd="qstat -n %s |awk -F- 'NR > 6 {print $0}'|xargs"%id
     cpu_list = os.popen(cmd).read().replace(' ','').replace('\n','').split('+')
     if cpu_list[0]=='--':
@@ -61,6 +63,7 @@ for id in jobpbsid[0:-1]:
     # Parsing the qstat info
     cmd="qstat -f %s"%id
     ALLINFO = os.popen(cmd).read().split('\n')
+    cpt_str='%2d'%cpt
     for l in ALLINFO:
        splt=l.split('=')
        if(len(splt)>1):
@@ -74,6 +77,6 @@ for id in jobpbsid[0:-1]:
            wall_used="h".join(value.split(':')[0:2])
        elif (option=='Job_Name'):
            job_name='%-40s'%value
-    s=id+' '+main_node+'  '+job_name+'  '+wall_used+'/'+wall_rqst+'\t'+str(n_nodes)+'('+str(n_cpus)+')\t'+'('+' '.join(nodes_str)+')'
+    s=id+' '+main_node+' '+cpt_str+' '+job_name+'  '+wall_used+'/'+wall_rqst+'\t'+str(n_nodes)+'('+str(n_cpus)+')\t'+'('+' '.join(nodes_str)+')'
     print(s)
 print("-----------------------------------------------------------------------------")

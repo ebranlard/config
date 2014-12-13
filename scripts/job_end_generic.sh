@@ -1,4 +1,9 @@
 #!/bin/bash
+if [[ $ALL_GOOD == 0 ]]
+then
+    echo "!!! Something went wrong before job end. Exiting."
+    exit -1
+fi
 if [[ $RES_FOLDER == '' ]] 
 then
     echo "!!! You need to specify SCRATCHDIR"
