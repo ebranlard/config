@@ -53,10 +53,9 @@ def job_status(ijob=None):
             nodes_str=list(set([x[2:5] for x in cpu_list]))
             n_cpus=len(cpu_list)
             n_nodes=len(nodes)
-            main_node=cpu_list[0][0:2]+"%03d"%nodes[0]
-            if cpu_list[0][0]=='j':
-                # hack for jess (nodes above change order due to set)
-                main_node=cpu_list[0][0:5]
+            #main_node=cpu_list[0][0:2]+"%03d"%nodes[0]
+            # (nodes above change order due to set)
+            main_node=cpu_list[0][0:5]
         job_name=''
         wall_used=''
         wall_rqst=''

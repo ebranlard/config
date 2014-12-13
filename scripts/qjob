@@ -53,10 +53,8 @@ for id in jobpbsid[0:-1]:
             nodes_str.append('...')
         n_cpus=len(cpu_list)
         n_nodes=len(nodes)
-        main_node=cpu_list[0][0:2]+str(nodes[0])
-        if cpu_list[0][0]=='j':
-            # hack for jess (nodes above change order due to set)
-            main_node=cpu_list[0][0:5]
+        # nodes above change order due to set
+        main_node=cpu_list[0][0:5]
     job_name=''
     wall_used=''
     wall_rqst=''
