@@ -60,6 +60,7 @@ def main(argv):
             # Respecting number of significant digits (if leading zeros)
             num_len=len(num_str[0])
             string_format="%%0%dd"%num_len
+#             string_format="%05d"
             num_new_str=string_format %  num_new
            
             # Replacement in string

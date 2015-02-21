@@ -50,7 +50,7 @@ else
     let fortran_fixed_source=1
     unlet! fortran_free_source
 endif
-if version>720
+if version>703
     set cc=132
 endif
 set textwidth=132
