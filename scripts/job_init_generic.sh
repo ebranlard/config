@@ -1,5 +1,5 @@
 #!/bin/bash
-
+ALL_GOOD=0
 #----------------------------------------------------------
 #--- SAFETY TESTS
 #----------------------------------------------------------
@@ -23,18 +23,19 @@ then
     NPROCS=1
     NNODES=1
     PBS_JOBNAME='local'
-    echo $HOSTNAME > $USERDIR/hostfile
+    PBS_NODEFILE=$USERDIR/"nodefile_"$PBS_JOBNAME
+    echo $HOSTNAME > $PBS_NODEFILE
     SCRATCHDIR=$USERDIR'/tmp_scratch_dir'
     mkdir -p $SCRATCHDIR
 else
     SCRATCHDIR=/scratch/$USER/$PBS_JOBID
     JOBPID=`echo $PBS_JOBID|awk -F. '{print $1}'`
-    NPROCS=`wc -l < $PBS_NODEFILE`
     # create a new machinefile file which only contains unique nodes 
-    cat $PBS_NODEFILE | uniq > $USERDIR/hostfile
-    NNODES=`wc -l < $USERDIR/hostfile`
 fi
-
+HOSTFILE=$USERDIR/"hostfile_"$PBS_JOBNAME
+cat $PBS_NODEFILE | uniq > $HOSTFILE
+NPROCS=`wc -l < $PBS_NODEFILE`
+NNODES=`cat $HOSTFILE |wc -l `
 #----------------------------------------------------------
 #--- PREPARING OUTPUT FOLDER (important if STD dumpted to it..)
 #----------------------------------------------------------
@@ -56,10 +57,10 @@ echo "PPN         :$PBS_NUM_PPN"
 echo "NPROCS      :$NPROCS"
 echo "NNODES      :$NNODES"
 echo "NUM_THREADS :$OMP_NUM_THREADS"
-if [ -f $USERDIR/hostfile ] 
+if [ -f $HOSTFILE ] 
 then
     echo "NODES:"
-    cat $USERDIR/hostfile
+    cat $HOSTFILE
 fi
 echo "ULIMIT:"
 ulimit -a
@@ -72,3 +73,4 @@ echo "-------------------------------------------------------"
 echo "Switching to user dir: "$USERDIR
 echo "-------------------------------------------------------"
 cd $USERDIR
+ALL_GOOD=1
