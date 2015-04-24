@@ -1,8 +1,13 @@
 #!/bin/bash
 
+#!!! Should not be run as root (for now)
+
+
 # Getting the directory where this script is stored
 path="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
+echo "USER: " $USERNAME $USER
+echo "PATH: " $path
 # Going to user home directory
 cd ~
 
@@ -31,3 +36,10 @@ fi
 # Fonts
 ln -s $path/fonts .fonts
 fc-cache -vf ~/.fonts
+
+# templates
+
+ln -s $path/profiles/templates .config/Templates
+
+# look
+ln -s $path/look/themes .themes
