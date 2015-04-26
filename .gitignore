@@ -21,7 +21,6 @@ tmp/
 _bkp_dotfiles
 _src_and_deb
 dotfiles/gitconfig-work
-SetupSyst
 
 
 sbin/
