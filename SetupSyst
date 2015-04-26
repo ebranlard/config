@@ -1,0 +1,113 @@
+#!/bin/bash
+
+MAINUSER=manu
+
+# Getting the directory where this script is stored
+# path=`pwd`
+path="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+#############################
+### ROOT stuff 
+#############################
+
+#making life more convenient
+sudo rm /usr/share/icons/IconsManu*
+sudo chown -R $MAINUSER: /usr/share/icons/
+sudo ln -s $path/look/IconsManu2009 /usr/share/icons/IconsManu2009
+sudo ln -s $path/look/IconsManu2011 /usr/share/icons/IconsManu2011
+
+# --------------------------------------------------------------------------------
+# --- OPT 
+# --------------------------------------------------------------------------------
+sudo mkdir /opt
+sudo chown -R $MAINUSER: /opt
+
+# --------------------------------------------------------------------------------
+# --- DOTFILES  for ROOT
+# --------------------------------------------------------------------------------
+sudo rm  /root/.bashrc /root/.bash_profile /root/.bash_logout /root/.vimrc /root/.vim 
+
+sudo ln -s $path/dotfiles/bashrc_root /root/.bashrc
+sudo ln -s $path/dotfiles/bash_profile_root /root/.bash_profile
+sudo ln -s $path/dotfiles/bash_logout /root/.bash_logout
+sudo ln -s $path/dotfiles/vimrc /root/.vimrc
+sudo ln -s $path/dotfiles/vim /root/.vim
+
+# --------------------------------------------------------------------------------
+# --- SUDOERS 
+# --------------------------------------------------------------------------------
+
+
+# --------------------------------------------------------------------------------
+# --- FSTAB 
+# --------------------------------------------------------------------------------
+sudo cp /etc/fstab /etc/fstab.bak 
+
+# Prepare fstab for win drives
+sudo mkdir /media/DataWin /media/Win
+sudo echo "
+# Win /dev/sda
+#UUID=   /media/Win      ntfs-3g defaults,noauto,umask=007,uid=1000,gid=1000       0       0
+# DataWin /dev/sda
+#UUID=   /media/DataWin      ntfs-3g defaults,umask=007,uid=1000,gid=1000       0       0
+" >> /etc/fstab
+
+# Storages
+sudo mkdir /media/WorkStorage /media/HomeStorage
+sudo echo "
+# Prepare fstab for Storage drives
+## Work Storage
+# UUID=1105BE213AEBE2F6 /media/WorkStorage      ntfs-3g defaults,users,noauto,umask=007,uid=1000,gid=1000       0       0
+## Home Storage
+# UUID=843671A53671993E /media/HomeStorage      ntfs-3g defaults,users,noauto,umask=007,uid=1000,gid=1000       0       0
+" >> /etc/fstab
+
+#Riso Drives
+sudo mkdir /mnt/R-home /mnt/S-group /mnt/T-apps /mnt/U-garb
+sudo echo "  
+# RISO DRIVES
+//fil-vea/home/    /mnt/R-home   cifs    credentials=/usr/local/etc/whisper.credentials,uid=1000,umask=000    0    0
+//fil-vea/group/    /mnt/S-group   cifs    credentials=/usr/local/etc/whisper.credentials,uid=1000,umask=000    0    0
+//fil-other/applications/    /mnt/T-apps   cifs    credentials=/usr/local/etc/whisper.credentials,uid=1000,umask=000    0    0
+//fil-other/garbage/    /mnt/U-garb   cifs    credentials=/usr/local/etc/whisper.credentials,uid=1000,umask=000    0    0
+   " >> /etc/fstab
+sudo echo "username=WIN/ebra
+password=" >> /usr/local/etc/whisper.credentials
+
+# --------------------------------------------------------------------------------
+# --- Multimedia  
+# --------------------------------------------------------------------------------
+sudo rm /m 
+sudo ln -s /media/HomeStorage/Music/ /m
+
+# --------------------------------------------------------------------------------
+# --- Policies and conf files 
+# --------------------------------------------------------------------------------
+# Policies
+# sudo ln -s $path/profiles/policies/ /etc/polkit-1/localauthority/55-mylocal.d
+
+# Issue
+sudo cp $path/profiles/issue /etc/
+
+# init-functions
+# sudo cp /lib/lsb/init-functions /lib/lsb/init-functions-bak
+# sudo cp $path/profiles/init-functions /lib/lsb/
+
+
+# udev policies (to avoid being shown in Thunar)
+# sudo cp $path/profiles/udevrules/* /etc/udev/rules.d/
+
+
+# grub 
+# sudo mv /etc/default/grub /etc/default/grub-bak
+# sudo ln -s $path/profiles/grub/etcdefaultgrub /etc/default/grub
+#update grub
+
+
+
+#texmf
+sudo ln -s $path/profiles/texmf/12-TexmfHome.cnf /etc/texmf/texmf.d/
+
+#sudoers
+sudo ./SetupSudoers
+

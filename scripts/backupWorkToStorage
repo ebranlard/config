@@ -7,10 +7,11 @@ if [[ `cat /etc/hostname` == "work" ]]
 then
     #variables
 #     OPTS="-av"
-    OPTS="-avlr"
+    OPTS="-alrv"
     DEST=/media/WorkStorage/_backups
     SRC=/home/manu
 
+    if [ -d $DEST ] ; then
     ##############
     # W1
     ##############
@@ -31,6 +32,10 @@ then
         rsync $OPTS --delete $SRC/Config/ "$DEST/WC/Config"
         rsync $OPTS --delete /opt/ "$DEST/WC/opt"
         echo `date` >> $DEST/WC/DateSync
+    fi
+    else
+        echo "Folder not mounted"
+
     fi
 else 
     echo "Wrong environment"
