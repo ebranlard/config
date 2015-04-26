@@ -12,7 +12,6 @@ dtu/
 look/
 patches/
 path/MatlabPath
-profiles/
 snd/
 syst/
 fonts/*/
@@ -31,3 +30,15 @@ scripts/windap.con
 simplekey
 scripts/Riso*
 dotfiles/gitignore-work
+
+
+
+
+profiles/Firefox-profile/
+profiles/_FluxBox/
+profiles/dicos/
+profiles/grub/
+profiles/kernel-config/
+profiles/smb.conf.VJK
+profiles/templates/
+profiles/texmf/
