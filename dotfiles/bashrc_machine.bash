@@ -23,9 +23,22 @@ then
     export OMNIVOR_BIN_DIR='/work/lib/OmniVor_lib/fortran/_bin/linux-amd64/'
     export OMNIVOR_SRC_DIR='/work/lib/OmniVor_lib/fortran/'
 
-    #export PS1='\[\033[1m\]\[\033[1;33m\]\u:\[\e[32;1m\]\w \[\e[33;1m\]\$\[\033[m\] '
-    #export PS1="\033[33;40m[\u@\h \w]\\$\007 \033[0m\007"
-    #export PS1='\[\033[33;40m\][\u@\h \[\e[33;40m\]\w]\[\e[33;1m\]\$\[\033[m\] '
+elif [ $HOSTNAME == 'olympe' ]
+then
+#    source /opt/intel/bin/compilervars.sh intel64
+#    alias vtune='source /opt/intel/vtune_amplifier_xe_2013/amplxe-vars.sh'
+
+#    export PATH=$PATH:/work/lib/OmniVor_lib/fortran/_bin/linux-amd64
+#    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
+    
+#    export PATH=/home/manu/Work/cuda/bin:$PATH
+#    export LD_LIBRARY_PATH=/home/manu/Work/cuda/lib64:$LD_LIBRARY_PATH
+
+#    export OMNIVOR_MKF_DIR='/work/lib/OmniVor_lib/fortran/_includes/'
+#    export OMNIVOR_LIB_DIR='/work/lib/OmniVor_lib/fortran/_lib/linux-amd64/'
+#    export OMNIVOR_OBJ_DIR='/work/lib/OmniVor_lib/fortran/_build/linux-amd64/'
+#    export OMNIVOR_BIN_DIR='/work/lib/OmniVor_lib/fortran/_bin/linux-amd64/'
+    export OMNIVOR_SRC_DIR='/work/lib/OmniVor_lib/fortran/'
 
 elif [ $HOSTNAME == 'g-000.risoe.dk' ]
 then

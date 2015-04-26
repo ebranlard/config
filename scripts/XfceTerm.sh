@@ -10,6 +10,8 @@
 # Screen 0: minimum 2720 x 1024, current 2720 x 1024, maximum 2720 x 1024
 # default connected 2720x1024+0+0 0mm x 0mm
 #    2720x1024      50.0* 
+if [[ $HOSTNAME == 'work' ]]
+then
 xfce4-terminal \
     -T TERM-HOME --working-directory=/home/manu/ --tab\
     -T TERM-SYSTEM --working-directory=/etc/ --tab\
@@ -21,3 +23,14 @@ xfce4-terminal \
     -T TERM-OMNIVOR_TESTS --working-directory=/work/lib/OmniVor_lib/fortran/__tests__/ --command='run-cmd git status' --tab\
     -T TERM-OMNIVOR --working-directory=/work/lib/OmniVor_lib/fortran --command='run-cmd git status'\
     --maximize
+fi
+
+if [[ $HOSTNAME == 'olympe' ]]
+then
+xfce4-terminal \
+    -T TERM-HOME --working-directory=/home/manu/ --tab\
+    -T TERM-HOME --working-directory=/home/manu/ --tab\
+    -T TERM-SYSTEM --working-directory=/etc/ --tab\
+    -T TERM-SYSTEM --working-directory=/etc/ --tab\
+    --maximize
+fi

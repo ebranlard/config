@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+ <mime-info xmlns='http://www.freedesktop.org/standards/shared-mime-info'>
+   <mime-type type="text/x-makefile">  
+   <comment>Makefile with extension .mk</comment>
+   <glob pattern="*.mk"/>
+  </mime-type>
+ </mime-info>
+
+

@@ -3,8 +3,6 @@ mkdir -p bundle
 cd bundle
 
 git clone https://github.com/kien/ctrlp.vim/
-git clone https://github.com/elmanuelito/vim-simple-compile
-git clone https://github.com/elmanuelito/vim-simple-comment
 git clone https://github.com/kien/rainbow_parentheses.vim
 git clone https://github.com/vim-scripts/Align
 git clone https://github.com/bling/vim-airline
@@ -29,4 +27,14 @@ then
 #     echo "gorm"
 # else
 #     echo "Unknown host."
+fi
+if [ $HOSTNAME == 'olympe' ]
+then
+    echo "Olympe"
+
+    git clone git@github.com:elmanuelito/vim-matlab-behave.git
+    git clone git@github.com:elmanuelito/vim-simple-comment.git
+    git clone git@github.com:elmanuelito/vim-simple-compile.git
+    git clone git@github.com:elmanuelito/vim-tagbar-manu
+
 fi
