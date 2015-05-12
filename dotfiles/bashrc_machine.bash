@@ -1,5 +1,6 @@
 
 export PYTHONPATH="$PYTHONPATH:$HOME/Config/path/PythonPath"
+# export PATH="$PATH:$HOME/Config/scrits"
 
 alias ls='ls -F --color=always --group-directories-first'
 # alias grep='grep --color=always'

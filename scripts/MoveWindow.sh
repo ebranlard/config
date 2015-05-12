@@ -39,36 +39,67 @@ WID=$(xdotool getactivewindow);
 # Find Window Position location
 XW=`xwininfo -id $WID |grep "Absolute upper-left X"| awk '{print $4}'`;
 
+
+
+# --------------------------------------------------------------------------------
+# --- That's not general enough 
+# --------------------------------------------------------------------------------
 # Depending on screen configuration, find screen dimensions
-if [[ $XDIM > $XDIMLAPTOP ]]
+ONESCREEN=1
+if [[ $DIM == "1920x1080" ]]
 then
-#     echo "Multiple screens config"
+    ONESCREEN=1
+else 
+    if [[ $XDIM > $XDIMLAPTOP ]] # THIS IS A NASTY TEST!!!
+    then
+        ONESCREEN=0
+    fi
+fi
+
+
+# --------------------------------------------------------------------------------
+# --- That's trying to be general 
+# --------------------------------------------------------------------------------
+# Setting up the following variables
+# XSTART
+# YSTART
+# WIDTH
+# HEIGHT
+if [[ $ONESCREEN == 1 ]] 
+then
+    # --- Single screen config 
+    #     echo "Single screen config"
+    XSTART=$XOFFMAIN;
+    YSTART=$YOFFMAIN;
+    WIDTH=`expr $XDIM - $XSTART`;
+    HEIGHT=`expr $YDIM - $YOFFMAIN`;
+else
+    # --- Multiple screen config 
+    #     echo "Multiple screens config"
+    # TODO TODO TODO, this is not general
     XS2=`expr $XDIM - $XDIMLAPTOP`; # x start of screen 2
     XS2flex=`expr $XS2 - $XTOL`;      # add offset if window in between screens
-#     if [ $XW -gt $XS2 ]  
+    #     if [ $XW -gt $XS2 ]  
     if [ $XW -gt $XS2flex ]  
     then
-#         echo "Window is in right screen"
+        #         echo "Window is in right screen"
         XSTART=$XS2;
         YSTART=$YOFF2;
         WIDTH=$XDIMLAPTOP;
         HEIGHT=`expr $YDIMLAPTOP - $YOFF2`;
         XSTARTS1=
     else
-#         echo "Window is in left screen"
+        #         echo "Window is in left screen"
         XSTART=$XOFFMAIN;
         YSTART=$YOFFMAIN;
         WIDTH=`expr $XS2 - $XSTART`;
         HEIGHT=`expr $YDIM - $YOFF2`;
     fi
-else
-#     echo "Single screen config"
-    XSTART=$XOFFMAIN;
-    YSTART=$YOFFMAIN;
-    WIDTH=`expr $XDIMLAPTOP - $XSTART`;
-    HEIGHT=`expr $YDIMLAPTOP - $YOFFMAIN`;
 fi
 # echo Params are: $XSTART $YSTART $WIDTH $HEIGHT
+
+
+
 
 ## General computations
 # Half width and height
