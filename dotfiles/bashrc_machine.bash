@@ -49,21 +49,21 @@ elif [ $HOSTNAME == 'g-000.risoe.dk' ]
 then
     # GORM
     alias ls='ls -F --color=always '
-    export OMNIVOR_MKF_DIR='/home/ebra/omnivor/_includes/'
-    export OMNIVOR_LIB_DIR='/home/ebra/omnivor/_lib/linux-amd64/'
-    export OMNIVOR_OBJ_DIR='/home/ebra/omnivor/_build/linux-amd64/'
-    export OMNIVOR_BIN_DIR='/home/ebra/omnivor/_bin/linux-amd64/'
-    export OMNIVOR_SRC_DIR='/home/ebra/omnivor/'
+    export OMNIVOR_MKF_DIR='/home/ebra/omnivor/_dev/_includes/'
+    export OMNIVOR_LIB_DIR='/home/ebra/omnivor/_dev/_lib/linux-amd64/'
+    export OMNIVOR_OBJ_DIR='/home/ebra/omnivor/_dev/_build/linux-amd64/'
+    export OMNIVOR_BIN_DIR='/home/ebra/omnivor/_dev/_bin/linux-amd64/'
+    export OMNIVOR_SRC_DIR='/home/ebra/omnivor/_dev/'
     export PATH="/home/ebra/anaconda/bin:$PATH"
 
 elif [ $HOSTNAME == 'jess.dtu.dk' ]
 then
     # JESS
-    export OMNIVOR_MKF_DIR='/home/ebra/omnivor/_includes/'
-    export OMNIVOR_LIB_DIR='/home/ebra/omnivor/_lib/linux-amd64/'
-    export OMNIVOR_OBJ_DIR='/home/ebra/omnivor/_build/linux-amd64/'
-    export OMNIVOR_BIN_DIR='/home/ebra/omnivor/_bin/linux-amd64/'
-    export OMNIVOR_SRC_DIR='/home/ebra/omnivor/'
+    export OMNIVOR_MKF_DIR='/home/ebra/omnivor/_dev/_includes/'
+    export OMNIVOR_LIB_DIR='/home/ebra/omnivor/_dev/_lib/linux-amd64/'
+    export OMNIVOR_OBJ_DIR='/home/ebra/omnivor/_dev/_build/linux-amd64/'
+    export OMNIVOR_BIN_DIR='/home/ebra/omnivor/_dev/_bin/linux-amd64/'
+    export OMNIVOR_SRC_DIR='/home/ebra/omnivor/_dev/'
     export PATH="/home/ebra/anaconda/bin:$PATH"
     export PATH="/home/ebra/omnivor/_bin/linux-amd64/:$PATH"
 
@@ -73,30 +73,30 @@ then
     alias gonodeX='qrsh -q mic_interactive-X'
     alias gonode='qrsh -q mic_interactive '
     alias gonodecuda='qsub -I -l nodes=n-62-14-50'
-    export OMNIVOR_MKF_DIR=$HOME'/omnivor/_includes/'
-    export OMNIVOR_LIB_DIR=$HOME'/omnivor/_lib/linux-amd64/'
-    export OMNIVOR_OBJ_DIR=$HOME'/omnivor/_build/linux-amd64/'
-    export OMNIVOR_BIN_DIR=$HOME'/omnivor/_bin/linux-amd64/'
-    export OMNIVOR_SRC_DIR=$HOME'/omnivor/'
+    export OMNIVOR_MKF_DIR=$HOME'/omnivor/_dev/_includes/'
+    export OMNIVOR_LIB_DIR=$HOME'/omnivor/_dev/_lib/linux-amd64/'
+    export OMNIVOR_OBJ_DIR=$HOME'/omnivor/_dev/_build/linux-amd64/'
+    export OMNIVOR_BIN_DIR=$HOME'/omnivor/_dev/_bin/linux-amd64/'
+    export OMNIVOR_SRC_DIR=$HOME'/omnivor/_dev/'
 
 elif [ $HOSTNAME == 'n-62-28-19' ]
 then
     # hpc node
     #source /opt/intel/2013.0.028/bin/ifortvars.sh intel64
     alias vtune='source /opt/intel/2013.0.028/vtune_amplifier_xe_2013/amplxe-vars.sh'
-    export OMNIVOR_MKF_DIR=$HOME'/omnivor/_includes/'
-    export OMNIVOR_LIB_DIR=$HOME'/omnivor/_lib/linux-amd64/'
-    export OMNIVOR_OBJ_DIR=$HOME'/omnivor/_build/linux-amd64/'
-    export OMNIVOR_BIN_DIR=$HOME'/omnivor/_bin/linux-amd64/'
-    export OMNIVOR_SRC_DIR=$HOME'/omnivor/'
+    export OMNIVOR_MKF_DIR=$HOME'/omnivor/_dev/_includes/'
+    export OMNIVOR_LIB_DIR=$HOME'/omnivor/_dev/_lib/linux-amd64/'
+    export OMNIVOR_OBJ_DIR=$HOME'/omnivor/_dev/_build/linux-amd64/'
+    export OMNIVOR_BIN_DIR=$HOME'/omnivor/_dev/_bin/linux-amd64/'
+    export OMNIVOR_SRC_DIR=$HOME'/omnivor/_dev/'
 elif [ $HOSTNAME == 'gray1' ]
 then
     alias ls='ls -F  '
-    export OMNIVOR_MKF_DIR=$HOME'/omnivor/_includes/'
-    export OMNIVOR_LIB_DIR=$HOME'/omnivor/_lib/linux-amd64/'
-    export OMNIVOR_OBJ_DIR=$HOME'/omnivor/_build/linux-amd64/'
-    export OMNIVOR_BIN_DIR=$HOME'/omnivor/_bin/linux-amd64/'
-    export OMNIVOR_SRC_DIR=$HOME'/omnivor/'
+    export OMNIVOR_MKF_DIR=$HOME'/omnivor/_dev/_includes/'
+    export OMNIVOR_LIB_DIR=$HOME'/omnivor/_dev/_lib/linux-amd64/'
+    export OMNIVOR_OBJ_DIR=$HOME'/omnivor/_dev/_build/linux-amd64/'
+    export OMNIVOR_BIN_DIR=$HOME'/omnivor/_dev/_bin/linux-amd64/'
+    export OMNIVOR_SRC_DIR=$HOME'/omnivor/_dev/'
 
 else
     alias ls='ls -F --color=always '
