@@ -1,0 +1,3 @@
+#!/bin/bash
+sudo cp -f $path/profiles/sudoers.d/* /etc/sudoers.d/
+sudo chmod 440 /etc/sudoers.d/*

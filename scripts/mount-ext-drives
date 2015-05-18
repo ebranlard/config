@@ -1,0 +1,28 @@
+#!/bin/bash
+
+function test {
+"$@"
+local status=$?
+if [ $status -eq 0 ] ;  then
+    echo -e  "\r[ OK ]"
+else
+    echo -e  "\r[FAIL]"
+fi
+return $status
+}
+
+
+if [ "$1" = "-u" ] ; then
+
+    # do unmount
+    echo -en "[....] Unmount Work-storage"
+    test /bin/umount /media/WorkStorage 2>/dev/null
+    echo -en "[....] Unmount Home-storage"
+    test /bin/umount /media/HomeStorage 2>/dev/null
+else
+    # do mount
+    echo -en "[....] Mounting Work-storage"
+    test /bin/mount /media/WorkStorage 2>/dev/null
+    echo -en "[....] Mounting Home-storage"
+    test /bin/mount /media/HomeStorage 2>/dev/null
+fi

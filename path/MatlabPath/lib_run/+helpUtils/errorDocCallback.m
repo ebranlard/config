@@ -1,22 +1,39 @@
 function errorDocCallback(topic, fileName, lineNumber)
-    if isequal(fileName(1:5),'/home')
+    % --------------------------------------------------------------------------------
+    % --- Determining whether we should use the original function or the tweaked one
+    % --------------------------------------------------------------------------------
+    bTweak=false; 
+    mlr=matlabroot; % matlab install path
 
+    if length(fileName)<length(mlr)
+        % most likely this is a user file
+        bTweak=true; 
+    else
+        if isequal(fileName(1:length(mlr)),mlr)
+            bTweak=false; 
+        else
+            bTweak=true; 
+        end
+    end
+
+    if bTweak
         % --------------------------------------------------------------------------------
-        % --- HACKED DOC CALLBACK 
+        % --- TWEAKED DOC CALLBACK to call editor
         % --------------------------------------------------------------------------------
+
         editor = system_dependent('getpref', 'EditorOtherEditor');
         editor = editor(2:end);
         file=fileName;
         if nargin==3
             linecol = sprintf('+%d',lineNumber); % tehre is something about -c "normal column|" but it didn't work
         else
-            linecol = ''
+            linecol = '';
         end
 
         if ispc
             % On Windows, we need to wrap the editor command in double quotes
             % in case it contains spaces
-            command=['"' editor '" "' linecol '" "' file '"&']
+            command=['"' editor '" "' linecol '" "' file '"&'];
         else
             % On UNIX, we don't want to use quotes in case the user's editor
             % command contains arguments (like "xterm -e vi")
@@ -24,7 +41,6 @@ function errorDocCallback(topic, fileName, lineNumber)
             command=[editor ' "' linecol '" "' file '" &'];
         end
         disp('This is the tweaked version errorDocCallBack.')
-        disp(command)
         system(command);
 
     else

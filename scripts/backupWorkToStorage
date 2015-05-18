@@ -1,0 +1,42 @@
+#!/bin/bash
+# Sould be run as user
+
+# With option -a : performs full backup (i.e. config files as well)
+
+if [[ `cat /etc/hostname` == "work" ]]
+then
+    #variables
+#     OPTS="-av"
+    OPTS="-alrv"
+    DEST=/media/WorkStorage/_backups
+    SRC=/home/manu
+
+    if [ -d $DEST ] ; then
+    ##############
+    # W1
+    ##############
+    #without deletion
+#     rsync $OPTS $SRC/Pictures/ $DEST/Pictures/
+    #with delete propagation
+    rsync $OPTS --delete $SRC/Cursus/    $DEST/W1/Cursus
+    rsync $OPTS --delete $SRC/Geekeries/ $DEST/W1/Geekeries
+    rsync $OPTS --delete $SRC/Projects/  $DEST/W1/Projects
+    rsync $OPTS --delete $SRC/Work/      $DEST/W1/Work
+    echo `date` >> $DEST/W1/DateSync
+
+    ##############
+    # WC 
+    ##############
+    if [ "$1" = "-u" ] ; then
+        rsync $OPTS --delete  --include='.**' --exclude='*' $SRC/ "$DEST/WC/dotfiles/"
+        rsync $OPTS --delete $SRC/Config/ "$DEST/WC/Config"
+        rsync $OPTS --delete /opt/ "$DEST/WC/opt"
+        echo `date` >> $DEST/WC/DateSync
+    fi
+    else
+        echo "Folder not mounted"
+
+    fi
+else 
+    echo "Wrong environment"
+fi

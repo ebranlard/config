@@ -1,0 +1,127 @@
+#!/bin/bash
+
+# FROM NOW ON, SHOULD BE RUN AS ROOT
+
+
+MAINUSER=manu
+
+# Getting the directory where this script is stored
+# path=`pwd`
+path="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+#############################
+### ROOT stuff 
+#############################
+
+#making life more convenient
+rm /usr/share/icons/IconsManu*
+mkdir -p /usr/share/icons
+chown -R $MAINUSER: /usr/share/icons/
+ln -s $path/look/IconsManu2009 /usr/share/icons/IconsManu2009
+ln -s $path/look/IconsManu2011 /usr/share/icons/IconsManu2011
+ln -s $path/look/IconsManu2012 /usr/share/icons/IconsManu2012
+
+# --------------------------------------------------------------------------------
+# --- OPT 
+# --------------------------------------------------------------------------------
+mkdir /opt
+chown -R $MAINUSER: /opt
+
+# --------------------------------------------------------------------------------
+# --- DOTFILES  for ROOT
+# --------------------------------------------------------------------------------
+rm  /root/.bashrc /root/.bash_profile /root/.bash_logout /root/.vimrc /root/.vim 
+
+ln -s $path/dotfiles/bashrc_root.bash /root/.bashrc
+ln -s $path/dotfiles/bash_profile_root.bash /root/.bash_profile
+ln -s $path/dotfiles/bash_logout /root/.bash_logout
+ln -s $path/dotfiles/vimrc /root/.vimrc
+ln -s $path/dotfiles/vim /root/.vim
+
+# --------------------------------------------------------------------------------
+# --- SUDOERS 
+# --------------------------------------------------------------------------------
+
+
+# --------------------------------------------------------------------------------
+# --- FSTAB 
+# --------------------------------------------------------------------------------
+if [[ `cat /etc/fstab |grep DataWin|wc -l` == 1 ]]
+then
+    cp /etc/fstab /etc/fstab.bak 
+
+    # Prepare fstab for win drives
+    mkdir /media/DataWin /media/Win
+echo "
+# Win /dev/sda
+#UUID=   /media/Win      ntfs-3g defaults,noauto,umask=007,uid=1000,gid=1000       0       0
+# DataWin /dev/sda
+#UUID=   /media/DataWin      ntfs-3g defaults,umask=007,uid=1000,gid=1000       0       0
+" >> /etc/fstab
+fi
+
+# Storages
+if [[ `cat /etc/fstab |grep HomeStorage|wc -l` == 1 ]]
+then
+    mkdir /media/WorkStorage /media/HomeStorage
+echo "
+# Prepare fstab for Storage drives
+## Work Storage
+# UUID=1105BE213AEBE2F6 /media/WorkStorage      ntfs-3g defaults,users,noauto,umask=007,uid=1000,gid=1000       0       0
+## Home Storage
+# UUID=843671A53671993E /media/HomeStorage      ntfs-3g defaults,users,noauto,umask=007,uid=1000,gid=1000       0       0
+" >> /etc/fstab
+fi
+
+if [[ `cat /etc/fstab |grep R-home|wc -l` == 1 ]]
+    then
+    #Riso Drives
+    mkdir /mnt/R-home /mnt/S-group /mnt/T-apps /mnt/U-garb
+echo "  
+# RISO DRIVES
+//fil-vea/home/    /mnt/R-home   cifs    credentials=/usr/local/etc/whisper.credentials,uid=1000,umask=000    0    0
+//fil-vea/group/    /mnt/S-group   cifs    credentials=/usr/local/etc/whisper.credentials,uid=1000,umask=000    0    0
+//fil-other/applications/    /mnt/T-apps   cifs    credentials=/usr/local/etc/whisper.credentials,uid=1000,umask=000    0    0
+//fil-other/garbage/    /mnt/U-garb   cifs    credentials=/usr/local/etc/whisper.credentials,uid=1000,umask=000    0    0
+" >> /etc/fstab
+    echo "username=WIN/ebra
+    password=" >> /usr/local/etc/whisper.credentials
+fi
+
+# --------------------------------------------------------------------------------
+# --- Multimedia  
+# --------------------------------------------------------------------------------
+#rm /m 
+#ln -s /media/HomeStorage/Music/ /m
+
+# --------------------------------------------------------------------------------
+# --- Policies and conf files 
+# --------------------------------------------------------------------------------
+# Policies
+# ln -s $path/profiles/policies/ /etc/polkit-1/localauthority/55-mylocal.d
+
+# Issue
+cp $path/profiles/issue /etc/
+
+# init-functions
+# cp /lib/lsb/init-functions /lib/lsb/init-functions-bak
+# cp $path/profiles/init-functions /lib/lsb/
+
+
+# udev policies (to avoid being shown in Thunar)
+# cp $path/profiles/udevrules/* /etc/udev/rules.d/
+
+
+# grub 
+# mv /etc/default/grub /etc/default/grub-bak
+# ln -s $path/profiles/grub/etcdefaultgrub /etc/default/grub
+#update grub
+
+
+
+#texmf
+ln -s $path/profiles/texmf/12-TexmfHome.cnf /etc/texmf/texmf.d/
+
+#sudoers
+./SetupSudoers
+

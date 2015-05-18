@@ -1,0 +1,9 @@
+#[stop]
+#Identity=unix-user:manu
+#Action=org.freedesktop.consolekit.system.stop
+#ResultAny=yes
+
+[restart]
+Identity=unix-user:manu
+Action=org.freedesktop.consolekit.system.*
+ResultAny=yes

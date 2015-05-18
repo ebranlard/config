@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CustomKeySet derivedfrom="Windows" modifieddefault="false">
+   <Context id="Global">
+      <Action id="new-mfile"/>
+      <Action id="previous-history-item">
+         <Stroke code="VK_UP"/>
+         <Stroke code="VK_KP_UP"/>
+         <Stroke code="VK_K" ctrl="on"/>
+      </Action>
+      <Action id="next-history-item">
+         <Stroke code="VK_DOWN"/>
+         <Stroke code="VK_KP_DOWN"/>
+         <Stroke code="VK_J" ctrl="on"/>
+      </Action>
+      <Action id="insert-tab">
+         <Stroke code="VK_TAB"/>
+         <Stroke code="VK_N" ctrl="on"/>
+      </Action>
+   </Context>
+   <Context id="CommandWindow">
+      <Action id="kill-line"/>
+   </Context>
+</CustomKeySet>

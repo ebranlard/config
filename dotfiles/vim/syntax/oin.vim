@@ -20,25 +20,36 @@ if exists("b:current_syntax")
 endif
 
 " Keywords
-syn keyword oKeyword Wind Environment CommonData Algo Param Coupling Field
+syn keyword oKeyword WindInputs Environment CommonData Algo Param Coupling Field
 
-syn keyword oIdentifier nDim bBuildMatrix bComputeGrad bConvertToPart bDistortPart bForceOneInfiniteWakePanel bForceWakePanelAlongmX bForceWakePanelAlongU0 bGridVelocity bHybridWake bNoRollUp tRollUpStart bPlaceConcentratedShedVorticity bPlotGeometry bPlots bPrescribedGamma bProfilesData bRemoveFarWake bNoShedding bViscousBoundaries EmissionMethod IprescribedIntensities nTGridVelocity pNumericalScheme PanlSmooth PartSmooth SgmtSmooth Model Param1 Param2 ParamMethod PrescribedIntensities ProfileSolving pSolverMatrixMethod bNWCPatTE crit MaxIter relax RelSizeNWPanel tConvertToPart pConvertToPart tRemoveFarWake bHawcWind bProfilesNoInduction bNoShedding bProfilesAlphaSmooth bProfilesNoInduction  bProfilesAlphaSmooth bRemoveZeroVorticity
+" Wind
+syn keyword oIdentifier Wind bExternal V0 pCoordinates Turb Shear bDumpProfile
+" Turb
+syn keyword oIdentifier Box file_u file_v file_w n1 n2 n3 d1 d2 d3 e1_g e2_g P1_g P2_g 
+syn keyword oIdentifier Part basename file_format
+" Shear
+syn keyword oIdentifier pType RefHeight StepValue StepEpsilon Slope Roughtness PowerLawCoeff Roughness
+syn keyword oIdentifier bBoundaryIntegral ExtMapRes nExtMapTarget 
+
+
+
+syn keyword oIdentifier nDim bBuildMatrix bComputeGrad bConvertToPart bDistortPart bForceOneInfiniteWakePanel bForceWakePanelAlongmX bForceWakePanelAlongU0 bGridVelocity bHybridWake bNoRollUp tRollUpStart bPlaceConcentratedShedVorticity bPlotGeometry bPlots bPrescribedGamma bProfilesData bRemoveFarWake bNoShedding bViscousBoundaries EmissionMethod IprescribedIntensities nTGridVelocity pNumericalScheme PanlSmooth PartSmooth SgmtSmooth Model Param1 Param2 ParamMethod PrescribedIntensities ProfileSolving pSolverMatrixMethod bNWCPatTE crit MaxIter relax RelSizeNWPanel tConvertToPart pConvertToPart tRemoveFarWake bProfilesNoInduction bNoShedding bProfilesAlphaSmooth bProfilesNoInduction  bProfilesAlphaSmooth bRemoveZeroVorticity
 
 syn keyword oIdentifier bExportPlot bExportLoads pExportPlotFormat pExportVelocityFormat nTExportPlot nTExportLoads nExportPlot bExportLoads  nExportLoads bExportPlotLight bExportPlotBodiesOnly bExportConverged 
 
 syn keyword oIdentifier bTIMING bDEBUGMIN bSTOP_ALLOWED prefix sim_folder nExportStates bExportStates bMemoryAnalyser bMemorySaver bTimeEstimator bSILENT_WARN bSILENT_ERROR bSILENT_INFO bConstantUiExternalPerStep state_file bSmartTicToc SmartTicTocVal
 
-syn keyword oIdentifier pVortexSplittingScheme bVortexSplitting VortexSplittingParam1 VortexSplittingParam2
+syn keyword oIdentifier pVortexSplittingScheme bVortexSplitting VortexSplittingParam1 VortexSplittingParam2 pRemoveZeroVorticity kRemoveZeroVorticity kDistortMax
 
 syn keyword oIdentifier nTConvertToPart bReduceSegments tReduceSegments nTReduceSegments
 
 syn keyword oIdentifier bProfiles2PiAlpha bProfiles2PiSinAlpha
 
 " UI related
-syn keyword oIdentifier pTree_k_factor pTree_small_branch
+syn keyword oIdentifier pTree_k_factor pTree_small_branch pPartUiMethod bPartIsoVolume
 
 " Grid related Inputs
-syn keyword oIdentifier pMG pRM pHW pU1 pU2 pField AI GI PE nx ny nz vx ny nz Scaling bScaling
+syn keyword oIdentifier pMG pRM pHW pU1 pU2 pField AI GI PE nx ny nz vx ny nz Scaling bScaling bDecompose
 
 " Box and Domains
 syn keyword oIdentifier MainDomain ConvectionDomain Box rangeX rangeY rangeZ
@@ -54,10 +65,8 @@ syn keyword oIdentifier bActive n nT tStart tEnd
 
 syn keyword oIdentifier pCoupling SmoothBEM bUseBEM
 
-syn keyword oIdentifier nu V0 Model 
-syn keyword oIdentifier bTurb_box Turb_box_file_u Turb_box_file_v Turb_box_file_w Turb_box_n1 Turb_box_n2 Turb_box_n3 Turb_box_d1 Turb_box_d2 Turb_box_d3 Turb_box_e1_g Turb_box_e2_g Turb_box_P1_g Turb_box_P2_g  TurbPart basename file_format 
 
-syn keyword oIdentifier KinVisc rho rho_water min_scale max_scale typical_scale ShearLayerHeight
+syn keyword oIdentifier KinVisc rho rho_water min_scale max_scale typical_scale ShearLayerHeight TypicalGridSpacing
 
 syn keyword oIdentifier dt tmax bDEBUG
 
