@@ -39,7 +39,11 @@ then
 #    export OMNIVOR_LIB_DIR='/work/lib/OmniVor_lib/fortran/_lib/linux-amd64/'
 #    export OMNIVOR_OBJ_DIR='/work/lib/OmniVor_lib/fortran/_build/linux-amd64/'
 #    export OMNIVOR_BIN_DIR='/work/lib/OmniVor_lib/fortran/_bin/linux-amd64/'
-    export OMNIVOR_SRC_DIR='/work/lib/OmniVor_lib/fortran/'
+    export OMNIVOR_MKF_DIR='/home/manu/Work-tmp/omnivor/_includes/'
+    export OMNIVOR_LIB_DIR='/home/manu/Work-tmp/omnivor/_dev/_lib/linux-amd64/'
+    export OMNIVOR_OBJ_DIR='/home/manu/Work-tmp/omnivor/_dev/_build/linux-amd64/'
+    export OMNIVOR_BIN_DIR='/home/manu/Work-tmp/omnivor/_dev/_bin/linux-amd64/'
+    export OMNIVOR_SRC_DIR='/home/manu/Work-tmp/omnivor/_dev/'
 
 elif [ $HOSTNAME == 'g-000.risoe.dk' ]
 then
