@@ -762,10 +762,19 @@ set guitablabel=%!GuiTabLabelManu()
 " --------------------------------------------------------------------------------
 " --- Environment variables, local
 " --------------------------------------------------------------------------------
-let $OMNIVOR_MKF_DIR='/work/lib/OmniVor_lib/fortran/_includes/'
-let $OMNIVOR_LIB_DIR='/work/lib/OmniVor_lib/fortran/_lib/linux-amd64/'
-let $OMNIVOR_SRC_DIR='/work/lib/OmniVor_lib/fortran/'
-let $PYTHONPATH='/home/manu/Config/path/PythonPath/'
+" let host=$HOSTNAME
+" 
+" if host == 'work'
+"     let $OMNIVOR_MKF_DIR='/work/lib/OmniVor_lib/fortran/_includes/'
+"     let $OMNIVOR_LIB_DIR='/work/lib/OmniVor_lib/fortran/_lib/linux-amd64/'
+"     let $OMNIVOR_SRC_DIR='/work/lib/OmniVor_lib/fortran/'
+"     let $PYTHONPATH='/home/manu/Config/path/PythonPath/'
+" endif
+" if host == 'olympe'
+"     let $OMNIVOR_MKF_DIR='/home/manu/Work-tmp/omnivor/_dev/_includes/'
+"     let $OMNIVOR_LIB_DIR='/home/manu/Work-tmp/omnivor/_dev/_lib/linux-amd64/'
+"     let $OMNIVOR_SRC_DIR='/home/manu/Work-tmp/omnivor/_dev/'
+" endif
 
 " --------------------------------------------------------------------------------
 " --- Typos - spelling - abbreviations
