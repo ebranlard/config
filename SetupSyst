@@ -117,7 +117,8 @@ cp $path/profiles/issue /etc/
 # ln -s $path/profiles/grub/etcdefaultgrub /etc/default/grub
 #update grub
 
-
+# Sorting underscores first
+update-locale LC_COLLATE=C
 
 #texmf
 ln -s $path/profiles/texmf/12-TexmfHome.cnf /etc/texmf/texmf.d/

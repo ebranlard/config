@@ -74,7 +74,7 @@ for id in jobpbsid[0:-1]:
        elif (option=='resources_used.walltime'):
            wall_used="h".join(value.split(':')[0:2])
        elif (option=='Job_Name'):
-           job_name='%-40s'%value
+           job_name='%-60s'%value
     s=id+' '+main_node+' '+cpt_str+' '+job_name+'  '+wall_used+'/'+wall_rqst+'\t'+str(n_nodes)+'('+str(n_cpus)+')\t'+'('+' '.join(nodes_str)+')'
     print(s)
 print("-----------------------------------------------------------------------------")
