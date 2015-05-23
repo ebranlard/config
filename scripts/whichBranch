@@ -1,5 +1,5 @@
 #!/bin/bash
-G=`git branch 2>&1 | wc -l`
+G=`git branch 2>/dev/null | wc -l`
 
 if [ $G -eq 0 ]; then
     echo ""
