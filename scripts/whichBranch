@@ -1,8 +1,13 @@
-#!/bin/sh
-G=`git branch 2>&1 | grep '*'| head -1 | sed -e 's/* //'`
-NB=`echo $G | grep "Not a git repository" | wc -l`
-if [ $NB -eq 1 ]; then
+#!/bin/bash
+G=`git branch 2>&1 | wc -l`
+
+if [ $G -eq 0 ]; then
     echo ""
 else
-    echo "($G)"
+    G=`git branch 2>&1 | grep '*'| head -1 | sed -e 's/* //'`
+    if [[ $G == "master" ]]; then
+        echo ""
+    else
+        echo "($G)"
+    fi
 fi
