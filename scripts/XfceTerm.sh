@@ -12,16 +12,17 @@
 #    2720x1024      50.0* 
 if [[ $HOSTNAME == 'work' ]]
 then
+#     -T TERM-PhDThesis --working-directory=/work/publications/phdthesis/ --command='run-cmd git status' --tab \
 xfce4-terminal \
     -T TERM-HOME --working-directory=/home/manu/ --tab\
-    -T TERM-SYSTEM --working-directory=/etc/ --tab\
-    -T TERM-SSH --working-directory=/work/lib/OmniVor_lib/fortran/ --tab \
-    -T TERM-PhDThesis --working-directory=/work/publications/phdthesis/ --command='run-cmd git status' --tab \
+    -T TERM-PhDThesis --working-directory=/work/publications/phdthesis/ --tab \
     -T TERM-WORK --working-directory=/work/ --tab\
     -T TERM-CODE --working-directory=/work/code --tab\
-    -T TERM-OMNIVOR_JOBS --working-directory=/work/jobs/  --tab\
-    -T TERM-OMNIVOR_TESTS --working-directory=/work/lib/OmniVor_lib/fortran/__tests__/ --command='run-cmd git status' --tab\
-    -T TERM-OMNIVOR --working-directory=/work/lib/OmniVor_lib/fortran --command='run-cmd git status'\
+    -T TERM-SYSTEM --working-directory=/etc/ --tab\
+    -T TERM-SSH --working-directory=/work/lib/OmniVor/_src/ --tab \
+    -T TERM-OMNIVOR_TESTS --working-directory=/work/lib/OmniVor/_src/__tests__/ --tab\
+    -T TERM-OMNIVOR_SRC --working-directory=/work/lib/OmniVor/_src --tab\
+    -T TERM-OMNIVOR --working-directory=/work/lib/OmniVor/ --command='mr status' \
     --maximize
 fi
 
