@@ -46,3 +46,9 @@ function! MyFoldTextPython()
     return '          ('.foldsize.'lines)'
 endfunction
 set foldtext=MyFoldTextPython()  " can be customized later
+
+
+" --------------------------------------------------------------------------------
+" --- Aligns 
+" --------------------------------------------------------------------------------
+vmap ,ac :Align! =Ip1P1 # <CR>

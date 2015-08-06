@@ -555,9 +555,15 @@ nmap ++ ^v$hyPa=<esc>A ;<esc>hi
 nmap ,i mi<esc>gg=G<esc>`i
 " These below might be overriden in after/ftplugin
 " Remeber there is \tt and \tsp
-vmap ,af :Align Ip0p1= = ( ) ; ,<CR>
-vmap ,aa :Align Ip0p1= = ; <CR>
-vmap ,ae :Align Ip0p1= = ; %<CR>
+vmap ,aa :Align! =Ip0P0 ( , ) <CR>
+vmap ,a= :Align! =Ip1P1 = <CR>
+vmap ,ac :Align! =Ip1P1 ! <CR>
+vmap ,a; :Align! =Ip0P1 ; <CR>
+vmap ,a, :Align! =Ip0P0 , <CR>
+" Function align: equal, args, semi column and comments
+vmap ,af ,a= gv ,aa gv ,a; gv ,ac
+" Statements :  equal, semicolumn and comments
+vmap ,ae ,a= gv ,a; gv ,ac
 
 
 "custom comma motion mapping
@@ -762,7 +768,8 @@ set guitablabel=%!GuiTabLabelManu()
 " --------------------------------------------------------------------------------
 " --- Environment variables, local
 " --------------------------------------------------------------------------------
-" let host=$HOSTNAME
+let host=$HOSTNAME
+let $OMNIVOR_OBJ_DIR='/work/lib/OmniVor/_src/_build/linux-amd64/'
 " 
 " if host == 'work'
 "     let $OMNIVOR_MKF_DIR='/work/lib/OmniVor_lib/fortran/_includes/'
