@@ -1,0 +1,81 @@
+#!/usr/bin/env ruby
+
+# TODO
+# implement full compatibility with notify-send:
+# urgency 
+# timeout
+# category
+# hints
+
+require 'optparse'
+
+begin
+    require 'dbus'
+rescue LoadError
+    exit 1
+end
+
+def parse_commandline
+    options = {
+        :urgency => 1,
+        :icon => "",
+        :id => 0,
+        :summary => "notify",
+        :body => "",
+        :application => "notify", # TODO
+        :timeout => 3, # TODO, not high prio as osd-notify does not support it anyway..
+    }
+
+    optparse = OptionParser.new do |opts|
+        opts.banner = "Usage: " + File.basename($0) + " [OPTIONS] <summary> [body]"
+
+        opts.on( '-?', '--help', 'show this message' ) do
+            puts opts.help
+            exit 0
+        end
+
+        opts.on( '-i icon', '--icon icon', String, 'icon to display') do |icon|
+            options[:icon] = icon
+        end
+
+        opts.on( '-r id', '--replace-id id', Integer, 'id of notification to replace' ) do |id|
+            options[:id] = id
+        end
+    end
+
+    rest = optparse.parse!
+    if not rest[0]
+        $stderr.puts "summary as first non-option argument is mandatory"
+        exit 1
+    else
+        options[:summary] = rest[0]
+    end
+
+    if rest[1]
+        options[:body] = rest[1]
+    end
+    return options
+end
+
+def get_iface
+    bus = DBus::SessionBus.instance
+
+    service = bus.service("org.freedesktop.Notifications")
+    object = service.object("/org/freedesktop/Notifications")
+    object.introspect
+    iface = object["org.freedesktop.Notifications"]
+    return iface
+end
+
+# MAIN
+options = parse_commandline
+iface = get_iface
+
+puts iface.Notify(options[:application],
+                  options[:id],
+                  options[:icon],
+                  options[:summary],
+                  options[:body],
+                  [],
+                  {},
+                  options[:timeout])

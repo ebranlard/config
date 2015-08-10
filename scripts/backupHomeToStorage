@@ -1,0 +1,36 @@
+#!/bin/bash
+# Sould be run as user
+
+# With option -a : performs full backup (i.e. config files as well)
+if [[ $HOSTNAME == "olympe" ]]
+then
+    #variables
+    OPTS="-alrv"
+    DEST=/media/HomeStorage/_backups
+    SRC=/home/manu
+    if [ -d $DEST ] ; then
+        ##############
+        # W1
+        ##############
+        #with delete propagation
+        rsync $OPTS --delete $SRC/Admin/    $DEST/H1/Admin
+        rsync $OPTS --delete $SRC/Music/    $DEST/H1/Music
+        rsync $OPTS --delete $SRC/Pictures/ $DEST/H1/Pictures
+        rsync $OPTS --delete $SRC/Salsa/ $DEST/H1/Salsa
+        echo `date` >> $DEST/H1/DateSync
+
+        ##############
+        # WC 
+        ##############
+        if [ "$1" = "-a" ] ; then
+            rsync $OPTS --delete  --include='.**' --exclude='*' $SRC/ "$DEST/HC/dotfiles/"
+            rsync $OPTS --delete $SRC/Config/ "$DEST/HC/Config"
+#             rsync $OPTS --delete /opt/ "$DEST/HC/opt"
+            echo `date` >> $DEST/HC/DateSync
+        fi
+    else
+        echo "Folder not mounted"
+    fi
+else 
+    echo "Wrong environment"
+fi

@@ -1,3 +1,4 @@
+*.pyc
 Bootchart/
 NVIDIA*
 backup_data/
@@ -7,10 +8,8 @@ build/
 doc/
 docnew/
 dtu/
-look/
-mime/
 patches/
-profiles/
+path/MatlabPath
 snd/
 syst/
 fonts/*/
@@ -20,10 +19,50 @@ tmp/
 _bkp_dotfiles
 _src_and_deb
 dotfiles/gitconfig-work
-SetupSyst
 
 
+sbin/
+scripts/tests/
+scripts/windap.con
 
 simplekey
 scripts/Riso*
 dotfiles/gitignore-work
+
+NTUA*
+
+profiles/Firefox-profile/
+profiles/_FluxBox/
+profiles/dicos/
+profiles/grub/
+profiles/kernel-config/
+profiles/smb.conf.VJK
+profiles/templates/
+profiles/texmf/
+	
+
+look/136850-Murrina-Debian-Red-0.9.tar.gz
+look/Background/
+look/BodyBg.jpg
+look/Desk4Term.png
+look/Desktop.png
+look/Icons/
+look/IconsManu2009.tar.bz2
+look/IconsManu2009/
+look/IconsManu2011.tar
+look/IconsManu2012.tar
+look/IconsManu2012/
+look/IconsManuFactory/
+look/Screenshot - 01182011 - 01:05:56 PM.png
+look/Screenshot-40-4.jpg
+look/Screenshot-41-7.png
+look/conky.png
+look/gnome-fs-executable.png
+look/orbit-grub.png
+look/orbit-grub.xcf
+look/testMimeIcons/
+look/themes/
+look/vlc.xpm
+look/xapp-mask.xbm
+look/xapp.png
+look/xapp.xbm

@@ -47,8 +47,12 @@ sudo dpkg --get-selections > liste-paquets.dpkg
 
 
 
+# --------------------------------------------------------------------------------
+# --- HOME 
+# --------------------------------------------------------------------------------
 #home folder
 sudo cp $HOME/Config/profiles/bash* home/
+cp $HOME/.bash_history home/bash_history
 cp $HOME/.vimrc home/vimrc
 cp -r $HOME/.vim/ home/vim
 cp $HOME/.xinitrc home/xinitrc
@@ -66,7 +70,9 @@ cp $HOME/.local/share/rhythmbox/*.xml home/local/share/rhythmbox/
 
 
 
-#system
+# --------------------------------------------------------------------------------
+# --- SYSTEM 
+# --------------------------------------------------------------------------------
 sudo cp /etc/fstab etc/fstab
 sudo cp /etc/modules etc/modules
 # sudo #cp /etc/event.d/tty1 etc/event.d/tty1

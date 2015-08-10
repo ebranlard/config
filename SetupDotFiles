@@ -1,26 +1,37 @@
 #!/bin/bash
 
+#!!! Should not be run as root (for now)
+
+
 # Getting the directory where this script is stored
 path="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
+echo "USER: " $USERNAME $USER
+echo "PATH: " $path
 # Going to user home directory
 cd ~
 
 # Moving existing files to a backup folder
 BKP_FOLDER=_bkp_dotfiles
 mkdir -p $BKP_FOLDER 
-mv .xinitrc .bashrc .bash_logout .bash_profile .vimrc .vim .gitconfig .profile .fonts $BKP_FOLDER
+mv .xinitrc .xsessionrc .bashrc .bash_logout .bash_profile .vimrc .vim .gitconfig .profile .fonts $BKP_FOLDER
 
 # Removing files
 ln -s $path/dotfiles/xinitrc .xinitrc
+ln -s $path/dotfiles/xsessionrc .xsessionrc
 ln -s $path/dotfiles/bashrc_user.bash .bashrc
 ln -s $path/dotfiles/bash_profile.bash .bash_profile
 ln -s $path/dotfiles/bash_logout .bash_logout
+ln -s $path/dotfiles/ctags .ctags
 ln -s $path/dotfiles/vimrc .vimrc
 ln -s $path/dotfiles/vim .vim
 ln -s $path/dotfiles/profile .profile
 
 if [ $HOSTNAME == 'work' ]
+then
+    echo "Work"
+    ln -s $path/dotfiles/gitconfig-work .gitconfig
+elif [ $HOSTNAME == 'work' ]
 then
     echo "Work"
     ln -s $path/dotfiles/gitconfig-work .gitconfig
@@ -30,3 +41,10 @@ fi
 # Fonts
 ln -s $path/fonts .fonts
 fc-cache -vf ~/.fonts
+
+# templates
+
+ln -s $path/profiles/templates .config/Templates
+
+# look
+ln -s $path/look/themes .themes

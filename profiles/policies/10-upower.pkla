@@ -1,0 +1,7 @@
+
+[upower]
+Identity=unix-user:*
+Action=org.freedesktop.upower.*
+ResultAny=yes
+
+

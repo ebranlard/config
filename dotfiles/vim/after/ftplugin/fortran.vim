@@ -50,7 +50,9 @@ else
     let fortran_fixed_source=1
     unlet! fortran_free_source
 endif
-set cc=132
+if version>703
+    set cc=132
+endif
 set textwidth=132
 
 " gfotran: suitable error format for quickfix window
@@ -66,6 +68,7 @@ set textwidth=132
 " " Gfortran
 " set efm=%E%f:%l.%c:,%E%f:%l:,%C,%C%p%*[0123456789^],%ZError:\ %m,%C%.%#
 
+
 " command! Ifort set efm=%f(%l):%m,%-G$.%#
 " command! Gfortran set efm=%E%f:%l.%c:,%E%f:%l:,%C,%C%p%*[0123456789^],%ZError:\ %m,%C%.%#
 command! Ifort compiler ifort
@@ -77,6 +80,16 @@ command! Gfortran compiler gfortran
 " set efm=%f(%l):%m,%-G$.%#
 
 
-let g:syntastic_fortran_flags=' -I /work/lib/OmniVor_lib/fortran/_build/linux-ia32/ -J/work/lib/OmniVor_lib/fortran/_build/linux-ia32/'
-let g:syntastic_fortran_include_dirs = ['/work/lib/OmniVor_lib/fortran/_build/linux-ia32/']
-compiler! gfortran
+" let g:syntastic_fortran_compiler_options=' -I /work/lib/OmniVor_lib/fortran/_build/linux-amd64/ -I _build/ -J/work/lib/OmniVor_lib/fortran/_build/linux-amd64/'
+" let g:syntastic_fortran_include_dirs = ['/work/lib/OmniVor_lib/fortran/_build/linux-amd64/','_build']
+let g:syntastic_fortran_compiler_options=' -I '.$OMNIVOR_OBJ_DIR .'-I _build/ -J'.$OMNIVOR_OBJ_DIR
+let g:syntastic_fortran_include_dirs = [$OMNIVOR_OBJ_DIR,'_build']
+" let g:syntastic_fortran_flags=' -I /work/lib/OmniVor_lib/fortran/_build/linux-amd64/ -I _build/ -J/work/lib/OmniVor_lib/fortran/_build/linux-amd64/'
+" let g:syntastic_fortran_include_dirs = ['/work/lib/OmniVor_lib/fortran/_build/linux-amd64/','_build']
+if version >=720
+    compiler! gfortran
+end
+
+
+" From Stack exchange for gfortran with undefined reference
+set efm=%A%f:%l.%c:,%C,%C\ %.%#,%ZError:\ %m,%ZWarning:\ %m,%f:(%.%#):%m,%f:%l:%m

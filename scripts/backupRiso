@@ -14,11 +14,13 @@ DEST2=$ROOTDEST2/$mydate
 mkdir -p $DEST
 mkdir -p $DEST2
 
+# -h: Deference Symlinks!!!
+
 cd $ROOTSRC
 for SRC in $SRCS
 do
     echo $SRC
-    tar -czhf $SRC"_"$mydate.tar.gz $SRC
+    tar -czf $SRC"_"$mydate.tar.gz $SRC
     cp $SRC"_"$mydate.tar.gz $DEST  #local version
     cp $SRC"_"$mydate.tar.gz $DEST2 #server version
     rm $SRC"_"$mydate.tar.gz 

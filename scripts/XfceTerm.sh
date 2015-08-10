@@ -10,14 +10,28 @@
 # Screen 0: minimum 2720 x 1024, current 2720 x 1024, maximum 2720 x 1024
 # default connected 2720x1024+0+0 0mm x 0mm
 #    2720x1024      50.0* 
+if [[ $HOSTNAME == 'work' ]]
+then
+#     -T TERM-PhDThesis --working-directory=/work/publications/phdthesis/ --command='run-cmd git status' --tab \
 xfce4-terminal \
     -T TERM-HOME --working-directory=/home/manu/ --tab\
-    -T TERM-SYSTEM --working-directory=/etc/ --tab\
-    -T TERM-SSH --working-directory=/work/lib/OmniVor_lib/fortran/ --tab \
-    -T TERM-PhDThesis --working-directory=/work/publications/phdthesis/ --command='run-cmd git status' --tab \
+    -T TERM-PhDThesis --working-directory=/work/publications/phdthesis/ --tab \
     -T TERM-WORK --working-directory=/work/ --tab\
-    -T TERM-VC-PRESC --working-directory=/work/vc-prescr/omnvor --tab\
-    -T TERM-OMNIVOR_JOBS --working-directory=/work/lib/OmniVor_lib/jobs/  --tab\
-    -T TERM-OMNIVOR_TESTS --working-directory=/work/lib/OmniVor_lib/fortran/__tests__/ --command='run-cmd git status' --tab\
-    -T TERM-OMNIVOR --working-directory=/work/lib/OmniVor_lib/fortran --command='run-cmd git status'\
+    -T TERM-CODE --working-directory=/work/code --tab\
+    -T TERM-SYSTEM --working-directory=/etc/ --tab\
+    -T TERM-SSH --working-directory=/work/lib/OmniVor/_src/ --tab \
+    -T TERM-OMNIVOR_TESTS --working-directory=/work/lib/OmniVor/_src/__tests__/ --tab\
+    -T TERM-OMNIVOR_SRC --working-directory=/work/lib/OmniVor/_src --tab\
+    -T TERM-OMNIVOR --working-directory=/work/lib/OmniVor/ --command='mr status' \
     --maximize
+fi
+
+if [[ $HOSTNAME == 'olympe' ]]
+then
+xfce4-terminal \
+    -T TERM-HOME --working-directory=/home/manu/ --tab\
+    -T TERM-HOME --working-directory=/home/manu/ --tab\
+    -T TERM-SYSTEM --working-directory=/etc/ --tab\
+    -T TERM-SYSTEM --working-directory=/etc/ --tab\
+    --maximize
+fi

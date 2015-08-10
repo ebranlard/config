@@ -38,8 +38,14 @@ alias lg='git status'
 alias cd..='cd ..'
 alias mygrep='grep --Insri '  #silly you, you made a function f in this file that you forgot
 
+# GIT
+alias lgr='for d in `find . -name ".git"`; do   echo "processing $d ..."; git --git-dir=$d --work-tree=$d/.. status; done'
 
-# systeme
+# Becasue I type wrong
+alias mkae='make'
+alias maek='make'
+
+# system
 alias reboot='sudo reboot'
 alias vigrub='sudo vim /boot/grub/grub.cfg'
 alias vix='sudo vim /etc/X11/xorg.conf'
@@ -125,7 +131,7 @@ else
 fi
 }
 #alias gvim=gv
-# alias gvim='gvim -p --remote-tab-silent'
+alias gvimt='gvim --remote-tab-silent'
 
 #########################################################
 # Bash params

@@ -1,0 +1,37 @@
+# here you can see the content of the file
+# "/etc/polkit-1/localauthority/50-local.d/org.freedesktop.consolekit.pkla"
+# create this file after you installed xfce4-desktop with the command:
+# apt-get install xfce4 xfce4-goodies
+# with the following lines in this file you will be able not only to logout,
+# but also shutdown, reboot, hybernate ans suspend with the XFCE menu buttons
+# and the best: we do not need any display manager like gdm3 lightdm, etc.
+
+[Local restart]
+Identity=unix-group:users
+Action=org.freedesktop.consolekit.system.restart
+ResultAny=yes
+ResultInactive=no
+ResultActive=yes
+
+[Local shutdown]
+Identity=unix-group:users
+Action=org.freedesktop.consolekit.system.stop
+ResultAny=yes
+ResultInactive=no
+ResultActive=yes
+
+[Local hibernate]
+Identity=unix-user:an3
+Identity=unix-group:users
+Action=org.freedesktop.upower.hibernate
+ResultAny=yes
+ResultInactive=no
+ResultActive=yes
+
+[Local suspend]
+Identity=unix-user:an3
+Identity=unix-group:users
+Action=org.freedesktop.upower.suspend
+ResultAny=yes
+ResultInactive=no
+ResultActive=yes
