@@ -38,5 +38,6 @@ else
     echo "OUTDIR      :$OUTDIR"
     echo "RESDIR      :$RESDIR"
 fi
+rm -f $HOSTFILE
 echo "-------------------------------------------------------"
 echo "Done!"
