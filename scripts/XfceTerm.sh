@@ -14,23 +14,22 @@ if [[ $HOSTNAME == 'work' ]]
 then
 #     -T TERM-PhDThesis --working-directory=/work/publications/phdthesis/ --command='run-cmd git status' --tab \
 xfce4-terminal \
-    -T TERM-HOME --working-directory=/home/manu/ --tab\
-    -T TERM-PhDThesis --working-directory=/work/publications/phdthesis/ --tab \
-    -T TERM-WORK --working-directory=/work/ --tab\
-    -T TERM-CODE --working-directory=/work/code --tab\
-    -T TERM-SYSTEM --working-directory=/etc/ --tab\
-    -T TERM-SSH --working-directory=/work/lib/OmniVor/_src/ --tab \
-    -T TERM-OMNIVOR_TESTS --working-directory=/work/lib/OmniVor/_src/__tests__/ --tab\
-    -T TERM-OMNIVOR_SRC --working-directory=/work/lib/OmniVor/_src --tab\
-    -T TERM-OMNIVOR --working-directory=/work/lib/OmniVor/ --command='mr status' \
+    -T TERM-HOME            --working-directory=/home/manu/ --tab\
+    -T TERM-SYSTEM          --working-directory=/etc/ --tab\
+    -T TERM-SSH             --working-directory=/work/libs/OmniVor/_jobs/ --tab \
+    -T TERM-PROJECT         --working-directory=/work/projects/2015/ --tab \
+    -T TERM-PROJECT         --working-directory=/work/projects/2015/ --tab \
+    -T TERM-OMNIVOR_TESTS   --working-directory=/work/libs/OmniVor/_src/__tests__/ --tab\
+    -T TERM-OMNIVOR_SRC     --working-directory=/work/libs/OmniVor/_src --tab\
+    -T TERM-OMNIVOR         --working-directory=/work/libs/OmniVor/ --command='mr status' \
     --maximize
 fi
 
 if [[ $HOSTNAME == 'olympe' ]]
 then
 xfce4-terminal \
-    -T TERM-HOME --working-directory=/home/manu/ --tab\
-    -T TERM-HOME --working-directory=/home/manu/ --tab\
+    -T TERM-HOME   --working-directory=/home/manu/ --tab\
+    -T TERM-HOME   --working-directory=/home/manu/ --tab\
     -T TERM-SYSTEM --working-directory=/etc/ --tab\
     -T TERM-SYSTEM --working-directory=/etc/ --tab\
     --maximize

@@ -18,15 +18,15 @@ then
     export PATH=$PATH:/work/lib/OmniVor/_src/_bin/linux-amd64
     export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
     
-    export PATH=/home/manu/Work/cuda/bin:$PATH
-    export LD_LIBRARY_PATH=/home/manu/Work/cuda/lib64:$LD_LIBRARY_PATH
+#     export PATH=/home/manu/Work/cuda/bin:$PATH
+#     export LD_LIBRARY_PATH=/home/manu/Work/cuda/lib64:$LD_LIBRARY_PATH
 
-    export OMNIVOR_MKF_DIR='/work/lib/OmniVor/_src/_mkf/'
-    export OMNIVOR_INC_DIR='/work/lib/OmniVor/_src/_includes/'
-    export OMNIVOR_LIB_DIR='/work/lib/OmniVor/_src/_lib/linux-amd64/'
-    export OMNIVOR_OBJ_DIR='/work/lib/OmniVor/_src/_build/linux-amd64/'
-    export OMNIVOR_BIN_DIR='/work/lib/OmniVor/_src/_bin/linux-amd64/'
-    export OMNIVOR_SRC_DIR='/work/lib/OmniVor/_src/'
+    export OMNIVOR_MKF_DIR='/work/libs/OmniVor/_src/_mkf/'
+    export OMNIVOR_INC_DIR='/work/libs/OmniVor/_src/_includes/'
+    export OMNIVOR_LIB_DIR='/work/libs/OmniVor/_src/_lib/linux-amd64/'
+    export OMNIVOR_OBJ_DIR='/work/libs/OmniVor/_src/_build/linux-amd64/'
+    export OMNIVOR_BIN_DIR='/work/libs/OmniVor/_src/_bin/linux-amd64/'
+    export OMNIVOR_SRC_DIR='/work/libs/OmniVor/_src/'
 
 elif [ $HOSTNAME == 'olympe' ]
 then
@@ -39,8 +39,6 @@ then
 #    export PATH=$PATH:/work/lib/OmniVor_lib/fortran/_bin/linux-amd64
 #    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
     
-#    export PATH=/home/manu/Work/cuda/bin:$PATH
-#    export LD_LIBRARY_PATH=/home/manu/Work/cuda/lib64:$LD_LIBRARY_PATH
 
 #    export OMNIVOR_MKF_DIR='/work/lib/OmniVor_lib/fortran/_includes/'
 #    export OMNIVOR_LIB_DIR='/work/lib/OmniVor_lib/fortran/_lib/linux-amd64/'
