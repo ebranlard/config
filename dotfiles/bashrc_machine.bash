@@ -80,7 +80,7 @@ then
     # hpc root
     alias gonodeX='qrsh -q mic_interactive-X'
     alias gonode='qrsh -q mic_interactive '
-    alias gonodecuda='qsub -I -l nodes=n-62-14-50'
+    alias gonodecuda='qsub -I -l nodes=n-62-18-47'
     export OMNIVOR_MKF_DIR=$HOME'/omnivor/_src/_includes/'
     export OMNIVOR_LIB_DIR=$HOME'/omnivor/_src/_lib/linux-amd64/'
     export OMNIVOR_OBJ_DIR=$HOME'/omnivor/_src/_build/linux-amd64/'
