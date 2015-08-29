@@ -15,18 +15,18 @@ then
     source /opt/intel/bin/compilervars.sh intel64
     alias vtune='source /opt/intel/vtune_amplifier_xe_2013/amplxe-vars.sh'
 
-    export PATH=$PATH:/work/lib/OmniVor_lib/fortran/_bin/linux-amd64
+    export PATH=$PATH:/work/lib/OmniVor/_src/_bin/linux-amd64
     export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
     
-    export PATH=/home/manu/Work/cuda/bin:$PATH
-    export LD_LIBRARY_PATH=/home/manu/Work/cuda/lib64:$LD_LIBRARY_PATH
+#     export PATH=/home/manu/Work/cuda/bin:$PATH
+#     export LD_LIBRARY_PATH=/home/manu/Work/cuda/lib64:$LD_LIBRARY_PATH
 
-    export OMNIVOR_MKF_DIR='/work/lib/OmniVor_lib/fortran/_mkf/'
-    export OMNIVOR_INC_DIR='/work/lib/OmniVor_lib/fortran/_includes/'
-    export OMNIVOR_LIB_DIR='/work/lib/OmniVor_lib/fortran/_lib/linux-amd64/'
-    export OMNIVOR_OBJ_DIR='/work/lib/OmniVor_lib/fortran/_build/linux-amd64/'
-    export OMNIVOR_BIN_DIR='/work/lib/OmniVor_lib/fortran/_bin/linux-amd64/'
-    export OMNIVOR_SRC_DIR='/work/lib/OmniVor_lib/fortran/'
+    export OMNIVOR_MKF_DIR='/work/libs/OmniVor/_src/_mkf/'
+    export OMNIVOR_INC_DIR='/work/libs/OmniVor/_src/_includes/'
+    export OMNIVOR_LIB_DIR='/work/libs/OmniVor/_src/_lib/linux-amd64/'
+    export OMNIVOR_OBJ_DIR='/work/libs/OmniVor/_src/_build/linux-amd64/'
+    export OMNIVOR_BIN_DIR='/work/libs/OmniVor/_src/_bin/linux-amd64/'
+    export OMNIVOR_SRC_DIR='/work/libs/OmniVor/_src/'
 
 elif [ $HOSTNAME == 'olympe' ]
 then
@@ -40,15 +40,12 @@ then
 #    export PATH=$PATH:/work/lib/OmniVor_lib/fortran/_bin/linux-amd64
 #    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
     
-#    export PATH=/home/manu/Work/cuda/bin:$PATH
-#    export LD_LIBRARY_PATH=/home/manu/Work/cuda/lib64:$LD_LIBRARY_PATH
-
-    export OMNIVOR_MKF_DIR='/home/manu/Work-tmp/omnivor/_src/_mkf/'
-    export OMNIVOR_INC_DIR='/home/manu/Work-tmp/omnivor/_src/_includes/'
-    export OMNIVOR_LIB_DIR='/home/manu/Work-tmp/omnivor/_src/_lib/linux-amd64/'
-    export OMNIVOR_OBJ_DIR='/home/manu/Work-tmp/omnivor/_src/_build/linux-amd64/'
-    export OMNIVOR_BIN_DIR='/home/manu/Work-tmp/omnivor/_src/_bin/linux-amd64/'
-    export OMNIVOR_SRC_DIR='/home/manu/Work-tmp/omnivor/_src/'
+    export OMNIVOR_MKF_DIR='/work/libs/OmniVor/_src/_mkf/'
+    export OMNIVOR_INC_DIR='/work/libs/OmniVor/_src/_includes/'
+    export OMNIVOR_LIB_DIR='/work/libs/OmniVor/_src/_lib/linux-amd64/'
+    export OMNIVOR_OBJ_DIR='/work/libs/OmniVor/_src/_build/linux-amd64/'
+    export OMNIVOR_BIN_DIR='/work/libs/OmniVor/_src/_bin/linux-amd64/'
+    export OMNIVOR_SRC_DIR='/work/libs/OmniVor/_src/'
 
 elif [ $HOSTNAME == 'g-000.risoe.dk' ]
 then

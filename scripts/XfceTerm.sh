@@ -12,26 +12,28 @@
 #    2720x1024      50.0* 
 if [[ $HOSTNAME == 'work' ]]
 then
+#     -T TERM-PhDThesis --working-directory=/work/publications/phdthesis/ --command='run-cmd git status' --tab \
 xfce4-terminal \
-    -T TERM-HOME --working-directory=/home/manu/ --tab\
-    -T TERM-SYSTEM --working-directory=/etc/ --tab\
-    -T TERM-SSH --working-directory=/work/lib/OmniVor_lib/fortran/ --tab \
-    -T TERM-PhDThesis --working-directory=/work/publications/phdthesis/ --command='run-cmd git status' --tab \
-    -T TERM-WORK --working-directory=/work/ --tab\
-    -T TERM-CODE --working-directory=/work/code --tab\
-    -T TERM-OMNIVOR_JOBS --working-directory=/work/jobs/  --tab\
-    -T TERM-OMNIVOR_TESTS --working-directory=/work/lib/OmniVor_lib/fortran/__tests__/ --command='run-cmd git status' --tab\
-    -T TERM-OMNIVOR --working-directory=/work/lib/OmniVor_lib/fortran --command='run-cmd git status'\
+    -T TERM-HOME            --working-directory=/home/manu/ --tab\
+    -T TERM-SYSTEM          --working-directory=/etc/ --tab\
+    -T TERM-SSH             --working-directory=/work/libs/OmniVor/_jobs/ --tab \
+    -T TERM-PROJECT         --working-directory=/work/projects/2015/ --tab \
+    -T TERM-PROJECT         --working-directory=/work/projects/2015/ --tab \
+    -T TERM-OMNIVOR_TESTS   --working-directory=/work/libs/OmniVor/_src/__tests__/ --tab\
+    -T TERM-OMNIVOR_SRC     --working-directory=/work/libs/OmniVor/_src --tab\
+    -T TERM-OMNIVOR         --working-directory=/work/libs/OmniVor/ --command='mr status' \
     --maximize
 fi
 
 if [[ $HOSTNAME == 'olympe' ]]
 then
 xfce4-terminal \
-    -T TERM-HOME --working-directory=/home/manu/ --tab\
-    -T TERM-SYSTEM --working-directory=/etc/ --tab\
-    -T TERM-OMN --working-directory=/home/manu/Work-tmp/omnivor/_src --tab\
-    -T TERM-TESTS --working-directory=/home/manu/Work-tmp/omnivor/_src/__tests__ --tab\
-    -T TERM-SRC --working-directory=/home/manu/Work-tmp/omnivor/_src  
+    -T TERM-HOME    --working-directory=/home/manu/ --tab\
+    -T TERM-SYSTEM  --working-directory=/etc/ --tab\
+    -T TERM-PROJECT --working-directory=/work/projects/2015/ --tab \
+    -T TERM-PROJECT --working-directory=/work/projects/2015/ --tab \
+    -T TERM-OMN     --working-directory=/work/libs/OmniVor/_src --tab\
+    -T TERM-TESTS   --working-directory=/work/libs/OmniVor/_src/__tests__ --tab\
+    -T TERM-SRC     --working-directory=/work/libs/OmniVor/_src  
     --maximize
 fi

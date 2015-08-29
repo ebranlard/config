@@ -82,9 +82,9 @@ set foldmethod=indent  " so that the nont indented stuff still have syntax highl
 
 
 
+" --------------------------------------------------------------------------------
+" --- Aligns 
+" --------------------------------------------------------------------------------
+vmap ,ac :Align! =Ip1P1 // <CR>
 
-" These might be overriden in after/ftplugin
-" Remeber there is \tt for latex latbles and \tsp for spaces
-vmap \af :Align Ip0p1= = ( ) ; // ,<CR>
-vmap \aa :Align Ip0p1= = ; //<CR>
-vmap \ae :Align Ip0p1= = ; //<CR>
+

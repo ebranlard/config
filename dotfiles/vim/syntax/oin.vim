@@ -20,7 +20,10 @@ if exists("b:current_syntax")
 endif
 
 " Keywords
-syn keyword oKeyword WindInputs Environment CommonData Algo Param Coupling Field
+syn keyword oKeyword DeviceInputs SpaceInputs TimeInputs WindInputs Environment Algo Param Coupling Field TopoInputs
+
+" Main data
+syn keyword oIdentifier pDevice pIO pTime pSpace pTopo pWind pProc pAlgo
 
 " Wind
 syn keyword oIdentifier Wind bExternal V0 pCoordinates Turb Shear bDumpProfile
@@ -37,7 +40,7 @@ syn keyword oIdentifier nDim bBuildMatrix bComputeGrad bConvertToPart bDistortPa
 
 syn keyword oIdentifier bExportPlot bExportLoads pExportPlotFormat pExportVelocityFormat nTExportPlot nTExportLoads nExportPlot bExportLoads  nExportLoads bExportPlotLight bExportPlotBodiesOnly bExportConverged 
 
-syn keyword oIdentifier bTIMING bDEBUGMIN bSTOP_ALLOWED prefix sim_folder nExportStates bExportStates bMemoryAnalyser bMemorySaver bTimeEstimator bSILENT_WARN bSILENT_ERROR bSILENT_INFO bConstantUiExternalPerStep state_file bSmartTicToc SmartTicTocVal
+syn keyword oIdentifier bTIMING bDEBUGMIN bSTOP_ALLOWED prefix sim_folder nExportState bExportState nTExportState bMemoryAnalyser bMemorySaver bTimeEstimator bSILENT_WARN bSILENT_ERROR bSILENT_INFO bConstantUiExternalPerStep state_file bSmartTicToc SmartTicTocVal
 
 syn keyword oIdentifier pVortexSplittingScheme bVortexSplitting VortexSplittingParam1 VortexSplittingParam2 pRemoveZeroVorticity kRemoveZeroVorticity kDistortMax
 

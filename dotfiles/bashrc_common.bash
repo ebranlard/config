@@ -41,7 +41,11 @@ alias mygrep='grep --Insri '  #silly you, you made a function f in this file tha
 # GIT
 alias lgr='for d in `find . -name ".git"`; do   echo "processing $d ..."; git --git-dir=$d --work-tree=$d/.. status; done'
 
-# systeme
+# Becasue I type wrong
+alias mkae='make'
+alias maek='make'
+
+# system
 alias reboot='sudo reboot'
 alias vigrub='sudo vim /boot/grub/grub.cfg'
 alias vix='sudo vim /etc/X11/xorg.conf'

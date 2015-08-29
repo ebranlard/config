@@ -159,13 +159,13 @@ Inkscape, which must be on the path for this script to work.
         
         exportcmd = "--export-eps"
         if self.epsfileoutput is None:
-            exportcmd = " --export-pdf "
+            exportcmd = " --export-pdf="
             
         inkscapecmd = "inkscape"
         if platform.system() == 'Windows':
             inkscapecmd = "C:\\Program Files\\Inkscape\\inkscape.exe"
-        sys.stderr.write(inkscapecmd+exportcmd+temppdffile.name+"--file"+self.latexsvgtmp.name+"\n")
-        subprocess.call([inkscapecmd,exportcmd, temppdffile.name, " --file ", self.latexsvgtmp.name])
+        sys.stderr.write(inkscapecmd+exportcmd+temppdffile.name+" --file="+self.latexsvgtmp.name+"\n")
+        subprocess.call([inkscapecmd,exportcmd, temppdffile.name, " --file=", self.latexsvgtmp.name])
         #print "copying file to: " + self.lateximagefile
         shutil.copy(temppdffile.name, self.lateximagefile)
         

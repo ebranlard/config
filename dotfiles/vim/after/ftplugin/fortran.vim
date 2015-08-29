@@ -3,16 +3,6 @@
 set autoindent
 " set indentexpr
 
-""" Aligns
-" These might be overriden in after/ftplugin
-" Remeber there is \tt for latex latbles and \tsp for spaces
-vmap ,af :Align Ip0p1= = ( ) ! ,<CR>
-vmap ,ad :Align Ip0p1= :: !<<CR>     
-vmap ,av :Align Ip0p1= :: !<CR>     
-vmap ,aa :Align Ip0p1= = !<CR>
-vmap ,ae :Align Ip0p0= = !<CR>
-vmap ,ac :Align Ip0p0= !<CR>
-vmap ,au :Align Ip0p0= only:<CR>
 
 """ Misc
 " Don't higlight fortran tabs
@@ -93,3 +83,12 @@ end
 
 " From Stack exchange for gfortran with undefined reference
 set efm=%A%f:%l.%c:,%C,%C\ %.%#,%ZError:\ %m,%ZWarning:\ %m,%f:(%.%#):%m,%f:%l:%m
+
+
+" --------------------------------------------------------------------------------
+" --- Align 
+" --------------------------------------------------------------------------------
+vmap ,ad :Align! =Ip1P1 :: !<<CR>     
+vmap ,av :Align! =Ip1P1 :: !<CR>     
+vmap ,ac :Align! =Ip1P1 !<CR>
+vmap ,au :Align! =Ip1P1 only:<CR>
