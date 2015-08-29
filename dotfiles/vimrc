@@ -762,19 +762,20 @@ set guitablabel=%!GuiTabLabelManu()
 " --------------------------------------------------------------------------------
 " --- Environment variables, local
 " --------------------------------------------------------------------------------
-" let host=$HOSTNAME
-" 
-" if host == 'work'
-"     let $OMNIVOR_MKF_DIR='/work/lib/OmniVor_lib/fortran/_includes/'
-"     let $OMNIVOR_LIB_DIR='/work/lib/OmniVor_lib/fortran/_lib/linux-amd64/'
-"     let $OMNIVOR_SRC_DIR='/work/lib/OmniVor_lib/fortran/'
-"     let $PYTHONPATH='/home/manu/Config/path/PythonPath/'
-" endif
-" if host == 'olympe'
-"     let $OMNIVOR_MKF_DIR='/home/manu/Work-tmp/omnivor/_dev/_includes/'
-"     let $OMNIVOR_LIB_DIR='/home/manu/Work-tmp/omnivor/_dev/_lib/linux-amd64/'
-"     let $OMNIVOR_SRC_DIR='/home/manu/Work-tmp/omnivor/_dev/'
-" endif
+let $PYTHONPATH='/home/manu/Config/path/PythonPath/'
+
+if empty($OMNIVOR_OBJ_DIR)
+    let host=hostname()
+    if host == 'work'
+        let $OMNIVOR_MKF_DIR='/work/lib/OmniVor/_src/_includes/'
+        let $OMNIVOR_OBJ_DIR='/work/lib/Omnivor/_src/_build/linux-amd64/'
+    elseif host == 'olympe'
+        let $OMNIVOR_OBJ_DIR='/home/manu/Work-tmp/omnivor/_src/_build/linux-amd64/'
+        let $OMNIVOR_MKF_DIR='/home/manu/Work-tmp/omnivor/_src/_includes/'
+    else
+        let $OMNIVOR_OBJ_DIR='/home/'
+    endif
+endif
 
 " --------------------------------------------------------------------------------
 " --- Typos - spelling - abbreviations

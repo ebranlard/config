@@ -29,8 +29,9 @@ if [[ $HOSTNAME == 'olympe' ]]
 then
 xfce4-terminal \
     -T TERM-HOME --working-directory=/home/manu/ --tab\
-    -T TERM-HOME --working-directory=/home/manu/ --tab\
     -T TERM-SYSTEM --working-directory=/etc/ --tab\
-    -T TERM-SYSTEM --working-directory=/etc/ --tab\
+    -T TERM-OMN --working-directory=/home/manu/Work-tmp/omnivor/_src --tab\
+    -T TERM-TESTS --working-directory=/home/manu/Work-tmp/omnivor/_src/__tests__ --tab\
+    -T TERM-SRC --working-directory=/home/manu/Work-tmp/omnivor/_src  
     --maximize
 fi

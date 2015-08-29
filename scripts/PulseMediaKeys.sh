@@ -5,90 +5,171 @@
 # Description :
 # Written by : Emmanuel Branlard
 # Created : June 2010 
-# Updated : October 2013
-# Dependencies : a notify daemon like xfce4-notify. For notificaitons that updates, needs libnotify-bin from a izx/askubuntu ppa
+# Updated : (see git)
+# Dependencies : 
 # License : Feel free to modify and adapt it
 # Udage : 
 #     PulseMediaKeys.sh increase
 #     PulseMediaKeys.sh decrease
 #     PulseMediaKeys.sh mute
 #############################################################
-SINK=0 # might be changed
-DELTAVOL=3277 #is 5% of the total volume, you can change this to suit your needs
-# MAXVOL=189875 # this is 115%. Max is 95536
-MAXVOL=89875 # this is 115%. Max is 95536
-MINVOL=14000 # 
-REFVOL=65536 # this is by definition 100%. Used to compute percentage
-REFVOL=89875 # this is by definition 100%. Used to compute percentage
-#### Creation of files/folders if dont exist
-test ! -d ~/.pulse        && mkdir ~/.pulse
-test ! -f ~/.pulse/mute   && echo "false" > ~/.pulse/mute
-test ! -f ~/.pulse/volume && echo "65536" > ~/.pulse/volume
-test ! -f ~/.pulse/nid    && echo "0" > ~/.pulse/nid
+### Main Files
+DIR=~/.config/pulse
+CFG=~/.config/pulse/PulseMediaKeys.conf
+STT=~/.config/pulse/PulseMediaKeys.stat
+LCK=/tmp/PulseMediaKeys.lock
+#### Function to store status to file
+function store_status {
+    echo "CURVOL=$1"  > $STT
+    echo "MUTE=$2"   >> $STT
+}
+function create_default_config {
+    echo "# CONFIG FILE for PulseMediaKeys.sh"                                              >  $CFG
+    echo "# You have to experiment with the different values below."                        >> $CFG
+    echo "# To experiment on you system, try the command:"                                  >> $CFG
+    echo "# pactl set-sink-volume SINK VOL"                                                 >> $CFG
+    echo "# Examples of values taken by SINK and VOL are given below."                      >> $CFG
+    echo "# Look at what happens in pavucontrol."                                           >> $CFG
+    echo "# "                                                                               >> $CFG
+    echo "# SINK: this number might depend on the number of audio cards."                   >> $CFG
+    echo "#     If the script doesnt work, try higher integers"                             >> $CFG
+    echo "SINK=0"                                                                           >> $CFG
+    echo "# DELTAVOL: volume increment"                                                     >> $CFG
+    echo "DELTAVOL=3277"                                                                    >> $CFG
+    echo "# MAXVOL: maximum volume you want to allow."                                      >> $CFG
+    echo "MAXVOL=89875"                                                                     >> $CFG
+    echo "# MINVOL: minimum volume allowed VERY IMPORTANT !!!"                              >> $CFG
+    echo "#       Experiment with this value. A value too low might result in pulseaudio"   >> $CFG
+    echo "#       muting your playback stream completely."                                  >> $CFG
+    echo "MINVOL=14000"                                                                     >> $CFG
+    echo "# REFVOL: if anything goes wrong, the script we'll go back to this volume value." >> $CFG
+    echo "REFVOL=65536"                                                                     >> $CFG
+}
 
+
+### Function to notify
+# function notify_mute {
+#         icon="audio-volume-muted"
+#         notify-send -t 1000 -i $icon "Mute: off"
+# }
+### Creating a lock file to ensure only one instance of this script is run at once
+echo "lock"
+lockfile -r 0 $LCK || exit 1
+
+#### Creation of files/folders if they dont exist
+test ! -d $DIR && mkdir $DIR
+if [ ! -f $CFG ]
+then
+    echo "Creating config file with sink 0"
+    create_default_config
+fi
+if [ ! -f $STT ]
+then
+    echo "Creating first status file"
+    store_status $REFVOL "false"
+fi
 #### READING FILES 
-CURVOL=`cat ~/.pulse/volume|awk 'NR<2 {print $1}'`     #Reads in the current volume
-MUTE=`cat ~/.pulse/mute`         #Reads mute state
-NID_PREVIOUS=`cat ~/.pulse/nid`  #Reads previous nid
+echo "sourcing"
+source $CFG
+source $STT
 
-if [[ $1 == "mute" ]]
+# echo "SINK    $SINK"
+# echo "DELTA   $DELTAVOL"
+# echo "CURVOL  $CURVOL"
+# echo "MAXVOL  $MAXVOL"
+# echo "MINVOL  $MINVOL"
+# echo "REFVOL  $REFVOL"
+# echo "MUTE    $MUTE"
+
+if [[ $# == 1 ]]
 then
-    if [[ $MUTE == "false" ]]
+    if [[ $1 == "mute" ]]
     then
-        # We mute and exit
-        pactl set-sink-mute $SINK 1
-        echo "true" > ~/.pulse/mute
-        icon="audio-volume-muted"
-        notify-send -t 1000 -i $icon "Mute: off"
-        exit
-     else
-        # We unmute
-        pactl set-sink-mute $SINK 0
-        echo "false" > ~/.pulse/mute    
+        if [[ $MUTE == "false" ]]
+        then
+            # We mute and exit
+            pactl set-sink-mute $SINK 1
+            MUTE="true"
+            #notify_mute
+         elif [[ $MUTE == "true" ]]
+         then
+            # We unmute
+            pactl set-sink-mute $SINK 0
+            MUTE="false"
+        else
+            # safety if garbage input in file
+            MUTE="false"
+        fi
+    else
+        echo "Volume old:" $CURVOL
+        # Safety Check: Test that CURVOL is a proper number
+        re='^[0-9]+$'
+        if ! [[ $CURVOL =~ $re ]] 
+        then
+           CURVOL=$REFVOL
+       else
+           if [[ $1 == "increase" ]]
+           then
+               CURVOL=$(($CURVOL + $DELTAVOL)) 
+               if [[ $CURVOL -ge $MAXVOL ]]
+               then
+                   CURVOL=$MAXVOL        
+               fi
+           elif [[ $1 == "decrease" ]]
+           then
+               CURVOL=$(($CURVOL - $DELTAVOL))
+               if [[ $CURVOL -le $MINVOL ]]
+               then
+                   CURVOL=$MINVOL        
+               fi
+           else
+               echo "Wrong argument"
+           fi
+        fi
+        ## SETTING VOLUME
+        echo "Volume new:" $CURVOL
+        echo "pactl" $SINK " vol" $CURVOl
+        #pactl set-sink-volume $SINK $CURVOL
+        pactl set-sink-volume 0 $CURVOL
+        pactl set-sink-volume 1 $CURVOL
+    #     pactl set-sink-volume 1 $CURVOL
     fi
+    ### Storing status to file
+        echo "store"
+    store_status $CURVOL $MUTE
 else
-    if [[ $1 == "increase" ]]
-    then
-        echo $CURVOL
-        CURVOL=$(($CURVOL + $DELTAVOL)) 
-        if [[ $CURVOL -ge $MAXVOL ]]
-        then
-            CURVOL=$MAXVOL        
-        fi
-    elif [[ $1 == "decrease" ]]
-    then
-        CURVOL=$(($CURVOL - $DELTAVOL))
-        if [[ $CURVOL -le $MINVOL ]]
-        then
-            CURVOL=$MINVOL        
-        fi
-    fi
-    ## SETTING VOLUME
-    echo $CURVOL
-    pactl set-sink-volume $SINK $CURVOL
-    echo $CURVOL > ~/.pulse/volume # Write the new volume to disk to be read the next time the script is run.
-#     pactl set-sink-volume 1 $CURVOL
+    echo "Wrong number of argument"
 fi
 
-## CHOSING ICON
-icon="audio-volume-low"
-if [[ $CURVOL -ge 50000 ]] 
-then
-    icon="audio-volume-high"
-elif [[ $CURVOL -ge 30000 ]]
-then
-    icon="audio-volume-medium"
-fi
-## PERCENTAGE
-a=00
-p=`expr $CURVOL$a / $REFVOL`
-## NOTIFICATION
-# Small safety if nid is empty
-if [[ $NID_PREVIOUS == "" ]]
-then
-    NID_PREVIOUS=1
-fi
-# notify-send -t 500 -i $icon "$p%"
-NID=$(notify-send -r $NID_PREVIOUS -p -t 500 -i $icon -h int:value:$p -h string:synchronous:volume "$p%")
-echo "$NID" > ~/.pulse/nid    
-sleep 0.1
+# --------------------------------------------------------------------------------
+# --- NOTIFICATION 
+# --------------------------------------------------------------------------------
+# ## CHOSING ICON
+# icon="audio-volume-low"
+# if [[ $CURVOL -ge 50000 ]] 
+# then
+#     icon="audio-volume-high"
+# elif [[ $CURVOL -ge 30000 ]]
+# then
+#     icon="audio-volume-medium"
+# fi
+# ## PERCENTAGE
+# a=00
+# p=`expr $CURVOL$a / $REFVOL`
+# ## NOTIFICATION
+# # Small safety if nid is empty
+# if [[ $NID_PREVIOUS == "" ]]
+# then
+#     NID_PREVIOUS=1
+# fi
+# # notify-send -t 500 -i $icon "$p%"
+# NID=$(notify-send -r $NID_PREVIOUS -p -t 500 -i $icon -h int:value:$p -h string:synchronous:volume "$p%")
+# echo "$NID" > ~/.pulse/nid    
+# sleep 0.1
+
+#### Removing lock
+echo "rm"
+rm -f $LCK
+
+
+
