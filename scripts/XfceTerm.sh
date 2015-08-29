@@ -34,6 +34,6 @@ xfce4-terminal \
     -T TERM-PROJECT --working-directory=/work/projects/2015/ --tab \
     -T TERM-OMN     --working-directory=/work/libs/OmniVor/_src --tab\
     -T TERM-TESTS   --working-directory=/work/libs/OmniVor/_src/__tests__ --tab\
-    -T TERM-SRC     --working-directory=/work/libs/OmniVor/_src  
+    -T TERM-SRC     --working-directory=/work/libs/OmniVor/_src  \
     --maximize
 fi
