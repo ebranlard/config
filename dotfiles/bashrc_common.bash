@@ -73,7 +73,6 @@ alias msearch='tracker-search -m '
 alias vsearch='tracker-search -v '
 alias isearch='tracker-search -i '
 
-
 alias lhm='xmodmap -e "pointer = 3 2 1 4 5 7 6 8 9"'
 alias rhm='xmodmap -e "pointer = 1 2 3 4 5 6 7 8 9"'
 
