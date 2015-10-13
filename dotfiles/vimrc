@@ -430,6 +430,9 @@ noremap zk zkzz
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ VIM-LATEX
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" DESACTIVATING IMAP
+let g:Imap_FreezeImap=1 
+
 " IMPORTANT: grep options
 " search in a singe file. This will confuse Latex-Suite. Set your grep
 " program to always generate a file-name.

@@ -147,29 +147,36 @@ Inkscape, which must be on the path for this script to work.
         # and save it in a temp file
         self.notextsvg.writexml(self.latexsvgtmp)
         self.latexsvgtmp.close()	
-
-        # now call inkscape with this file to produce a
-        # pdf version.
-        # TODO: this is a hard dependency on inkscape which might 
-        # be nice to replace with cairo at some later
-        # date...
-
-        temppdffile = tempfile.NamedTemporaryFile(delete=False)  
-        temppdffile.close()
+# 
+#         # now call inkscape with this file to produce a
+#         # pdf version.
+#         # TODO: this is a hard dependency on inkscape which might 
+#         # be nice to replace with cairo at some later
+#         # date...
+# 
+#         temppdffile = tempfile.NamedTemporaryFile(delete=False)  
+#         temppdffile.close()
         
         exportcmd = "--export-eps"
         if self.epsfileoutput is None:
-            exportcmd = " --export-pdf="
+            exportcmd = " --export-pdf "
             
         inkscapecmd = "inkscape"
         if platform.system() == 'Windows':
             inkscapecmd = "C:\\Program Files\\Inkscape\\inkscape.exe"
-        sys.stderr.write(inkscapecmd+exportcmd+temppdffile.name+" --file="+self.latexsvgtmp.name+"\n")
-        subprocess.call([inkscapecmd,exportcmd, temppdffile.name, " --file=", self.latexsvgtmp.name])
-        #print "copying file to: " + self.lateximagefile
-        shutil.copy(temppdffile.name, self.lateximagefile)
-        
-        os.unlink(temppdffile.name)
+
+
+#         print (" svg filename = %s" % self.svgfilename)
+#         print (" latex image file = " + self.lateximagefile)
+#         print (" latex input file = " + self.latexfilename)
+
+        sys.stderr.write(inkscapecmd+exportcmd+temppdffile.name+" --file "+self.latexsvgtmp.name+"\n")
+        subprocess.call([inkscapecmd,exportcmd, temppdffile.name, " --file ", self.latexsvgtmp.name])
+
+#         #print "copying file to: " + self.lateximagefile
+#         shutil.copy(temppdffile.name, self.lateximagefile)
+#         
+#         os.unlink(temppdffile.name)
         
 
 #####################################################################
