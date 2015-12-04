@@ -1,0 +1,9 @@
+#!/bin/sh
+xfce4-terminal -T T4 --geometry 80x26+800+450 &
+xfce4-terminal -T T1 --geometry 80x26+84+0 &
+xfce4-terminal -T T3 --geometry 80x26+800+0 &
+xfce4-terminal -T T2 --geometry 80x26+84+450 &
+
+
+
+

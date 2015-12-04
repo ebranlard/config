@@ -1,0 +1,33 @@
+#!/bin/bash
+#############################################################
+# smartmake : Run Makefile in current directory or upper directory
+#############################################################
+# 
+# written by Emmanuel Branlard
+# 
+#############################################################
+
+echo ""
+echo "-----------------------------------"
+echo "This is smartmake"
+echo "-----------------------------------"
+echo ""
+
+# read reply
+if [[ -f Makefile ]] 
+then
+    echo "There is a makefile"
+    make $1
+else
+#      echo "Going one dir up"
+#     dir=`pwd`
+#     dir=`basename "$dir"`
+#     make -C ../ $1 2>&1 |sed 's/'$dir'\//..\/'$dir'\//g'
+#     make -C ../ $1 2>&1 |sed -r 's/^.*:[0-9\.]*:/..\/&/g' # this was gfotran
+# make -C ../ $1 2>&1 |sed -r 's/^.*[0-9\.:()]*:/..\/&/g' # this should woek for both
+make -C ../ $1 2>&1 |sed -r 's/^[0-9a-zA-Z\/\_\-\.]*[:()0-9\.]+:/..\/&/g'
+# make -C ../ $1 2>&1 
+# make -C ../ $1 2>&1 |sed -r 's/^.*[0-9\.:()]*:/..\/&/g'
+fi
+# make -C ../ 2>&1 |sed -r 's/^[0-9a-Z\/\_-\.]*:[0-9]*:/AA..\/&AA/g'
+# make -C ../ 2>&1 |sed -r 's/^.*:[0-9]*:/..\/&/g'

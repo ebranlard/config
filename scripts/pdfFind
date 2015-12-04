@@ -1,0 +1,17 @@
+#! /bin/bash
+echo "Looking for "$1
+
+SAVEIFS=$IFS
+IFS=$(echo -en "\n\b")
+
+
+for i in `find -name "*.pdf" -printf '%h/%f\n'  2> /dev/null`
+do
+	echo "----------------------------"
+	echo "$i";
+	echo "----------------------------" 
+	pdftotext $i - |grep --color=always $1
+#	 strings "$i"  |grep $1
+done; 
+IFS=$SAVEIFS
+

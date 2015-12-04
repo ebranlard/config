@@ -1,0 +1,2 @@
+#!/bin/bash
+WINEDLLOVERRIDES="riched20=n" wine "/home/manu/.wine/drive_c/Program Files/Microsoft Office/Office12/POWERPNT.EXE"

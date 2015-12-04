@@ -1,0 +1,13 @@
+#!/bin/bash
+G=`git branch 2>/dev/null | wc -l`
+
+if [ $G -eq 0 ]; then
+    echo ""
+else
+    G=`git branch 2>&1 | grep '*'| head -1 | sed -e 's/* //'`
+    if [[ $G == "master" ]]; then
+        echo ""
+    else
+        echo "($G)"
+    fi
+fi

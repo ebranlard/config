@@ -1,0 +1,23 @@
+#! /bin/bash
+rm -f *.aux
+rm -f *.toc
+rm -f *.log
+rm -f *.bbl
+rm -f *.out
+rm -f *.cb
+rm -f *.blg
+rm -f *.lot
+rm -f *.lof
+rm -f *.tps
+rm -f *.maf
+rm -f *.ilg
+rm -f *.glo
+rm -f *.mtc*
+rm -f *.ptc*
+rm -f *.bmt
+rm -f *.idx
+rm -f *.ind
+rm -f *.snm
+rm -f *.nav
+rm -f *.cb2
+rm -f *synctex.gz

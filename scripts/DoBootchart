@@ -1,0 +1,13 @@
+#!/bin/sh
+
+
+#initialization
+HOME=/home/manu
+folder=/home/manu/Config/scripts/Bootchart
+mydate=$(date +%Y-%m-%d-%H%M)
+
+cd $HOME
+bootchart
+
+cp bootchart.png $folder/bootchart$mydate.png
+

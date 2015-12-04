@@ -1,0 +1,48 @@
+#! /bin/bash
+
+if [ $# -eq 0 ]
+then 
+	Files=*.png
+        Files="$Files"
+else
+	l=$@
+        Buff=""
+        First=''
+        for i in $l
+        do
+            if [ ! `echo $i |grep -E "[.][a-zA-Z]{3,4}$"` = "" ] 
+            then
+                    File="$Buff $i"
+                    Buff=""
+                    First=""
+                    File2=`echo $File|tr ' ' '_'`
+                    #
+                    if [ $File != $File2 ]
+                    then
+                            mv "$File" $File2
+                    fi
+                    #
+                    Files="$Files $File2"
+           else
+                if [ -z ${First} ] 
+                then
+                        Buff="$i"
+                        First="no"
+                else
+                        Buff="$Buff $i"
+                fi
+           fi
+           
+        done
+#        echo $Files
+fi
+# This command has a bug now...
+# FileOut=`echo $Files|grep -Eo "^[a-Z0-9\_ -]*[.]"|tr '_' ' '`"pdf"
+FileOut=OUTPUTFILE.pdf
+
+echo $FileOut
+
+#convert $Files "$FileOut"
+convert -page A4 -units PixelsPerInch -normalize -density 100 *.png "$FileOut"
+
+

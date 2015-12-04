@@ -1,0 +1,18 @@
+#!/bin/bash 
+# set -vx
+ln=`grep --colour=none -n -T begin{document} $1.tex|awk -F: '{print $1}'|sed 's/\ //g'|tr -d ' '|tr -d -c '[0-9]'`
+# echo $ln
+# awk "NR<$ln"' {print}' $1.tex 
+awk -v line="$ln" 'NR<line {print}' $1.tex >tmp_tikz.tex
+echo "\\usepackage{pgfplots}" >> tmp_tikz.tex
+echo "\\usepackage[xetex,active,displaymath,tightpage]{preview}" >> tmp_tikz.tex
+echo "\\PreviewEnvironment[]{tikzpicture}" >> tmp_tikz.tex
+echo "\\PreviewEnvironment[]{pgfpicture}" >> tmp_tikz.tex
+echo "\\begin{document}" >> tmp_tikz.tex
+echo "\\input{$2}" >> tmp_tikz.tex
+echo "\\end{document}" >> tmp_tikz.tex
+# 
+# 
+# 
+
+

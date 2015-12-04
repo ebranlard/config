@@ -1,0 +1,18 @@
+#!/bin/bash
+# Sould be run as user
+
+if [[ `cat /etc/hostname` == "olympe" ]]
+then
+    #variables
+    OPTS="-av"
+    DEST=/media/DataWin
+    SRC=/media/Storage
+    #with delete propagation
+    rsync $OPTS --delete $SRC/Admin/ $DEST/Admin/
+    rsync $OPTS --delete $SRC/Geekeries/ $DEST/Geekeries/
+    rsync $OPTS --delete $SRC/Projects/ $DEST/Projects/
+    rsync $OPTS --delete $SRC/Work/ $DEST/Work/
+    rsync $OPTS --delete $SRC/Config-Work/ "$DEST/Config-Work/"
+else 
+    echo "Wrong environment"
+fi

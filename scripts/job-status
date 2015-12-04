@@ -1,0 +1,94 @@
+#!/usr/bin/env python
+# jo: display compact infos about user's PBS jobs, including full job-name
+#
+# E. Branlard - March 2014
+# 
+# usage: qjob [username]
+
+import sys
+import os
+
+
+
+def job_status(ijob=None):
+    user='ebra'
+
+    # --------------------------------------------------------------------------------
+    # --- Getting job PBS id
+    # --------------------------------------------------------------------------------
+    cmd="qstat -u %s|awk 'NR>5'|awk '{print $1}'|awk -F. '{print $1}'"%user
+    jobpbsid = os.popen(cmd).read().split('\n')
+
+    # number of jobs
+    n_jobs=len(jobpbsid)-1
+
+    # --------------------------------------------------------------------------------
+    # --- Looping and Getting job specific info  
+    # --------------------------------------------------------------------------------
+    if ijob is None:
+        Loop=jobpbsid[0:-1]
+    else:
+        Loop=[jobpbsid[i] for i in ijob]
+
+    n_loop=len(Loop);
+    if n_loop==1:
+        n_lines=40
+    elif n_loop==2:
+        n_lines=28
+    else:
+        n_lines=25
+    
+
+    for id in Loop:
+        cmd="qstat -n %s |awk -F- 'NR > 6 {print $0}'|xargs"%id
+        cpu_list = os.popen(cmd).read().replace(' ','').replace('\n','').split('+')
+        if cpu_list[0]=='--':
+            nodes=0
+            nodes_str='--'
+            n_cpus=0
+            n_nodes=0
+            main_node='--'
+        else:
+            nodes=list(set([int(x[2:5]) for x in cpu_list]))
+            nodes_str=list(set([x[2:5] for x in cpu_list]))
+            n_cpus=len(cpu_list)
+            n_nodes=len(nodes)
+            #main_node=cpu_list[0][0:2]+"%03d"%nodes[0]
+            # (nodes above change order due to set)
+            main_node=cpu_list[0][0:5]
+        job_name=''
+        wall_used=''
+        wall_rqst=''
+        # Parsing the qstat info
+        cmd="qstat -f %s"%id
+        ALLINFO = os.popen(cmd).read().split('\n')
+        for l in ALLINFO:
+            splt=l.split('=')
+            if(len(splt)>1):
+                 option =splt[0].strip()
+                 value  =("=".join(splt[1:])).strip()
+            else:
+                 option=''
+            if (option=='Resource_List.walltime'):
+                 wall_rqst="h".join(value.split(':')[0:2])
+            elif (option=='resources_used.walltime'):
+                 wall_used="h".join(value.split(':')[0:2])
+            elif (option=='Job_Name'):
+                 job_name='%-40s'%value
+        s=id+' '+main_node+'  '+job_name+'  '+wall_used+'/'+wall_rqst+'\t'+str(n_nodes)+'('+str(n_cpus)+')\t'+'('+' '.join(nodes_str)+')'
+        print("------------------------------------------------------------------------------------")
+        print("NODE: %s JOB: %s - PID: %s - UP:%s"%(main_node,job_name,id,wall_used))
+        print("------------------------------------------------------------------------------------")
+        if n_nodes>0:
+            cmd="ssh %s@%s 'tail -n %d /scratch/ebra/*/*/*.log'"%(user,main_node,n_lines)
+            print(os.popen(cmd).read())
+
+    print("------------------------------------------------------------------------------------")
+
+if __name__ == "__main__":
+    if(len(sys.argv)>1):
+        job_status(list(map(int,sys.argv[1:])))
+    else:
+        job_status()
+
+    pass

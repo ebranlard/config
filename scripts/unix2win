@@ -1,0 +1,23 @@
+#!/bin/bash
+#############################################################
+# unix2win:
+#############################################################
+# Description : mv input files from unix format to windows compatible format
+# Written by : Emmanuel Branlard
+# Date : May 2011
+# Dependencies : 
+# License : Feel free to modify and adapt it
+# Example : 
+#       find ./* -type f -execdir unix2win {} \;
+#############################################################
+#############################################################
+for file ; 
+do 
+    newfile=`echo $file | sed -e 's/[^a-Z_0-9\. /-]//g' ;`
+    if [[ "$file" != "$newfile" ]]
+    then
+        echo $file ;
+        echo $newfile ;  
+        mv "$file" "$newfile" ;
+    fi
+done 

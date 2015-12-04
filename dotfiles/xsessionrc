@@ -1,0 +1,29 @@
+echo "--------------------------------------------------------------------"
+echo "----------------------- BEGIN XSESSIONRC ---------------------------"
+echo "--------------------------------------------------------------------"
+#############################
+# This file is not used by nodm, see .xsession
+# This file is not used by xdm (I think)
+# This file is used by lightdm
+#############################
+# PATH="$PATH:$HOME/Config/scripts"
+. $HOME/.profile 
+#if [ -x /usr/bin/numlockx ]
+#then
+#   /usr/bin/numlockx on
+#fi
+#/usr/bin/keytouchd&
+# /home/share/Config/_MyScripts/cnx-vjk.sh
+#/etc/init.d/init-cnx-vjk.sh&
+#/usr/bin/xsetnumlock&
+
+#xterm config
+#xrdb ~/.Xdefaults
+#if which dbus-launch > /dev/null && test -z "$DBUS_SESSION_BUS_ADDRESS" ; then
+#    eval "$(dbus-launch --sh-syntax --exit-with-session)"
+#fi
+
+#exec ck-launch-session startxfce4
+#exec startxfce4
+
+#setxkbmap -option compose:ralt

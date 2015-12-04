@@ -1,0 +1,67 @@
+#!/bin/bash
+echo "Usage: pdf2ocr.sh FILE.pdf lang"
+if [ -e tmp ] ;
+then
+	echo "Folder tmp/ exists - Continue anyway ?" ;
+	echo "	YES : Press Enter  ";
+	echo "	NO :  Press Ctrl+C ";
+	read reply
+else
+	mkdir tmp
+fi
+
+echo " "
+echo "- Entering folder tmp"
+cd tmp
+ERRORS=0
+
+echo " "
+echo "- Bursting with pdftk..."
+pdftk "../$1" burst dont_ask
+
+echo " "
+for f in pg_*.pdf
+do
+	echo "- Pre-processing $f ...";
+	convert -quiet -monochrome -normalize -density 300 "$f" "$f.png";
+done
+
+echo " "
+for f in pg_*.png
+do
+	echo "- Processing $f ..."
+	convert "$f" "$f.bmp"
+	echo "Merging BMP and hOCR into PDF file..."
+	cuneiform -l $2 -f hocr -o "$f.html" "$f.bmp"
+	convert -blur 0.4 "$f" "$f.bmp"
+	OUT=$?
+	hocr2pdf -i "$f" -s -o "$f.pdf" < "$f.html"
+	OUT=`expr $? + $OUT`
+	if [ $OUT -gt 127 ] ;
+	 then
+		 echo "$f" >> ../errors.log ;
+		 ERRORS=`expr $ERRORS + 1` ;
+		 cp "${f%%.png}" "$f.pdf"
+	 fi	
+	rm -f "$f.bmp"
+done
+
+
+echo " "
+echo "- Binding with pdftk..."
+pdftk pg_*.png.pdf output "../$1-OCR.pdf"
+
+
+echo " "
+if [ $ERRORS -gt 0 ] ;
+then
+	echo "- Number of errors $ERRORS"
+	cat ../errors.log
+fi
+echo "Done, should I delete all the temporary files?"
+
+echo "	YES : Press Enter  ";
+echo "	NO :  Press Ctrl+C ";
+read reply
+
+rm -r pg_*

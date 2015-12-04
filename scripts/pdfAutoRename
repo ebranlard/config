@@ -1,0 +1,125 @@
+#! /bin/sh
+for i in *.pdf ; do
+	echo ""
+	echo "-------------------------------------------------------------------------";
+	filebase=${i%.*};
+	
+	INFO=`pdfinfo "$"i 2>/dev/null`;
+ 	FIRSTPAGE=`pdftotext -f 1 -l 1 "$i" -|head -c 1000|tr -d '[*]'`;
+
+	Title=`echo $INFO| awk -F ":" '/Title/ {print $2}'`
+	Author=`echo $INFO| awk -F ":" '/Author/ {print $2}'`
+	Subject=`echo $INFO| awk -F ":" '/Subject/ {print $2}'`
+	Date=`echo $FIRSTPAGE|grep -E -o --color=none "(18|19|20)[0-9]{2}"|xargs|cut -c 1-4`
+
+	### Display information
+	echo File is : ${i%.*};
+	echo Title: $Title
+	echo Author: $Author
+	echo Subject: $Subject
+	echo Date: $Date
+	
+	### Predifined scheme
+	title=" - $Date - "`pdftotext -f 1 -l 1 "$i" - | tr -d '[*]'| awk '!/[0-9.]/'|awk '/. / '|tr '\n' ' '|head -c 100`
+	titleRis1=" - $Date - "`pdftotext -f 1 -l 1 "$i" - |tr -d '[*]'|awk '!/Ris/'|awk '/. /'|awk '!/[,]/' |tr '\n' ' '|head -c 100`
+	titleRis2=" - $Date - "`pdftotext -f 1 -l 1 "$i" - |tr -d '[*]'| awk '!/Ris/' |awk '/[A-Za-z0-9.]/'| awk '/. /'|awk '!/[,]/' |tr '\n' ' '|head -c 100`
+	titlesandia=" - $Date - "`pdftotext -f 1 -l 1 "$i" - |tr -d '[*]'| awk '!/[0-9.]/'|awk '!/SANDIA REPORT/' |awk '!/Unlimited Release/' |awk '/. / '|tr -d '\n' |head -c 100`
+	titlebegin=" - $Date - "`echo $FIRSTPAGE|cut -c 100`	
+	titleupper=" - $Date - "`echo $FIRSTPAGE|grep -E -o --color=none "[A-Z]{2}[A-Z]*" |xargs |cut -c 1-100`
+	titleECN=`pdftotext -f 1 -l 1 "$i" - | awk '!/[0-9.]/'|awk '/. / '|tr '\n' ' '|head -c 64|tr ' ' '_'`
+
+	### Making a choice
+	nchosen=1;
+	if test "`echo $FIRSTPAGE|cut -c -11`" = "WIND ENERGY" 
+		then 
+		echo "Wind Energy Publication"
+		Date=`pdftotext -f 1 -l 1 "$i" - |awk -F "Published" 'NR < 2 {print $2}'|grep -E -o --color=none "(18|19|20)[0-9]{2}"`
+		Title=`pdftotext -f 1 -l 1 "$i" -|awk 'NR==5 {print $0}'`
+		Author=`pdftotext -f 1 -l 1 "$i" -|awk 'NR==6 {print $0}'|tr -d '[:punct:]'|cut -c 1-30`
+		titlechosen="$Author - $Date - $Title"
+		nchosen=5
+	elif test "`echo $FIRSTPAGE|cut -c -11`" = "ECN" 
+		then 
+                titlechosen=titleECN
+                nchosen=8
+	elif [ -n "`echo $Subject|grep "Journal"`" ]
+                then
+                echo "JOURNAL OF FLUID MEACHANICS"
+                Year=`echo $INFO| awk -F ":| " '/CreationDate/ {print $NF}'`
+                titlechosen=$Author" - "$Year" - "$Title
+                nchosen=5b
+	elif [ -n "`echo $FIRSTPAGE|grep "Ris"`" ]  
+		then
+		echo "RISO INSIDE"
+		if [ `expr length "$titleRis1"` -gt 12 ]
+		then
+			titlechosen=$titleRis1
+			nchosen=2;
+		else
+			titlechosen=$title	
+			nchosen=1;
+		fi
+	elif [ -n "`echo $FIRSTPAGE|grep "SANDIA"`" ]  
+		then
+		echo "SANDIA INSIDE"
+		titlechosen=$titlesandia
+		nchosen=4
+	elif [ -n "`echo $Subject|grep "Journal"`" ]  
+		then
+		echo "JOURNAL OF FLUID MEACHANICS"
+		Year=`echo $INFO| awk -F ":| " '/CreationDate/ {print $NF}'`
+		titlechosen=$Author" - "$Year" - "$Title
+		nchosen=5b
+	elif [ -n "$Title" ]	
+		then
+		titlechosen=$Title;
+		nchosen=5;
+	else
+		titlechosen=$title;
+		nchosen=1;
+	fi
+	if [ `expr length "$title"` -lt 7 ]
+	then
+		nchosen=0;
+		titlechosen="$filebase"
+	fi
+
+	titlepdfinfo=$Author" - $Date - "$Title
+	
+### User interact
+	echo "- Choices :"
+	echo 1 - $title
+	echo 2 - $titleRis1
+	echo 3 - $titleRis2
+	echo 4 - $titlesandia
+	echo 5 - $titlepdfinfo
+	echo 6 - $titlebegin
+	echo 7 - $titleupper 
+        echo 8 - $titleECN
+	echo ""
+	echo "$nchosen)->"$titlechosen
+	echo "" 
+	echo "-Type enter for default, number for choice, 0 for nothing"	
+	read choice
+	if [ -n "$choice" ]
+		then 
+		echo "Using choice $choice"
+		case $choice in
+			0) dest="$filebase";;
+			1) dest="$title" ;;
+			2) dest="$titleRis1" ;;
+			3) dest="$titleRis2"	;;
+			4) dest="$titlesandia" ;;
+			5) dest="$titlepdfinfo" ;;
+	   		6) dest="$titlebegin";;
+	   		7) dest="$titleupper"	;;
+                        8) dest="$titleECN" ;;
+		esac
+	else
+		echo "Using default:"
+		dest=$titlechosen
+	fi
+#	echo "mv $i $dest"
+	mv "$i" "$dest.pdf"
+done
+

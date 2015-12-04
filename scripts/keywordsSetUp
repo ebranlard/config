@@ -1,0 +1,15 @@
+#! /bin/bash
+SAVEIFS=$IFS
+IFS=$(echo -en "\n\b")
+
+echo "Converting pdfs "
+for i in `find -name "*.php" -printf '%h/%f\n'  2> /dev/null`
+do
+	echo "----------------------------"
+	echo "Keywords $i";
+	echo "----------------------------"
+	cp $i "$i.tmp"
+	cat "$i.tmp" | awk '$0 !~ NAME="keywords" {print $0}; $0 ~ NAME="keywords" {print "<META NAME=\"keywords\" CONTENT=\"KEYWORDSSHOULDGOHERE\">"}' >$i
+	rm "$i.tmp"
+done; 
+IFS=$SAVEIFS

@@ -1,0 +1,8 @@
+#! /usr/bin/expect -f
+set force_conservative 1;
+
+set timeout 2
+spawn ssh -T -l LOGIN HOST
+expect "password: $"
+send "MOTDEPASSE\n"
+interact

@@ -1,0 +1,38 @@
+#!/bin/bash
+#############################################################
+# Default script:
+#############################################################
+# Description :
+# Written by : Emmanuel Branlard
+# Date : Oct 2009
+# Dependencies : 
+# License : Feel free to modify and adapt it
+# Note : To separate 'file.pdf' into single page files :
+#     pdftk file.pdf burst
+#############################################################
+echo "Script name is		[$0]"
+echo "This Process ID is		[$$]"
+echo "This Parameter Count is	[$#]"
+echo "All Parameters		[$@]"
+echo "The FLAGS are			[$-]"
+#############################################################
+#sh syntax
+# if [ $# -eq 0 ]; then echo "No arguments"; fi
+# Expression comparison : !EX1 -a Ex2, Ex1 -o Ex2
+# String comp : S1 = S2, S1!=S2
+# Int comp :    I1 -ne I2
+#bash syntax
+#if [ $# == 0 ]; then echo "No arguments"; fi
+# for f in *
+# do
+  # echo "$f"
+# done
+
+# first step go to PA
+rename s/books[a-zA-Z0-9\-\?\=\&_]*AA/ZAA/g *
+rename s/books[a-zA-Z0-9\-\?\=\&_]*PA/ZPA/g *
+rename s/books[a-zA-Z0-9\-\?\=\&_]*PR/ZAB/g *
+
+#second step remove what's after the number and add extension
+ rename s/\&[a-zA-Z0-9\&\-_\=\?]*$/.png/g *
+

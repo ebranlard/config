@@ -1,0 +1,128 @@
+#!/bin/sh
+#######################################################
+#echo "Script name is		[$0]"
+#echo "This Process ID is		[$$]"
+#echo "This Parameter Count is	[$#]"
+#echo "All Parameters		[$@]"
+#echo "The FLAGS are			[$-]"
+#######################################################
+
+export fordir="/home/ebranlar/SpaceCharge/fortran"
+export bunchdir="/bunches"
+export outdir="/paramcomp"
+export casedir="/cases"
+export tempBuffer="tempBuffer.in"
+
+
+#STORING DEFAULT ARGUMENTS
+export algo=$1
+export case=$2
+export distr=$3
+echo "Algorithm : "$algo 
+echo "Case : ":$case
+echo "Distribution : ":$distr
+shift;shift;shift;
+casefile=$case".in"
+
+
+#CREATING CASE FILE WITH GOOD DISTRIBUTION AND STORING IT IN OUTDIR
+awk -f changeParam $casedir/$casefile Distribution=\'$bunchdir/$distr".ini"\' > $casefile
+params="simul"
+while [ "$1" != "" ]
+do
+  temp=$casefile"-tmp";
+  cp $casefile $temp;
+  case $1 
+  in
+    2D) 
+	echo "2D";
+	params=$params"-2D";
+	awk -f changeParam $temp LSPCH=.T > $casefile ;cp $casefile $temp;
+	awk -f changeParam $temp LSPCH3D=.F > $casefile;;
+    3D)	echo "3D";
+	params=$params"-3D";
+ 	awk -f changeParam $temp LSPCH=.T >$casefile;cp $casefile $temp;
+	awk -f changeParam $temp LSPCH3D=.T >$casefile;;
+    0D) echo "Desactivating space charge";
+	params=$params"-NOSPCH"
+	awk -f changeParam $temp LSPCH=.F > $casefile; cp $casefile $temp;
+	awk -f changeParam $temp LSPCH3D=.F > $casefile;;
+    xsgrid) echo "XS grid";
+	params=$params"-xsgrid"
+	awk -f changeParam $temp Nxf=8 > $casefile;	cp $casefile $temp;
+	awk -f changeParam $temp Nyf=8 > $casefile;	cp $casefile $temp;
+	awk -f changeParam $temp Nzf=8 > $casefile;	cp $casefile $temp;
+	awk -f changeParam $temp Nrad=4 > $casefile; cp $casefile $temp;
+	awk -f changeParam $temp Nlong_in=8 > $casefile;;
+    sgrid) echo "S grid";
+	params=$params"-sgrid"
+	awk -f changeParam $temp Nxf=16 > $casefile; cp $casefile $temp;
+	awk -f changeParam $temp Nyf=16 > $casefile; cp $casefile $temp;
+	awk -f changeParam $temp Nzf=16 > $casefile; cp $casefile $temp;
+	awk -f changeParam $temp Nrad=8 > $casefile; cp $casefile $temp;
+	awk -f changeParam $temp Nlong_in=16 > $casefile;;
+     mgrid) echo "M grid";
+	params=$params"-mgrid"
+	awk -f changeParam $temp Nxf=32 > $casefile; cp $casefile $temp;
+	awk -f changeParam $temp Nyf=32 > $casefile; cp $casefile $temp;
+	awk -f changeParam $temp Nzf=32 > $casefile; cp $casefile $temp;
+	awk -f changeParam $temp Nrad=16 > $casefile; cp $casefile $temp;
+	awk -f changeParam $temp Nlong_in=32 > $casefile;;
+     lgrid) echo "L grid";
+	params=$params"-lgrid"
+	awk -f changeParam $temp Nxf=64 > $casefile; cp $casefile $temp;
+	awk -f changeParam $temp Nyf=64 > $casefile; cp $casefile $temp;
+	awk -f changeParam $temp Nzf=64 > $casefile; cp $casefile $temp;
+	awk -f changeParam $temp Nrad=32 > $casefile; cp $casefile $temp;
+	awk -f changeParam $temp Nlong_in=64 > $casefile;;
+    * ) echo "Setting parameter $1";
+	params=$params"-"$1
+	awk -f changeParam $temp $1 > $casefile;;
+  esac
+  shift;
+done
+echo $params
+
+
+
+#CREATING ARBORESCENCE
+
+casename=$case"-"$params
+outdir=$outdir/$case/$distr/$params/$algo
+case=$casename".in"
+
+mv $casefile $case
+echo $outdir
+mkdir -p $outdir
+mv $case $outdir/$case
+cp $bunchdir/$distr.ini $outdir/$casename.0000.001
+rm $temp
+
+
+
+#COMPILING ASTRA VERSION
+echo $fordir
+echo "Version :" :$algo
+cd $fordir/$algo
+cp $outdir/$case ./
+
+#make
+
+#RUNNING ASTRA
+./Astra $case
+
+
+#MOVING OUTPUT FILES
+mv *.out $outdir
+mv *.001 $outdir
+#rm $case 
+
+#RUNNING R FOR DATA INTERPRETATION
+#if [ $# -ne 3 ]; then
+#        cd $outdir
+#        echo "BatchMain.AstraPostPro()" >run.r
+#        R -f run.r
+#fi
+
+
+echo "Done."

@@ -1,0 +1,40 @@
+#!/usr/bin/python
+
+#############################################################
+# Show Tag
+#############################################################
+# Description: notify audio tags
+# Written by : Emmanuel Branlard
+# Date : March 2011
+# Dependencies : 
+# License : Feel free to modify and adapt it
+# Note : 
+#############################################################
+import mutagen 
+import optparse
+import subprocess
+parser = optparse.OptionParser()
+(options, args) = parser.parse_args()
+
+def getKey(audio,key):
+        try:
+                f=audio[key].pop().encode('utf-8')
+        except KeyError:
+                print "caught"
+                f=""
+        return(f)
+
+audio=mutagen.File(args[0], easy=True)
+artist=getKey(audio,'artist')
+album=getKey(audio,'album')
+songtitle=getKey(audio,'title')
+genre=getKey(audio,'genre')
+year=getKey(audio,'date')
+
+
+print artist
+print songtitle
+print album
+print genre
+print year 
+subprocess.call(["notify-send",artist+"\n"+songtitle+"\n"+album+"\n"+genre+"\n"+year])

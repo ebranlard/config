@@ -1,0 +1,305 @@
+#!/usr/bin/env python
+#############################################################
+# MakeStandaloneFigs:
+#############################################################
+# Description : Takes a latex file (with preamble) and generate standalone pdf figures for each figure environment
+#               Use --help option argument for more.
+# Written by : Emmanuel Branlard
+# Date : February 2014
+# Dependencies : python, latex
+# License : Feel free to modify and adapt it
+#############################################################
+#
+
+# --------------------------------------------------------------------------------
+# --- PARAMETERS
+# --------------------------------------------------------------------------------
+NoCaption=True  # remove the caption in the figure environment
+NewTexFile=True # generate a tex file which include the figures 1-n
+
+# TODO link these params to commandline args 
+bDryRun=False # if true, do not generate figures
+UseFullPageWidth=True # if true, the output figure is not cropped and is exactly the width of the pagewidth
+
+# Latex options
+COMPILE_CMD='pdflatex --interaction=nonstopmode '
+CMD_OUT=' >/dev/null'
+
+HEADERS=r"""
+\usepackage[xetex,active,displaymath,tightpage]{preview}
+\PreviewSnarfEnvironment[{[]}]{figure}
+\setlength\PreviewBorder{0pt}  %  CHANGE ME if you want more spacing
+\begin{document}
+\pagestyle{empty}\thispagestyle{empty}
+"""
+
+
+# 
+# --------------------------------------------------------------------------------
+# --- PACKAGES REQUIRED 
+# --------------------------------------------------------------------------------
+import os, re
+import sys
+import argparse
+import subprocess
+
+# --------------------------------------------------------------------------------
+# ---  
+# --------------------------------------------------------------------------------
+DESCRIPTION="""Description:
+Takes one latex file (should have preamble for now) and generate standalone pdf figures for each figure environment. 
+
+If you have custom commands to generate your figure, run de-macro on it before.
+"""
+
+# pattern_latex_figure = re.compile(r'\\begin\{(document|abstract)')
+pattern_document   = re.compile(r'\\begin\{document')
+pattern_figure     = re.compile(r'.*\\begin\{figure')
+pattern_figure_end = re.compile(r'.*\\end\{figure')
+pattern_comment    = re.compile(r'\s*%') # matching either " % " or anything different than "\ % " i.e. "sldjfksdfsfsldfkj % ?dskfjskf"
+
+pattern_command_1opt_1arg = re.compile(r'\\(?P<command>\w+)(?P<optional>(\[\w*\])?)\{(?P<arg1>.*?)\}',re.DOTALL)
+pattern_command_caption   = re.compile(r'\\(?P<command>caption)(?P<optional>(\[.*\])?)\{(?P<arg>.*?)\}',re.DOTALL)
+pattern_command_label     = re.compile(r'\\(?P<command>label)(?P<optional>(\[.*\])?)\{(?P<arg>.*?)\}',re.DOTALL)
+pattern_command_figure    = re.compile(r'.*\\begin\{(?P<command>figure[\*]?)\}(?P<arg>(\[[^\]]+\]))',re.DOTALL)
+
+def main(argv):
+    # Configure argument parser
+    parser = argparse.ArgumentParser(formatter_class=argparse.RawDescriptionHelpFormatter,description=DESCRIPTION)
+    parser.add_argument('--version', action='version', version='%(prog)s 1.0')
+#     parser.add_argument('tex_file', nargs='+', help='List of files')
+    parser.add_argument('tex_file', nargs=1, help='Tex file containing figure environments')
+
+    args = parser.parse_args(argv)
+    tex_file=args.tex_file[0]
+    tex_file_out=os.path.splitext(os.path.basename(tex_file))[0]+'-figs.tex'
+ 
+
+    f=open(tex_file,'r');
+    # --------------------------------------------------------------------------------
+    # ---  Extracting Headers
+    # --------------------------------------------------------------------------------
+    Headers=[];
+    line = f.readline()
+    while line :
+        if pattern_document.match(line):
+            break;
+        else:
+            Headers.append(line);
+        line=f.readline()
+    # --------------------------------------------------------------------------------
+    # ---  Adding useful package to header
+    # --------------------------------------------------------------------------------
+    Headers.append(HEADERS)
+    if NoCaption:
+        Headers.append(r'\renewcommand{\caption}[2][]{}'+'\n')
+
+    # --------------------------------------------------------------------------------
+    # ---  Finding figure environment
+    # --------------------------------------------------------------------------------
+    Figures=[];
+    while line:
+        if pattern_comment.match(line):
+            pass
+        elif pattern_figure.match(line):
+            # we match a begin figure, we'll store the figure lines
+            if UseFullPageWidth:
+                # Let's do a hack to ensure that we use full page width
+                m=pattern_command_figure.match(line);
+                iend=m.end()
+                if iend<=len(line):
+                    rest_of_line=line[iend:];
+                else:
+                    rest_of_line=''
+    #             line=line[0:iend]+'\\noindent\\rule{\linewidth}{0pt}\\\\'+rest_of_line
+                line=line[0:iend]+'\\begin{minipage}[c]{\\textwidth}'+rest_of_line
+            #
+            FigureLines=[];
+            while ( not pattern_figure_end.match(line) ):
+                FigureLines.append(line)
+                line = f.readline()
+
+            if UseFullPageWidth:
+                istart=line.find('\\end{figure')
+                if istart!=0:
+                    rest_of_line=line[0:istart];
+                else:
+                    rest_of_line==''
+                line=rest_of_line+'\\end{minipage}'+line[istart:]
+                print(line)
+            
+            # we append also the last line (which might be the first)
+            FigureLines.append(line) 
+
+            # We store a list of those figure lines
+            Figures.append(FigureLines)
+
+        #
+        line = f.readline()
+
+
+    # --------------------------------------------------------------------------------
+    # ---  Looping on figure environments and compile standalones
+    # --------------------------------------------------------------------------------
+    for fig,cpt in zip(Figures,range(len(Figures))):
+        print('--------')
+        tmpfile_content=''.join(Headers)+''.join(fig)+'\n'+'\end{document}' ;
+        outfile=str(cpt+1)+'.pdf' # TODO possible imnprovements on filename based on label for instance
+        compile_this(tmpfile_content,outfile,bDryRun)
+    
+    # --------------------------------------------------------------------------------
+    # ---  if wanted, we create a new tex file
+    # --------------------------------------------------------------------------------
+    if NewTexFile:
+        # reopen input file for reading
+        f.close()
+        f=open(tex_file,'r')     ; 
+        # open output
+        fout=open(tex_file_out,'w') ; 
+        # Loop overlines
+        line=f.readline()
+        cpt=0
+        while line:
+            if pattern_comment.match(line):
+                fout.write(line)
+                
+            elif pattern_figure.match(line):
+                # we match a begin figure, we'll store the figure lines igen!(quick and dirty)
+                cpt=cpt+1
+                FigureLines=[];
+                while ( not pattern_figure_end.match(line) ):
+                    FigureLines.append(line)
+                    line = f.readline()
+                FigureLines.append(line) # we append also the end figure
+
+                FigureLines=''.join(FigureLines)
+                ### Some nasty handling
+                bPrintFigLines=False
+
+                # Iterator over Matching Caption commands
+                iter_match_caption=pattern_command_caption.finditer(FigureLines);
+                match_caption = None
+                for match_caption in iter_match_caption:
+                    pass
+                # Captions are not that easy (involve matching brackets, so we have to loop
+                if match_caption is not None:
+                    i=match_caption.start()
+                    no=0
+                    nc=0
+                    istart=0 #safety..
+                    while i<len(FigureLines):
+                        if FigureLines[i]=='{':
+                            no=no+1;
+                            if no==1:#first opening bracket
+                                istart=i+1;
+                        elif FigureLines[i]=='}':
+                            nc=nc+1;
+                            if nc==no:
+                                # Find we found our position
+                                break
+                        i=i+1; 
+                    caption=FigureLines[istart:i]
+
+
+                # Iterator over Matching Label commands
+                iter_match_label=pattern_command_label.finditer(FigureLines);
+
+                # matching figure arguments \begin{figure}[!htpb]
+                match_figure=pattern_command_figure.match(FigureLines);
+                if match_figure:
+                    fig_pos=match_figure.group('arg');
+                else:
+                    print('WARNING: NO FIGURE POSITIONING FOUND IN FIGURE BELOW')
+                    fig_pos='[h]'
+                    bPrintFigLines=True
+
+                ### Writting figure back to latex 
+                fout.write('\\noindent\\begin{figure}%s\\centering%%\n' % fig_pos)
+                fout.write('\\includegraphics[width=\\textwidth]{%d}%%\n' % cpt)
+                if match_caption is not None:
+                    fout.write('\\caption%s{%s}' %(match_caption.group('optional'),caption))
+                else:
+                    print('WARNING: NO CAPTION FOUND IN FIGURE BELOW')
+                    bPrintFigLines=True
+                match_label = None
+                for match_label in iter_match_label:
+                    # For backward compatibility, we display all labels
+                    if(len(match_label.group('arg'))>0):
+                        fout.write(' \\label{%s}%%\n' %match_label.group('arg'))
+                if match_label is None:
+#                 else:
+                    print('WARNING: NO LABEL FOUND IN FIGURE BELOW')
+                    bPrintFigLines=True
+
+
+                if bPrintFigLines:
+                    fout.write('\n')
+                    print(FigureLines)
+
+                fout.write(r'\end{figure}'+'\n')
+
+            else:
+                fout.write(line)
+
+            line=f.readline()
+
+
+# #
+def compile_this(content,outfile,bDryRun):
+    #print('Calling external:'+cmd)
+    import os
+    import sys
+    import platform
+    from subprocess import Popen, PIPE
+
+    # TODO use tmp file and detached command for potential parallel computation
+    tmpfile_name='tmpfile.tex'
+    pdffile_name='tmpfile.pdf'
+    ftmp=open(tmpfile_name,'w');
+    ftmp.write(content); 
+    ftmp.close(); 
+
+    cmd=COMPILE_CMD+' '+tmpfile_name+' '+CMD_OUT
+    if(not bDryRun):
+        print('Running: '+cmd)
+        os.system(cmd)
+        os.rename(pdffile_name,outfile)
+    else:
+        print('Would run: '+cmd)
+
+
+
+def launch_cmd_detached(cmd):
+    #print('Calling external:'+cmd)
+    import os
+    import sys
+    import platform
+    from subprocess import Popen, PIPE
+    
+    try:
+        # set system/version dependent "start_new_session" analogs
+        kwargs = {}
+        if platform.system() == 'Windows':
+            # from msdn [1]
+            CREATE_NEW_PROCESS_GROUP = 0x00000200  # note: could get it from subprocess
+            DETACHED_PROCESS = 0x00000008          # 0x8 | 0x200 == 0x208
+            kwargs.update(creationflags=DETACHED_PROCESS | CREATE_NEW_PROCESS_GROUP)  
+        elif sys.version_info < (3, 2):  # assume posix
+            kwargs.update(preexec_fn=os.setsid)
+        else:  # Python 3.2+ and Unix
+            kwargs.update(start_new_session=True)
+
+        p = Popen(cmd.split(' '), stdin=PIPE, stdout=PIPE, stderr=PIPE, **kwargs)
+        assert not p.poll()
+        #print('Command has returned')
+
+
+    except OSError:
+        print('Impossible to execute command: ' + cmd)
+
+
+
+
+if __name__ == "__main__":
+    main(sys.argv[1:])
+

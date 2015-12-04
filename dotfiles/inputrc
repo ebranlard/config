@@ -1,0 +1,15 @@
+set editing-mode vi
+set keymap vi
+set convert-meta on
+
+"\C-p": paste-from-clipboard
+
+#  $if mode=emacs
+#  "\ep": history-search-backward
+#  "\en": history-search-forward
+#  $endif
+#
+#
+
+#
+set bell-style none

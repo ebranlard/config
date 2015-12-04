@@ -1,0 +1,6 @@
+[udisks]
+Identity=unix-user:*
+Action=org.freedesktop.udisks.*
+ResultAny=yes
+ResultActive=yes
+ResultInactive=no

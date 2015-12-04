@@ -1,0 +1,7 @@
+#! /bin/sh
+#launching 
+rhythmbox&
+#after a while using the client to play
+sleep 20;rhythmbox-client --play --hide&
+
+

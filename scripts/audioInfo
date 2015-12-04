@@ -1,0 +1,33 @@
+#!/bin/bash
+#############################################################
+# audioInfo: prints audio info, metadata, bit rate
+#############################################################
+# Description :
+# Written by : Emmanuel Branlard
+# Date : March 2011
+# Dependencies : 
+# License : Feel free to modify and adapt it
+# Note :
+#############################################################
+Duration=`ffmpeg -i "$@" 2>&1 |grep Duration | awk -F":|," '{print $3":"int($4)}'` 
+MetaData=`ffmpeg -i "$@" 2>&1 |grep -E " artist |title |album |genre|TYER"|awk -F: '{print "   "$2}'`       
+ 
+Stream=`ffmpeg -i "$@" 2>&1 |grep Stream | awk -F, '{print $1"\n    "$2 $3 $4"\n    "$5}'`
+
+Bitrate=`ffmpeg -i "$@" 2>&1|awk '/bitrate:/ {print $6" "$7}'`
+
+
+
+#xargs -0
+echo $Duration
+echo $Stream
+echo $MetaData
+Out="MetaData:
+$MetaData
+-----------------------------------------
+Length: $Duration
+Bitrate:  $Bitrate
+-----------------------------------------
+Audio:
+$Stream"
+notify-send -t 3000 -i gnome-volume-control "$Out"

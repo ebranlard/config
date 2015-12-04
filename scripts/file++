@@ -1,0 +1,89 @@
+#!/usr/bin/env python
+#############################################################
+# file++:
+#############################################################
+# Description : use ./SCRIPT -h for help and description
+# Written by : Emmanuel Branlard
+# Date : September 2013
+# Dependencies : python
+# License : Feel free to modify and adapt it
+#############################################################
+import os, re
+import sys
+
+import argparse
+
+DESCRIPTION="""Description:
+   Rename "files" by adding "num" to the first number found in their filename.
+   If no number is present in the filename, nothing is done. 
+   If several numbers are present, only the first one is incremented. 
+   The numbers between filenames do no have to be continuous. 
+   The script will not overwrite existing files and will abort before it occurs.
+   The script does the renaming in ascending of descending order depending on the sign of "num"
+   Example: 
+       $file++ 10 file001.png file10-sub12.jpg
+       will rename file001.png into file011.png and file10-sub12.jpg into file20-sub12.jpg
+    """
+
+def main(argv):
+    # Configure argument parser
+    parser = argparse.ArgumentParser(formatter_class=argparse.RawDescriptionHelpFormatter,description=DESCRIPTION)
+    parser.add_argument('--version', action='version', version='%(prog)s 1.0')
+    parser.add_argument('num', type=int, nargs=1, help='Integer increment (can be negative)')
+    parser.add_argument('files', nargs='+', help='List of files')
+
+    args = parser.parse_args(argv)
+    shiftnum=args.num[0]
+    files=args.files
+    print 'Number in filenames will be shifted by:', shiftnum
+#     print 'Input files are"',files
+
+    # Sorting input files 
+    files.sort()
+    if shiftnum>0:
+        # if we need to increment by a number, and move files, we need to go in reversed order in order not to ovewrite files
+        file_list=reversed(files)
+    else:
+        #
+        file_list=files
+
+    # Looping through files 
+    for f in file_list:
+        print "-----------------------------------------------------"
+        (head,filebase)=os.path.split(f)
+        try:
+            # Extracting number
+            num_str = re.findall('[0-9]+', filebase)
+            num_new=int(num_str[0])+shiftnum
+            if num_new<0:
+                print "Warning: Negative number found for the following renaming."
+            # Respecting number of significant digits (if leading zeros)
+            num_len=len(num_str[0])
+            string_format="%%0%dd"%num_len
+#             string_format="%05d"
+            num_new_str=string_format %  num_new
+           
+            # Replacement in string
+            filebase_new=re.sub(num_str[0], num_new_str, filebase, count=1, flags=0)
+            f_new=os.path.join(head,filebase_new)
+            
+            # Renaming
+            print "Renaming:", f, "into",f_new
+            if os.path.exists(f_new):
+                raise NameError('File exists')
+            else:
+                os.rename(f,f_new)
+        except IndexError:
+            print "Warning: No number found in file: ", filebase
+            pass
+        except NameError:
+            print "Error: can't rename", f, "into",f_new,". File exists."
+            print "Aborting"
+            sys.exit(2)
+
+if __name__ == "__main__":
+    main(sys.argv[1:])
+
+
+
+

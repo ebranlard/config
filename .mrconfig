@@ -1,0 +1,14 @@
+[.]
+checkout = git clone 'git@github.com:elmanuelito/config' '.'
+
+[dotfiles/vim/bundle/vim-matlab-behave]
+checkout =  git clone git@github.com:elmanuelito/vim-matlab-behave.git 'vim-matlab-behave'
+
+[dotfiles/vim/bundle/vim-simple-comment]
+checkout =  git clone git@github.com:elmanuelito/vim-simple-comment.git 'vim-simple-comment'
+
+[dotfiles/vim/bundle/vim-simple-compile]
+checkout =  git clone git@github.com:elmanuelito/vim-simple-compile.git 'vim-simple-compile'
+
+[dotfiles/vim/bundle/vim-tagbar-manu]
+checkout =  git clone git@github.com:elmanuelito/vim-tagbar-manu.git 'vim-tagbar-manu'

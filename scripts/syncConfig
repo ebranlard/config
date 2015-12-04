@@ -1,0 +1,22 @@
+#!/bin/bash
+#############################################################
+# syncConfig
+#############################################################
+# Description : scp my configuration files to a server
+# Written by : Emmanuel Branlard
+# Date : Janvier 2013
+# Dependencies : 
+# License : Feel free to modify and adapt it
+# Usage: the argument is something like USER@SERVER
+############################################################
+
+con=$1
+
+#bashrc
+#vim
+cat ~/Config/profiles/bashrc_user ~/Config/profiles/bashrc_common >bashtmp
+
+scp -r ~/.vim* ~/.ctags ~/Config/scripts/* bashtmp $con:.
+
+
+rm bashtmp

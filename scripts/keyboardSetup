@@ -1,0 +1,11 @@
+#! /bin/bash
+echo "----------------------- BEGIN KEYBOARD SETUP ---------------------------"
+# Compose key
+setxkbmap -option compose:ralt
+# Restart X
+setxkbmap -option terminate:ctrl_alt_bksp
+# No Caps lock
+setxkbmap -option ctrl:nocaps
+# Allow Ctrl-Alt-/ and Ctrl-Alt-* for grab debugging
+setxkbmap -option grab:break_actions
+echo "----------------------- END KEYBOARD SETUP ---------------------------"
