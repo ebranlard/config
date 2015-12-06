@@ -1,3 +1,17 @@
+# Programs to install
+Git
+Vim
+AutoHotKey
+
+# TaskBar with quickLaunch
+Right-click the taskbar and select Toolbars-->New Toolbar.
+Navigate to: User\AppData\Roaming\Microsoft\Internet Explorer\Quick Launch
+
+
+# Git
+t config core.autocrlf true
+
+
 # Vim
 edit the file _vimrc to remove the source mswin and behave mswin line
 
