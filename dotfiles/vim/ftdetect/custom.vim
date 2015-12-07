@@ -2,6 +2,8 @@ au! BufNewFile,BufRead *.htc setf htc
 au! BufNewFile,BufRead *.oin setf oin
 au! BufNewFile,BufRead *.cu  setf c
 
+au! BufNewFile,BufRead *.md  setf markdown
+
 " --- pascal_fpc is set in ftplugin/after
 "      pascal_delphi could be set alternatively
 

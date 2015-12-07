@@ -703,12 +703,17 @@ let g:pymode_breakpoint_bind = '<leader>b'
 """ Shell
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set shellslash    " important for vimlatex and windows
-set shell=bash
-" set shell+=\ -i    " to make the shell interactive (and hence load bashrc) otherwise use bash_profile
-" map ,s :!~/.vim/shell.sh<CR>
-" Quicly open a shell in the current directory:
-map ,s :!xfce4-terminal &<CR><CR>         
-map ,<F5> :!xfce4-terminal -e "matlab -nojvm " &<CR><CR>         
+if has("win32") || has("win16")
+    set shell=cmd
+    " Quickly open a shell in the current directory:
+    map ,s :!start cmd /k<CR><CR>         
+else
+    set shell=bash
+    " set shell+=\ -i    " to make the shell interactive (and hence load bashrc) otherwise use bash_profile
+    " map ,s :!~/.vim/shell.sh<CR>
+    " Quickly open a shell in the current directory:
+    map ,s :!xfce4-terminal &<CR><CR>         
+endif
 
 function! s:ExecuteInShell(command) " {{{
     let command = join(map(split(a:command), 'expand(v:val)'))
