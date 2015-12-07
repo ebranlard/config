@@ -1,11 +1,11 @@
 
 # Programs to install
+WinSplit Revolution 11
+AutoHotKey
 Git  (with admin rights in Programfiles 86)
 Vim
-AutoHotKey
-ConEmu  (use AppData/Roaming/ConEmu.xml for config file)
 Babun
-WinSplit Revolution 11
+ConEmu  (use AppData/Roaming/ConEmu.xml for config file)
 
 
 #  
@@ -13,25 +13,24 @@ WinSplit Revolution 11
 
 # Windows Config:
 
-## TaskBar with quickLaunch
+## TaskBar Config:
+Right click on task bar:
+- unlock
+- Use small buttons
+- Never combine
+
+## Add QuickLaunch to TaskBar
 Right-click the taskbar and select Toolbars-->New Toolbar.
 (default Quick Launch is at: User\AppData\Roaming\Microsoft\Internet Explorer\Quick Launch)
 
-## Disable Full path in title bar (and hence task bar) for Explorer
+## Disable Full path in title bar (and hence task bar) for Explorer 
 Folder Options>View> Uncheck "Display the full path in the title bar"
 
 
 
-
-
-# Git
-git config core.autocrlf true
-
-
-# Vim
-edit the file _vimrc to remove the source mswin and behave mswin line
-
-help runtimepath
+# WinSplit Revolution
+Configuration is stored in:
+"C:\Users\ebra\AppData\Roaming\Winsplit Revolution\"
 
 
 # HotKeys
@@ -51,15 +50,64 @@ return
 C:\Users\ebra\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup
 
 
-# WinSplit Revolution
-Configuration is stored in:
-"C:\Users\ebra\AppData\Roaming\Winsplit Revolution\"
+
+
+
+
+# Git
+git config core.autocrlf true
+
+
+# Vim
+edit the file _vimrc to remove the source mswin and behave mswin line
+
+help runtimepath
+
+
+
+
+# Babun
+
+## Babun and ConEmu (see ConEmu)
+
+# Cygwin
+
+## Packages to add
+vim
+ssh
+make 
+gcc-fortran
+dos2unix
+unix2dos
+git git-gui git-svn git-completion
+wget
+
+apt-cyg (from github)
+## Cygwin and ConEmu (see ConEmu)
 
 
 
 
 
-#
+
+# ConEmu
+## ConEmu and Babun (see babun)
+
+In ConEmu
+    Go to Settings>Startup>Tasks
+    Create a new task
+        Task parameters - /icon "%userprofile%.babun\cygwin\bin\mintty.exe" /dir "%userprofile%"
+        Commands %userprofile%\.babun\cygwin\bin\mintty.exe -
+
+Then babun is available in the "Create new console" menu.
+
+
+
+
+
+
+
+# Links
 http://lifehacker.com/how-to-get-the-best-linux-features-on-windows-1569195729
 
 https://www.reddit.com/r/customization/comments/19t8ow/making_windows_feel_more_like_ubuntulinux/

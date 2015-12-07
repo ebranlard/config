@@ -78,10 +78,18 @@ alias rhm='xmodmap -e "pointer = 1 2 3 4 5 6 7 8 9"'
 
 #Aptitude
 alias update='sudo aptitude update;sudo aptitude safe-upgrade'
-alias api='sudo aptitude install '
-alias aps='aptitude search '
-alias apss='aptitude show '
-alias apc='apt-cache policy '
+
+if ! type "aptitude" 2> /dev/null; then
+  echo "aptitude not found"
+  alias api='apt-cyg install '
+  alias aps='apt-cyg listall '
+  alias apss='apt-cyg show '
+else
+    alias api='sudo aptitude install '
+    alias aps='aptitude search '
+    alias apss='aptitude show '
+    alias apc='apt-cache policy '
+fi
 
 alias busy='cat /dev/urandom | hexdump -C | grep "ca fe"'
 
@@ -100,6 +108,7 @@ bind -m vi-insert "\C-n":menu-complete
 
 # ^l clear screen
 #  bind -m vi-insert "\C-l":clear-screen
+alias clear='printf "\033c"'
 
 # Auto complete search in history
 bind -m vi-insert "\C-k":history-search-backward
@@ -159,6 +168,6 @@ shopt -s checkwinsize
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
-if [ -f /etc/bash_completion ]; then
-    . /etc/bash_completion
-fi
+# if [ -f /etc/bash_completion ]; then
+#     . /etc/bash_completion
+# fi
