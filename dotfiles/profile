@@ -2,6 +2,8 @@
 PATH="$PATH:$HOME/Config/scripts"
 PYTHONPATH="$PYTHONPATH:$HOME/Config/path/PythonPath"
 
+# Set user-defined locale (en_US.UTF-8)
+export LANG=$(locale -uU)
 # X specific commands
 if xset q &>/dev/null; then
     # restart x
