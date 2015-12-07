@@ -1,24 +1,45 @@
+
 # Programs to install
-Git
+Git  (with admin rights in Programfiles 86)
 Vim
 AutoHotKey
+ConEmu  (use AppData/Roaming/ConEmu.xml for config file)
+Babun
+WinSplit Revolution 11
 
-# TaskBar with quickLaunch
+
+#  
+
+
+# Windows Config:
+
+## TaskBar with quickLaunch
 Right-click the taskbar and select Toolbars-->New Toolbar.
-Navigate to: User\AppData\Roaming\Microsoft\Internet Explorer\Quick Launch
+(default Quick Launch is at: User\AppData\Roaming\Microsoft\Internet Explorer\Quick Launch)
+
+## Disable Full path in title bar (and hence task bar) for Explorer
+Folder Options>View> Uncheck "Display the full path in the title bar"
+
+
+
 
 
 # Git
-t config core.autocrlf true
+git config core.autocrlf true
 
 
 # Vim
 edit the file _vimrc to remove the source mswin and behave mswin line
 
+help runtimepath
+
 
 # HotKeys
 
 - Install AutoHotKeys
+
+- For windows 8 and higher, it may be best to enable UIAccess on the autohotkey.exe file. Download EnableUiAccess from:  https://autohotkey.com/board/topic/70449-enable-interaction-with-administrative-programs/ 
+Unzip the files, and run the main script. Select AutohotKey.exe, overwrite it. 
 
 - Create some scripts (Right click, new script.) 
  Example of script (Ctrl-Z lauches notepad):
@@ -26,12 +47,12 @@ edit the file _vimrc to remove the source mswin and behave mswin line
 Run, Notepad,
 return
 
-
-
 - Put Your scripts in:
 C:\Users\ebra\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup
 
+
 # WinSplit Revolution
+Configuration is stored in:
 "C:\Users\ebra\AppData\Roaming\Winsplit Revolution\"
 
 

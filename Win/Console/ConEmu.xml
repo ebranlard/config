@@ -580,16 +580,16 @@
 					<value name="Active" type="dword" data="00000000"/>
 					<value name="Count" type="dword" data="00000001"/>
 				</key>
-				<key name="Task3" modified="2015-12-07 11:54:50" build="151205">
+				<key name="Task3" modified="2015-12-07 12:23:18" build="151205">
 					<value name="Name" type="string" data="{Shells::cmd (Admin)}"/>
-					<value name="Flags" type="dword" data="00000000"/>
+					<value name="Flags" type="dword" data="00000001"/>
 					<value name="Hotkey" type="dword" data="00000000"/>
 					<value name="GuiArgs" type="string" data=""/>
 					<value name="Cmd1" type="string" data="cmd.exe /k &quot;%ConEmuBaseDir%\CmdInit.cmd&quot; -new_console:a"/>
 					<value name="Active" type="dword" data="00000000"/>
 					<value name="Count" type="dword" data="00000001"/>
 				</key>
-				<key name="Task4" modified="2015-12-07 11:54:50" build="151205">
+				<key name="Task4" modified="2015-12-07 12:23:18" build="151205">
 					<value name="Name" type="string" data="{Shells::cmd 64/32}"/>
 					<value name="Flags" type="dword" data="00000000"/>
 					<value name="Hotkey" type="dword" data="00000000"/>
@@ -599,7 +599,7 @@
 					<value name="Active" type="dword" data="00000001"/>
 					<value name="Count" type="dword" data="00000002"/>
 				</key>
-				<key name="Task5" modified="2015-12-07 11:54:50" build="151205">
+				<key name="Task5" modified="2015-12-07 12:23:18" build="151205">
 					<value name="Name" type="string" data="{Shells::PowerShell}"/>
 					<value name="Flags" type="dword" data="00000000"/>
 					<value name="Hotkey" type="dword" data="00000000"/>
@@ -608,16 +608,16 @@
 					<value name="Active" type="dword" data="00000000"/>
 					<value name="Count" type="dword" data="00000001"/>
 				</key>
-				<key name="Task6" modified="2015-12-07 11:54:50" build="151205">
+				<key name="Task6" modified="2015-12-07 12:23:18" build="151205">
 					<value name="Name" type="string" data="{Shells::PowerShell (Admin)}"/>
-					<value name="Flags" type="dword" data="00000003"/>
+					<value name="Flags" type="dword" data="00000000"/>
 					<value name="Hotkey" type="dword" data="00000000"/>
 					<value name="GuiArgs" type="string" data=""/>
 					<value name="Cmd1" type="string" data="powershell.exe -new_console:a"/>
 					<value name="Active" type="dword" data="00000000"/>
 					<value name="Count" type="dword" data="00000001"/>
 				</key>
-				<key name="Task7" modified="2015-12-07 11:54:50" build="151205">
+				<key name="Task7" modified="2015-12-07 12:23:18" build="151205">
 					<value name="Name" type="string" data="{Bash::Git bash}"/>
 					<value name="Flags" type="dword" data="00000000"/>
 					<value name="Hotkey" type="dword" data="00000000"/>
@@ -626,7 +626,7 @@
 					<value name="Active" type="dword" data="00000000"/>
 					<value name="Count" type="dword" data="00000001"/>
 				</key>
-				<key name="Task8" modified="2015-12-07 11:54:50" build="151205">
+				<key name="Task8" modified="2015-12-07 12:23:18" build="151205">
 					<value name="Name" type="string" data="{Tests::Show ANSI colors}"/>
 					<value name="Flags" type="dword" data="00000000"/>
 					<value name="Hotkey" type="dword" data="00000000"/>
@@ -635,7 +635,7 @@
 					<value name="Active" type="dword" data="00000000"/>
 					<value name="Count" type="dword" data="00000001"/>
 				</key>
-				<key name="Task9" modified="2015-12-07 11:54:50" build="151205">
+				<key name="Task9" modified="2015-12-07 12:23:18" build="151205">
 					<value name="Name" type="string" data="{Scripts::Chocolatey (Admin)}"/>
 					<value name="Flags" type="dword" data="00000000"/>
 					<value name="Hotkey" type="dword" data="00000000"/>
@@ -645,10 +645,10 @@
 					<value name="Count" type="dword" data="00000001"/>
 				</key>
 			</key>
-			<key name="Apps" modified="2015-12-07 11:54:50" build="151205">
+			<key name="Apps" modified="2015-12-07 12:23:18" build="151205">
 				<value name="Count" type="dword" data="00000000"/>
 			</key>
-			<key name="Colors" modified="2015-12-07 11:54:50" build="151205">
+			<key name="Colors" modified="2015-12-07 12:23:18" build="151205">
 				<value name="Count" type="dword" data="00000000"/>
 			</key>
 			<value name="LastMonitor" type="string" data="122,0,1920,1080"/>
