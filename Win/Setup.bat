@@ -35,6 +35,13 @@ set FIL=C:\Users\%USERNAME%\AppData\Roaming\ConEmu.xml
 del "%FIL%" > nul 2>&1
 mklink /H "%FIL%" "%SCRIPT_DIR%\Console\ConEmu.xml"
 
+:: --------------------------------------------------------------------------------
+:: --- Git
+:: --------------------------------------------------------------------------------
+echo -------------------------- Setting up Git ------------------------------------
+set FIL=%USERPROFILE%\.gitconfig
+del "%FIL%" > nul 2>&1
+mklink /H "%FIL%" "%DOT_DIR%\gitconfig"
 
 :: --------------------------------------------------------------------------------
 :: --- Vim 
@@ -62,6 +69,7 @@ mklink /D "%HOME_DIR%\Config"        "%USERPROFILE%\Config"
 :: mklink /D "%HOME_DIR%\.bash_profile" "%DOT_DIR%\bash_profile.bash" 
 :: mklink /D "%HOME_DIR%\.profile"       "%DOT_DIR%\profile" 
 :: mklink /D "%HOME_DIR%\.ctags"         "%DOT_DIR%\ctags" 
+:: mklink /D "%HOME_DIR%\.gitconfig"     "%DOT_DIR%\gitconfig" 
 :: 
 :: :: Vim for babun
 :: set DIR=%HOME_DIR%\.vim

@@ -90,7 +90,15 @@ else
          if term=="linux"
              set t_Co=8 " Explicitly tell Vim that the terminal supports 8 colors
              colorscheme wombat256    " use this color scheme
+         elseif term=="cygwin"
+             set t_Co=8 " Explicitly tell Vim that the terminal supports 256 colors
+             colorscheme wombat256    " use this color scheme
+"              set background=light   " adapt colors for background
+"              colorscheme ManuWhite
+"              set guifont=DejaVu\ Sans\ Mono\ for\ Powerline
          else
+             set t_Co=8 " Explicitly tell Vim that the terminal supports 256 colors
+             colorscheme wombat256    " use this color scheme
 "              set t_Co=256 " Explicitly tell Vim that the terminal supports 256 colors
 "              set background=light   " adapt colors for background
 "              colorscheme ManuWhite
@@ -114,9 +122,9 @@ endif
 """ Color Parenthesis
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " au VimEnter * RainbowParenthesesToggle
-au Syntax * RainbowParenthesesLoadRound
-au Syntax * RainbowParenthesesLoadSquare
-au Syntax * RainbowParenthesesLoadBraces
+"au Syntax * RainbowParenthesesLoadRound
+"au Syntax * RainbowParenthesesLoadSquare
+"au Syntax * RainbowParenthesesLoadBraces
  
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

@@ -82,7 +82,9 @@ unix2dos
 git git-gui git-svn git-completion
 wget
 
-apt-cyg (from github)
+apt-cyg (from github), within Cygwin type:
+lynx -source rawgit.com/transcode-open/apt-cyg/master/apt-cyg > apt-cyg
+install apt-cyg /bin
 ## Cygwin and ConEmu (see ConEmu)
 
 
