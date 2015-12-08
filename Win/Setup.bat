@@ -24,8 +24,19 @@ set HOME_DIR=C:\cygwin64\home\ebra
 echo ------------------------ Setting up AutoHotKeys ------------------------------
 set FIL=%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\All.ahk
 del %FIL% > nul 2>&1
-echo %FIL%
 mklink /H "%FIL%" "%SCRIPT_DIR%\KeyboardShortcuts\AutoHotKeys\All.ahk"
+
+:: --------------------------------------------------------------------------------
+:: ---  WinSplitRevolution
+:: --------------------------------------------------------------------------------
+echo ------------------------ Setting up WinSplitRev ------------------------------
+set FIL=%USERPROFILE%\AppData\Roaming\Winsplit Revolution\hotkeys.xml
+del %FIL% > nul 2>&1
+mklink /H "%FIL%" "%SCRIPT_DIR%\KeyboardShortcuts\WindSplitRevolution\hotkeys.xml"
+set FIL=%USERPROFILE%\AppData\Roaming\Winsplit Revolution\layout.xml
+del %FIL% > nul 2>&1
+mklink /H "%FIL%" "%SCRIPT_DIR%\KeyboardShortcuts\WindSplitRevolution\layout.xml"
+
 
 :: --------------------------------------------------------------------------------
 :: --- ConEmu 

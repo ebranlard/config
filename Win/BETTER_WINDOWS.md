@@ -6,6 +6,7 @@ Git  (with admin rights in Programfiles 86)
 Vim
 Babun
 ConEmu  (use AppData/Roaming/ConEmu.xml for config file)
+EveditorFree
 
 
 #  
