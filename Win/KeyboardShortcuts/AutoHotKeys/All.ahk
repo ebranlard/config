@@ -12,16 +12,16 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 ;; --------------------------------------------------------------------------------
 ;; --- SwitchMonitor.ahk
 ;; --------------------------------------------------------------------------------
-global leftMonitorWidth = 1920
-global leftMonitorHeight = 1080
-global rightMonitorWidth = 1600
-global rightMonitorHeight = 900
 
 #1:: send_left()
 #2:: send_right()
    
 
 send_right(){
+    global leftMonitorWidth := 1920
+    global leftMonitorHeight := 1080
+    global rightMonitorWidth := 1600
+    global rightMonitorHeight := 900
     activeWindow := WinActive("A")
     borderThreshold := -10
     if ( activeWindow = 0 ) {
@@ -44,8 +44,12 @@ send_right(){
     return
 }
 send_left(){
+    global leftMonitorWidth := 1920
+    global leftMonitorHeight := 1080
+    global rightMonitorWidth := 1600
+    global rightMonitorHeight := 900
     activeWindow := WinActive("A")
-    borderThreshold := -10
+    border := 106
     if (activeWindow = 0 ){
         return
     }
@@ -55,16 +59,16 @@ send_left(){
     ; Sending to left
     if (x > leftMonitorWidth-10  ) {
         newY := y
-        newX := x - leftMonitorWidth
-        xScale := screenLeftMonitorWidth / screenRightMonitorWidth
-        yScale := screenLeftMonitorHeight / screenRightMonitorHeight
+        newX := x - leftMonitorWidth + border
+        xScale := leftMonitorWidth / rightMonitorWidth
+        yScale := leftMonitorHeight / rightMonitorHeight
        xScale :=1
        yScale :=1
-        newWidth := width * xScale
-        newHeight := height * yScale
+       newWidth := width * xScale
+       newHeight := height * yScale
         WinMove, ahk_id %activeWindow%, , %newX%, %newY%, %newWidth%, %newHeight%
         WinActivate ahk_id %activeWindow%  ;Needed - otherwise another window may overlap it
-     }
+    }
 return
 }
 
