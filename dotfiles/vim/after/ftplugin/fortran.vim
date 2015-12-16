@@ -36,14 +36,19 @@ if s:extfname ==? "f90"
     let b:fortran_fixed_source=0 
     let b:fortran_dialect="f90" 
     let b:fortran_do_enddo=1 
+    if version>703
+        set cc=132
+    endif
+    set textwidth=132
 else
     let fortran_fixed_source=1
     unlet! fortran_free_source
+    let b:fortran_dialect="f77" 
+    if version>703
+        set cc=73
+    endif
+    set textwidth=73
 endif
-if version>703
-    set cc=132
-endif
-set textwidth=132
 
 " gfotran: suitable error format for quickfix window
 "  set efm=%E%f:%l.%c:,%E%f:%l:,%C,%C%p%*[0123456789^],%ZError:\ %m,%C%.%#,%W%f:%l.%c:,%W%f:%l:,%C,%C%p%*[0123456789^],%ZWarning:\ %m,%C%.%#
@@ -56,7 +61,9 @@ set textwidth=132
 " set efm=%f(%l):%m,%-G$.%#
 " 
 " " Gfortran
-" set efm=%E%f:%l.%c:,%E%f:%l:,%C,%C%p%*[0123456789^],%ZError:\ %m,%C%.%#
+"set efm=%E%f:%l.%c:,%E%f:%l:,%C,%C%p%*[0123456789^],%ZError:\ %m,%C%.%#
+" Good one:
+"set efm=%A%f:%l.%c:,%C,%C\ %.%#,%ZError:\ %m,%ZWarning:\ %m,%f:(%.%#):%m,%f:%l:%m
 
 
 " command! Ifort set efm=%f(%l):%m,%-G$.%#
@@ -78,6 +85,7 @@ let g:syntastic_fortran_include_dirs = [$OMNIVOR_OBJ_DIR,'_build']
 " let g:syntastic_fortran_include_dirs = ['/work/lib/OmniVor_lib/fortran/_build/linux-amd64/','_build']
 if version >=720
     compiler! gfortran
+"     compiler! ifort
 end
 
 
