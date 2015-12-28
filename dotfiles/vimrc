@@ -90,11 +90,19 @@ else
          if term=="linux"
              set t_Co=8 " Explicitly tell Vim that the terminal supports 8 colors
              colorscheme wombat256    " use this color scheme
+         elseif term=="cygwin"
+             set t_Co=8 " Explicitly tell Vim that the terminal supports 256 colors
+             colorscheme wombat256    " use this color scheme
+"              set background=light   " adapt colors for background
+"              colorscheme ManuWhite
+"              set guifont=DejaVu\ Sans\ Mono\ for\ Powerline
          else
-             set t_Co=256 " Explicitly tell Vim that the terminal supports 256 colors
-             set background=light   " adapt colors for background
-             colorscheme ManuWhite
-             set guifont=DejaVu\ Sans\ Mono\ for\ Powerline
+             set t_Co=8 " Explicitly tell Vim that the terminal supports 256 colors
+             colorscheme wombat256    " use this color scheme
+"              set t_Co=256 " Explicitly tell Vim that the terminal supports 256 colors
+"              set background=light   " adapt colors for background
+"              colorscheme ManuWhite
+"              set guifont=DejaVu\ Sans\ Mono\ for\ Powerline
          endif
 endif
 " let &t_SI = "\<Esc>]50;CursorShape=1\x7"
@@ -114,9 +122,9 @@ endif
 """ Color Parenthesis
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " au VimEnter * RainbowParenthesesToggle
-au Syntax * RainbowParenthesesLoadRound
-au Syntax * RainbowParenthesesLoadSquare
-au Syntax * RainbowParenthesesLoadBraces
+"au Syntax * RainbowParenthesesLoadRound
+"au Syntax * RainbowParenthesesLoadSquare
+"au Syntax * RainbowParenthesesLoadBraces
  
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -703,12 +711,17 @@ let g:pymode_breakpoint_bind = '<leader>b'
 """ Shell
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set shellslash    " important for vimlatex and windows
-set shell=bash
-" set shell+=\ -i    " to make the shell interactive (and hence load bashrc) otherwise use bash_profile
-" map ,s :!~/.vim/shell.sh<CR>
-" Quicly open a shell in the current directory:
-map ,s :!xfce4-terminal &<CR><CR>         
-map ,<F5> :!xfce4-terminal -e "matlab -nojvm " &<CR><CR>         
+if has("win32") || has("win16")
+    set shell=cmd
+    " Quickly open a shell in the current directory:
+    map ,s :!start cmd /k<CR><CR>         
+else
+    set shell=bash
+    " set shell+=\ -i    " to make the shell interactive (and hence load bashrc) otherwise use bash_profile
+    " map ,s :!~/.vim/shell.sh<CR>
+    " Quickly open a shell in the current directory:
+    map ,s :!xfce4-terminal &<CR><CR>         
+endif
 
 function! s:ExecuteInShell(command) " {{{
     let command = join(map(split(a:command), 'expand(v:val)'))

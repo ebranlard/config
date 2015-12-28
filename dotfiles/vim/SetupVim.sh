@@ -32,9 +32,13 @@ if [ $HOSTNAME == 'olympe' ]
 then
     echo "Olympe"
 
-    git clone git@github.com:elmanuelito/vim-matlab-behave.git
-    git clone git@github.com:elmanuelito/vim-simple-comment.git
-    git clone git@github.com:elmanuelito/vim-simple-compile.git
-    git clone git@github.com:elmanuelito/vim-tagbar-manu
+#    git clone git@github.com:elmanuelito/vim-matlab-behave.git
+#    git clone git@github.com:elmanuelito/vim-simple-comment.git
+#    git clone git@github.com:elmanuelito/vim-simple-compile.git
+#    git clone git@github.com:elmanuelito/vim-tagbar-manu
 
 fi
+git clone https://github.com/elmanuelito/vim-matlab-behave
+git clone https://github.com/elmanuelito/vim-simple-comment
+git clone https://github.com/elmanuelito/vim-simple-compile
+git clone https://github.com/elmanuelito/vim-tagbar-manu

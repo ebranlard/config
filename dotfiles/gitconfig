@@ -2,8 +2,11 @@
 	branch = auto
 	diff = auto
 	status = auto
+
 [core]
 	pager = less -F -X
+	autocrlf = false
+
 [giggle]
 	main-window-maximized = true
 	main-window-geometry = 1569x1042+111+0
@@ -11,5 +14,12 @@
 	main-window-view = HistoryView
 	show-graph = true
 	file-view-vpane-position = 686
+
 [help]
-	autocorrect = -1
+	autocorrect = 1
+
+
+[user]
+    name  = el
+    email = el.github@gmail.com
+

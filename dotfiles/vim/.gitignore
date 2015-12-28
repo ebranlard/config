@@ -1,20 +1,2 @@
+vimrc*
 bundle
-ltags
-tesss.c
-shell.sh
-tesss.f90
-tesss.m
-tesss.tex
-README_MANU.txt
-
-
-# colors
-colors/molokai.vim
-colors/mustang.vim
-colors/peaksea.vim
-colors/skittles_dark.vim
-colors/tango.vim
-colors/wombat.vim
-colors/wombat256.vim
-colors/xoria256.vim
-colors/xterm16.vim

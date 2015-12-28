@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WinSplit_HotKeys>
+  <MaximizeVertically Modifier1="Ctrl" Modifier2="Alt" VirtualHotkey="86" Activate="True"/>
+  <MaximizeHorizontally Modifier1="Ctrl" Modifier2="Alt" VirtualHotkey="72" Activate="True"/>
+  <AlwaysOnTop Modifier1="Ctrl" Modifier2="Alt" VirtualHotkey="79" Activate="True"/>
+  <ActiveWindowTools Modifier1="Ctrl" Modifier2="Alt" VirtualHotkey="84" Activate="True"/>
+  <RestoreMinimizedWindow Modifier1="Win" Modifier2="-none-" VirtualHotkey="51" Activate="True"/>
+  <MinimizeWindow Modifier1="Ctrl" Modifier2="Alt" VirtualHotkey="34" Activate="True"/>
+  <WindowToRigthScreen Modifier1="Ctrl" Modifier2="Alt" VirtualHotkey="39" Activate="True"/>
+  <WindowToLeftScreen Modifier1="Ctrl" Modifier2="Alt" VirtualHotkey="37" Activate="True"/>
+  <FusionMode Modifier1="Ctrl" Modifier2="Alt" VirtualHotkey="67" Activate="True"/>
+  <MosaicMode Modifier1="Ctrl" Modifier2="Alt" VirtualHotkey="70" Activate="True"/>
+  <CloseAllWindows Modifier1="Ctrl" Modifier2="Alt" VirtualHotkey="77" Activate="True"/>
+  <RightTop Modifier1="Win" Modifier2="-none-" VirtualHotkey="69" Activate="True"/>
+  <Top Modifier1="Win" Modifier2="-none-" VirtualHotkey="87" Activate="True"/>
+  <LeftTop Modifier1="Win" Modifier2="-none-" VirtualHotkey="81" Activate="True"/>
+  <Right Modifier1="Win" Modifier2="-none-" VirtualHotkey="68" Activate="True"/>
+  <FullScreen Modifier1="Win" Modifier2="-none-" VirtualHotkey="83" Activate="True"/>
+  <Left Modifier1="Win" Modifier2="-none-" VirtualHotkey="65" Activate="True"/>
+  <RightBottom Modifier1="Win" Modifier2="-none-" VirtualHotkey="67" Activate="True"/>
+  <Bottom Modifier1="Win" Modifier2="Shift" VirtualHotkey="88" Activate="True"/>
+  <LeftBottom Modifier1="Win" Modifier2="-none-" VirtualHotkey="90" Activate="True"/>
+  <AutoPlacement Modifier1="Ctrl" Modifier2="Alt" VirtualHotkey="96" Activate="True"/>
+</WinSplit_HotKeys>
