@@ -1,7 +1,7 @@
 " Vim syntax file
 " Language:	Fortran 2008 (and earlier versions: 2003, 95, 90, and 77)
 " Version:	0.94
-" Last Change:	2012 June 18
+" Last Change:	2012 June 18 ??? MANU
 " Maintainer:	Ajit J. Thakkar (ajit AT unb.ca); <http://www.unb.ca/chem/ajit/>
 " Usage:	For instructions, do :help fortran-syntax from Vim
 " Credits:
