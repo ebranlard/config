@@ -7,4 +7,7 @@ chmod +x dotfiles/vim/SetupVim.sh
 
 ./SetupDotFiles
 
-./dotfiles/vim/SetupVim.sh
+
+
+cd dotfiles/vim/
+./SetupVim.sh
