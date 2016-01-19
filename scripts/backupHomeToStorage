@@ -14,9 +14,11 @@ then
         ##############
         #with delete propagation
         rsync $OPTS --delete $SRC/Admin/    $DEST/H1/Admin
+        rsync $OPTS --delete $SRC/Dropbox/  $DEST/H1/Dropbox
         rsync $OPTS --delete $SRC/Music/    $DEST/H1/Music
         rsync $OPTS --delete $SRC/Pictures/ $DEST/H1/Pictures
-        rsync $OPTS --delete $SRC/Salsa/ $DEST/H1/Salsa
+        rsync $OPTS --delete $SRC/Projects/ $DEST/H1/Projects
+        rsync $OPTS --delete $SRC/Salsa/    $DEST/H1/Salsa
         echo `date` >> $DEST/H1/DateSync
 
         ##############
@@ -25,7 +27,7 @@ then
         if [ "$1" = "-a" ] ; then
             rsync $OPTS --delete  --include='.**' --exclude='*' $SRC/ "$DEST/HC/dotfiles/"
             rsync $OPTS --delete $SRC/Config/ "$DEST/HC/Config"
-#             rsync $OPTS --delete /opt/ "$DEST/HC/opt"
+            rsync $OPTS --delete /opt/ "$DEST/HC/opt"
             echo `date` >> $DEST/HC/DateSync
         fi
     else

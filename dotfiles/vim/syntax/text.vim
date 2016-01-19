@@ -1,56 +1,70 @@
-" Text syntax file
-" Language:	Text
-" Maintainer:	E. Branlard
-" Last Change:	2016
-" Version:	0
-" URL:		
-" Notes: 
+" Vim syntax file for text files
+" Language: Text file
+" Maintainer: Emmanuel Branlard
+" Latest Revision: October 2015
+" Installation:
+" - Put this file in ~./vim/syntax/
+
+if version < 600
+  syntax clear
+elseif exists("b:current_syntax")
+  finish
+endif
 
 
-" if exists("b:current_syntax")
-"   finish
-" endif
+
 
 " Keywords
-" syn keyword Keyword begin end nextgroup=hIdentifier
-" syn keyword Keyword #
-syn match Keyword "#.*$" 
-" syn keyword Identifier simulation 
-syn match Identifier "^.*:" 
+" syn keyword tKeyword '^-'
+" syn keyword tKeyword '^>'
+syn match tKeyword '^-' 
+syn match tIdentifier '^>' 
+syn match tIdentifier '^>>' 
 
+syn match tKeyword "#.*$" 
+syn match tIdentifier "^.*:" 
+
+" syn keyword oIdentifier pDevice pIO 
 
 " syn keyword celTodo contained TODO FIXME XXX NOTE HACK
-" syn keyword Todo TODO FIXME XXX NOTE HACK
-" syn match Comment ";S*$" contains=hTodo
-" 
+syn keyword tTodo TODO FIXME XXX NOTE HACK todo
+" syn keyword oBool true false T F
+
+" syn match oParam '^[\ a-zA-Z0-9]*'
+syn match tComment "^#.*$" contains=hTodo
+
+
 " syn match EmptyLines /^$/
 " syn match EmptyLines /^\s*$/ 
 " 
-" " Regular int like number with space or tab in front
-syn match Number '[\t\ ]\d\+' 
 " Regular int like number with - + or nothing in front
-syn match Number '[-+\ ]\d\+' 
+syn match tNumber '\d\+' 
+" Regular int like number with - + or nothing in front
+syn match tNumber '[-+]\d\+' 
 " Floating point number with decimal no E or e (+,-)
-syn match Number '[-+\ ]\d\+\.\d*' 
+syn match tNumber '[-+]\d\+\.\d*' 
 " Floating point like number with E and no decimal point (+,-)
-syn match Number '[-+\ ]\=\d[[:digit:]]*[eE][\-+]\=\d\+'
+syn match tNumber '[-+\ ]\=\d[[:digit:]]*[eE][\-+]\=\d\+'
 " Floating point like number with E and decimal point (+,-)
-syn match Number '[-+\ ]\=\d[[:digit:]]*\.\d*[eE][\-+]\=\d\+'
-" 
-" " syn region celString start='"' end='"' contained
-" syn region String start='./' end=';'  contains=masterReplace
+syn match tNumber '[-+\ ]\=\d[[:digit:]]*\.\d*[eE][\-+]\=\d\+'
+
+" syn region celString start='"' end='"' contained
+" syn region all start='\&' end='\/' contains=oString oKeyword
+" syn region oString start='\'' end='\''  
+syn region tString  start=+"+ end=+"+	
+
+
+" syn match oEqual '[=]'
 
 
 let b:current_syntax = "text"
 
-" hi def link masterReplace  Constant
-" hi def link hNumber         Number
-" hi def link EmptyLines      Error
-
-
-" Cleanup: 
-" unlet s:extfname
-" let   b:current_syntax = "tex"
-" let &cpo               = s:keepcpo
-" unlet s:keepcpo
-" vim: ts=8 fdm=marker
+hi def link tTodo        Todo
+hi def link tComment     Comment
+hi def link tKeyword     Preproc
+hi def link tIdentifier  Type
+" hi def link oEqual  Statement
+hi def link tNumber      Number
+" hi def link oBool      Number
+hi def link tString      String
+" hi def link all  Constant

@@ -28,7 +28,7 @@ then
         ##############
         # WC 
         ##############
-        if [ "$1" = "-u" ] ; then
+        if [ "$1" = "-a" ] ; then
             rsync $OPTS --delete  --include='.**' --exclude='*' $SRC/ "$DEST/WC/dotfiles/"
             rsync $OPTS --delete $SRC/Config/ "$DEST/WC/Config"
             rsync $OPTS --delete /opt/ "$DEST/WC/opt"

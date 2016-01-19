@@ -15,6 +15,7 @@ then
             ##############
             #with delete propagation
             rsync $OPTS --delete $SRC/W1/    $DEST/W1
+            rsync $OPTS --delete $SRC/WC/    $DEST/WC
         else
             echo "Folder source not mounted"
         fi
