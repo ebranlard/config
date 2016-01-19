@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<Mixer>
+  <device name="#0: HDA Intel">
+    <position x="440" y="300"/>
+    <size width="600" height="355"/>
+    <state sticky="0"/>
+    <disclosure expanded="1"/>
+  </device>
+</Mixer>

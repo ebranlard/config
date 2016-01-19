@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<shortcuts-theme name="wmctrl">
+	<shortcut command="aumix -v0" keys="XF86AudioMute"/>
+	<shortcut command="aumix -v-10" keys="XF86AudioLowerVolume"/>
+	<shortcut command="aumix -v+10" keys="XF86AudioRaiseVolume"/>
+	<shortcut command="wmctrl -r :ACTIVE: -b add,maximized_vert,maximized_horz" keys="Control+Alt+KP_5"/>
+	<shortcut command="wmctrl -r :ACTIVE: -b remove,maximized_vert,maximized_horz;wmctrl -r :ACTIVE: -e 0,0,0,644,876" keys="Control+Alt+KP_4"/>
+	<shortcut command="wmctrl -r :ACTIVE: -b remove,maximized_vert,maximized_horz;wmctrl -r :ACTIVE: -e 0,0,445,644,430" keys="Control+Alt+KP_1"/>
+	<shortcut command="wmctrl -r :ACTIVE: -b remove,maximized_vert,maximized_horz;wmctrl -r :ACTIVE: -e 0,738,0,644,430" keys="Control+Alt+KP_9"/>
+	<shortcut command="wmctrl -r :ACTIVE: -b remove,maximized_vert,maximized_horz;wmctrl -r :ACTIVE: -e 0,738,0,644,876" keys="Control+Alt+KP_6"/>
+	<shortcut command="wmctrl -r :ACTIVE: -b remove,maximized_vert,maximized_horz;wmctrl -r :ACTIVE: -e 0,738,445,1298,430" keys="Control+Alt+KP_2"/>
+	<shortcut command="wmctrl -r :ACTIVE: -b remove,maximized_vert,maximized_horz;wmctrl -r :ACTIVE: -e 0,738,445,644,430" keys="Control+Alt+KP_3"/>
+	<shortcut command="wmctrl -r :ACTIVE: -b remove,maximized_vert,maximized_horz;wmctrl -r :ACTIVE: -e 1,0,0,1298,430" keys="Control+Alt+KP_8"/>
+	<shortcut command="wmctrl -r :ACTIVE: -b remove,maximized_vert,maximized_horz;wmctrl -r :ACTIVE: -e 1,1,0,644,430" keys="Control+Alt+KP_7"/>
+	<shortcut command="xfce4-popup-menu" keys="Control+Escape"/>
+	<shortcut command="xfhelp4" keys="Alt+F1"/>
+	<shortcut command="xflock4" keys="Control+Alt+Delete"/>
+	<shortcut command="xfrun4" keys="Alt+F2"/>
+	<shortcut command="xkill" keys="Control+Alt+Escape"/>
+</shortcuts-theme>

@@ -1,0 +1,48 @@
+nb_lines=4
+nb_launcher=7
+extra_spacing=0
+has_tooltips=true
+has_labels=false
+
+[launcher_7]
+command=gvim /home/manu/Admin/Contacts.txt
+name=
+icon_name=/home/manu/Config/look/Icons/amsn.png
+icon_id=21
+
+[launcher_6]
+command=gvim /home/manu/Geekeries/_Programming/FORTRAN/Fortran_doc.tex
+name=gvim /home/manu/Geekeries/_Programming/FORTRAN/Fortran_doc.tex
+icon_name=/home/manu/Config/look/Icons/text-x-fortran.png
+icon_id=21
+
+[launcher_5]
+command=gvim /home/manu/Geekeries/_Programming/Matlab/Matlab_doc.tex
+name=
+icon_name=/home/manu/Config/look/Icons/text-x-matlab.png
+icon_id=21
+
+[launcher_4]
+command=gvim /home/manu/Admin/Notes.c
+name=
+icon_name=/home/manu/Config/look/Icons/text-x-generic.png
+icon_id=21
+
+[launcher_3]
+command=gvim /home/manu/Config/doc/notes-linux.tex
+name=gvim /home/manu/Config/doc/notes-linux.tex
+icon_name=/home/manu/Config/look/Icons/Linuxicon-32.png
+icon_id=21
+
+[launcher_2]
+command=gvim /home/manu/Work/2012-Riso/_admin/InfoDtuAdmin.md
+name=gvim /home/manu/Work/2012-Riso/_admin/InfoDtuAdmin.txt
+icon_name=/home/manu/Config/look/Icons/DTU_logo.png
+icon_id=21
+
+[launcher_1]
+command=gvim /home/manu/Admin/_INFOSADMINISTRATIVES.txt
+name=
+icon_name=/home/manu/Config/look/Icons/text-x-texinfo.png
+icon_id=21
+

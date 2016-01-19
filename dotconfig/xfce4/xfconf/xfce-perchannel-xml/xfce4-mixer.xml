@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<channel name="xfce4-mixer" version="1.0">
+  <property name="sound-card" type="string" value="IDT92HD90BXXOSSMixer"/>
+  <property name="window-height" type="int" value="400"/>
+  <property name="window-width" type="int" value="600"/>
+  <property name="sound-cards" type="empty">
+    <property name="HDAIntelAlsamixer" type="array">
+      <value type="string" value="Master"/>
+      <value type="string" value="Headphone"/>
+      <value type="string" value="Speaker"/>
+      <value type="string" value="PCM"/>
+      <value type="string" value="Mic Jack Mode"/>
+      <value type="string" value="IEC958"/>
+      <value type="string" value="IEC958 Default PCM"/>
+      <value type="string" value="IEC958 Playback Source"/>
+      <value type="string" value="Capture"/>
+      <value type="string" value="Digital"/>
+      <value type="string" value="Mux"/>
+      <value type="string" value="PC Beep"/>
+    </property>
+    <property name="IDT92HD90BXXOSSMixer" type="array">
+      <value type="string" value="Master"/>
+    </property>
+  </property>
+  <property name="active-card" type="string" value="HDAIntelAlsamixer"/>
+  <property name="volume-step-size" type="uint" value="5"/>
+</channel>
