@@ -1,0 +1,461 @@
+#bg color used to be#ebe8e4
+gtk_color_scheme = "bg_color:#ebedf1"
+# gtk_color_scheme = "bg_color:#ebe8e4"
+gtk_color_scheme = "selected_bg_color:#b0c0d0\nbase_color:#f7f7f7"   # Background, base.
+gtk_color_scheme = "fg_color:#3C3C3C\nselected_fg_color:#860000\nselected_text_color:#ffffff\ntext_color:#1f1f1f"   # Foreground, text.
+gtk_color_scheme = "tooltip_bg_color:#F5F5B5\ntooltip_fg_color:#000000"                # Tooltips.
+gtk_color_scheme = "link_color:#08c"                                                   # Hyperlinks
+gtk_color_scheme = "fm_color:#Ff0707"                                   # Color used in Nautilus and Thunar.
+gtk_color_scheme = "frame_color:#CDCDCD\ninactive_frame_color:#CDCDCD"                 # Fix for Chrome
+gtk_color_scheme = "bg_color_dark:#383838\ntext_color_dark:#FFF"     
+gtk_color_scheme = "prelight_bg_color:#c0d3e5"
+gtk_color_scheme = "clr_blu_lightest:#cce2ff"
+gtk_color_scheme = "clr_blu_light:#c6d3df"
+gtk_color_scheme = "clr_blu_dark:#b0c0d0"
+gtk_color_scheme = "clr_blu_darkest:#729FcF"
+gtk_color_scheme = "clr_orange:#e6b78a"
+gtk_color_scheme = "clr_darkred:#860000"
+
+gtk-icon-sizes = "panel-menu=16,16 : gtk-menu=16,16 : gtk-button=16,16 : gtk-small-toolbar=16,16 : gtk-large-toolbar=16,16 : gtk-dialog=32,32 "
+# gtk-menu-popup-delay = 0
+# gtk-menu-popdown-delay = 0
+
+style "xfdesktop-icon-view" {
+	#from 0 tp 255
+	XfdesktopIconView::label-alpha = 0 
+}
+widget_class "*XfdesktopIconView*" style "xfdesktop-icon-view"
+
+
+
+style "default"
+{
+    GtkWidget::focus-line-width                  = 0 #important, surrounds selected buttons
+    GtkWidget::focus_padding                     = 0
+    GtkWidget::interior_focus                    = 0
+    GtkWidget::internal_padding                  = 0
+   
+    GtkButton::child_displacement_x              = 0
+    GtkButton::child_displacement_y              = 0
+    GtkButton::default_border                    = {0, 0, 0, 0}
+    GtkButton::default_outside_border            = {0, 0, 0, 0}
+    GtkButton::focus-line-pattern                = "\1\1" #\0    
+	
+    GtkButtonBox::child_internal_pad_x           = 0
+    GtkButtonBox::child_internal_pad_y           = 0
+    GtkButtonBox::child_min_heigth               = 0
+    GtkButtonBox::child_min_width                = 0
+
+    GtkCheckButton::indicator_size               = 12
+    GtkCheckButton::focus-line-pattern           = "\1\1"
+
+    GtkEntry::focus-line-pattern                 = "\0"
+
+    GtkRadioButton::indicator_size               = 12
+    GtkRadioButton::focus-line-pattern           = "\1\1"
+
+    GtkExpander::expander-size                   = 11
+    GtkExpander::expander_spacing                = 0
+
+    GtkMenuBar::internal-padding                 = 0
+
+    GtkMenu::horizontal-padding                  = 0
+    GtkMenu::vertical-padding                    = 0
+	
+    GtkMenuItem::internal_padding                = 1
+    GtkMenuItem::selected_shadow_type            = etched-in   #gtk-shadow_in
+
+    GtkPaned::handle_full_size                   = 1
+    GtkPaned::handle_size                        = 5 # important, Distance in Thunar between side pane
+
+    GtkRange::slider_width                       = 15
+    GtkRange::stepper_size                       = 15
+    GtkRange::stepper_spacing                    = 0
+    GtkRange::stepper_spacing                    = 0
+    GtkRange::trough_border                      = 0
+    GtkRange::trough-border                      = 0
+
+    GtkScale:: value_spacing                      = 0
+    GtkScale:: activate-slider                  = 0   # [ 0 ] ( bool ) With this option set to TRUE, sliders will be drawn ACTIVE and with shadow IN while they are dragged.
+    GtkScale:: slider-length                    = 31  # [31 ] ( >= 0 ) Length of scale's slider.	
+    GtkScale:: slider-width                     = 15  # [14 ] ( >= 0 ) Width of scrollbar or scale thumb.
+    GtkScale:: trough-side-details              = 1   # [ 0 ] ( bool ) When TRUE, the parts of the trough on the two sides of the slider are drawn with different details.
+
+
+    
+    GtkScrollbar:: activate-slider                  = 0    # [  0 ] ( bool ) With this option set to TRUE, sliders will be drawn ACTIVE and with shadow IN while they are dragged.
+    GtkScrollbar:: arrow-scaling                    = 0.4  # [0.5 ] ( 0.1  ) The arrow size proportion relative to the scroll button size.
+    GtkScrollbar:: fixed-slider-length              = 0    # [  0 ] ( bool ) Don't change slider size, just lock it to the minimum length.
+    GtkScrollbar:: min-slider-length                = 50   # [ 21 ] ( >= 0 ) Minimum length of scrollbar slider.
+    GtkScrollbar:: slider-width                     = 15   # [ 14 ] ( >= 0 ) Width of scrollbar or scale thumb.    
+    GtkScrollbar:: stepper-spacing                  = 0    # [  0 ] ( >= 0 ) The spacing between the stepper buttons and thumb. Note that setting this value to anything > 0 will automatically set the trough-under-steppers style property to TRUE as well. Also, stepper-spacing won't have any effect if there are no steppers.
+    GtkScrollbar:: trough-border                    = 0    # [  1 ] ( >= 0 ) Spacing between thumb/steppers and outer trough bevel.
+    GtkScrollbar:: trough-side-details              = 0    # [  0 ] ( bool ) When TRUE, the parts of the trough on the two sides of the slider are drawn with different details.    
+    GtkScrollbar:: trough-under-steppers            = 1    # [  1 ] ( bool ) Whether to draw the trough across the full length of the range or to exclude the steppers and their spacing. Note that setting the "stepper-spacing" style property to any value > 0 will automatically enable trough-under-steppers too.
+ 
+    GtkScrollbar:: has-backward-stepper             = 1    # [  1 ] ( bool ) Display the standard backward arrow button.
+    GtkScrollbar:: has-forward-stepper              = 1    # [  1 ] ( bool ) Display the standard forward arrow button.
+    GtkScrollbar:: has-secondary-backward-stepper   = 0    # [  0 ] ( bool ) Display a second backward arrow button on the opposite end of the scrollbar.
+    GtkScrollbar:: has-secondary-forward-stepper    = 0    # [  0 ] ( bool ) Display a second forward arrow button on the opposite end of the scrollbar.
+ 
+    GtkHScrollbar:: has-secondary-backward-stepper   = 0    # [  0 ] ( bool ) Display a second backward arrow button on the opposite end of the scrollbar.
+    GtkHScrollbar:: has-secondary-forward-stepper    = 0    # [  0 ] ( bool ) Display a second forward arrow button on the opposite end of the scrollbar.
+    GtkVScrollbar:: has-secondary-backward-stepper   = 0    # [  0 ] ( bool ) Display a second backward arrow button on the opposite end of the scrollbar.
+    GtkVScrollbar:: has-secondary-forward-stepper    = 0    # [  0 ] ( bool ) Display a second forward arrow button on the opposite end of the scrollbar.
+
+    GtkWidget:: scroll-arrow-hlength             = 16   # [16] ( >= 1 ) Length of horizontal scroll arrows.
+    GtkWidget :: scroll-arrow-vlength            = 16  # [16] ( >= 1 ) Length of vertical scroll arrows.
+    GtkScrolledWindow::scrollbar_spacing         = 0
+
+    GtkTextView::focus-line-pattern              = "\0"
+
+    GtkToolbar::internal-padding                 = 0
+    GtkToolbar::space-size                       = 10
+
+    GtkTreeView::expander-size                   = 11
+    GtkTreeView::horizontal-separator            = 0
+    GtkTreeView::vertical-separator              = 0
+
+    ExoIconBar::focus_padding                    = 1
+
+# Dialogs are those popup windows
+	GtkDialog::action-area-border = 1 # external padding in most windows
+	GtkDialog::button-spacing = 7
+	GtkDialog::content-area-border = 1
+
+# Explantion of colors
+# NORMAL: normal state
+# ACTIVE: “active” state and Scrollbar tabs. Darker than NORMAL
+# PRELIGHT: Buttons and MenuItem hilighted
+# SELECTED selected widgets
+# INSENSITIVE: insensitive widgets
+# Background for most widgets
+    bg[NORMAL]        = @bg_color
+#      bg[NORMAL]    = "#efeff1"  # what makes averything blue...
+#      bg[NORMAL]    = "#E9ECF1"  # what makes averything blue...
+#      bg[NORMAL]    = "#ebedf1"  # what makes averything blue...
+    bg[PRELIGHT]      = @prelight_bg_color
+    bg[SELECTED]      = @selected_bg_color
+    bg[ACTIVE]        = "#f5f5f5"  # !!!!!!!!!!!!(strangely) controls inactive tab BGs, prefer a not so dark color
+    bg[INSENSITIVE]   = @bg_color
+# Foreground for most widgets
+    fg[NORMAL]        = @fg_color
+    fg[PRELIGHT]      = @selected_fg_color
+    fg[SELECTED]      = @selected_fg_color
+    fg[ACTIVE]        = @fg_color
+    fg[INSENSITIVE]   = darker (@bg_color)
+# foreground of widgets displaying editable text
+    text[NORMAL]      = @text_color
+    text[PRELIGHT]    = "#000000"
+    text[SELECTED]    = @selected_text_color
+    text[ACTIVE]      = @text_color
+# background of widgets displaying editable text
+    base[NORMAL]      = @base_color
+    base[PRELIGHT]    = @prelight_bg_color
+	base[ACTIVE]      = shade (0.9, @selected_bg_color)
+	base[SELECTED]    = @selected_bg_color
+#     base[SELECTED]    = @clr_orange
+    base[INSENSITIVE] = @bg_color
+
+    xthickness = 1
+    ythickness = 1
+
+
+    engine "xfce"
+    {
+        smooth_edge = true
+        boxfill
+        {
+#            fill_style = plain
+            fill_style = gradient
+            orientation = auto
+            shade_start = 1.15
+            shade_end = 1.0
+        }
+    }
+
+}
+
+
+style "wider"     { xthickness = 3 ythickness = 3 }
+
+# this is Combox menux and combo box entry menu
+style "menuitem" = "default"
+{
+    xthickness = 1
+    ythickness = 2
+}
+
+style "menustyle" = "default"
+{
+    xthickness = 1
+    ythickness = 1
+}
+
+#important for thunar
+style "treeview"
+{
+    xthickness = 1
+    ythickness = 6
+}
+
+# That's the bar that contains File / Edit /View etc..
+style "menubar" {
+
+}
+
+# The clicked item of the menubar e.g. File - bg prelight is relevant
+style "menubaritem" {
+	ythickness = 2
+#     bg[PRELIGHT]      = "#0000ff"
+}
+# slide bar
+style "scale" {
+      bg[NORMAL]        = shade(1.02,@selected_bg_color)   #color of the bar
+      bg[PRELIGHT]        = shade(1.2,@selected_bg_color)   #color of the bar
+#      bg[NORMAL]        = "#dae6f1"
+    xthickness = 2
+    ythickness = 2
+    engine "xfce" 
+    {
+        smooth_edge = true
+        boxfill
+        {
+            fill_style = gradient
+            orientation = automatic
+            shade_start = 1.10
+            shade_end = 1.00
+        }
+    }
+
+}
+# progress bar - not something you can click on
+style "progress" {
+#     bg[NORMAL]        = @bg_color   #background of it
+#     bg[PRELIGHT]        = shade(0.95,@selected_bg_color) #color of the progressbar
+     bg[NORMAL]        = "#dae6f1"
+#     engine "xfce" {}
+    xthickness = 2
+    ythickness = 2
+    engine "xfce" 
+    {
+        smooth_edge = true
+        boxfill
+        {
+            fill_style = gradient
+            orientation = automatic
+            shade_start = 1.10
+            shade_end = 1.00
+        }
+    }}
+
+
+style "button"
+{
+     GtkButton::focus-line-width                  = 1 #important, surrounds selected buttons
+    GtkWidget::focus-line-width                  = 0 #important, surrounds selected buttons
+    GtkWidget::focus_padding                     = 0
+    GtkWidget::interior_focus                    = 0
+    GtkWidget::internal_padding                  = 0
+    
+    GtkButton::child_displacement_x              = 0
+    GtkButton::child_displacement_y              = 0
+    GtkButton::default_border                    = {0, 0, 0, 0}
+    GtkButton::default_outside_border            = {0, 0, 0, 0}
+    GtkButton::focus-line-pattern                = "\0" #\0    
+
+    xthickness = 2  # set a small gap around the progress-bar
+    ythickness = 2
+
+    bg[ACTIVE]	     = @clr_orange 
+    engine "xfce" 
+    {
+        smooth_edge = true
+#         grip_style = none
+        boxfill
+        {
+            fill_style = gradient
+            orientation = automatic
+            shade_start = 1.10
+            shade_end = 1.00
+        }
+    }
+
+}
+style "scrollbar" {
+  bg[SELECTED] = "#c0d3e5"  # for use with Murrine
+#    engine "murrine"  {}
+    xthickness = 2  # set a small gap around the progress-bar
+    ythickness = 2
+#        bg[NORMAL]        = shade(1.01,@selected_bg_color)   #color of the bar
+}
+
+
+style "notebook"
+{
+   GtkNotebook::tab-curvature = 5  #somehow change the padding between text and tablimit
+   GtkNotebook::tab-overlap = 0
+   GtkNotebook::focus-line-width = 0  # important for the tab appeareance, try it to understand
+	xthickness = 2
+	ythickness = 3
+	bg[SELECTED]	  = "#860000" # the selected tab upper color
+    bg[SELECTED]	     = @clr_orange 
+#	bg[ACTIVE]        = "#0000a0" # the inactive tab bg
+# 	bg[NORMAL] = shade (1.05, @bg_color) #makes the surrounging of the tab a bit lighter
+	engine "clearlooks" 
+	{
+ 		style             = GUMMY  #Gummy or glossy
+	}
+}
+
+# This is for the window borders (xfwm4 & metacity)
+style "titlebar" = "default"
+{
+    bg[SELECTED]      = shade(0.9,@selected_bg_color)
+    bg[SELECTED]      = shade(0.9,@clr_orange)
+    fg[SELECTED]      = "#ffffff"
+    bg[INSENSITIVE]   = "#bfbdbb"
+    fg[INSENSITIVE]   = "#000000"
+}
+
+
+#########################################
+# Matches
+#########################################
+# widget_class "*"                   style "default"
+class "GtkWidget"                style "default"
+class "GtkButton"                style "button"
+class "GtkTreeView"                style "treeview"
+
+# 
+class "GtkScrollbar"              style "scrollbar"
+class "*GtkScale*"                 style "scale"
+class "*GtkProgress*"              style "progress" 
+widget_class "*<GtkNotebook>"      style "notebook"  # tabulated stuff, typical option, gvim, etc
+
+widget_class "*OptionMenu*"        style "button"
+class "*OptionMenu*"               style "button"
+# 
+class "*MenuBar*"      style "menubar"          # the menu bar
+widget_class "*MenuBar.*"  style "menubaritem"  # The clicked item of the menubar e.g. File
+# The stuff below don't seem to do much
+widget_class "*MenuItem.*" style "menuitem"
+
+
+widget "xfwm"             style "titlebar"
+class "MetaFrames"        style "titlebar"
+widget_class "MetaFrames" style "titlebar" 
+
+widget_class "*ToolBar"            style "menustyle"
+class "*ToolBar"                   style "menustyle"
+
+# 
+# 
+style "xfcepanel"
+{
+     xthickness = 0
+     ythickness = 0
+# #     bg[NORMAL]="#fafafa"
+# #     fg[NORMAL]		    = "#0000ff"
+# # 	fg[ACTIVE]		    = "#0000ff"
+# 	fg[PRELIGHT]		= "#00ff00"# will be the surrounding of the window of the other workspace when prelighted 
+# 	fg[SELECTED]		= "#ffff00" #important for worspace switcher, surrounding window color
+# # 	fg[INSENSITIVE]		= "#0000ff"
+# #     bg[NORMAL]          = "#ff0000"  # will be the background of "inactive" worspace switcher and clock
+# #     bg[NORMAL]          = @bg_color #"#0000ff"  # will be the background of "inactive" worspace switcher and clock
+#     bg[PRELIGHT]        = "#ffffff"  # prelight of the worspace 
+# 	bg[SELECTED]		= "#ff00ff" # will be the background of the workspace , it seems all other colors are derived from it
+# 	bg[INSENSITIVE]		= "#00ffff" #nothing
+#     text[NORMAL]        = "#0000ff"
+# 	text[ACTIVE]	    = "#0000ff"
+#     text[PRELIGHT]      = "#0000ff"
+# 	text[SELECTED]		= "#0000ff"
+# 	text[INSENSITIVE]	= "#0000ff"
+}
+style "xfcepanel-button"
+{
+    GtkButton::child_displacement_x              = 0
+    GtkButton::child_displacement_y              = 0
+    GtkButton::default_border                    = {0, 0, 0, 0}
+    GtkButton::default_outside_border            = {0,0, 0, 0}
+    GtkButton::focus-line-pattern                = "\1\1" #\0 #\1\1   # !!!
+     GtkButton::focus-line-width                  = 0 #important, surrounds selected buttons
+#    GtkButton::interior-focus =true
+#      GtkWidget::interior-focus = 0
+      GtkWidget::focus-padding = 0
+    xthickness = 0
+    ythickness = 0
+#     bg[NORMAL]        = @bg_color
+# #      bg[NORMAL]    = "#efeff1"  # what makes averything blue...
+# #      bg[NORMAL]    = "#E9ECF1"  # what makes averything blue...
+# #      bg[NORMAL]    = "#ebedf1"  # what makes averything blue...
+#     bg[PRELIGHT]      = @prelight_bg_color
+#     bg[SELECTED]      = @selected_bg_color
+#     bg[ACTIVE]        = "#f5f5f5"  # !!!!!!!!!!!!(strangely) controls inactive tab BGs, prefer a not so dark color
+#     bg[INSENSITIVE]   = @bg_color
+# # Foreground for most widgets
+#     fg[NORMAL]        = @fg_color
+#     fg[PRELIGHT]      = @selected_fg_color
+#     fg[SELECTED]      = @selected_fg_color
+#     fg[ACTIVE]        = @fg_color
+#     fg[INSENSITIVE]   = darker (@bg_color)
+# # foreground of widgets displaying editable text
+#     text[NORMAL]      = @text_color
+#     text[PRELIGHT]    = "#000000"
+#     text[SELECTED]    = @selected_text_color
+#     text[ACTIVE]      = @text_color
+# # background of widgets displaying editable text
+#     base[NORMAL]      = @base_color
+#     base[PRELIGHT]    = @prelight_bg_color
+# 	base[ACTIVE]      = shade (0.9, @selected_bg_color)
+# 	base[SELECTED]    = @selected_bg_color
+# #     base[SELECTED]    = @clr_orange
+#     base[INSENSITIVE] = @bg_color
+#   bg[ACTIVE]	     = @clr_orange 
+# 	fg[PRELIGHT]		= "#00ff00"# textcolor
+#     fg[NORMAL]		    = "#0000ff"
+# 	fg[ACTIVE]		    = "#0000ff"
+# 	fg[PRELIGHT]		= "#0000ff"
+# 	fg[SELECTED]		= "#0000ff"
+# 	fg[INSENSITIVE]		= "#0000ff"
+#     bg[NORMAL]          = "#0000ff"
+# 	bg[ACTIVE]		    = "#0000ff"
+#     bg[PRELIGHT]        = "#0000ff"
+# 	bg[SELECTED]		= "#0000ff" 
+# 	bg[INSENSITIVE]		= "#0000ff"
+#   engine "xfce"{
+#         smooth_edge = true
+#         grip_style = none
+#         boxfill
+#         {
+#             fill_style = gradient
+#             orientation = auto
+#             shade_start = 1.2
+#             shade_end = 0.9
+#         }
+#     }
+    engine "murrine" 
+    {
+         contrast            = 0.0  # 0.0:0.1:2.0   #put it to zero
+         highlight_shade     = 1.02 #!!!!
+         lightborder_shade   = 1.0  # !!!
+        gradient_shades     = {1.0,0.95,0.95,1.00}
+        border_shades       = { 1.0, 0.8 } # !!!
+        shadow_shades       = {1.0,1.0}    # !!!
+        reliefstyle         = 3
+ 		focus_color         = @clr_orange
+   		glazestyle          = 3                 # 0 = flat highlight, 1 = curved highlight, 2 = concave style, 3 = top curved highlight, 4 = beryl highlight
+ 		glowstyle           = 0                 # 0,1,2,3,4  0:top 2:bottom
+  		glow_shade          = 2.5               # how much it glows : 1 is no change  
+		roundness           = 0                 # 0 = squared, 1 = old default, more will increase roundness
+    }
+#     text[NORMAL]        = "#0000ff"
+# 	text[ACTIVE]	    = "#0000ff"
+#     text[PRELIGHT]      = "#0000ff"
+# 	text[SELECTED]		= "#0000ff"
+# 	text[INSENSITIVE]	= "#0000ff"
+}
+#~ 
+# right now there is no way i can grab the quicklauncher , so I have to stick to the vase color
+widget_class "*Xfce*Panel*" style "xfcepanel" # this will do the start and the clock and the workspace switch
+widget_class "*Xfce*Panel*Button*"   style "xfcepanel-button" # this would to the tawsklist onlkky

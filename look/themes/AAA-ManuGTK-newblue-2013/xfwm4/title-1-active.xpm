@@ -1,0 +1,20 @@
+/* XPM */
+static char * title_1_active_xpm[] = {
+"2 8 9 1",
+" 	c None",
+".	c #DCE7F0",
+"+	c #D3E0EB",
+"@	c #D2E0EB",
+"#	c #BDCFE1",
+"$	c #BCCEE1",
+"%	c #A0B5CC",
+"&	c #9AADC0",
+"*	c #627CAD",
+"..",
+"+@",
+"#$",
+"%%",
+"&&",
+"&&",
+"&&",
+"**"};

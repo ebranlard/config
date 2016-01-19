@@ -1,0 +1,30 @@
+style "manu-window"
+{
+    bg[NORMAL] = "#aab8cf"
+    fg[NORMAL] = "#000000"    
+    XfceNotifyWindow::border-color = "#2d3945"
+    XfceNotifyWindow::border-radius = 10.0
+    XfceNotifyWindow::border-width = 2.5
+}
+class "XfceNotifyWindow" style "manu-window"
+
+style "manu-button"
+{
+    bg[ACTIVE]        = "#d9d7d6"
+    bg[NORMAL]        = "#eeeeec"
+    bg[SELECTED]      = "#4e627d"
+	bg[PRELIGHT]      = "#cce2ff"
+    
+    fg[ACTIVE]        = "#000000"
+    fg[SELECTED]      = "#000000"
+}
+widget_class "XfceNotifyWindow.*.GtkButton*" style "manu-button"
+
+style "manu-text"
+{
+    fg[NORMAL] = "#000000"
+    GtkWidget::link-color ="#000000"
+    #~ "#a7a7a7"
+}
+widget_class "XfceNotifyWindow.*.<GtkLabel>" style "manu-text"
+
