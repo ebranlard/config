@@ -1,0 +1,378 @@
+<?xml encoding="UTF-8" version="1.0"?>
+<actions>
+<action>
+	<icon>gnome-terminal</icon>
+	<name>Terminal fichier</name>
+	<unique-id>1380194857927840-1</unique-id>
+	<command>exo-open --working-directory %d --launch TerminalEmulator</command>
+	<description></description>
+	<patterns>*</patterns>
+	<audio-files/>
+	<image-files/>
+	<other-files/>
+	<text-files/>
+	<video-files/>
+</action>
+<action>
+	<icon>utilities-terminal</icon>
+	<name>Ouvrir un terminal ici</name>
+	<unique-id>1387711923416183-1</unique-id>
+	<command>exo-open --working-directory %f --launch TerminalEmulator</command>
+	<description>Exemple d&apos;une action personnalisée</description>
+	<patterns>*</patterns>
+	<directories/>
+</action>
+<action>
+	<icon>folder_new</icon>
+	<name>Nouveau Dossier</name>
+	<unique-id>1380194857927868-3</unique-id>
+	<command> xterm -geometry 30x2+550+400 +sb -e &apos;echo &quot;Folder Name&quot;;read a;mkdir &quot;$a&quot;&apos;</command>
+	<description></description>
+	<patterns>*</patterns>
+	<directories/>
+	<audio-files/>
+	<image-files/>
+	<other-files/>
+	<text-files/>
+	<video-files/>
+</action>
+<action>
+	<icon>document-new</icon>
+	<name>Nouveau fichier</name>
+	<unique-id>1380194857927881-4</unique-id>
+	<command>xterm -geometry 30x2+550+400 +sb -e &apos;echo &quot;File Name&quot;;read a;touch &quot;$a&quot;&apos;</command>
+	<description></description>
+	<patterns>*</patterns>
+	<directories/>
+	<audio-files/>
+	<image-files/>
+	<other-files/>
+	<text-files/>
+	<video-files/>
+</action>
+<action>
+	<icon>folder</icon>
+	<name>Get CD</name>
+	<unique-id>1411430740178481-1</unique-id>
+	<command>echo cd &quot;&apos;&quot;`pwd`&quot;&apos;&quot; |xclip</command>
+	<description></description>
+	<patterns>*</patterns>
+	<directories/>
+	<audio-files/>
+	<image-files/>
+	<other-files/>
+	<text-files/>
+	<video-files/>
+</action>
+<action>
+	<icon>vim</icon>
+	<name>Gvim Tab</name>
+	<unique-id>1383895217267228-1</unique-id>
+	<command>gvim --remote-tab-silent %F</command>
+	<description></description>
+	<patterns>*</patterns>
+	<text-files/>
+</action>
+<action>
+	<icon>gnome-mime-application-x-rar</icon>
+	<name>Extract RAR</name>
+	<unique-id>1380194857927909-7</unique-id>
+	<command>rar e %f</command>
+	<description></description>
+	<patterns>*.rar</patterns>
+	<other-files/>
+</action>
+<action>
+	<icon>openofficeorg-20-database</icon>
+	<name>How big?</name>
+	<unique-id>1380194857927920-8</unique-id>
+	<command>du -chs %N |sort -hr|xargs -0 notify-send -t 4000 -i openofficeorg-20-database</command>
+	<description></description>
+	<patterns>*</patterns>
+	<directories/>
+	<audio-files/>
+	<image-files/>
+	<other-files/>
+	<text-files/>
+	<video-files/>
+</action>
+<action>
+	<icon>xfce-sound</icon>
+	<name>Audio Info</name>
+	<unique-id>1387792148789851-1</unique-id>
+	<command>audioInfo %f</command>
+	<description></description>
+	<patterns>*</patterns>
+	<audio-files/>
+	<video-files/>
+</action>
+<action>
+	<icon>gnome-mime-video</icon>
+	<name>flv2avi</name>
+	<unique-id>1380194857927941-10</unique-id>
+	<command>ffmpeg -i %f -vcodec mpeg2video -acodec libmp3lame -ar 22050 -s 320x240 -y %n.avi</command>
+	<description></description>
+	<patterns>*.flv</patterns>
+	<audio-files/>
+	<other-files/>
+	<text-files/>
+	<video-files/>
+</action>
+<action>
+	<icon>sound</icon>
+	<name>Convert to mp3</name>
+	<unique-id>1380194857927951-11</unique-id>
+	<command>/home/manu/Config/scripts/tomp3 %F</command>
+	<description></description>
+	<patterns>*flv;*.avi;*.mp4;*.mpeg;*.mpg;*.webm</patterns>
+	<audio-files/>
+	<other-files/>
+	<video-files/>
+</action>
+<action>
+	<icon></icon>
+	<name>flv2mpg</name>
+	<unique-id>1380194857927961-12</unique-id>
+	<command>ffmpeg -i %f -vcodec mpeg2video -acodec libmp3lame -ar 22050 -s 800x600 -y %n.mpg</command>
+	<description></description>
+	<patterns>*</patterns>
+	<video-files/>
+</action>
+<action>
+	<icon>application-pdf</icon>
+	<name>To PDF</name>
+	<unique-id>1380194857927969-13</unique-id>
+	<command>/home/manu/Config/scripts/topdf &apos;%N&apos;</command>
+	<description></description>
+	<patterns>*</patterns>
+	<image-files/>
+</action>
+<action>
+	<icon>system-software-install</icon>
+	<name>Install it!</name>
+	<unique-id>1380194857927978-14</unique-id>
+	<command>xterm -e &apos;sudo dpkg -i %f;echo &quot;Press enter to continue&quot;; read line&apos;</command>
+	<description></description>
+	<patterns>*.deb</patterns>
+	<other-files/>
+</action>
+<action>
+	<icon>text-x-bibtex</icon>
+	<name>LatexClean</name>
+	<unique-id>1380194857927987-15</unique-id>
+	<command>texclean</command>
+	<description></description>
+	<patterns>*.tex</patterns>
+	<directories/>
+	<text-files/>
+</action>
+<action>
+	<icon>application-pdf</icon>
+	<name>PDF Bind</name>
+	<unique-id>1385891992359455-3</unique-id>
+	<command>pdfBind %N</command>
+	<description></description>
+	<patterns>*.pdf</patterns>
+	<other-files/>
+	<text-files/>
+</action>
+<action>
+	<icon>application-pdf</icon>
+	<name>PDF Burst</name>
+	<unique-id>1398242049984234-1</unique-id>
+	<command>pdftk %f burst</command>
+	<description></description>
+	<patterns>*.pdf</patterns>
+	<other-files/>
+	<text-files/>
+</action>
+<action>
+	<icon>application-pdf</icon>
+	<name>eps2pdf</name>
+	<unique-id>1380194857928004-17</unique-id>
+	<command>epstopdf %n</command>
+	<description></description>
+	<patterns>*.eps</patterns>
+	<image-files/>
+</action>
+<action>
+	<icon></icon>
+	<name>Resize 90%</name>
+	<unique-id>1427990289505204-3</unique-id>
+	<command>/home/manu/Config/scripts/shrinkFig3 %N</command>
+	<description></description>
+	<patterns>*</patterns>
+	<image-files/>
+	<text-files/>
+</action>
+<action>
+	<icon>gimp</icon>
+	<name>Resize 60%</name>
+	<unique-id>1380194857928012-18</unique-id>
+	<command>/home/manu/Config/scripts/shrinkFig2 %N</command>
+	<description></description>
+	<patterns>*</patterns>
+	<image-files/>
+</action>
+<action>
+	<icon>gimp</icon>
+	<name>Resize 40%</name>
+	<unique-id>1380194857928020-19</unique-id>
+	<command>/home/manu/Config/scripts/shrinkFig %F</command>
+	<description></description>
+	<patterns>*</patterns>
+	<image-files/>
+</action>
+<action>
+	<icon>vim</icon>
+	<name>Ed-it!</name>
+	<unique-id>1380194857928029-20</unique-id>
+	<command>gvim --servername MAT --remote-tab-silent %F</command>
+	<description></description>
+	<patterns>*.m</patterns>
+	<other-files/>
+	<text-files/>
+</action>
+<action>
+	<icon>TagTool</icon>
+	<name>Tag it!</name>
+	<unique-id>1380194857928037-21</unique-id>
+	<command>tagtool `pwd`</command>
+	<description></description>
+	<patterns>*</patterns>
+	<directories/>
+	<audio-files/>
+</action>
+<action>
+	<icon>zip</icon>
+	<name>Zip it!</name>
+	<unique-id>1415472997832424-1</unique-id>
+	<command>zip -r %n %N</command>
+	<description></description>
+	<patterns>*</patterns>
+	<directories/>
+</action>
+<action>
+	<icon>drive-removable-media</icon>
+	<name>Mount it!</name>
+	<unique-id>1380194857928053-23</unique-id>
+	<command>fuseiso -n -p %f %f.mount</command>
+	<description></description>
+	<patterns>*.iso;*.ISO;*.bin;*.BIN;*.nrg;*.NRG;*.mdf;*.MDF</patterns>
+	<other-files/>
+</action>
+<action>
+	<icon>drive-removable-media</icon>
+	<name>Unmount it!</name>
+	<unique-id>1380194857928063-24</unique-id>
+	<command>fusermount -u %f</command>
+	<description></description>
+	<patterns>*.mount</patterns>
+	<directories/>
+	<other-files/>
+</action>
+<action>
+	<icon>preferences-system-windows</icon>
+	<name>Diff it!</name>
+	<unique-id>1380194857928072-25</unique-id>
+	<command>meld %F</command>
+	<description></description>
+	<patterns>*</patterns>
+	<directories/>
+	<other-files/>
+	<text-files/>
+</action>
+<action>
+	<icon>email</icon>
+	<name>Send it!</name>
+	<unique-id>1380194857928090-27</unique-id>
+	<command>/home/manu/Config/scripts/sendit %N</command>
+	<description></description>
+	<patterns>*</patterns>
+	<audio-files/>
+	<image-files/>
+	<other-files/>
+	<text-files/>
+	<video-files/>
+</action>
+<action>
+	<icon>/home/manu/Config/look/Icons/pdf-xchange-viewer16.png</icon>
+	<name>View it!</name>
+	<unique-id>1380194857928100-28</unique-id>
+	<command>wine &quot;/home/manu/.wine/drive_c/PDF-XChange-Viewer2.5.2/PDF Viewer/PDFXCview.exe&quot; %n</command>
+	<description></description>
+	<patterns>*.pdf</patterns>
+	<other-files/>
+</action>
+<action>
+	<icon>vim</icon>
+	<name>Open Session</name>
+	<unique-id>1380194857928109-29</unique-id>
+	<command>gvim -S %f</command>
+	<description></description>
+	<patterns>Sess*.vim</patterns>
+	<text-files/>
+</action>
+<action>
+	<icon>preferences-desktop-user-password</icon>
+	<name>Decrypt it!</name>
+	<unique-id>1380194857928118-30</unique-id>
+	<command>mycrypt -d %f</command>
+	<description></description>
+	<patterns>*m</patterns>
+	<other-files/>
+	<text-files/>
+</action>
+<action>
+	<icon>preferences-desktop-user-password</icon>
+	<name>Crypt it!</name>
+	<unique-id>1380194857928128-31</unique-id>
+	<command>mycrypt -e %f</command>
+	<description></description>
+	<patterns>*</patterns>
+	<audio-files/>
+	<image-files/>
+	<other-files/>
+	<text-files/>
+	<video-files/>
+</action>
+<action>
+	<icon>emblem-symbolic-link</icon>
+	<name>Symlink it!</name>
+	<unique-id>1393079330388266-6</unique-id>
+	<command>symlink --src %f</command>
+	<description></description>
+	<patterns>*</patterns>
+	<directories/>
+	<other-files/>
+	<text-files/>
+</action>
+<action>
+	<icon>emblem-ok-symbolic</icon>
+	<name>Symlink here</name>
+	<unique-id>1393079348220393-7</unique-id>
+	<command>symlink --dest_folder %f</command>
+	<description></description>
+	<patterns>*</patterns>
+	<directories/>
+</action>
+<action>
+	<icon>system-search</icon>
+	<name>Find</name>
+	<unique-id>1393079396843701-8</unique-id>
+	<command>catfish --fileman=thunar --path=%f</command>
+	<description></description>
+	<patterns>*</patterns>
+	<directories/>
+</action>
+<action>
+	<icon>paraview</icon>
+	<name>Paraview it</name>
+	<unique-id>1415777929667441-2</unique-id>
+	<command>paraview %f</command>
+	<description></description>
+	<patterns>*.vtk</patterns>
+	<other-files/>
+	<text-files/>
+</action>
+</actions>

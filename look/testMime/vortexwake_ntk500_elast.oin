@@ -1,0 +1,116 @@
+&CommonData
+tmax=30
+dt=0.15
+prefix='omnivor_'
+sim_folder='sim'
+bDEBUG=.false.
+bDEBUGMIN=.true.
+bExportStates=.true.
+nExportStates=10
+/
+&Wind
+bHawcWind=.true.
+/
+
+&Environment
+/
+
+
+&Algo
+pNumericalScheme=1 !
+!  bRemoveFarWake=.true. ! do we cut the far wake after a while
+!  tRemoveFarWake=0.5
+bConvertToPart=.false.
+tConvertToPart=0.3
+!
+bNoRollUp=.false.
+bDistortPart=.true.
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! These are the important parameters
+EmissionMethod=0 !0 : CreateTEBEforeSolving
+bPlaceConcentratedShedVorticity=.true.;
+bProfilesAlphaSmooth=.true.
+ProfileSolving%relax=0.1D0 
+ProfileSolving%MaxIter =100
+! --------------------------------------------------------------------------------
+! --- Smooth and Viscous
+! --------------------------------------------------------------------------------
+! General flags
+bViscousDiffusion=.false.
+SmoothAlpha=1.2564 ! alpha for the Squire Model
+
+! Particles 
+PartSmooth%Model=1 ! see Columns and types
+PartSmooth%ParamMethod=0 ! 0: constant , 1:determined by spacing , 2: linear with time
+PartSmooth%Param1=0.5
+
+! Sgmt 
+SgmtSmooth%Model=3 ! 0: none, 1: Rankine, 2: LambOseen, 3: Vatistas, 4: Compact, 5: Compact Dimensions
+SgmtSmooth%ParamMethod=2 ! 0: constant , 1:determined by spacing , 2: linear with time
+! Squire: rc=sqrt(4 alpha delta nu (t-t0)) 
+SgmtSmooth%Param1=200 ! delta : viscous core diffusitivity coefficient (0-1000)
+SgmtSmooth%Param2=0.1 ! t0 (maybe between 0-10)
+
+!Panel 
+PanlSmooth%Model = 0 ! see Columns and types
+PanlSmooth%ParamMethod = 0 ! 0: constant , 1:determined by spacing
+PanlSmooth%Param1 = 0 ! delta : viscous core diffusitivity coefficient
+PanlSmooth%Param2 = 0 ! t0
+
+! --------------------------------------------------------------------------------
+! --- Shortning of computational time
+! --------------------------------------------------------------------------------
+bHybridWake=.true.
+HGrid_tStart=9.0
+HGrid_tEnd=9.0
+HGrid_n1=20
+HGrid_n2=5
+HGrid_n3=20
+HGrid_l1=50 
+HGrid_l2=40 
+HGrid_l3=50 
+HGrid_PO_g=0,6,-35
+
+! --------------------------------------------------------------------------------
+! --- Exportation
+! --------------------------------------------------------------------------------
+! Export formats
+pExportPlotFormat=1     ! 0: Pure Binary, 1: Ascii vtk, 2: Binary vtk
+pExportVelocityFormat=1 ! 0: Pure Binary, 1: Ascii vtk, 2: Binary vtk
+!
+!! Plots
+bExportPlot=.true.
+!  nTExportLoads=10
+nTExportPlot=3
+!  nExportPlot=1
+
+!! Loads
+bExportLoads=.true.
+nTExportLoads=1
+! nExportLoads=10
+! --------------------------------------------------------------------------------
+! --- Grid 1  
+! --------------------------------------------------------------------------------
+bUGrid1=.false.
+nTUGrid1=1
+!  nUGrid1=0
+UGrid1_bComputeGrad=.false.
+UGrid1_bPolar=.false.
+UGrid1_n1=10
+UGrid1_n2=10
+UGrid1_n3=10
+UGrid1_l1=20 
+UGrid1_l2=50 
+UGrid1_l3=100 
+UGrid1_PO_g=0,10,-35
+UGrid1_e1_g=0,1,0
+UGrid1_e2_g=0,0,-1
+/
+&Param
+/
+
+
+&Coupling
+pCoupling=2 ! 2: strong , 1: Soft, 0 : loose
+/
+

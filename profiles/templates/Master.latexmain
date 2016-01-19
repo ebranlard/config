@@ -1,0 +1,6 @@
+"To put in a *.latexmain to override for a project
+let Tex_DefaultTargetFormat = 'pdf'
+let Tex_MultipleCompileFormats='' 
+let Tex_FormatDependency_pdf = ''
+let Tex_ProjectSourceFiles ='bib/*.bib,tex/*.tex'
+let Tex_CompileRule_pdf = 'pdflatex -interaction=nonstopmode Branlard-2011-TipLosses_MscThesis.tex'

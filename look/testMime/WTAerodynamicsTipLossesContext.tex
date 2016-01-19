@@ -1,0 +1,810 @@
+\nocite{bailey:2006}%different vortex models, some figures and 
+\nocite{mithelicopter:1991}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%                  Historical development  
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Tip-losses in the historical context of wind turbine aerodynamics}
+\label{sec:historicalreviewtiplosses}
+The origin of the most common tip-loss correction, Prandtl's correction, comes from the broader problem of loss minimization for lifting devises. An historical review of the topic will reveal the intellectual path followed by the scientists at the beginning of the 20th century with the study of problems of growing complexity, while also shedding light on the different theoretical tools available and on the assumptions under which they operate. The problem is first taken as the determination of induced power losses in general to further focus on the tip-loss aspects only. Notions of local aerodynamics of the blade will be required  to understand how tip-losses can affect the angle of attack and the airfoil performances. The tip-loss factor will be defined in \autoref{sec:preliminaryconsideration} where preliminary considerations on this challenging topic will be introduced.
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Momentum theory 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Losses inherent to a rotating extracting device}
+
+\paragraph{1D momentum theory - Rankine-Froude's theory}
+The 1D \voccat{momentum theory}{1D} is the simplest method to assess the induced power losses. It's derivation has been obtained by R. \voc{Froude}\cite{froude:1889} from the discussions and contributions of Rankine\cite{rankine:1865} and W.Froude\cite{froude:1878}. 
+In this theory the flow is assumed to be purely axial with no rotational motion and the induced velocities at the rotor are uniform over the whole swept area. The rotor is replaced by the concept of an \voc{actuator disk}, which is responsible for creating an artificial pressure drop while allowing the flow to be continuous through it. The actuator disk can be seen as two contra-rotative rotors with infinite number of blades but no details on the actual energy extracting device are used and its rotation is not even implied. 
+The flow slows down to a velocity $U_0-u_i$ at the rotor disk across which it releases momentum due to the pressure drop created by the actuator disk. The flow returns to its original pressure far downstream where it has eventually reached a velocity of $U_0-2 u_i$ according to Bernoulli's theorem and the conservation of mass. 
+The accurate demonstration of this result needs to take into account the pressure force on the streamtube. The proper way to derive the result is to consider it as the limit of a finite case where either the streamtube is in an channel\cite{glauert:1935}\cite{houlsbyoldfiled2008}, either it is pressure-constrained at its boundary\cite{houlsbyoldfiled2008}, and then expand the walls to infinity. Most authors ignore this problem or implicitly add another assumption to this theory by using the fact that: the streamtube is surrounded by atmospheric pressure, or the longitudinal velocity in the by-pass flow is equal to the infinite velocity\cite{martin}.
+
+\imagebtex{Actuator1DMomentum}{One dimensional momentum theory}{0.5}{}
+
+Parallel work down within 5 years from the authors Lanchester\cite[(1915)]{lanchester:1915}, Joukowski\footnote{Nikolai Egorovich Zhukovsky, different writing of this name can be found when using latin alphabet.}\cite[(1920)]{joukowski:1920} and Betz\cite[(1920)]{betz:1920}, led to the theoretical limit of power than can be extracted: the \voc{Betz-Joukowski limit}\footnote{In 2007\cite{kuik:2007} the naming Lanchester-Betz-Joukowski limit was suggested, but further historical research\cite{okulov:2011} attributed this result to the independent work of Betz and Joukowski.} with a value of power coefficient of 16/27. It should be noted that some authors found that the power coefficient tends to infinity for low tip speed ratio but it has been argued\cite{sorensen:2010} that this is the result of neglecting the pressure forces on the streamtube for highly-loaded rotors. Below, it will be seen that the theoretical Betz-Joukowski limit has to be reduced in practice while releasing assumptions from the momentum theory.
+
+\paragraph{2D momentum theory} The 2D \voccat{momentum theory}{2D} as derived by Joukowski\cite{joukowski:1918} in 1918, reported by Glauert\cite{glauert:1935} in 1935 and further formalized in 2010 by S{\o}rensen and van Kuik\cite{sorensen:2010} uses an actuator disk that impart a pressure drop and a tangential rotational speed to the fluid without discontinuity in the axial and radial flow passing the disk. No friction losses are considered in this theory which is why the rotation of the flow has to be introduced artificially by the actuator disk and also why the rotational velocity in front of the disk is zero. This theory allows for radial variations of velocities and pressure at the rotor and at the wake, and accounts for pressure changes due to \voccat{wake}{rotation} rotation.
+Nevertheless the theory leads to a system of equations which is not closed. Either two variables needs to be given or assumptions made to simplify the theory. The Joukowski model uses the assumption of constant circulation, which imply that the flow is irrotational everywhere except along the axis of rotation and that the rotational momentum of the slipstream in the wake $\omega r^2$ is constant for each radial elements. Under this assumption, it is found that in general the axial induced velocity in the wake is not twice the one at the rotor. Nevertheless, the results get really close for tip speed ratio above 2. To avoid inconsistency near the rotor center, a Rankine vortex core can be used instead of a line vortex for a better representation of the flow\cite{sorensen:2010}. In this case, the equations become more complex, but still lead to a closed form solution.
+
+\imagebtex{Actuator2DMomentum}{Two-dimensional momentum theory notation scheme}{0.5}{}
+
+Simplified equations are obtained by adding the assumption that the rotor is lightly loaded and the rotation of the wake is small compared to the rotational speed of the rotor. This can be interpreted as the pressure in the far wake equals the pressure upstream. Consequently the thrust and axial induction results from the 1D momentum apply and the tangential axial induction factor can be determined as a function of the local speed ratio and the axial induction factor. This relation is often drawn as a velocity triangle and can also be interpreted as an energy equation. The final equations resulting from the use of 2D momentum theory results linked to 1D momentum results will be further referred to as ``simplified-2D \voccat{momentum theory}{Simplified-2D}''. It should be kept in mind that only under the assumption of this simplified theory holds the fact that the induced velocity in the wake is twice the one at the rotor. 
+%It is worth mentioning that Glauert attempted to introduce drag losses in this equation but the applicability is reduced.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Three dimensional effects
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Introducing notions used for the study of three dimensional effects}
+\label{sec:intro3deffects}
+\paragraph{Limitation of momentum theory} 
+The methods mentioned above do no fully capture the variations of the flow nor the physics of the energy extraction device. The momentum theory gives an upper limit for the maximum power that can be extracted from the flow but does not give indication on the design of the device itself. Also the assumption of uniform induced velocity at the rotor used in the momentum theory does not hold for a real flow where three dimensional effects takes place and the rotor obviously does not have an infinite number of blades.  One example of these effects in the appearance of vortices at the tip of a finite span wing as described among the following paragraphs. Tip-vortices have been first investigated for aircrafts by Prandtl who derived the lifting line theory to determine the losses related to this vorticity.
+
+
+
+\paragraph{Simulation of actuator disks}
+Under the 1D and simplified-2D momentum theory, the inductions factors are assumed uniform over the entire disk. The validity of these assumptions were studied using computational fluid dynamic tools to model the \voc{actuator disk}\cite{shen:1998,madsen:2007,bak:2007aeroelasticityChapter2,madsen:2009}. Results from these analysis showed that the axial velocity was underestimated($a$ overestimated) in the inner part of the disk due to the neglecting of the pressure term from \voccat{wake}{rotation} rotation. On the outer part of the blade the axial velocity is overestimated($a$ underestimated) due to the neglecting of the radial expansion of the streamtube. The assumption of uniform axial induction factor is thus not valid, and it will be expected to be, among others, a function of the radius:
+\eq a=a(r,\ldots) \eqf
+Such variations are captured by the general 2D momentum theory in which the axial induction is purely a function of radius, written in this document $\hat{a}=\hat{a}(r)$. Despite this radial-dependency, it is worth mentioning that using both a simple vortex model and a actuator disk model, it has been found\cite{troldborg:2010} that each annular element seem to behaves locally as predicted by the 1D momentum theory, meaning that in a first approximation each annular strip can be reasonably considered independent.
+
+
+
+\paragraph{Finite number of blades}\index{axial induction!averaged}\index{axial induction!blade}
+The concept of actuator disk used previously is equivalent to the assumption of infinite number of blades, which is that all particles passing through the disk will experience the same change of momentum due to the presence of the blades. This no longer holds for a rotor with a finite number of blades for which the local axial induction will be larger close to the blades than in between the blades. As a result of this, an azimuthal dependency of the axial induction factor should be accounted for on top of the radial dependency mentioned in the above paragraph, viz.
+\eq a=a(r,\psi,\ldots)\eqf
+The local induction factor at the blade which characterize the incoming speed on the blade and thus determine the local aerodynamic load is written distinctively $a_B$. The average axial induction factor $\bar{a}(r)$ is defined as:
+\eq\qquad  \bar{a}(r) =\frac{1}{2\pi} \int_{0}^{2\pi}a(r,\psi){\d}\psi \quad \dim{ - } \label{eq:abar}\eqf
+In the case of infinite number of blade $a_B$ and $\bar{a}$ are the same. Axisymmetric flows, i.e. flow azimuthally independent such as the one described by 2D momentum or 2D vortex theories can only be found for wind turbines with infinite number of blades. With finite number of blades, these theories no longer apply but are still used in BEM codes by introduction of a ``\voc{tip-loss factor}'' (see discussion on \autoref{sec:preliminaryconsideration} and \autoref{sec:tiplossapplicability}).
+
+
+
+\paragraph{Tip vortex} 
+Complex aerodynamic laws\footnote{Laws that does not involve wrong assertions such as ``upper and lower paths have different lengths''. Rigorous understanding of lift can be found in\cite{bonnetportance}} causes pressure differences to arise between the two sides of an airfoil which in turn result in aerodynamic forces. The low pressure upper surface is called the suction side and the lower surface the pressure side. The pressure difference has to vanish if no airfoil is present so that pressure equalization between the pressure and the suction side should occur at the extremity of any lifting surface such as an aircraft wing or a wind turbine blade. This causes a spanwise pressure gradient so that the flow from the lower surface will go around the blade tip to reach the upper surface generating a vortex known as a tip-vortex. The higher the loading, the higher the pressure gradient and hence the intensity of the \voc{tip-vortex}. The pressure gradient will imply a radial motion with the flow from the lower surface having a radial component heading towards the tip while the flow from the upper surface will go in the other direction. This is illustrated on \autoref{fig:TipVortex}, and CFD results example are shown in \autoref{sec:cfdtipvorticity}.
+
+\imageb{TipVortex}{Tip-vortex formation and radial flow on the upper and lower surface at the tip}{0.6}{The flow from the upper surface has a radial component towards the root, while the flow from the pressure side is directed towards the tip.}
+
+
+When meeting at the trailing edge the flow from the two surfaces reaches a common axial velocity but keeps this radial difference of velocity. This jump in tangential velocity has to be associated with a vortex sheet which is known to have the properties of such discontinuity surface. This vortex sheet is formed at the trailing edge and for this reason will be referred to as trailing vorticity. The tangential velocities stay discontinuous across this sheet whereas the pressure is continuous. The intensity of this \voc{vortex sheet} is directly related to the jump of tangential velocity: 
+\eq \disc
+{V_t}=\v{\Gamma}\times\v{n}\eqf
+In fact, the tip-vortices observed are the result from the roll-up of the vortex sheet which occur under the influence of the induced velocities created from the whole vortex sheet. The notion of induced velocity will be developed below.
+
+
+\imageb{WakeBehindWing}{Formation of tip vortices at the tip of a wing and resulting induced velocities in the wake}{0.7}{}
+
+
+
+
+\paragraph{Vortices in the context of potential flow}
+Under the assumption of incompressible and irrotational flow, the equations of motion reduce to the well known \voc{Laplace's equation} where the velocity is expressed by a potential. Among the particular solutions from this equation lay the vortex, source and doublet solutions. The linearity of Laplace's equation implies that any potential flow can be described as a combination of these elementary solutions if properly distributed to satisfy the boundary conditions. This makes the foundations for numerical vortex methods. For profiled bodies under small angles of attack, separation can be omitted and the assumptions of potential flow can be used to determine the lift force. Vortices in viscous flow will be discussed in section \autoref{sec:viscousvortex}. 
+
+
+
+\paragraph{Kutta-Joukowski relation}
+At this stage it is required to introduce the \voc{Kutta-Joukowski relation} which is extensively used in aerodynamics. This relation strictly applies to potential flows but is commonly used in the presence of viscosity as well in a fashion described below. The Kutta-Joukowski theorem named from the two authors who developed it independently at the beginning of the 20$^{th}$ century, states that the force per unit of span at a given point is related to the velocity and the circulation around this point:
+\eq \qquad \v{L} = \rho \v{V}_\text{rel} \times \v{\Gamma}\quad \dim{N/m} \label{eq:kuttajoukowskitheorem}\eqf
+This direct relationship between lift and circulation is the foundations for lifting line theories where the airfoil is replaced by a vortex filament. 
+The assumptions of the Kutta-Joukowski relation are often relaxed and the frictional Drag is introduced\footnote{The Pressure drag is zero in potential flow, which is D'Alembert's paradox.}. The force obtained from the Kutta-Joukowski theorem contributes fully to the lift. The drag is calculated if the lift over drag ratio $\LOD$ of the airfoil is known. The drag has the same direction as the incoming flow and is obtained as:
+\eq \qquad \v{D}=\frac{\norm{\v{L}}}{\LOD} \frac{\v{V}_\text{rel}}{\norm{\v{V}_\text{rel}}} =\frac{1}{\LOD} \rho \Gamma \v{V}_\text{rel,} \quad \dim{N/m} \label{eq:joukowskidrag}\eqf
+In the above the velocity $V_\text{rel}$ refers to the velocity projected into the cross sectional plane of the airfoil.
+
+
+
+\paragraph{Biot-Savart law}
+The \voc{Biot-Savart law} is named after the two scientists who developed it in 1820 for application in induction in electromagnetism. It also applies for aerodynamics to determine the velocity induced by a vortex distribution. This law is obtained from the classical resolution of \voc{Poisson's equation} by convolution with the Green function. The velocity field produced at the point $M(x,y,z)$ by a volumic vortex distribution $\gamma$ in a domain $\Omega$ is found as:
+\eq  \v{u_i}(M)=\frac{1}{4\pi} \cdot \int_{\Omega} \frac{\v{\gamma}\times\v{M_0M}}{\norm{\v{M_0M}}^3} d\Omega(M_0) \label{eq:biotandsavart}\eqf
+
+
+
+\paragraph{Notion of induced velocity}
+The finite span of a wing generates vorticity which propagates in the wake. The term ``\voc{induced velocity}'' is used to refer to the part of the total velocity field which is different from the uniform infinite velocity upstream. In potential flows, this field can be associated for instance with a distribution of sources and vortices. There is a complete equivalence between the knowledge of the distribution of sources and vortices and their associated wind field. There is thus no cause and effect relationship between them, so that the term ``induced'' is considered by some authors inappropriate\cite{drela:1998}. This notion is found in 2D unsteady flow where vorticity is shed and in three dimensions due to the formation of a wake. It is introduced artificially to highlight the differences with 2D steady flow. 
+
+
+
+\paragraph{Notion of induced drag}
+\vocghost{induced drag}
+In three dimensional flow the wake induces a \voc{downwash}\footnote{In aerodynamics the notion of downwash or upwash is relative to the lift and not the vertical. A downwash velocity is a velocity in opposite direction of the lift.} velocity at any radial position of the wing so that the local angle of attack is reduced compared to the one expected if calculated from the infinite upstream velocity. The actual lift can thus be seen as rotated accordingly downstream and if projected on the direction of the upstream velocity, a force component colinear with the upstream velocity is found. This force is called drag induced by the lift in aircraft terminology, it can represent up to 80\% of the total drag in climb and account for about 40\% of the fuel used in a commercial planes\cite{appliedaero}.  \Autoref{fig:InducedDrag} illustrates how the component of the lift induces drag due to the downwash. 
+\imagetex{InducedDrag}{Illustration of the notion of induced drag}{1}
+
+
+
+\paragraph{Loss minimization} 
+The apparition of losses due to three dimensional effects raises the challenge of minimizing these losses. For this reason many investigations have been carried out in order to find the optimal lift or circulation distribution that would minimize the induced loss for a wing, a propeller or a rotor. The theoretical work concerning wings is attributed to Prandtl\cite{prandtl:1918} and Munk\cite{munknaca121}, for propellers and air-screw to Betz\cite{betz:1919}, Prandtl(in the appendix to Betz article), and Goldstein\cite{goldstein:1929}. Later, minimum induced losses for wind mills, propellers and helicopters has been investigated by Larrabee\cite{larrabee:1983} and is still studied with new numerical methods\cite{chattot:2002wt}. The motivation for these investigation is that the losses can be minimized for a given thrust if an efficient circulation distribution is present at the rotor, and thus if an efficient design is implemented.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Description of 3D aerodynamics
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Description of the wake dynamics}
+\label{sec:wakedynamics}
+In this section three dimensional effects which concerns the structure and dynamics of the \voccat{wake}{Dynamics} that forms behind a turbine is presented. The description of 3D aerodynamic effects which affects the performance of the blade airfoil locally is discussed in a separate section (\autoref{sec:localaerodynamics}).
+References in aerodynamics appreciated by the author are \cite{bonnetluneau} and \cite{huerre:2006}. For specific 3D wind turbine aerodynamics the following references can be used \cite{windenergyhandbook, windenergyexplained, martin} which are in turn highly inspired by the work of Glauert\cite{glauert:1935}.
+
+
+
+\paragraph{Generality for wings} To describe precisely the vorticity system associated with a wing, the distinction between bound, trailed and shed circulation is to be done. As seen from the Kutta-Joukowski theorem in \autoref{eq:kuttajoukowskitheorem}, the lift from a wing is associated with a circulation around the airfoil called \textit{\voc{bound circulation}} and further noted $\Gamma$. In stationary flow, this bound circulation corresponds to the starting vortex generated when the upstream flow started its motion according to Kelvin's theorem.  Due a consequence of \voc{Helmotz's theorem} stating that vortex line going along the wing span cannot end in the fluid, the vorticity associated to this circulation has to be trailed into the wake from the trailing edge and the wing extremities(the blade root and the tip for a rotor). This streamwise component of vorticity emanating from the airfoil is referred as \textit{\voc{trailed vorticity}}. If the circulation is constant along the wing span, vortices are trailed only from wing extremities, whereas if the circulation varies along the blade span, trailing vortices are created from each radial position $r$ forming a continuous \voc{vortex sheet}. The strength per unit of length of the trailed vorticity is directly equal to the bound circulation's gradient which writes:
+\eq\quad \quad \Gamma_t(r)=-\frac{\partial\Gamma(r)}{\partial r} \dr \quad \dim{m$^2$/s}\label{eq:trailedgamma}\eqf
+For a real flow, the bound circulation gradient along the span will obviously be present because the circulation has to vanish continuously at the wing extremities. As a result of this, the strength of the vortex sheets usually increases towards the wing extremities where the circulation gradient is expected to be the highest. These higher intensities of trailed vorticity at the tip will induce a roll-up of the \voccat{wake}{roll-up} into concentrated \voc{tip-vortex}. Prandtl neglected this roll-up to develop his \voc{lifting-line theory} where the blade was modelled as a superposition of \voc{horseshoe vortices} laying on the wing and expending towards infinity.
+
+The last form of vorticity found is the one generated by time variations of the bound circulation which shed spanwise vorticity in the wake. This \textit{\voc{shed circulation}} is directly related to the change of vorticity on the blade as:
+\eq \quad \quad \Gamma_s(r)=\frac{\partial \Gamma(r)}{\partial t} \dt \quad \dim{m$^2$/s}\eqf
+The vorticity sheets are convected downstream with the wake velocity. According to Biot-Savart law, the distributed vorticity from the wake and the blade induces a velocity field in the domain. In particular this field acts on the fluid particle of the wake sheet which then tends to roll-up into concentrated tip-vortex as it propagates downstream. It should be noted that in potential flow, there can be no flow through these surfaces and they can be considered impermeable. An illustration inspired and adapted from \cite{sant:2007} of the different type of circulations involved is found on \autoref{fig:WakeVortexSheet}. The above discussion is valid for rotary wings, but the structure of the wake is more complex and will deserve more attention in the following.
+
+\imagebtex{WakeVortexSheet}{Vortex sheet forming behind a wind turbine blade}{0.9}{The variation of bound circulation along the span generates trailed vorticity, while its time variation generates shed vorticity. The influence of the vortex sheet on itself induces a roll-up of the sheet at the root and the tip which concentrates into a tip and root vortex.}
+
+
+\paragraph{Rotor wake specificity}
+For a rotating wing, the vorticity structures are mainly transported downstream in the axial direction and because they are continuously shed from different azimuthal location due to the rotation of the rotor the resulting \voccat{wake}{Helix} shape ``looks'' helical.  The influence of the wake on itself will distort the wake shape so that the wake does not hold its nominal helical shape. For instance, the edges of the vortex sheet roll up into concentrated tip vortices.  For simplicity this roll-up can be ignored, as for the propeller case for instance where the high axial velocity in the streamwise direction transport the wake quickly downstream. For airplane propeller and helicopters the induced velocities are often small compared to the speed of flight but this is not the case for wind energy applications in which they are appreciable and moreover opposite to the streamwise direction. As the wake propagates downstream, the distance between the different vortex sheets tend to decrease while the wake radius expands. The stability of the wake is quite complex and depends mainly on the loading of the rotor. The loading can be related to the thrust coefficient, which in turns is related to the inductions factors and the tip speed ratio. Studies of wake stability can be found in \cite{okulov:2004}, but in all theoretical derivations presented in this study the wake is assumed stable.
+
+
+
+\paragraph{Lightly-loaded assumption}
+When a rotor is \voc{lightly-loaded} it is argued that the wake expansion behind the rotor is small and so is its distortion. When the assumption of lightly-loaded rotor is made, it thus implies no wake expansion and distortion, so that the wake shape is a perfect helix held in a cylinder with periodicity between the vortex sheet. For applications where the thrust coefficient is low(usually high wind speed, low tip-speed ratio), the lightly-loaded assumption is often used for its convenient simplicity.
+
+
+
+\paragraph{Constant circulation}
+The case of an hypothetical rotor uniformly loaded with hence a constant circulation along its blades is sometimes referred as the Joukowski's model. In this case a single vortex is continuously emitted from the tip and from the root. This can be understood by looking at the ill-definition of \autoref{eq:trailedgamma} at the blade extremities. In this simplified model, the discontinuity of circulation at the tip will induce an infinite downwash at the tip. An illustration of the hypothetical vortex system that would exist in this case can be seen on \autoref{fig:WakeTipHelical} where the hub radius is assumed to be zero.  
+For a simple aircraft made of two symmetric wings joined together, the bound circulations of the wings are equal and have the same sign. There is thus no discontinuity of circulation and hence no vorticity is trailed at the junction between the two wings. For a two-bladed wind turbine(with or without hub) the bound circulation on each blade has opposite sign so that vorticity is trailed at the root. In case where the hub radius is zero, the root vortices are trailed along the rotor axis in a straight line with intensity:
+\eq \Gamma_\text{axis}=-B\, \Gamma_\text{blade}=-B\, \Gamma_\text{tip} \label{eq:gammaaxis}\eqf
+The tip-vorticity line convects downstream with the wake velocity forming an helix of constant pitch and radius. If the hub radius is none zero, then $B$ vortex lines of intensity $\Gamma_\text{blade}$ are emitted at the root and convects downstream in a helical shape.
+\imagebtex{WakeTipHelical}{Single helical vortex-line trailing from the tip under the assumption of constant circulation at the blade and zero hub radius}{1}{}
+
+For a wind turbine configuration, the axial component of the tip and root vorticity is such that it induces a swirl in the wake in the opposite direction\weird{check, glauert says same page 219, and I think WEH says so as well} as the rotor rotation but no flow rotation outside of the wake. The azimuthal component of the tip and root\footnote{In presence of a hub radius.} vortex induces an axial velocity inside the wake in the upstream direction hence slowing down the flow inside the wake. More generally, the axially induced velocity is in the opposite direction of the thrust, so that for a propeller, the directions in the above needs to be inverted.
+
+
+Despite the uniform loading the axial induction factor is not uniform due to the finite number of blade. Instead it takes larger values in the vicinity of the blades and hence lower values elsewhere. This can be demonstrated by implementing a simple vortex code using discrete line elements. The influence of the bound's circulation on each blade cancels out, and, if the hub radius is zero, the circulation on the axis does not contribute to the axial induced velocity. As a results of this, only the influence of the helical tip vortices of each blade needs to be computed. Results from such simulation are displayed on \autoref{fig:AxialInductionAzimuth}. Despite the azimuthal variation it should be noted that the azimuthally averaged value of $a$ is uniform: 
+\eq \forall r ,\quad \bar{a}=\frac{1}{2\pi}\int_{0}^{2\pi}a(r,\psi){\d}\psi = \text{cst}\eqf
+
+\imageb{AxialInductionAzimuth}{Azimuthal variation of $a$ for different radial positions}{0.6}{It can be observed that the azimuthally average value of $a$ is uniform. These results were obtained using vortex line elements describing a three bladed rotor operating at $\lambda=6$, $a=1/3$ and $C_T=0.89$, with a uniform circulation along the span equal to $\Gamma=C_T \pi R U_0(1-a)/\lambda$. Each of the three helical curve extends 40 radii downstream and is modelled by 10000 vortex line elements.}
+
+
+
+\paragraph{Span-varying circulation} 
+When the circulation is not uniform each blade sheds a continuous sheet of vorticity from its trailing edge that is transported downstream so that the resulting wake shape can be compared to one of a screw. Thetypical notations and conventions are represented on \autoref{fig:WakeMesh}, while the non-expanding wake shape are detailed on\autoref{fig:VizualizationTurbineWake}. In analogy with \autoref{eq:gammaaxis}, the center of the wake contains vorticity which is such that the flow outside the streamtube does not have a tangential velocity. Its strength is equal to the axial components of the trailing vorticity. As was mentioned above, the wake does not keep its canonical helical shape, it expands, distorts, and rolls-up into concentrated tip-vortices. As most theories uses a non-expanding helical shape as a starting point, \autoref{fig:VizualizationTurbineWake} has been drawn to help visualize this wake shape. It should be noted that the wind turbine convention of rotor that rotates in the clockwise direction has been used for clarity. To the author's knowledge, the other references(e.g. \cite{okulov:2007,okulov:2008}), always represents these wake shapes in the counter clockwise direction(which is common in propellers and helicopters references), which could confuse the reader. This explains why the author has chosen to detail \autoref{fig:VizualizationTurbineWake}. On \autoref{fig:HelicalWakePlotAllBlades54}, the wake from the three blades is represented.
+
+\imagetex{WakeMesh}{Continuous vortex sheet trailed by a rotor with span varying circulation - Convention}{0.5}
+
+
+\noi\begin{figure}[!htb]
+\centering%
+  \begin{minipage}[b]{0.24\textwidth} \centering \subfloat[0\deg]{\includegraphics[width=\fitfig{1}]{figs/HelicalWakePlot0}} \end{minipage}
+  \begin{minipage}[b]{0.73\textwidth} \centering \subfloat[-90\deg]{\includegraphics[width=\fitfig{1}]{figs/HelicalWakePlot90}} \end{minipage}\\
+  \begin{minipage}[b]{0.25\textwidth} \centering \subfloat[36\deg]{\includegraphics[width=\fitfig{1}]{figs/HelicalWakePlot-36}} \end{minipage}  
+  \begin{minipage}[b]{0.30\textwidth} \centering \subfloat[54\deg]{\includegraphics[width=\fitfig{1}]{figs/HelicalWakePlot-54}} \end{minipage}  
+  \begin{minipage}[b]{0.43\textwidth} \centering \subfloat[72\deg]{\includegraphics[width=\fitfig{1}]{figs/HelicalWakePlot-72}} \end{minipage}\\
+  \begin{minipage}[b]{0.25\textwidth} \centering \subfloat[-36\deg]{\includegraphics[width=\fitfig{1}]{figs/HelicalWakePlot36}} \end{minipage}  
+  \begin{minipage}[b]{0.30\textwidth} \centering \subfloat[-54\deg]{\includegraphics[width=\fitfig{1}]{figs/HelicalWakePlot54}} \end{minipage}  
+  \begin{minipage}[b]{0.43\textwidth} \centering \subfloat[-72\deg]{\includegraphics[width=\fitfig{1}]{figs/HelicalWakePlot72}} \end{minipage} 
+      \caption[Visualization of the ideal helical wake with the proper wind turbine convention]{Visualization of the ideal helical wake with the proper wind turbine convention. The wake of only one blade is displayed for clarity. All the plots follow the convention of a wind turbine turning in the clockwise direction. These plots are different view of a same helical wake when the camera is rotated in the wake plane by the angle presented below each figures. The axis of rotation is follows the blade pointing up.}
+      \label{fig:VizualizationTurbineWake}%
+ \end{figure} 
+
+
+\imageb{HelicalWakePlotAllBlades54}{Ideal helical wake behind a turbine generated by the three blades}{0.7}{}
+
+
+
+
+\paragraph{Velocities induced by the wake at the rotor}
+The wake vorticity and the blade's bound vorticity\footnote{For a perfectly symmetric rotor the bound vorticity influences of each blade cancels out} induce velocities that alter the velocity field at any location and in particular about the rotor. The induced velocities has an influence in $1/r^3$ according to Biot-Savart law. As a result of this the contribution from the vortex close to the rotor will be predominant. A CFD study\cite{zahle:2007} shows that resolving only the near wake, $0.5D$, was giving induction results only 1.2\% different than the one for a simulation resolving a wake of $7D$. Nevertheless, this grid size study result can not be directly transfered to vortex codes where larger grid sizes are expected to be required\cite{schmitz:2005}. The exact induced velocity at the rotor is the result of the contribution of the entire wake, and is thus a result of the whole circulation history. The numerical vortex methods that will be introduced in \autoref{sec:numericalvortexmethods} are used to calculate the induced velocity at the rotor from a given circulation history at the rotor. 
+
+
+%\paragraph{A scheme of different particle trajectories}
+%In \cite{windenergyhandbook} a detailed description of the trajectories of 4 different particles is done.
+
+
+%\weird{PARTICLES WEH page 108 (82)}
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Methods for 3D effects
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Methods to overcome the limitations of the momentum theory}
+In \autoref{sec:intro3deffects} the limitations of the momentum theory have been introduced and basic elements related to three dimensional effects have been described. A better insight of the three dimensional structure of the flow has been acquired through \autoref{sec:wakedynamics}. Methods to account for these effects and provide a better view of the details of the flow should now be presented. 
+
+
+
+\paragraph{Different philosophy}
+Methods that investigate the flow can be distinguished between ``near wake'' analysis where the flow is sought at the rotor and ``far wake'' analysis where the flow is studied far downstream. 
+The term ``near wake'' is used for the region where the properties of the rotor can be discriminated, which is taken between half or one rotor diameter downstream. In the far-wake, the effects due to the specificity of the rotor are assumed to be dissipated. \voc{Near-wake analysis} are the one commonly used obviously because in most application the interest is on the details of the flow and loads close to the rotor and on the specificity of the rotor itself. Nevertheless, \voc{far-wake analysis} are used for theoretical derivations whose results are in turn applied for methods that investigates the flow in the near-wake. Far-wake results will be the object of the next section (\autoref{sec:farwake})
+
+
+
+\paragraph{Vortex theory}\vocghost{vortex theory} 
+The knowledge of the wake vorticity distribution allows the calculation of the induced velocity at the rotor. Analytical solution are limited to vortex lines, tubes and recently helix\cite{okulov:2007} so that such methods are inherently oriented towards numerical implementation. Such numerical methods will be described in \autoref{sec:numericalvortexmethods}.
+
+ 
+
+\paragraph{Blade element theory}
+The \voc{blade element theory} derived by W. Froude\cite{froude:1878} and mainly S. \voc{Drzeweicki}\cite{drzewiecki:1892} takes into account the blade geometry and aerodynamic properties at every blade location to determine the loads acting on an elementary blade portion assuming two-dimensionality of the flow. Nevertheless, this theory by itself does not allow the determination of the flow at the rotor. Combined with the momentum theory, it yields to the Blade Element Momentum Method, which will be briefly commented in \autoref{sec:bem} and detailed in \autoref{anx:bem}. 
+\imagetex{BladeElementTriangle}{Blade velocity triangle and resulting aerodynamic forces for the blade element theory}{0.4}
+
+
+
+\paragraph{The use of the Kutta-Joukowski theorem}
+By application of the Kutta-Joukowski theorem the forces along the blades can be determined and by integration one can obtain the total aerodynamic forces and moments acting on the turbine.
+%The induced power loss at each location is obtained as: \weird{!!!!!!!}
+%\eq dP_i = \rho \v{u_i}\cdot\left(\v{U}\times \v{\Gamma} \right) \dr\eqf
+Such method requires the knowledge of both the circulation and the induced velocity distribution.
+If the circulation is known, simulations using vortex method can be used to determine the induced velocity distribution. Experimentally, pressure sensors on the blade can be used to determine the lift and then the circulation at different locations. Different flow visualization techniques from smoke to Particle Image Velocimetry(PIV) can be used to determine the induced velocities or the geometry of the wake.
+
+%\paragraph{Span wise loading - lifting line} \weirdb{A little bit more on that} For a fixed wing the elliptical lift loading has been proven to be the distribution that induced minimum losses.  In the spanwise loading analysis, the lift distributions are compared to this canonical distribution.
+
+
+
+\paragraph{Prandtl lifting line theory - Spanwise loading distribution}
+\label{sec:prandtlliftingline}\index{Prandtl!Lifting-line theory|see{lifting-line theory}}
+Prandtl found the optimal circulation distribution for a fixed wing by modelling the wake by a series of horseshoe vortices placed along the wing span(mentioned in \autoref{sec:wakedynamics}). His theory is based on two assumptions: the wing is thin and has a wide span. From these hypotheses, the wake vortex-sheet is assumed to be planar and the wing reduces to a bound vortex segment called Prandtl's lifting-line. The whole vortex sheet is composed by an infinite number of horseshoe vortices. The two trailing semi-infinite segments from a horseshoe vortex located at the spanwise position $y$ have the intensity $d\Gamma/dy$. On one hand the lift coefficient can be computed by definition using the Lift(i.e. the circulation from the Kutta-Joukowski relation), the chord and the relative velocity(approximated to the infinite velocity). On the other hand the lift coefficient can be computed using thin airfoil theory. For the later, the effective angle of attack is used, which is determined by computing the induced velocities from the vortex sheet. Equating the two formulae of the lift coefficient leads to Prandlt's integral equation. From the expression of the lift and the downwash, the induced drag as defined in \autoref{sec:intro3deffects} is obtained. 
+One approach used by Prandtl consists in defining a lift distribution $L(y)$ as an infinite Fourier series. This leads to a none trivial equation involving the Fourier coefficients. Taking only the first term of the Fourier series leads to an elliptical distribution of lift. More details on this can be found in e.g. \cite{huerre:2006,appliedaero}. In his analysis, Prandtl showed that the \voc{elliptical distribution} was the one inducing the least drag. This result was also derived by Munk\cite{munknaca121} using a far-wake analysis.
+
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Far wake analysis
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Far wake analysis: optimal distribution and the birth of tip-losses}
+\label{sec:farwake}
+\paragraph{Introduction}
+Far wake theories applies under the assumptions of inviscid and irrotational flow, and they rely on the fact that there is a direct relation between the loading and hence the circulation at the lifting devise and the momentum in the wake. Such theories are often quite complex and require a high level of abstraction so that only few historical elements and basic concepts are referenced in this section. They are introduced in this study because all theoretical derivations concerning tip-losses are based in the far-wake.
+%\weird{The induced power losses are equal to the rate at which the energy is added in the far wake.}
+
+The motivations for such analysis is that the flow is way more complicated in the near wake due to the interaction with blades, boundary layers at the blade and separation effects. These effects dissipates and are thus no more present in the far wake. For helicopter flows the blade tip reaches transonic speeds so that compressibility effects should be accounted for. For wind turbines such speeds are not found but the Mach number can be found to be quite larger than 0.3\footnote{Temperature plays a role as well with higher Mach number at lower temperature. See e.g. \cite{branlard:arctic} for study of wind turbines in cold climates.} which is the upper limit usually taken to justify incompressibility. In the far wake the induced velocities are reduced so the assumptions of inviscid and irrotational flow can be further justified. 
+
+%\weird{elliptical wing, }
+%Kuethe, A. M. and Chow, C., Foundations of Aerodynamics, John Wiley and Sons, New York, 1986
+
+\paragraph{Far wake analysis - elliptical wing}\voc{elliptical distribution}
+By applying momentum theory on a box surrounding the wing and extending the boundaries to infinity, only the plane perpendicular to the direction of flight in the far wake is left in the calculation of the drag\cite[chap.~9]{appliedaero}. This conceptual plane or ``front view'', called the \voc{Trefftz plane}, leaves the chord as a secondary consideration by focusing on the wake at the Trefftz plane only. The lift and drag at the lifting devise can be determined by integration of the velocity potential in the Trefftz plane, and by application of the Gauss theorem, reduces to a line integral on the wake. By using a variation method on the velocity potential, \voc{Munk}\cite{munknaca121} derived the minimum \voccat{drag}{minimum} and found the result of elliptic lift distribution in a different way than Prandtl. 
+%By this analysis, it is also found that the flow witch induced minimum losses is equivalent to a flow due to an horizontal 2D flat plate moving downward with constant velocity in potential flow, \weird{as seen from an observer who is stationary with respect to the fluid far from the plate. The perpendicular component of the flow at the wake sheet is constant.}
+
+
+\paragraph{Betz}
+Following an analogous far wake analysis as Munk\cite{munknaca121}, \voccat{Betz}{Optimum circulation} derived the optimum circulation distribution which minimizes the power losses for a propeller rotor with infinite number of blades\cite{betz:1919}. To do so he calculated the thrust and power in the far wake and minimized the power for variations of the circulation. This yielded to the condition of the flow being locally perpendicular to the wake surface. The optimal circulation is obtained for this flow condition at any radial position by integrating the velocity around a path surrounding the propeller axis.  For this optimal condition the flow in the far wake is the same as if the vortex surface formed by the trailing vortices was an impermeable rigid body that translated downstream with a constant velocity $w$. In the propeller case, this velocity is oriented in the stream direction going away from the rotor, whereas for wind turbines, $w$ is pointing towards the rotor. This analysis was performed under the assumption of lightly-loaded rotor(low-thrust) and the system of vortex sheets was thus taken as a perfect screw(no wake expansion). Betz referred to it as the ``rigid-\voccat{wake}{rigid-wake}'' condition but it should be noted that the flow in itself does not follow a rigid rotation nor a rigid translation. The flow has to move locally perpendicular to the screw surface which has an helix angle which changes with radius as illustrated in \autoref{fig:HelicalWakeTwoRadTop}, so that the flow actually has an axial and an azimuthal component. It is important to note as well that the $w$ is the apparent velocity of translation of the wake, but an elementary wake surface at radius $r$ would move at a velocity $w \cos\epsilon(r)$, as illustrated on \autoref{fig:HelicalWakeTwoRadTop}.
+
+
+\biimagestex{HelicalWakeTwoRadTop}{FlowWakeScheme}{Helix angle change with radius}{1}{1}{(a) Side-view of an helix of pitch $h$ for two different radii - (b) Close up on the change of helix angle $\epsilon$ along $r$ and decomposition of the helix velocity along the normal of the helix surface. Each wake section has a velocity equal to $w\cos\epsilon(r)$. The apparent translation velocity of the wake $w$ has been represented for the case of a propeller, its sign should be opposite for a wind turbine.}
+
+\paragraph{Prandtl}
+As a discussion following the work of Betz, Prandtl derived an approximation to correct for the finite number of blades \cite{prandtlnaca116}. By doing so, he introduced a correction factor which made the optimal circulation from Betz go to zero at the tip of the blade. This physical effect is referred as tip-losses and the correction factor called the tip-loss factor usually noted $F$. A more detailed study of Prandtl tip-loss factor will follow in \autoref{sec:focusprandtl}.
+
+
+\paragraph{Goldstein}
+Advised by him, Goldstein\cite{goldstein:1929} completed the work from Betz using the same assumptions except with a finite number of blades and derived an exact solution as opposed to the approximation from Prandtl. He used Betz's results stating that the optimal circulation distribution for a given thrust was producing the same far-wake flow: a rigid screw moving axially with a constant velocity.  Goldstein took advantage of the periodicity of the flow between two screw surfaces to solve Poisson's equation which reduces to solving both the homogeneous and the inhomogeneous modified Bessel differential equations. Goldstein's makes use of infinite series to solve these equations with the proper boundary conditions. Once the potential is known he determines the circulation at a given radial position, for a given tip-speed ratio by the jump of potential across the sheet at this radial position(in the far wake). The velocity at any point of the far wake is obtained by differentiation of the potential $(\v{V}=\grad\phi)$. With the no-wake expansion assumption, the velocities at the rotor are found as twice as much as the velocity in the far-wake and the flow-angle can be derived. The calculation of the thrust and torque follow with and without the presence of profile drag using the Kutta-Joukowski theorem. A guide to follow Goldstein's article can be found in \autoref{anx:goldstein} and overview of the results and challenges from his theory will follow in \autoref{sec:goldsteintheory}.
+
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Numerical vortex methods
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Numerical vortex methods}
+\label{sec:numericalvortexmethods}
+Vortex methods determine the induced velocities at the rotor generated by the bound and wake vorticity of the wake by using the Biot-Savart law. As opposed to the momentum theory, the vortex theory is based on local flow characteristics and can thus provide more information about the flow. It is important to note that the vortex theory gives the same results as the momentum theory when using the same assumptions, that is, assuming an infinite number of blade, with the vorticity distributed throughout the wake volume\cite{johnson1994helicopter,oye:1990}.  Different vortex methods are found depending on the way the vorticity is modeled. The different options originate from the fact that Poisson's equation, which is linear, admits several infinitesimal solutions which can be used by superposition to find any solutions satisfying the given boundary conditions of the problem. The equivalence between a \voc{potential flow} and a distribution of vortex elements is illustrated on \autoref{fig:PotentialFlowEquivalence}, adapted from \cite{ecnAWSM:2003}.
+%The different possible discretizations of the vorticity are described below and then the problem of the wake geometry is presented.
+
+\imagebtex{PotentialFlowEquivalence}{Illustration of the equivalence between a given flow and a continuous distribution of sources and vortices}{0.9}{}
+
+
+Different \voc{vortex code} implementations exist also depending on the purpose of the code. Some codes guess and prescribe the wake geometry to calculate the flow at the rotor for a steady situation, while other codes reproduce the vorticity shedding, propagation and deformation of the wake. Several variations of vortex codes have been implemented for this study as described in \autoref{anx:vortexcode}.  A small overview is presented in this section.
+
+
+\paragraph{Different dimensions of vorticity} The size of the problem can be reduced in several degrees to simplify it by integrating the distributed vorticity distribution and concentrating it into surfaces lines, or even points. The different formulations changes the character of the flow in the vicinity of the vortex elements which reduces to so called singularities. Far from the vortex elements though the different configurations should give similar flow fields.  The reduction of vorticity dimensions is illustrated on \autoref{fig:VortexDimensionReduction}, adapted from both \cite{drela:1998} and \cite{ecnAWSM:2003}. 
+
+\imagebtex{VortexDimensionReduction}{Reduction of vorticity dimensions by integration}{0.95}{The concentration of vorticity introduces singularities in the velocity field close to the vortex elements.}
+
+
+\paragraph{Different vortex codes} From the different dimensions of vorticity presented above, different vortex code formulations can be derived. These vortex codes are illustrated on \autoref{fig:VortexMethods} and they will be further described in the following paragraphs.
+
+\imagebtex{VortexMethods}{Different vortex codes using different dimension of vorticity}{0.83}{}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Lifting line
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\paragraph{Lifting-line code}
+Prandtl's analytical lifting line theory for a wing has been presented above in \autoref{sec:prandtlliftingline}. This theory cam be applied numerically for any lifting devises satisfying the assumption that the extension of the geometry in the span-wise direction is predominant compared to the ones in chord and thickness direction. For a wind turbine, under this assumption, each blade can be modelled with a line, made of bound vortex segments, passing through the quarter chord point of each cross section. All the flow field in chord-wise direction is concentrated in that point and at each cross section of the blade the lift is assumed to act at the quarter chord location. From each extremity of the bound vorticity segments, two trailing vortex segments emanates of the blade and convects downstream. Segments parallel to the bound segments are also shed if the circulation varies with time. The resulting wake shapes resembles a lattice justifying the appellation sometimes used of ``\voc{vortex-lattice code}''. The implementation of such code varies. It can be made by using segments, horseshoe vortex, or vortex rings. All formulation are identical but varies in the concept of attribution of circulation value to the segments. For instance, in a vortex ring formulation, each rings as one circulation value. Two adjacent rings in the spanwise direction will have one trailed segment in common. The concept of the algorithm is such that the segment is counted positive for one ring and negative for the other ring, so that by computing the total contribution for the two rings, by linearity it is equivalent to computing the trailed segments only once with the circulation value equal to the difference of the two circulations. For code optimization, this is obviously required to avoid computing the influence of a same segments twice.
+
+In this study a lifting line code has been implemented as described in \autoref{anx:vortexcode}. Another example of \voc{lifting-line code} is the one from ECN called AWSM\cite{ecnAWSM:2011,ecnAWSM:2003}. In AWSM the effect of viscosity is taken by using polars of the lift, drag and pitching moment as function of the local flow direction.  To avoid singularities for velocities evaluated close to the vortex line elements, a ``cut-off radius'' is used in the denominator of the Biot-Savart law to ensure it is never 0.
+
+
+\paragraph{Lifting surface code with vortex-lattice} The difference between such code and a lifting-line code is that the wing or blade is modelled with several elements in the chordwise direction and hence takes into account the chord dimension. The wake model is identical, and the same concepts of vortex rings, horseshoe vortex, or trailed and shed segments can be chosen. The difficulty in this code come when it is used in combination with airfoil data. The notion of angle of attack needs to be defined together with the chordwise repartition of lift and hence circulation. Methods using known chordwise distribution from flat plates and elliptical wings are used in\cite{olsen:2001}.
+%``Firs mones'' Piziali, R. A. and Du Waldt, F. A., "A Method for Computing Rotary Wing
+%Airload Distributions in Forward Flight," U.S. Army TCREC, TR 62-44, Nov.
+%1962.
+
+\paragraph{Lifting surface code with continuous distribution} As opposed to the previous method, the vorticity distribution is modelled continuously in each ``rings'' or quadrilateral forming the lattice. This method is at midway between the vortex-lattice and the panel code formulation.
+
+
+\paragraph{Panel code} In a \voc{panel code} the thickness of the geometry can be modelled offering the possibility to compute complex flow cases. Many variations of panels code can be found, as referenced for instance in\cite{katzplotkin}.
+
+
+\paragraph{Mixed representation} For steady simulations in the light of optimizing propellers, steady lifting-line codes are developed\cite{chattot:2002,chattot:2002wt}. Such methods requires iterations to find a physical solution.
+%The geometry is prescribed prior to the simulation. 
+
+
+
+
+\paragraph{Challenges} \label{sec:viscousvortex}
+Due to the law in $1/r^2$ the induced velocity close to a vortex element tend to infinity. Such phenomenon is observed within the hypothesis of potential flow, but in a viscous flow, even a strong vortex will generate finite induced velocity due to viscous shear forces within the fluid elements\cite{bailey:2006}. The vorticity is diffused into a small tube called the vortex-core. Vortex methods circumvent the infinite velocity by introducing these vortex core to simulate viscous effects\cite{katzplotkin,johnson1994helicopter}. Nevertheless, the choice of the core size is empirical and affects significantly the results.
+In numerical vortex methods where the vortex elements are allowed to move freely, numerical instabilities can arise if two elements become too close to each other, even if a vortex core model is used. 
+
+
+\paragraph{Wake model} The \voccat{wake}{model} shape formed by the vortex elements has a critical influence on the induced velocities found at the rotor. It has been seen that for real flow the wake convects, expands, rolls up and distorts. To capture these phenomena, the induced velocities at every point of the wake should be calculated and used to determine how each vortex element will move and what will be their location at the next time step. Such model is referred to as a free wake model. Running such a model requires an important computational time and raises different problems such as the handling of vortex elements as they get close to each other(viscous model, re-meshing) and the modelling of the stretching of vortex elements. These problems are often circumvented by using a prescribed wake model which specifies the wake shape and hence the locations of each vortex elements. The determination of the wake shape is usually empirical or based on free-wake simulations. For a given prescribed wake the induced velocities at the rotor are known in a deterministic way, so that the accuracy of the solution is entirely dependent on how realistic the wake shape is. Given the large number of parameters influencing the wake shape($C_T, \lambda,\Gamma$, etc.) prescribed wake models clearly appears limited.
+Nevertheless, a common approach consists in using mixed representation setting the close-wake free in order to capture local phenomena, while modelling the far-wake as a prescribed helix of constant pitch and radius. 
+Wake modelling for vortex methods has an important number of variations which are beyond the scope of this document(see for instance \cite{gaunaa:2011}\weird{MORE}).
+
+
+
+
+
+
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%   Consideration on aerodynamics on a rotating blade
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\clearpage
+\section{Considerations on the local aerodynamics of a rotating blade}
+\label{sec:localaerodynamics}
+The understanding of the 3D aerodynamics of a rotating blade is fundamentally required in this study. The 3D effects influencing the airfoil performance are investigated because they need to be the modelled in BEM codes and sometimes vortex codes as well. The challenge in these codes is to use tabulated 2D airfoil data which by essence does not reveal three dimensional effects. Two main levers are found:
+\begin{itemizec}
+    \item The angle of attack: a wrong assessment of the angle of attack will lead to a wrong data from the table.
+    \item The airfoil performances: the relevance of 2D airfoil data for wind turbine is rather limited\cite{vermeer:2003}, the airfoil performances have to be known for the exact flow conditions(stall, radial flow, extension of the boundary layer, etc.) they are evaluated at.
+\end{itemizec}
+The problem is really critical for simulation quality but also really challenging. The notion of tip-loss is greatly implicated in this problem as it is used to determine the flow angle and thus the angle of attack either in direct or inverse BEM codes. Inversed BEM codes can be used to find the local angle of attack for a given load distribution on the blade. For this reason a wrong tip-loss implementation will not value a good 3D correction model, and an inaccurate 3D correction model will give no hope to find a good tip-loss correction. An uncertainty analysis was carried out\cite{moffitt:2007} by students from Georgia Tech that showed that the uncertainty on the airfoil coefficients was the one which had the greatest influence on the determination of Goldstein's tip-loss factor(see \autoref{sec:goldsteintheory}).
+On the other hand, rotational effects and stall are mainly found in the inner part of the blade, so it is likely that the tip-losses won't have effects in this area. It has also been observed\cite{risorgaunaa:2011}, that as long as the airfoil section is not stalled, the 2D data were a good approximation in wind energy applications.
+
+In \autoref{anx:aerocoeff2d3d} a comparative study between the airfoil coefficients found with 3D CFD compared to the one found with 2D CFD is presented. These data will be used in \autoref{sec:tiplossaerocoeff} to assess a ``lift coefficient'' tip-loss factor. It will be indeed seen that tip-losses can (partially) by viewed as airfoil corrections (as defined e.g. by \autoref{eq:FCl}). The following paragraphs will be useful to discuss this definition.
+
+
+
+\subsection{Angle of attack}
+\label{sec:angleofattack}
+\paragraph{Definition of angle of attack}
+The notion of \voc{angle of attack} is only well defined in a 2D situation whereas in 3D the introduction of span-wise velocity and induced velocities make it ill-defined. In two dimensions, the angle of attack is defined as the angle between the velocity vector and the chord direction vector.
+In the 2D lifting line theory, the angle of attack has been found to be defined as the angle between the local chord direction and the local effective velocity which is taken as the sum of the undisturbed velocity and the velocity induced by the wake. This definition is made more general, by considering the projection of the total velocity into the plane of the airfoil section. This distinction is important when radial flows are present and in the case of swept and coned blades. 
+%\weird{Zero transpiration see Snel ECN-93 052}
+
+
+
+\weird{Snel:1993.  The measurement of flow angle will always include upwash or downwash that results from the bound vorticity, and in the second place, the wake induced velicity at the point of measurement is not equal to that at the position of the bound vortex, since the finite number of blades causes an azimuthal dependency. This last effect is usually accounted for by application of a tip correction factor within the framework of bem theory.}
+In \cite{snel:1993} the induced velocities used for the angle of attack are taken as the one resulting from all vorticity except the one from the bound vortices.
+In a same fashion, Pitot tube measurements on a rotating blade must be corrected to account for the bound circulation and for the finite number of blade.
+In the BEM method(see \autoref{anx:bem}), such considerations are not needed because the induced velocities will not be calculated using the Biot-Savart law, but using a force-momentum equilibrium law.
+%In this case the wake is assumed to be cylindrical(not expanding).
+
+\paragraph{Inverse methods to determine the angle of attack}\vocghost{inverse method} Using the BEM formalism presented in \autoref{anx:bem}, the angle of attack can be determined if the load distribution is known. The load distribution can be determined by integration of pressure measurement or CFD computation. It is likely that when integrating pressure from measurement, a coordinate system attached to the airfoil chord will be used and hence the load in the chordwise and perpendicular direction will be known. Using data from CFD, depending on the post processor, the data might be exported in another reference system, such as the global blade coordinate system.  The pitch angle and twist angle being known, the axial and tangential forces per length, $p_n$ and $p_t$, are here used as input variables for this inverted BEM code.
+
+\noi The second linkage equations \autoref{eq:bemlinkthrust} and \ref{eq:bemlinktorque} have to be solved for $a$ and $a'$.
+\begin{align}
+    \frac{B p_n}{4\pi \rho r U_0^2} &= aF\left(1-a\right)\\
+    \frac{B p_t}{4 \pi \rho r U_0^2 \lambda_r} &= a'F\left(1-a\right)
+\end{align}
+It should be noted that the tip-loss factor has been inserted in these equations using Glauert's formalism. Also, the ``hat'' notation $\hat{a}$, has been dropped not to surprise the reader with this notation. Other implementations of the tip-loss and BEM equations are possible as described in \autoref{sec:tiplossapplicability}. Only the principle of inverse BEM codes is described here.
+The flow angle is then determined with the first linkage equation:
+\eq \phi=\atan \frac{(1-a) u_0}{(1+a')\lambda_r}\eqf
+Once again, strictly speaking, the local axial inductions on the blade $a_B$ and $a'_B$ should be used in these equations, but several variations of BEM formulation exist.
+The angle of attack, and lift and drag forces per length immediately follow:
+\eq \alpha= \phi - \theta \eqf
+and the aerodynamic coefficients:
+\begin{align}
+    C_l&=\frac{1}{\frac{1}{2}\rho \U^2 c} \left( p_n \cos\phi +p_t \sin\phi\right)\\
+    C_d&= \frac{1}{\frac{1}{2}\rho \U^2 c} \left(p_n \sin\phi - p_t \cos\phi\right)
+\end{align}
+If the tip-loss functions are not function of $a$ and $a'$, then the resolution is done, otherwise an iterative procedure is required. For this the tip-loss function can be initialized to $1$. For instance, all functions can be taken as the Glauert tip-loss correction, $F_\text{Gl}$. As it will be seen in \autoref{sec:tiplossoverview}, this factor depend on $\phi(r)$, which in turn depend on $a$ and $a'$, justifying the iterative procedure.
+Both in experimental and computational methods, the force normal to the chord axis is the one obtained with the most accuracy so it is expected that the lift force will be determined more accurately than the drag force. Moreover, a small error in the determination of the angle of attack will results in a large error in the induced drag due to commonly large values of the lift over drag ratio $\LOD$ (see \autoref{eq:joukowskidrag}).
+
+In a similar fashion, it is possible to use a vortex code in an inverse fashion, using iterations to find the angle of attack corresponding to a given loading. More details on such methods can be found in \cite{sant:2006} and \cite{risorgaunaa:2011}.\vocghost{inverse method}
+
+\paragraph{Other methods to determined the angle of attack}
+The \voc{averaging technique} is probably the most widely used method to determine the angle of attack for CFD data. This method presented in \cite{hansen:2004,johansen:2004} consists in averaging the axial induction in annuli located at different distance to the rotor to extrapolate the value of the axial induction at the rotor. In its simplest form, only two annuli symmetric with respect to the rotor can be used. In \cite{shen:2007} an iterative method is presented which can be used for both CFD and Pitot tubes measurements. This method uses the loading on the blade and the flow angle parameter to determine the bound circulation and the corresponding induced velocities, that will in turn modify the flow angle. A similar method, but using this time a distributed circulation instead of a point vortex to assess the induced velocities is presented in\cite{bak:2005chapter2}. The advantage of this method, is that it is less dependent on the distance to the leading edge where the velocity is evaluated.
+
+
+
+\subsection{Rotational effects}
+\label{sec:rotationaleffects}
+\paragraph{Rotational effects}
+In the middle of the 20$^{th}$ century, Himmeslkamp\cite{himmelskamp:1945} has observed on aircraft propellers that the lift coefficients of the airfoils were increased due to rotational effects implying radial flows. This observation was mainly seen in the smaller radial sections where it was also observed that the stall was occurring at higher angle of attack.  
+One of the first simulation that could include \voc{rotational effects} and carried out for a wind turbine was done by S{\o}rensen in 1986\cite{sorensen:1986}. The effects of lift increase and stall delay were found in these simulations and confirmed by observations of Savino and Nyland\cite[1985]{savino:1985}, and later by Rasmussen et al.\cite[1988]{rasmussen:1988}, Madsen and Rasmussen\cite[1988]{madsen:1988}, Ronsten\cite[1991]{ronsten:1991}, Bruining\cite[1993]{bruining:1993}, with other references found in\cite{lindenburg:2004} and a throughout comparison in\cite{lindenburg:2003}. 
+\begin{itemizeb}
+    \item Lift coefficient: In the inner part of the blade, increase of lift coefficient up to 30\% can be found. Nevertheless, the quantification of increase of lift is difficult and clearly airfoil dependent.  As a general trend, the difference between the 2D and 3D lift coefficients increases going from the mid-span to the hub, in the region where stall occurs. It was also found that the 3D aerodynamic coefficients mainly starts to differ from the 2D coefficient from the angle of attack of maximum lift. 
+    \item Radial component: It was found that the laminar flow was hardly influenced by rotational effects and followed the chord direction from the leading edge. Nevertheless, when the flow encounters an adverse pressure gradient and separates, the fluid is significantly moved outwards by the centrifugal force. This effect is referred as ``centrifugal pumping''.
+    \item Drag coefficient: Studies of the NREl phase VI experiment\cite{lindenburg:2003,tangler:2005} showed an increase of drag near the root and a small decrease near the tip. 
+        % This is for 90\% to the wind Montgomerie\cite{montgomerie:2003} on the other hand expect a decay of drag at the tip.
+        In his study, S{\o}rensen found almost no difference but slightly lower $C_d$. In general, there is no full consensus yet concerning the drag coefficient, though it has been observed that the pressure in the 3D separated zone is lower than the one in 2D, resulting in higher drag. The tapered ratio of the tip is likely to have an influence on the drag coefficient towards the tip.
+    \item Separation Point: Stall can be delayed of few percent of the chord length.
+\end{itemizeb}
+The current understanding of rotational effects can be described as follow. The centrifugal loads acts on all volume of air for which the relative tangential velocity differs from the relative velocity of the blade, $\Omega r$.  This radial flow can only occurs in regions of strongly retarded flows as the separated boundary layer and separation bubble present on the suction side of the blade. Due to centrifugal loads the air is accelerated radially towards the tip of the blade. This radial velocity component will induce a Coriolis acceleration in the main flow direction, acting as a favourable pressure gradient. The displacement thickness of the separated boundary layer is decreased, leading to less de-cambering and higher lift coefficients\cite{snel:1993}. 
+\weird{towards the leading edge says Lindenburg??}. 
+\weird{More on leading edge stall and trailing edge stall and extension of the boundary layers towards the trailing edge}
+
+%If the pressure gradient is insufficient to balance this acceleration the air in the separation bubble tend to move towards the trailing edge 
+
+%The boundary layer moves slightly towards the tip, is less thick and more stable compared to a non-rotating state. The overall phenomenon results either in higher lift coefficients or constant lift-coefficient in the range where stall for the non rotating airfoil was expected.
+
+%Leading edge stall is likely not to occur at all.
+%Centrifugal pumping is based on the effect of trailing edge stall.
+
+%Leading edge stall trailing edge stall
+
+%\paragraph{Deep stall} \weirdb{}
+%\weird{See ECN C03025 for deep stal}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%i
+%%% Airfoils 3D corrections
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Airfoil corrections}
+\label{sec:airfoilcorrections}
+\paragraph{Data for large angles of attack}
+Data for large angles of attack are usually not available from wind tunnel measurement so extrapolation techniques are often used. For high incidences(e.g. $\alpha\in\seg{-170}{-30}\cup\seg{30}{170}$) airfoil characteristics are considered to become rather independent of the geometry so that data from a flat plate can be used. This is for instance mentioned in \cite{shen:2005} but with the flat plate airfoil characteristics reduced by a factor of 85\%. In \cite{bakadwt1} the fully separated($\text{fs}$) coefficients for high \voccat{angle of attack}{large} are computed as:
+\begin{align}
+    C_{L,\text{fs}}&=2\cos\alpha\sin\alpha\\
+    C_{D,\text{fs}}&=1.3\sin^2\alpha\\
+    C_{m,\text{fs}}&=-\frac{1}{4} C_n\quad \text{with}\quad C_n=1.0 \sin\alpha
+\end{align}
+\weird{$C_=-1.4*\sin\alpha*C_d$}
+and a function $g$ is used to ensure a smooth transition between the original data and the extrapolated data, as $C_\bullet=gC_\bullet+(1-g)C_{\bullet,\text{fs}}$, with e.g. the function $g$ defined with three parameters $\alpha_d$, $\alpha_0$ and $\Delta\alpha$ as:
+\eq g(\alpha)=0.5+0.5\tanh\left[ \frac{\alpha_d+\alpha_0-\abs{\alpha}}{\Delta\alpha}\right] \eqf
+Another model is the one from Viterna and Corrigan\cite{viterna:1981} which extrapolates the airfoil coefficients after stall. The authors looked at a way to obtain an idealized stall that would keep a constant torque at high wind speeds and thus high angles of attack. This approach was developed to fit measured and predicted performances of two specific stall regulated wind turbine. This correction requires that the lift over drag ratio at the initial angle of attack matches the lift over drag ratio of a flat plate. This is unfortunately not a common case and in\cite{tangler:2005} it is argued that an incomplete understanding of the stall process existed at the time of this method's development. In\cite{tangler:2005}, the \voc{Viterna's method} is applied with as input the angle of attack and the average aerodynamic coefficients values over the blade span for which the lift over drag ratio matches the flat plate theory.   A review of aerodynamics coefficients at high angles of attack can be found in \cite{lindenburg:2001}.
+
+
+\paragraph{Airfoil data 3D corrections}
+The 2D \voccat{airfoil coefficients}{corrections} found from measurements in wind tunnel or by simulations such as CFD or panel methods tools such as Xfoil\cite{xfoil}, are usually corrected to be used in BEM or aeroelastic codes. It should be noted that though there are uncertainties in simulations results, measurements data also have quite a spread as seen in the comparison of results from 4 different renown wind tunnels \cite{danaerofinal}. 
+Most 3D correction methods can be written in the following form:
+\eq C_{\bullet,\text{3D}}= C_{\bullet,\text{2D}}+f_{C_\bullet} \Delta C_\bullet \label{eq:c3dc2d} \eqf
+where $\bullet$ stands for $L$, $D$, $m$, the indexes of Lift, Drag and moment coefficients. $\Delta C_\bullet$ is the difference between the coefficient $C_\bullet$ estimated in inviscid flow(i.e. without separation) and its its steady 2D value evaluated for instance from a wind tunnel measurement(where obviously separation will occur). The inviscid lift coefficient can be approximated with the one for the Joukowski's airfoil family\cite{huerre:2006} approximated for a thin airfoil of trailing edge parameter $a$, chord of $\approx 4a$,  at small angle of attack $\alpha$ and small camber parameter $\beta$ :
+\eq C_{l,\text{inv},\text{thin}}\approx 8\pi \frac{a}{c}\sin(\alpha+\beta)\approx 2\pi(\alpha-\alpha_0) \label{eq:clinv} \eqf
+Nevertheless, the author would like to point out that such approximations is often inappropriate for airfoils used in wind energy. This remark will also apply when commenting the performance tip-loss correction from Lindenburg in \autoref{sec:tiplossoverview}. The result from \autoref{eq:clinv} apply to thin airfoils and the slope $2 \pi$ is only obtained when the thickness tend to zero. In Abbot and Von Doenhoff\cite{theoryofwingsections}, a similar conformal transformation is used for symmetric airfoils that leads to(see \cite[p~53]{theoryofwingsections}):
+\eq C_{l,\text{inv},\text{thin}} \approx 2\pi \left( 1+\frac{4}{3\sqrt{3}}\frac{t}{c}\right)\sin(\alpha-\alpha_0)\approx 2\pi \left( 1+0.77\frac{t}{c}\right)\sin(\alpha-\alpha_0) \label{eq:clinvb}  \eqf
+where the thickness ratio has been taken as $(3\sqrt{3}/4)\epsilon/a\approx1.299\epsilon/a$ according to Abbot and Von Doenhoff's notations. This formula shows that the slope for thick airfoil can be expected to be higher than the theoretical results of $2\pi$ extensively used in engineering methods. The author does not recommend in particular to use \autoref{eq:clinvb} which could lead to tremendously large slopes for thick airfoils. Instead, a linear fit of 2D viscous tabulated data in the linear region (e.g. \seg{\alpha_0}{\alpha_0+8}) should be used to determine the slope $C_{l,\alpha}$. The inviscid coefficient could then be determined as:
+\eq C_{l,\text{inv}}=C_{l,\alpha}\sin(\alpha-\alpha_0-0.01 ) \label{eq:clinvc} \eqf
+The constant $0.01$ is suggested in order to ensure that the inviscid data are slightly always than the viscous one.
+
+A brief overview of the models of Snel et al\cite{snel:1993}, Lindenburg\cite{lindenburg:2003,lindenburg:2004}, Du and Selig\cite{du:1998} and Chaviaropoulos and Hansen\cite{chaviaropoulos:2000} which all increases the lift coefficient in the root section can be seen \autoref{tab:3Dcorrections}. None of the methods presented in this table uses a correction for the moment coefficient, i.e. $f_{C_m}=0$. This table also presents the engineering model that has been derived by Sant\cite{sant:2007} for the NREL phase VI rotor\cite{nrelphasesix} using different polynomials $P$ of degree 3 and 4 in $c/r$. The model of Bak et al\cite{bak:2006} is probably the most complex one at this moment as it uses a model for the $C_p$ distribution depending on the angles of attack where the separation occurs from the leading edge and where the separation starts from the trailing edge. This model of $C_p$ tries to reproduce the difference between $C_p$ distributions from 3D measurements and 2D data. It is also the only model that presents a correction for the moment coefficient. Among the other existing corrections used for wind turbine, one can mention the methods to extrapolates coefficients for unclean blades(ice, dirt, insects). Such extrapolation methods are referenced in \cite{branlard:arctic}.
+%\weird{ECN c 93 052 SNEL} 
+
+\begin{tabcol}{3Dcorrections}{Corrections of airfoil coefficients for 3D effects according to Eq. \ref{eq:c3dc2d}}
+  \renewcommand{\arraystretch}{2.1}%
+  \begin{tabular}{|p{2.5cm} |p{6.0cm}|p{6.0cm}|}
+      \hline
+      \textbf{Model} & $\mathbf{f_{C_L}}$  &  $\mathbf{f_{C_D}}$  \\
+        \hlinet
+        Snel et al.\cite{snel:1993}\par & $\displaystyle3\left(\frac{c}{r}\right)^2 \quad\text{or}\quad  3.1\left(\frac{c}{r}\right)^2$  & 0   \\
+        Lindenburg\cite{lindenburg:2004}\par& $\displaystyle3.1 \left(\frac{\Omega r}{V_\text{rel}}\frac{c}{r}\right)^2$ &0 \\
+        Du \& Selig\cite{du:1998}&
+        $ \frac{1}{2\pi}\displaystyle \left[\frac{1.6(c/r)}{0.1267}\frac{a-(c/r)^\frac{dR}{\Lambda r}}{b+(c/r)^\frac{dR}{\Lambda r}} -1\right]$\par
+        with $\Lambda=\Omega R/\sqrt{V_0^2+(\Omega r)^2}$\par 
+        \ $\quad \quad a=b=d=1$ &
+         $- \frac{1}{2\pi}\displaystyle \left[\frac{1.6(c/r)}{0.1267}\frac{a-(c/r)^\frac{dR}{2\Lambda r}}{b+(c/r)^\frac{dR}{2\Lambda r}} -1\right]$\par
+        \\
+       Chaviaropoulos \& Hansen\cite{chaviaropoulos:2000}& 
+       $a \displaystyle\left(\frac{c}{r}\right)^h \cos^n\beta$\par
+       with $a=2.2$, $h=1$ and $n=4$       
+       &
+       $\displaystyle a \left(\frac{c}{r}\right)^h \cos^n\beta$\par
+       \\
+       Sant \cite{sant:2007} & 
+       $K_L(\alpha)\left[1-e^{-0.003\left(\max(\alpha,\alpha_s)-\alpha_s\right)^3}\right]$\par
+       with $K_\bullet=g_\bullet(n_{\bullet}-m_\bullet\alpha)e^{-a_\bullet(\alpha-\alpha_s)}$\par
+       \ $\quad \quad g,n,m,a=P(\frac{c}{r})$ 
+       &
+       $K_D(\alpha)\left[1-e^{-0.003\left(\max(\alpha,\alpha_s)-\alpha_s\right)^3}\right]$ \\
+         \hline
+    \end{tabular}
+\end{tabcol}
+
+%\weird{SEE BOT manual See ECN C03025 for effect of rotation, and stall delay 
+%Snel model , correction only below 80\%}
+
+\paragraph{Stall Delay}
+The most common \voc{stall delay} model is the one from Corrigan and Shillings\cite{corrigan:1994,lindenburg:2003}. 
+Most models for stall delay modify only the lift coefficient, but not exclusively. For wind turbines applications, a modification of the drag coefficient is most probably required due to difference of pressure intensity observed in the separated regions between 2D and 3D stall.
+%\weird{centrifugal pumping of air in the trailing-edge separation bubble.}
+
+\paragraph{Tip-losses} The tip-loss correction of Shen et al.\cite{shen:2005} suggests of correction on $C_n$ and $C_t$ to account for the pressure equalization at the tip of the blade which should lead to the loads vanishing. This correction will be presented in more details in \autoref{sec:overviewshen} and \ref{sec:shen}. In his PhD thesis\cite{sant:2007}, Sant suggests a correction for the lift and drag coefficient in a similar fashion than Shen. This correction is presented in \autoref{sec:overviewsant}.
+
+
+
+
+
+
+
+
+\clearpage
+
+
+
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%  Preliminary considerations        
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\clearpage
+\section{Preliminary considerations for the study and modelling of tip-losses}
+\label{sec:preliminaryconsideration}
+\subsection{Physical considerations expected to be modelled}
+\begin{itemizeb}
+    \item The force on the blade should go to zero at the tip due to the pressure balance between the upper surface and the lower surface
+    \item The relative velocity at the blade tip cannot be equal to the upstream velocity due to shear at the boundary of the ``ideal'' streamtube and to the presence of the tip vortex that will clearly modify the flow structure at this particular location.
+    \item The average axial induction drops towards zero at the tip, but does not have to be exactly zero at the tip. The radial and rotational flow at the tip due to the tip-vortex transfers axial kinetic energy towards rotational kinetic energy so that the flow is not likely to have it's full upstream velocity at the tip. This is supported by the considerations of the previous point, and CFD simulations.
+    \item The relative velocity is not uniform in a annular section to the limited number of blades. The axial and tangential induction factor are thus azimuthally dependent.
+    \item The flow has a radial component, simply due to the expansion of the streamtube and also more subtly due to 3D aerodynamic effects\cite{madsen:2007}. As a result of this the 2D airfoil coefficients could not be suitable to give the exact aerodynamic loads. %Also a radial dependence of the axial induction factors could be expected for this reason\weird{here I'm less confident}. 
+    \item The circulation along the blade is not constant due to e.g. root and hub losses. This will imply a radial dependency of the induction factors.%\weird{explain why, hehehe}
+    \item The optimal circulation distribution derived by Goldstein and reasonably simplified by Prandtl are never obtained in reality. Moreover they are derived for optimal frictionless rotors, so their applicability to rotors in general is uncertain.
+%    \item Vortices are shed into the wake and these flow structure 
+\end{itemizeb}
+
+
+\subsection{Definition of the tip loss factor}
+\label{sec:tiplossdefinition}
+It will be seen that several definitions and interpretations of the \voccat{tip-loss factor}{definition} can be found in the literature. These definitions will be introduced in this section, but more detailed will be found throughout this document, particularly in \autoref{sec:maintiplosstheories} where the theoretical work are presented.  As a result of these different definitions, the implementation of the tip-loss factor will also have several variations. This will be the focus of \autoref{sec:tiplossapplicability}.
+\paragraph{Definition in terms of axial induction}
+The fact that the axial induction factor is azimuthally dependent suggests the introduction of the average induction factor in an annulus $\bar{a}$ (see \autoref{eq:abar}). It is also expected that this factor will reach an extremum in the vicinity of the blade so that the particular value taken at the blade is relevant and will be denoted $a_B$. With these definition, the tip-loss factor $F$ has been defined by Glauert as the ratio between the azimuthally averaged axial induction factor and its value at the blade:
+\eq F=\frac{\bar{a}}{a_B} \label{eq:Fa} \eqf\index{axial induction!averaged}\index{axial induction!blade}
+The difference between $\bar{a}$ and $a_B$ can be read on \autoref{fig:AxialInductionAzimuth}. Reading the plot at the azimuthal positions of the blades(e.g. 120\deg), and doing the ratio of the inductions factors at different radial position, the tip-loss factor as defined by \autoref{eq:Fa} can be visualized. A shape similar to \autoref{fig:TiplossPrandtlV0} is obtained.
+
+
+
+
+\paragraph{Definition in terms of circulation}
+The \voccat{tip-loss factor}{definition}  can also be seen as the ratio between the maximum theoretical circulation for a rotor with an infinite number of blades to the actual circulation for a rotor with finite number of blades:
+\eq F=\frac{B\Gamma}{\Gamma_\infty} \label{eq:Fgamma}\eqf
+This definition corresponds to the work of Prandtl and Goldstein, whose work will presented
+
+%\weird{Important to remember: On the blade, locally, close to the tip, $a_r$ is larger than 1/3, so that the blade geometry should be smaller, the inflow angle is smaller. But in average azimuthally, the axial induction factor goes to zero with r going to the tip.}
+
+\paragraph{Definition in terms of aerodynamic efficiency} 
+In \autoref{sec:localaerodynamics} the local aerodynamics near the blade has been discussed. At the blade tip the flow is likely to differ significantly from 2D aerodynamics due to the formation of the tip-vortex(see e.g. \autoref{fig:TipSurfaceStreamlines}). The performance of the airfoil at the tip is hence lower than expected and a \voccat{tip-loss factor}{performance} can be defined accordingly as: 
+\eq F_{C_l}=\frac{C_{l,3D}}{C_{l,2D}} \label{eq:FCl} \eqf
+This \voccat{tip-loss factor}{definition} is likely to be dependent on the tip geometry and on the rotor operating condition. It will be investigated using CFD data in \autoref{sec:tiplossaerocoeff}. This tip-loss factor can be seen independently of the one from \autoref{eq:Fa} which predicts a reduction of angle of attack near the tip.
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% BEM 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Distribution of axial induction}
+Given the definition from \autoref{eq:Fa}, a throughout understanding of how the axial induction is distributed around the wind turbine is required. 
+Several figures will be and have been presented to illustrate the variations of the axial induction. Observing these figures, several general remarks are drawn:
+\begin{itemized}
+    \item \Autoref{fig:Actuator1DMomentum}: From the 1D momentum theory, it is known that the axial induction increases progressively from upstream to a given value downstream
+    \item \Autoref{fig:AxialInductionAzimuth}: Using a vortex code with a constant circulation along the blade, it was seen that the axial induction increases azimuthally when approaching the blade azimuth and drops after that. This increase of induction is more important at the tip of the blade.
+    \item \Autoref{fig:VLTipLossSensitivityToBoundPolarBound}: The bound circulation is responsible for the jump in axial induction from both side of the blade when looking at different azimuthal position. The wake is responsible for the main part of the axial induction. In a sense, the blockage of the flow is performed by the wake. 
+    \item \Autoref{fig:NB4AxialInductionWakeDeficit}: The axial induction increases when going further downstream. The local effects are smoothen out and the presence of the nacelle becomes barely noticeable. It is seen that the average axial induction goes to zero with the radial coordinate, but is not zero at the tip.
+    \item \Autoref{fig:AxialInductionZX}: The thrust coefficient has an important influence on how the axial induction is distributed before and after the rotor. The higher the thrust coefficient, the more flow is blocked in front of the rotor. Radial variations of the axial induction in the wake are of course dependent on the axial induction on the blade. Important variations of axial induction are found at the tip. Velocities higher than the free stream velocity can be found at the tip, implying that negative axial induction can occur at the tip. As said above, The velocity does no reaches the free stream velocity exactly at the blade tip.
+\end{itemized}
+
+\noi\begin{figure}[!htb]
+\centering%
+  \begin{minipage}[b]{0.3\textwidth} \centering \subfloat[$U_0=6$ m/s - $C_T=0.25$]{\includegraphics[width=\fitfig{1}]{figs/NB4_AB00_ns_pitch_n1p3_t_Vw060_090rpm_VelV_Yzplan}} \end{minipage}
+  \begin{minipage}[b]{0.3\textwidth} \centering \subfloat[$U_0=10$ m/s - $C_T=0.21$]{\includegraphics[width=\fitfig{1}]{figs/NB4_AB00_ns_pitch_n2p7_t_Vw100_120rpm_VelV_Yzplan}} \end{minipage}
+  \begin{minipage}[b]{0.3\textwidth} \centering \subfloat[$U_0=12$ m/s - $C_T=0.1$]{\includegraphics[width=\fitfig{1}]{figs/NB4_AB00_ns_pitch_p6p85_t_Vw120_120rpm_VelV_Yzplan}} \end{minipage} \\
+  \begin{minipage}[b]{0.3\textwidth} \centering \subfloat[$U_0=14$ m/s - $C_T=0.06$]{\includegraphics[width=\fitfig{1}]{figs/NB4_AB00_ns_pitch_p10p85_t_Vw140_120rpm_VelV_Yzplan}} \end{minipage} 
+  \begin{minipage}[b]{0.3\textwidth} \centering \subfloat[$U_0=16$ m/s - $C_T=0.03$]{\includegraphics[width=\fitfig{1}]{figs/NB4_AB00_ns_pitch_p15p7_t_Vw160_120rpm_VelV_Yzplan}} \end{minipage} 
+      \caption{Side view of the turbine showing the variation of velocity(or axial induction) found with CFD}
+      \label{fig:AxialInductionZX}%
+ \end{figure} 
+
+
+
+
+
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% BEM 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Subtleties of the BEM method relevant for this study}
+\label{sec:bem}
+For clarity, the common BEM method is presented in annex \autoref{anx:bem} whereas this section is more dedicated to the subtleties of this method.
+The \voc{blade element momentum}(BEM) method is attributed to Glauert\cite{glauert:1935} and results in the combination of the \voc{momentum theory} and the \voc{blade element theory}. The momentum theory applied to an annular element provides the corresponding elementary thrust and torque for a given set of induction factors. This relation between induction factors and loads is invertible. The velocity triangle from the momentum theory also gives an expression of the flow angle as function of $a$ and $a'$. On the other hand, the blade element theory requires the airfoil characteristics, the angle of attack(or the flow angle) and the relative velocity to calculate the forces of lift and drag applied to the blade element, and by projection the elementary thrust and torque. For a given rotor geometry and a given wind condition, a physical solution will be found if both methods returns the same loads for all the different stripes. In order to find this solution, the methods are linked together to form a converging iterative process. The author likes to emphasize two links, or linkage, to clearly distinguish the difference of the methods and how they interact. The first linkage is obtained by comparing the velocity triangles of the two methods(energy equation). The second linkage consists in equalizing the loads obtained from both methods. \Autoref{fig:BEMscheme} illustrates the BEM process, the use of the different theory and the two links between them.
+%(\weirdb{this might have to be thought more generally}).  
+%\weirdb{I like to describe the BEM by emphasizing two ``linkages''. I recently discovered the view of Stieg Oye, and Theodorsen and I haven't looked enough into it. That should imply small modifications. More maturity needed to clearly states the debates}
+
+\imagebtex{BEMscheme}{Parameters needed and results obtained with the different method used}{0.92}{The Blade Element Momentum(BEM) method results in the combination of both the momentum theory and the blade element theory} 
+
+
+\paragraph{Context of applicability}
+\begin{hyps}Simplified 2D Momentum theory
+	\resethypcounters
+    \begin{hyp} Homogeneous, incompressible, steady state fluid flow   \end{hyp}
+	\begin{hyp} No frictional drag\end{hyp}
+	\begin{hyp} Actuator disk generates a pressure drop and rotates the flow downstream(infinite number of blades) \end{hyp}
+        \begin{hyp} Uniform circulation/thrust over the rotor area and thus uniform induction \label{hb:uniformcirculation}  \end{hyp}
+	\begin{hyp} Lighlty loaded rotor  \end{hyp}
+	\begin{hyp} The static pressure far upstream and downstream is equal to the undisturbed ambient static pressure($\omega$ small compared to $\Omega$)\end{hyp}
+\end{hyps}
+\begin{hyps}Blade element theory
+	\resethypcounters
+        \begin{hyp} No aerodynamic interaction between the annular elements   \end{hyp}
+	    \begin{hyp} Forces on the blade can be calculated using airfoil aerodynamic characteristics\end{hyp}
+\end{hyps}
+\begin{hyps}BEM
+	\resethypcounters
+        \begin{hyp} The assumptions of momentum theory can be relaxed  \end{hyp}
+        \begin{hyp} The forces of the $B$ blade elements are responsible for the change of momentum of the air which passes through the annulus swept by the elements \end{hyp}
+\end{hyps}
+\noi A justification on how \refh{hb:uniformcirculation} can be relaxed can be found in \cite[p~63]{windenergyexplained}. This relaxation is primordial to justify the common use of the BEM method.
+
+\paragraph{Pros and cons} Doing a listing of advantages and shortcomings of a BEM code is bound to raise clich\'es and debates, so the reader is invited to evaluate them parsimoniously:\\ 
+Advantages
+\begin{itemizec}
+    \item Fast
+    \item Known and well tested models to unsteady flows
+    \item Proved some accuracy
+\end{itemizec}
+Shortcomings:
+\begin{itemizec}
+    \item Not possible to model winglets of sweep-back blades
+    \item 3D effects, yaw, non-stationary effects and stall are only modelled
+    \item No investigation of the flow possible(boundary layer, pressure distribution, wake)
+\end{itemizec}
+
+
+\paragraph{Observed performance of BEM codes} The performance of BEM codes will be extremely dependent on the model implemented. As an illustrations of this, several observations found in the literature are listed. It is see that these observations are sometimes contradictory and they should thus not be taken as general.
+Different observations are found when comparing with measurements. 
+\begin{itemizec}
+    \item Underprediction of power, especially after stall \cite{sankar:2001}. 
+    \item Underprediction of power in the stalled conditions\cite{sorensen:1986}. 
+    \item Overprediciton of power for 2-bladed rotors\cite{lindenburg:2003}
+    \item Prandtl tip loss correction overestimate the loads at the tip\cite{shen:2005}
+    \item Under prediction of the power coefficient in the inner part of the blade and over prediction in the outer part of the blade (without tip or hub corrections ) \cite{madsen:2009,madsen:2007} 
+\end{itemizec}
+
+%\weird{predicted’ is partly eliminated. Another reason for the over-predicted performance of 2-bladed rotors is the fact that real rotor blades have higher aerodynamic drag coeffcients caused by inaccuracies of the airfoil shape near the leading edge and caused by dirt.  With their smaller tip-speed, the performance of 3-bladed rotors is less in?uenced by (an increased) drag so the mis-prediction due to dirt is smaller.}
+
+\paragraph{Debate on the drag} In linking the blade element theory and the momentum theory, it is argued that the \voccat{drag}{Inclusion in BEM} should not be included. 
+\begin{itemizec}
+    \item References advising not to include the drag:\cite{wilsonlissaman:1974,lindenburg:2003,devries:1979,windenergyexplained} 
+    \item References including the drag:\cite{martin,bak:2010}
+    \item References arguing both:\cite{windenergyexplained}
+\end{itemizec}
+From an analysis of the following references \cite{windenergyhandbook,lindenburg:2003,huerre:2006,wilsonlissaman:1974}, the following can be mentioned concerning the debate on the inclusion of the drag.
+The viscous effects emerging from the boundary layer of the airfoil are propagated in the wake into helical filaments enclosed by vorticity. The velocity deficit caused by drag is confined to this narrow wake emerging from the trailing edge. 
+It is argued that these filaments are diffused behind the rotor and are only a feature of the wake, so that they induced no velocity in the rotor plane. 
+The momentum equations uses the induced velocities at the rotor plane and thus from the argument above the drag coefficient should not be used.
+
+This argumentation requires the understanding and distinction of pressure drag and friction drag. Friction drag comes from the tangential component of the strain vector at the wall which arises from viscosity. Pressure drag is the result of the normal component of the strain vector. For profiled bodies at high Reynolds number, at a first approximation separation can be neglected and the pressure solution would be close to the one found for the corresponding potential flow\footnote{For moderate Reynolds number though, the pressure drag due to the presence of the boundary layer, even if thin, can be quite important.}. The pressure drag force could then be neglected as a general result of potential flow. Nevertheless, the frictional drag associated with the viscous strain in the boundary layer is non zero and makes the most part of the total drag. In the contrary, when separation clearly occurs, the pressure drag is likely to be the predominant term in the total drag. The friction drag is barely dependent on the relative thickness of the profile whereas the pressure drag clearly is. 
+Assuming attached flow at high Reynolds number then, the pressure drag could be considered as zero and thus the drag would not contribute to the pressure drop across the rotor. This analysis though is to be taken with care and its results can be argued.
+
+
+
+
+\paragraph{Steady BEM Code patches}
+BEM Code patches listed here with a minimum of detail. The representation as a list of different items should be taken with care as most of them are overlapping or interlinked.
+\begin{itemizec}
+    \item Momentum theory break down: The actuator disk stops all the fluid if $a=1/2$, but this cannot be stored it has to flow away so correction is needed. The common corrections are the one from Spera or Glauert.  Typically $C_T=f(a)$ inverted in $a=f(C_T)$
+    \item Hub and tip losses due to 3D effects and the intrinsic generation of vorticity from the lift\weird{youhou}
+    \item Corrections of airfoil coefficients accounting for 3D effects, extrapolation, smoothing of airfoil data
+    \item Stall delay model accounting for some 3D effects
+%    \item Drag ? Something like it?
+%    \item Tip vortex rollup in aerodyn ?????
+\end{itemizec}
+Each of these ``patches'' offers a different levers to correct for the difference between the simplified theory and the real situation. There are indeed different physical phenomenon observed such as centrifugal pumping, stall delay, tip losses, and it seems reasonable to treat these different problem independently, but obviously non-linearity in the overall problem will make the modelling and verification difficult. 
+The different models mentioned above have proven good when combined all together in the BEM algorithm, but there is no guarantee that improving one model with more physical sense will make the overall BEM code more accurate.
+
+
+%\weirdb{Something I don't quite understand from\cite{lindenburg:2003}: Still the viscous wake of the airfoil has a small influence because the loss of momentum involves some flow expansion.  This disturbance from flow expansion is perpendicular to that from the loss of momentum due to drag, which means that flow expansion from airfoil drag should not be described as loss of momentum of the annular flow.}
+
+% 
+% 
+% \paragraph{Debate on the equality of momentum} The debate on this follow a little bit the previous paragraph.  Two different methods can be used for the ``second linkage''. \begin{itemize}
+%     \item First method: Let the axial force on the blade equal the rate of change of axial momentum, and the torque equal the rate of change of angular momentum.
+%     \item Second method: Let the total rate of change of momentum equal to the lift force.
+% \end{itemize}
+% Clearly in reality, both the lift and the drag contributes to the thrust and the torque. Nevertheless, the induced velocities are only produced by the Lift, the loss of momentum produced by the drag being due to shear stresses in the boundary layer. It is thus argued that the first method has an inherent inconsistency\cite{devries:1979,sorensen:1986}
+% %\weirdb{(\{O}ye 1983)}.
+% 
+% 
+% \subsection{The second linkage - using the first method}
+% 
+% \paragraph{Blade Element theory formulation} Using the blade element theory(\BET) formalism, the total thrust and torque exerted on $B$ blade elements are : 
+% \begin{align}
+% \dT_\BET&=B {\d}F_n = \frac{1}{2}\rho \U^2 (Bc\dr) C_n  \dim{N} \label{eq:dtbladeelement}\\
+% \dQ_\BET&=B r{\d}F_t = \frac{1}{2}\rho \U^2 (Bc\dr) r C_t   \dim{Nm} \label{eq:dqbladeelement}
+% \end{align}
+% \paragraph{Momentum theory formulation} Over the assumptions of the simplified 2D momentum theory, the overall changes of axial and angular momentum are: 
+% \begin{align}
+% \dT_\text{MT}&=\frac{1}{2}\rho U_0^2 (2\pi r \dr) \left[4a(1-a)\right]      \\
+% \dQ_\MT&=\frac{1}{2}\rho U_0^2 (2\pi r \dr) r \left[4a'(1-a)\lambda_r\right] 
+% \end{align} 
+% Equating the two leads to the basic BEM equations. 
+% 
+% 
+% \subsection{The second linkage - using the second method}\weirdb{draft}
+% 
+% The pressure drop across the disk corresponds to the contribution of the lift force only:
+% \eq \Delta p 2\pi r \dr = B L \dr \eqf
+% and the pressure drop is:
+% \eq \Delta p = 2 \rho w_i (U_0 - w_i \cos\phi) \eqf
+% The combination of these two formula is the linkage required.
+% \weirdb{I need to check if this is exactly the same as done in the wind energy handbook p62}
+% 
+% 
+% 
+
+
+
+
+
+
+
+
+\subsection{Final remarks}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% The main assumption - potential flow
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\paragraph{Note on potential flows} 
+The 1D and 2D momentum theory relies on the assumption of potential flow, which mainly implies that the drag is zero. The blade element theory on the other hand does not have this constraint. Using both the simplified 2D momentum theory and the BET, the BEM equations should in theory be constraint to the absence of drag but nevertheless BEM codes are used with drag. The same apply to vortex theory which relies on potential flow, and vortex codes which are sometimes used as predictive wind turbine tools, using drag.  All wind turbine codes all have to relax the assumptions on which they are based, hence loosing rigour and introducing potential inconsistency.
+%By overpassing the assumptions all models becomes intrinsically potentially inconsistent. The
+
+\paragraph{Pragmatic approach} All of the above being kept in mind the physical problem of tip-losses will be investigated. Such investigation will require the observation of this phenomenon through experiments and simulation, together with an interpretation and understanding of its physics. By studying the different existing models, understanding their limitations and confronting them to different datasets, an insight of the challenges raised when modeling this problem will be acquired. Due to the different ``BEM patches'' acting as as many levers, a global view of the field of influence of each of them is necessary. Such analysis should eventually give suitable basis for trying to search for improvements.     
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% The Challenges
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% As a first analysis, the main challenges can be thought to be:
+% \begin{itemize}
+%     \item Evaluating loads on a blade for an arbitrary incoming velocity
+%     \item Evaluating the flow over the rotor
+% \end{itemize}
+% 
+% 

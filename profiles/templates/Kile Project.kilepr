@@ -1,0 +1,9 @@
+[General]
+masterDocument=report.tex
+name=WTBook
+
+
+[item:report.tex]
+archive=true
+open=true
+

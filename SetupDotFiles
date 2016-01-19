@@ -11,12 +11,17 @@ echo "PATH: " $path
 # Going to user home directory
 cd ~
 
-# Moving existing files to a backup folder
+# Moving existing dofiles to a backup folder
 BKP_FOLDER=_bkp_dotfiles
+echo "Backup Folder: $BKP_FOLDER"
 mkdir -p $BKP_FOLDER 
-mv .xinitrc .xsessionrc .bashrc .bash_logout .bash_profile .vimrc .vim .gitconfig .profile .fonts $BKP_FOLDER
+mv .xinitrc .xsessionrc .bashrc .bash_logout .bash_profile .ctags .vimrc .vim .gitconfig .profile $BKP_FOLDER
+# Moving existing dotconfig to a backup folder
+mv .config/Templates .config/xfce4 .config/Thunar $BKP_FOLDER
+# Moving existing dotfolders to a backup folder
+mv .themes .fonts $BKP_FOLDER
 
-# Removing files
+# Linking dotfiles
 ln -s $path/dotfiles/xinitrc .xinitrc
 ln -s $path/dotfiles/xsessionrc .xsessionrc
 ln -s $path/dotfiles/bashrc_user.bash .bashrc
@@ -24,8 +29,15 @@ ln -s $path/dotfiles/bash_profile.bash .bash_profile
 ln -s $path/dotfiles/bash_logout .bash_logout
 ln -s $path/dotfiles/ctags .ctags
 ln -s $path/dotfiles/vimrc .vimrc
-ln -s $path/dotfiles/vim .vim
 ln -s $path/dotfiles/profile .profile
+# Linking dotfolders
+ln -s $path/dotfiles/vim .vim
+# Linking .config folders
+mkdir -p .config
+ln -s $path/dotconfig/xfce4 .config/xfce4
+ln -s $path/dotconfig/Thunar .config/Thunar
+
+
 
 if [ $HOSTNAME == 'work' ]
 then
@@ -43,7 +55,6 @@ ln -s $path/fonts .fonts
 fc-cache -vf ~/.fonts
 
 # templates
-
 ln -s $path/profiles/templates .config/Templates
 
 # look
