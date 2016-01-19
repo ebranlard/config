@@ -343,8 +343,15 @@ LWin:: Send {Esc}
 ;; ---  Browser
 ;; --------------------------------------------------------------------------------
 #If WinActive("ahk_class IEFrame") || WinActive("ahk_class MozillaWindowClass")
+^j::Send {Down}
+^k::Send {Up}
+^n::Send {Down}
+^p::Send {Up}
 ^+j::Send {Down}
 ^+k::Send {Up}
+^+n::Send {Down}
+^+p::Send {Up}
+;; ^+k::Send {Up}
 /::Send ^f
 ^+h::Send +^{Tab}
 ^+l::Send  ^{Tab}

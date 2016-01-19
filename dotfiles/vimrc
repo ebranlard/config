@@ -32,7 +32,7 @@ if has("gui_running")
     if has("gui_gtk2")
         set guifont=DejaVu\ Sans\ Mono\ for\ Powerline
     elseif has("gui_win32")
-        set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h9
+        set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h10
     end
 else
     " Detect filetype nd use syntax highlighting syntax enable
@@ -206,7 +206,8 @@ let g:airline_theme='sol'
 " FILETYPE and TAG
 if version >=704
 "     let g:airline_section_x='%{airline#util#prepend(airline#extensions#tagbar#currenttag(),0)}%{airline#util#wrap(airline#parts#filetype(),0)}'
-    let g:airline_section_x='%{airline#util#prepend(airline#extensions#tagbar#currenttag(),0)}%{airline#util#wrap(airline#parts#filetype(),0)}'
+"     let g:airline_section_x='%{airline#util#prepend(airline#extensions#tagbar#currenttag(),0)}%{airline#util#wrap(airline#parts#filetype(),0)}'
+    let g:airline_section_x='%{airline#util#wrap(airline#parts#filetype(),0)}'
 endif
 " ENCODING
 let g:airline_section_y='%{airline#util#wrap(airline#parts#ffenc(),0)}'
@@ -476,7 +477,8 @@ let g:Imap_FreezeImap=1
 " IMPORTANT: grep options
 " search in a singe file. This will confuse Latex-Suite. Set your grep
 " program to always generate a file-name.
-set grepprg=grep\ -InsriH\ --exclude={*.vtk,tags,*.mod,*.log,*_geom.m,*_out.m,*.dat,*.pvsm,*.png,*.o,*.exe}\ --exclude-dir=*.git\ $*
+" set grepprg=grep\ -InsriH\ --exclude={*.vtk,tags,*.mod,*.log,*_geom.m,*_out.m,*.dat,*.pvsm,*.png,*.o,*.exe}\ --exclude-dir=*.git\ $*
+set grepprg=grep\ -Insri\ --exclude={*.vtk,tags,*.mod,*.log,*_geom.m,*_out.m,*.dat,*.pvsm,*.png,*.o,*.exe}\ --exclude-dir=*.git\ $*
 " OPTIONAL: Starting with Vim 7, the filetype of empty .tex files defaults to
 " 'plaintex' instead of 'tex', which results in vim-latex not being loaded.
 " The following changes the default filetype back to 'tex':
@@ -651,6 +653,7 @@ call ctrlp_bdelete#init()
 " nnoremap ,j :LustyJuggler <CR>
 nnoremap <C-b> :CtrlPBuffer <CR>
 nnoremap <C-m> :CtrlPMRU <CR>
+nnoremap <CR> <CR>
 
 " searching by filename (as opposed to full path) as the
 let g:ctrlp_by_filename = 0
@@ -671,7 +674,11 @@ source $VIMRUNTIME/macros/matchit.vim
 " let g:matlab_behave_mapping_kind = 0
 " --- Parameters for xterm
 let g:matlab_behave_terminal="xterm" 
-let g:matlab_behave_paste_cmd="Shift+Insert"
+if has("win32") || has("win16")
+    let g:matlab_behave_paste_cmd="^v"
+else
+    let g:matlab_behave_paste_cmd="Shift+Insert"
+endif
 " --- Parameters for xfce4-terminal
 " let g:matlab_behave_terminal="xfce4-terminal" 
 " let g:matlab_behave_paste_cmd="Shift+Ctrl+v"

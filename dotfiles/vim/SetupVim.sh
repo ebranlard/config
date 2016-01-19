@@ -9,8 +9,9 @@ git clone https://github.com/vim-scripts/Align
 git clone https://github.com/tpope/vim-fugitive.git
 git clone git://git.code.sf.net/p/vim-latex/vim-latex vim-latex-vim-latex
 git clone https://github.com/d11wtq/ctrlp_bdelete.vim.git
+git clone https://github.com/scrooloose/syntastic.git
+git clone https://github.com/tpope/vim-surround.git
 
-# git clone https://github.com/scrooloose/syntastic.git
 if [ $HOSTNAME == 'work' ]
 then
     echo "Work"
