@@ -170,8 +170,8 @@ let symbols_branch = ''
 let symbols_readonly = ''
 
 set encoding=utf-8 " Necessary to show Unicode glyphs
+" set statusline=\ %F%m%r%h%w\ %=\ \ %Y\ \ %{&encoding}[%{&ff}]\ \ %p%%\ \ %l:\ %v
 " set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\[HEX=\%02.2B]\ [POS=%04l,%04v]\ [%p%%]\ [LEN=%L] 
-set statusline=\ %F%m%r%h%w\ %=\ \ %Y\ \ %{&encoding}[%{&ff}]\ \ %p%%\ \ %l:\ %v
 " set statusline=%F%m%r%h%w\ %=\ [Hello]\  
 " %{linenr()}
 " " adding status error flag
@@ -550,7 +550,7 @@ let g:EasyMotion_leader_key = '<Leader>'
 " Ctaps in multi-level directory hierarchy
 " http://linux.byexamples.com/archives/385/vim-with-ctags-for-multi-level-directory-hierarchy/
 if has("win32") || has("win16")
-    map <F12> :!H:/Bin/ctags58/ctags.exe -R --fields=+iaS --extra=+q .<CR><CR>
+    map <F12> :!ctags -R --fields=+iaS --extra=+q .<CR><CR>
 else
     map <F12> :!ctags -R --fields=+iaS --extra=+q .<CR><CR>
 end
