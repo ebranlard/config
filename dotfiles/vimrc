@@ -37,9 +37,6 @@ if has("gui_running")
 else
     " Detect filetype nd use syntax highlighting syntax enable
     syntax on           " syntax highlighing     !!!! should be after filetype plugin indent on
-"     set t_Co=256 " Explicitly tell Vim that the terminal supports 256 colors
-"     set background=light   " adapt colors for background
-"     colorscheme ManuWhite
     " Using Escape to leave insert mode in the terminal, it will by
          augroup FastEscape
              autocmd!
@@ -47,22 +44,21 @@ else
              au InsertLeave * set timeoutlen=1000
          augroup END
          let term=$TERM
-         if term=="linux"
-             set t_Co=8 " Explicitly tell Vim that the terminal supports 8 colors
+         if term=="xterm"
+             set t_Co=256 " Explicitly tell Vim that the terminal supports 256 colors
              colorscheme wombat256    " use this color scheme
+             set guifont=DejaVu\ Sans\ Mono\ for\ Powerline
+         elseif term=="linux"
+             set t_Co=256 " Explicitly tell Vim that the terminal supports 256 colors
+             "set t_Co=8 " Explicitly tell Vim that the terminal supports 8 colors
+             colorscheme koehler    " use this color scheme
          elseif term=="cygwin"
-             set t_Co=8 " Explicitly tell Vim that the terminal supports 256 colors
-             colorscheme wombat256    " use this color scheme
-"              set background=light   " adapt colors for background
-"              colorscheme ManuWhite
-"              set guifont=DejaVu\ Sans\ Mono\ for\ Powerline
+             "set t_Co=8 " Explicitly tell Vim that the terminal supports 256 colors
+             "colorscheme wombat256    " use this color scheme
+             colorscheme koehler    " use this color scheme
          else
              set t_Co=8 " Explicitly tell Vim that the terminal supports 256 colors
-             colorscheme wombat256    " use this color scheme
-"              set t_Co=256 " Explicitly tell Vim that the terminal supports 256 colors
-"              set background=light   " adapt colors for background
-"              colorscheme ManuWhite
-"              set guifont=DejaVu\ Sans\ Mono\ for\ Powerline
+             colorscheme koehler    " use this color scheme
          endif
 endif
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -555,6 +551,27 @@ else
     map <F12> :!ctags -R --fields=+iaS --extra=+q .<CR><CR>
 end
 set tags=tags;    " the magic is the ‘;’ at end. it will make vim tags file search go up from current directory until it finds one.
+
+" For markdown and tagbar
+" let g:tagbar_type_markdown = {
+"     \ 'ctagstype' : 'markdown',
+"     \ 'kinds' : [
+"         \ 'h:Heading_L1',
+"         \ 'i:Heading_L2',
+"         \ 'k:Heading_L3'
+"     \ ]
+" \ }
+let g:tagbar_type_markdown = {
+            \ 'ctagstype' : 'markdown',
+            \ 'kinds' : [
+                \ 'h:headings',
+                \ 'l:links',
+                \ 'i:images'
+            \ ],
+    \ "sort" : 0
+\ }
+
+
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
