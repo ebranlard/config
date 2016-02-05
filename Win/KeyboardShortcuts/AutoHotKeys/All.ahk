@@ -300,6 +300,7 @@ Return
 ;; shell:=ComObjCreate("Shell.Application")
 ;; #r::shell.FileRun()
 Lwin & f::Send #q
+#f::Send #q
 ;; --- WindowsSearch
 #IfWinActive, Search Pane
 ^n::Send {Down}
@@ -327,7 +328,7 @@ Lwin::Send {Esc}
 ;; 		MsgBox You double-pressed LWin!
     }
 Return
-
+;; Windows App Menu
 #IfWinActive ahk_class ImmersiveLauncher
 LWin:: Send {Esc}
 ^j::Send {Tab}
@@ -350,7 +351,6 @@ LWin:: Send {Esc}
 ^+j::Send {Down}
 ^+k::Send {Up}
 ^+n::Send {Down}
-^+p::Send {Up}
 ;; ^+k::Send {Up}
 /::Send ^f
 ^+h::Send +^{Tab}
@@ -385,7 +385,7 @@ LWin:: Send {Esc}
 ;; --- Console 
 ;; --------------------------------------------------------------------------------
 #IfWinActive ahk_class ConsoleWindowClass
-#esc::Send !{Space}C
+#esc::Send !{Space}c
 #IfWinActive
 
 

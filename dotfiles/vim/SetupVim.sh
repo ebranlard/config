@@ -45,3 +45,4 @@ git clone https://github.com/elmanuelito/vim-matlab-behave
 git clone https://github.com/elmanuelito/vim-simple-comment
 git clone https://github.com/elmanuelito/vim-simple-compile
 git clone https://github.com/elmanuelito/vim-tagbar-manu
+#git clone https://github.com/majutsushi/tagbar

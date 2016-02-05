@@ -28,6 +28,8 @@ dotfiles/gitignore-work
 
 NTUA*
 
+dotfiles/vim/.netrwhist
+
 profiles/Firefox-profile/
 profiles/_FluxBox/
 profiles/dicos/
@@ -51,3 +53,30 @@ look/IconsManu2012/32x32/
 look/IconsManu2012/48x48/
 look/IconsManu2012/64x64/
 look/IconsManu2012/icon-theme.cache
+
+
+Win/QuickLaunch/Audacity.lnk
+Win/QuickLaunch/ConEmu (x64).lnk
+Win/QuickLaunch/Cygwin64 Terminal.lnk
+Win/QuickLaunch/DAEMON Tools Lite.lnk
+Win/QuickLaunch/FileZilla.lnk
+Win/QuickLaunch/GVimPortable.exe - Shortcut.lnk
+Win/QuickLaunch/Git Bash.lnk
+Win/QuickLaunch/Git GUI.lnk
+Win/QuickLaunch/Microsoft Office Excel 2007.lnk
+Win/QuickLaunch/Microsoft Office PowerPoint 2007.lnk
+Win/QuickLaunch/Microsoft Office Word 2007.lnk
+Win/QuickLaunch/Mozilla Firefox.lnk
+Win/QuickLaunch/ParaView.lnk
+Win/QuickLaunch/Skype.lnk
+Win/QuickLaunch/VLC media player.lnk
+Win/QuickLaunch/depends.exe - Shortcut.lnk
+Win/QuickLaunch/matlab.exe - Shortcut (2).lnk
+Win/QuickLaunch/ContextEdit.lnk
+Win/QuickLaunch/Debian32.vbox - Shortcut.lnk
+Win/QuickLaunch/Delphi 2007.lnk
+Win/QuickLaunch/FastExplorer.exe - Shortcut.lnk
+Win/QuickLaunch/FlexPortal3_20160113.exe - Shortcut.lnk
+Win/QuickLaunch/MATLAB R2014a.lnk
+Win/QuickLaunch/Meld.lnk
+Win/QuickLaunch/TreeSize Free.lnk
