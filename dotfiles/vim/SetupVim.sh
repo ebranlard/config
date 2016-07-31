@@ -16,14 +16,18 @@ git clone https://github.com/elmanuelito/vim-matlab-behave
 git clone https://github.com/elmanuelito/vim-simple-comment
 git clone https://github.com/elmanuelito/vim-simple-compile
 git clone https://github.com/elmanuelito/vim-tagbar-manu
-# if [ $HOSTNAME == 'work' ]
-# then
-#     echo "Work"
-# fi
+#git clone https://github.com/majutsushi/tagbar
 # tlib_vim/
 # vim-addon-mw-utils/
 # vim-easymotion/
 # vim-markdown-folding/
 # vim-markdown/
 # vim-snipmate/
-
+if [ $HOSTNAME == 'olympe' ]
+then
+    echo "Olympe"
+fi
+if [ $HOSTNAME == 'work' ]
+then
+    echo "Work"
+fi

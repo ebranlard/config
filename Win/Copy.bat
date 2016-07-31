@@ -6,10 +6,10 @@
 :: --------------------------------------------------------------------------------
 :: Convenient varibles: %USERNAME% %USERPROFILE%
 :: set SCRIPT_DIR=%USERPROFILE%\Config\Win
-set SCRIPT_DIR=H:\Config\Win
-set DOT_DIR=%USERPROFILE%\Config\dotfiles
-set HOME_DIR=%USERPROFILE%\.babun\cygwin\home\ebra
-set HOME_DIR=C:\cygwin64\home\ebra
+set SCRIPT_DIR=C:\Config\Win
+:: set DOT_DIR=%USERPROFILE%\Config\dotfiles
+:: set HOME_DIR=%USERPROFILE%\.babun\cygwin\home\ebra
+:: set HOME_DIR=C:\cygwin64\home\ebra
 ::
 :: --------------------------------------------------------------------------------
 :: --- QuickLaunch -> (Aborted: bad user permissions)

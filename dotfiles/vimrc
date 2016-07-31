@@ -37,9 +37,6 @@ if has("gui_running")
 else
     " Detect filetype nd use syntax highlighting syntax enable
     syntax on           " syntax highlighing     !!!! should be after filetype plugin indent on
-"     set t_Co=256 " Explicitly tell Vim that the terminal supports 256 colors
-"     set background=light   " adapt colors for background
-"     colorscheme ManuWhite
     " Using Escape to leave insert mode in the terminal, it will by
          augroup FastEscape
              autocmd!
@@ -47,22 +44,21 @@ else
              au InsertLeave * set timeoutlen=1000
          augroup END
          let term=$TERM
-         if term=="linux"
-             set t_Co=8 " Explicitly tell Vim that the terminal supports 8 colors
+         if term=="xterm"
+             set t_Co=256 " Explicitly tell Vim that the terminal supports 256 colors
              colorscheme wombat256    " use this color scheme
+             set guifont=DejaVu\ Sans\ Mono\ for\ Powerline
+         elseif term=="linux"
+             set t_Co=256 " Explicitly tell Vim that the terminal supports 256 colors
+             "set t_Co=8 " Explicitly tell Vim that the terminal supports 8 colors
+             colorscheme koehler    " use this color scheme
          elseif term=="cygwin"
-             set t_Co=8 " Explicitly tell Vim that the terminal supports 256 colors
-             colorscheme wombat256    " use this color scheme
-"              set background=light   " adapt colors for background
-"              colorscheme ManuWhite
-"              set guifont=DejaVu\ Sans\ Mono\ for\ Powerline
+             "set t_Co=8 " Explicitly tell Vim that the terminal supports 256 colors
+             "colorscheme wombat256    " use this color scheme
+             colorscheme koehler    " use this color scheme
          else
              set t_Co=8 " Explicitly tell Vim that the terminal supports 256 colors
-             colorscheme wombat256    " use this color scheme
-"              set t_Co=256 " Explicitly tell Vim that the terminal supports 256 colors
-"              set background=light   " adapt colors for background
-"              colorscheme ManuWhite
-"              set guifont=DejaVu\ Sans\ Mono\ for\ Powerline
+             colorscheme koehler    " use this color scheme
          endif
 endif
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -170,8 +166,8 @@ let symbols_branch = ''
 let symbols_readonly = ''
 
 set encoding=utf-8 " Necessary to show Unicode glyphs
-" set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\[HEX=\%02.2B]\ [POS=%04l,%04v]\ [%p%%]\ [LEN=%L] 
 set statusline=\ %F%m%r%h%w\ %=\ \ %Y\ \ %{&encoding}[%{&ff}]\ \ %p%%\ \ %l:\ %v
+" set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\[HEX=\%02.2B]\ [POS=%04l,%04v]\ [%p%%]\ [LEN=%L] 
 " set statusline=%F%m%r%h%w\ %=\ [Hello]\  
 " %{linenr()}
 " " adding status error flag
@@ -550,34 +546,37 @@ let g:EasyMotion_leader_key = '<Leader>'
 " Ctaps in multi-level directory hierarchy
 " http://linux.byexamples.com/archives/385/vim-with-ctags-for-multi-level-directory-hierarchy/
 if has("win32") || has("win16")
-    map <F12> :!H:/Bin/ctags58/ctags.exe -R --fields=+iaS --extra=+q .<CR><CR>
+    map <F12> :!ctags -R --fields=+iaS --extra=+q .<CR><CR>
 else
     map <F12> :!ctags -R --fields=+iaS --extra=+q .<CR><CR>
 end
 set tags=tags;    " the magic is the ‘;’ at end. it will make vim tags file search go up from current directory until it finds one.
 
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-""" IDE Stuffs
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
+" --------------------------------------------------------------------------------
+" --- tagbar 
+" --------------------------------------------------------------------------------
 """ Tag bar
+if has("win32") || has("win16")
+    let g:tagbar_ctags_bin = 'C:\Bin\ctags58\ctags.exe'
+endif
 let g:tagbar_sort = 0
 let g:tagbar_compact = 1
 let g:tagbar_foldlevel = 2
 let g:tagbar_autoshowtag = 0
-let g:tagbar_autoclose = 1
+" let g:tagbar_autoclose = 1
 " let g:tagbar_autopreview = 1
 let g:tagbar_left = 1
+let g:tagbar_width = 30
 let g:tagbar_autofocus = 1
 let g:tagbar_indent = 1
+let g:tagbar_show_visibility = 0
 "" Taglist
 " Extending taglist to latex (see .ctagsrc)
 " let tlist_tex_settings   = 'latex;s:sections;g:graphics;l:labels'
-let tlist_tex_settings   = 'latex;s:sections'
-let Tlist_Auto_Highlight_Tag = 1
-let Tlist_WinWidth=35
-let Tlist_Compact_Format = 1
+" let tlist_tex_settings   = 'latex;s:sections'
+" let Tlist_Auto_Highlight_Tag = 1
+" let Tlist_WinWidth=35
+" let Tlist_Compact_Format = 1
 " let Tlist_Show_One_File = 1
 " let Tlist_Display_Tag_Scope=1
 " let Tlist_Enable_Fold_Column = 0
@@ -588,8 +587,71 @@ let Tlist_Compact_Format = 1
 " let NERDTreeMinimalUI=1
 " let NERDTreeDirArrows=1
 " nnoremap <F6> :TlistToggle <CR>
+
 nnoremap ,to :TagbarToggle <CR>
 nnoremap ,tt :TagbarShowTag <CR>
+let g:tagbar_type_markdown = {
+    \ 'ctagstype' : 'markdown',
+    \ 'kinds' : [
+        \ 'h:headings',
+        \ 'l:links',
+        \ 'i:images'
+    \ ],
+    \ "sort" : 0
+\ }
+"  \ 'ctagsbin'  : 'ctags',
+"     \ 'ctagsargs' : '-f- --format=2 --excmd=pattern --fields=nksSa --extra= --sort=no --language-force=asm',
+let g:tagbar_type_matlab = {
+    \ 'ctagstype' : 'matlab',
+    \ 'kinds' : [
+        \ 'f:functions',
+        \ 's:sections'
+    \ ],
+    \ "sort" : 0
+\ }
+
+let g:tagbar_type_fortran = {
+    \ "sort" : 0
+\ }
+
+
+let g:tagbar_type_tex = {
+    \ 'kinds' : [
+        \ 'i:includes:1:0',
+        \ 'p:parts',
+        \ 'c:chapters',
+        \ 's:sections',
+        \ 'u:subsections',
+        \ 'b:subsubsections',
+        \ 'I:inputs',
+        \ 'P:paragraphs',
+        \ 'G:subparagraphs',
+    \ ],
+    \ 'kind2scope' : {
+        \ 'p' : 'part',
+        \ 'c' : 'chapter',
+        \ 's' : 'section',
+        \ 'u' : 'subsection',
+        \ 'b' : 'subsubsection',
+        \ 'P' : 'paragraph',
+        \ 'G' : 'subparagraph',
+        \ 'I' : 'input'
+    \ },
+    \ 'scope2kind' : {
+        \ 'part'          : 'p',
+        \ 'chapter'       : 'c',
+        \ 'section'       : 's',
+        \ 'subsection'    : 'u',
+        \ 'subsubsection' : 'b',
+        \ 'paragraph'     : 'P',
+        \ 'subparagraph'  : 'G',
+        \ 'input' : 'I'
+    \ },
+\ }
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""" IDE Stuffs
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 " nnoremap <F6> :NERDTreeToggle <CR>
 " Tlist_Show_Menu
 "win manager and file explorer and taglist plugins
@@ -695,7 +757,8 @@ endif
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set shellslash    " important for vimlatex and windows
 if has("win32") || has("win16")
-    set shell=cmd
+    " Tagbar will fail if not using the default value for shell
+    "set shell=cmd
     " Quickly open a shell in the current directory:
     map ,s :!start cmd /k <CR>
 else
