@@ -1,11 +1,11 @@
 if [ ! -z ${BASHRC_LOADED} ]; then
-    echo "Bashrc was already loaded";
+    echo "Reloading bashrc";
 fi
 
 source $HOME"/""Config/dotfiles/bashrc_machine.bash"
 source $HOME"/""Config/dotfiles/bashrc_common.bash"
 
 export BASHRC_LOADED=true
-echo "Bashrc loaded"
+# echo "Bashrc loaded"
 
 # export PATH=$PATH:$HOME/Config/scripts/

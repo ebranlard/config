@@ -34,9 +34,13 @@ BWhite='\[\e[1;37m\]'       # White
 
 export PS1="$BYellow\u$BGreen@$BYellow\h:$BGreen\w $BYellow\$ $Color_Off"
 
-if [ $HOSTNAME == 'work' ]
+if [ $HOSTNAME == 'dong' ]
 then
+    # nothing so far
+    export PATH=$PATH
 
+elif [ $HOSTNAME == 'work' ]
+then
     source /opt/intel/bin/compilervars.sh intel64
     alias vtune='source /opt/intel/vtune_amplifier_xe_2013/amplxe-vars.sh'
 
@@ -53,8 +57,8 @@ then
 elif [ $HOSTNAME == 'olympe' ]
 then
 
-    UNAME=`uname -a | awk -F _ '{print $1}'`
-    if [  $UNAME == 'CYGWIN' ] 
+    UNAME=`uname -a |awk -F_ '{print $1}'|awk '{print $1}'`
+    if [ "$UNAME" == 'CYGWIN' ] 
     then
         echo "-"$UNAME"-"
     else

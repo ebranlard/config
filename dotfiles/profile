@@ -2,6 +2,12 @@
 PATH="$PATH:$HOME/Config/scripts"
 PYTHONPATH="$PYTHONPATH:$HOME/Config/path/PythonPath"
 
+
+export PATH="/home/manu/.pyenv/bin:$PATH"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+
+
 # Set user-defined locale (en_US.UTF-8)
 export LANG=$(locale -uU)
 # X specific commands

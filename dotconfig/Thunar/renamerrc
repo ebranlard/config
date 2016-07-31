@@ -39,5 +39,5 @@ Text=0
 Regexp=FALSE
 Replacement=_
 CaseSensitive=TRUE
-Pattern=\ 
+Pattern=%20
 

@@ -84,6 +84,8 @@
         <value type="string" value="vidyodesktop"/>
         <value type="string" value="xfce terminal"/>
         <value type="string" value="vidalia"/>
+        <value type="string" value="autokey-gtk"/>
+        <value type="string" value="spotify"/>
         <value type="string" value="dropbox"/>
         <value type="string" value="xfce4-power-manager"/>
         <value type="string" value="transmission"/>

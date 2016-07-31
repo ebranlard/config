@@ -79,7 +79,7 @@ alias rhm='xmodmap -e "pointer = 1 2 3 4 5 6 7 8 9"'
 #Aptitude
 alias update='sudo aptitude update;sudo aptitude safe-upgrade'
 
-if ! type "aptitude" 2> /dev/null; then
+if ! type "aptitude" &> /dev/null; then
   echo "aptitude not found"
   alias api='apt-cyg install '
   alias aps='apt-cyg listall '
