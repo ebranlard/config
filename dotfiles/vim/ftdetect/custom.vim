@@ -2,6 +2,20 @@ au! BufNewFile,BufRead *.htc setf htc
 au! BufNewFile,BufRead *.oin setf oin
 au! BufNewFile,BufRead *.cu  setf c
 
+
+au! BufNewFile,BufRead *.inf setf master
+au! BufNewFile,BufRead *.mas setf master
+au! BufNewFile,BufRead *.bld setf deflex_basic
+au! BufNewFile,BufRead *.brk setf deflex_basic
+au! BufNewFile,BufRead *.con setf deflex_basic
+au! BufNewFile,BufRead *.fnd setf deflex_basic
+au! BufNewFile,BufRead *.gen setf deflex_basic
+au! BufNewFile,BufRead *.pit setf deflex_basic
+au! BufNewFile,BufRead *.twr setf deflex_basic
+au! BufNewFile,BufRead *.yaw setf deflex_basic
+au! BufNewFile,BufRead *.out setf out
+
+
 au! BufNewFile,BufRead *.md  setf markdown
 
 " --- pascal_fpc is set in ftplugin/after

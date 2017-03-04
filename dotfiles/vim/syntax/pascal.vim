@@ -161,9 +161,9 @@ if !exists("pascal_traditional")
   syn keyword pascalType	PChar
 
 
-  if !exists ("pascal_fpc")
+"   if !exists ("pascal_fpc")
     syn keyword pascalPredefined	Result
-  endif
+"   endif
 
   if exists("pascal_fpc")
     syn region	pascalComment	start="//" end="$" contains=pascalTodo,pascalSpaceError
@@ -184,7 +184,7 @@ if !exists("pascal_traditional")
     syn keyword pascalType	PAnsiChar
   endif
 
-  if exists("pascal_delphi")
+"   if exists("pascal_delphi")
     syn region	pascalComment	start="//"  end="$" contains=pascalTodo,pascalSpaceError
     syn keyword pascalType	SmallInt Int64
     syn keyword pascalType	Real48 Currency
@@ -208,7 +208,7 @@ if !exists("pascal_traditional")
     syn keyword pascalAcces	protected published automated
     syn keyword pascalDirective	register pascal cvar cdecl stdcall safecall
     syn keyword pascalOperator	as is
-  endif
+"   endif
 
   if exists("pascal_no_functions")
     "syn keyword pascalModifier	read write

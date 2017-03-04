@@ -25,12 +25,15 @@ map ,m :w<cr>\ll
 let @+=''
 let @*=''
 
-function! Tex_ForwardSearchLaTeX()
-  let cmd = 'evince_forward_search ' . fnamemodify(Tex_GetMainFileName(), ":p:r") .  '.pdf ' . line(".") . ' ' . expand("%:p")
-"   let cmd
-  let output = system(cmd)
-endfunction
+if has("win32") || has("win16")
 
+else
+    function! Tex_ForwardSearchLaTeX()
+      let cmd = 'evince_forward_search ' . fnamemodify(Tex_GetMainFileName(), ":p:r") .  '.pdf ' . line(".") . ' ' . expand("%:p")
+    "   let cmd
+      let output = system(cmd)
+    endfunction
+endif
 
 
 "if exists("did_load_tex_local_after")

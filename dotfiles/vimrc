@@ -1,3 +1,10 @@
+" --------------------------------------------------------------------------------
+" ---  Macros
+" --------------------------------------------------------------------------------
+" Change a variable based on a value b:i   0cw=b:i:let b:i=b:i+5j
+" --------------------------------------------------------------------------------
+" ---  
+" --------------------------------------------------------------------------------
 set nocompatible
 set visualbell t_vb=    " turn off error beep/flash
 set novisualbell    " turn off visual bell
@@ -5,8 +12,6 @@ set novisualbell    " turn off visual bell
 "Pathogen
 execute pathogen#infect()
 " call pathogen#helptags() "run: Helptags directly
-" for personal mapping (I keep "\", while using "," as my leader, so that I'm not pulluted by all
-" the plugins commands
 let mapleader='\' 
 "
 " 
@@ -61,6 +66,32 @@ else
              colorscheme koehler    " use this color scheme
          endif
 endif
+
+" --------------------------------------------------------------------------------
+" --- Font 
+" --------------------------------------------------------------------------------
+function! FontSizeAdjust(amount)
+  if has("gui_gtk2") && has("gui_running")
+    let s:pattern = '^\(.* \)\([1-9][0-9]*\)$'
+    let fontname = substitute(&guifont, s:pattern, '\1', '')
+    let cursize = substitute(&guifont, s:pattern, '\2', '')
+    let newsize = cursize + a:amount
+    let newfont = fontname . newsize
+    let &guifont = newfont
+  elseif has("gui_win32")
+    let s:pattern = '^\(.*:h\)\([1-9][0-9]*\)$'
+    let fontname = substitute(&guifont, s:pattern, '\1', '')
+    let cursize = substitute(&guifont, s:pattern, '\2', '')
+    let newsize = cursize + a:amount
+    let newfont = fontname . newsize
+    let &guifont = newfont
+  else
+    echoerr "You need to run the GTK2 version of Vim to use this function."
+  endif
+endfunction
+map ,fp :call FontSizeAdjust(1) <CR>
+map ,fm :call FontSizeAdjust(-1) <CR>
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ Indent 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -77,6 +108,22 @@ set cindent
 set tabstop=4
 set shiftwidth=4	" 4 characters for indenting
 set et " expand tab
+
+" ShowTab: toggles between showing tabs and using standard listchars
+fu! ShowTab()
+  if !exists("g:SeeTabEnabled")
+    let g:SeeTabEnabled = 1
+    let g:SeeTab_list = &list
+    let g:SeeTab_listchars = &listchars
+    set list
+    set listchars=tab:\|_
+  else
+    let &list = g:SeeTab_list
+    let &listchars = &listchars
+    unlet g:SeeTabEnabled g:SeeTab_list g:SeeTab_listchars
+  endif
+endfunc
+com! -nargs=0 ShowTab :call ShowTab()
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ From vimrc example
@@ -95,8 +142,6 @@ if has("autocmd")
     " Put these in an autocmd group, so that we can delete them easily.
     augroup vimrcEx
         au!
-        " For all text files set 'textwidth' to 78 characters.
-        "         autocmd FileType text setlocal textwidth=78
         " When editing a file, always jump to the last known cursor position.
         " Don't do it when the position is invalid or when inside an event handler
         " (happens when dropping a file on gvim).
@@ -110,42 +155,12 @@ else
 endif 
 " No end of line
 set noeol
-" Convenient command to see the difference between the current buffer and the
-" file it was loaded from, thus the changes you made.
-command! DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis | wincmd p | diffthis
 " command! Mdiff vert diffsplit
 command! -complete=file -nargs=+ Mdiff vert diffsplit <args>
 
 " filetype on
 set nospell 
-" " Cursor
-" let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-" let &t_EI = "\<Esc>]50;CursorShape=0\x7"
-" let &t_SI .= "\<Esc>[4 q"
-" " solid block
-" let &t_EI .= "\<Esc>[2 q"
-" 1 or 0 -> blinking block
-" 3 -> blinking underscore
-" Recent versions of xterm (282 or above) also support
-" 5 -> blinking vertical bar
-" 6 -> solid vertical bar
 
-" 
-" 
-" """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" """ Color Parenthesis
-" """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" " au VimEnter * RainbowParenthesesToggle
-" "au Syntax * RainbowParenthesesLoadRound
-" "au Syntax * RainbowParenthesesLoadSquare
-" "au Syntax * RainbowParenthesesLoadBraces
-"  
-" 
-" """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" """ Gitgutter
-" """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" " let g:gitgutter_realtime = 0
-" " let g:gitgutter_eager = 0
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ Syntastic options
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -156,7 +171,7 @@ let g:syntastic_enable_balloons = 0
 " let g:syntastic_quiet_messages = {'level': 'warnings'}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ Statusline
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""{{{
 let left_sep = ''
 let left_alt_sep = ''
 let right_sep = ''
@@ -197,11 +212,9 @@ let g:airline_theme='sol'
 " --- Airline Sections
 " let g:airline_section_a='%#__accent_bold#%{airline#util#wrap(airline#parts#mode(),0)}%#__restore__#%{airline#util#append(airline#parts#paste(),0)}%{airline#util#append(airline#parts#iminsert(),0)}'
 " let g:airline_section_b='%{airline#util#wrap(airline#extensions#branch#get_head(),0)}'
-" let g:airline_section_c='%{getcwd()} -- %f -- %<%t%m %#__accent_red#%{airline#util#wrap(airline#parts#readonly(),0)}%#__restore__#'
 " let g:airline_section_c='%{getcwd()} -- %f %<%m %#__accent_red#%{airline#util#wrap(airline#parts#readonly(),0)}%#__restore__#'
 " FILETYPE and TAG
 if version >=704
-"     let g:airline_section_x='%{airline#util#prepend(airline#extensions#tagbar#currenttag(),0)}%{airline#util#wrap(airline#parts#filetype(),0)}'
 "     let g:airline_section_x='%{airline#util#prepend(airline#extensions#tagbar#currenttag(),0)}%{airline#util#wrap(airline#parts#filetype(),0)}'
     let g:airline_section_x='%{airline#util#wrap(airline#parts#filetype(),0)}'
 endif
@@ -213,10 +226,15 @@ let g:airline_section_y='%{airline#util#wrap(airline#parts#ffenc(),0)}'
 """ Sessions
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set sessionoptions=blank,tabpages,winsize,resize,winpos,sesdir,buffers  "sessionoptions, i removed folds and curdir
-"  set backupdir=~/.vim/tmp,~/.tmp,~/tmp,/var/tmp,/tmp  " save all tmp files to ./vim/tmp/
 "  set directory=~/.vim/tmp,~/.tmp,~/tmp,/var/tmp,/tmp
+if has("gui_win32")
+  set nofsync 
+  set nowritebackup  "dangerous option
+else
+  set backupdir=~/vim/tmp " save all tmp files to ./vim/tmp/
+end
 set nobackup
-set noswapfile
+set noswapfile 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ Editor general
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -253,9 +271,6 @@ else
     autocmd FileType * setlocal formatoptions-=o formatoptions+=n formatoptions+=q formatoptions+=r
 endif
 
-" For formatting of latex paragraph using qglp
-omap lp ?^$\\|^\s*\(\\begin\\|\\end\\|\\label\)?1<CR>//-1<CR>.<CR>
-
 " When using vim in xterm, the term title will have the file name
 set title
 
@@ -266,7 +281,6 @@ function! MyFoldText()
     let thisline = getline(v:lnum)
     let foldsize = (v:foldend-v:foldstart)
     return getline(v:foldstart).'    ('.foldsize.'lines)'
-"      return getline(v:foldstart)
 endfunction
 set foldtext=MyFoldText()  " can be customized later
 " foldexpr is customized in after/ftplugin/ for different languages
@@ -287,6 +301,22 @@ autocmd QuickFixCmdPost    l* nested lwindow
 noremap ,n :cnext  <CR>
 noremap ,<S-N> :cprevious  <CR> 
 
+" --------------------------------------------------------------------------------
+" --- Grep / find
+" --------------------------------------------------------------------------------
+" IMPORTANT: grep options
+" search in a singe file. This will confuse Latex-Suite. Set your grep
+" program to always generate a file-name.
+" set grepprg=grep\ -InsriH\ --exclude={*.vtk,tags,*.mod,*.log,*_geom.m,*_out.m,*.dat,*.pvsm,*.png,*.o,*.exe}\ --exclude-dir=*.git\ $*
+if has("win32") || has("win16")
+"     set grepprg=grep\ -ni $*
+    set grepprg=findstr\ /n\ /I\ /S 
+else
+    set grepprg=grep\ -Insri\ --exclude={*.vtk,tags,*.mod,*.log,*_geom.m,*_out.m,*.dat,*.pvsm,*.png,*.o,*.exe}\ --exclude-dir=*.git\ $*
+endif
+
+" IMPORTANT: to use :find in a "fuzzy" and "recursive" way
+set path+=**
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ SpellCheck
@@ -373,8 +403,6 @@ set foldlevel=1     " fold from the beginning
 noremap <C-H> :tabprevious<CR>
 noremap <C-L> :tabnext<CR>
 set showtabline=2  " always tabs visible
-nnoremap <silent> <A-Left> :execute 'silent! tabmove ' . (tabpagenr()-2)<CR>
-nnoremap <silent> <A-Right> :execute 'silent! tabmove ' . tabpagenr()<CR>
 
 "open tag in new tab
 map <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
@@ -400,7 +428,7 @@ set autoread   " tricky one: if a file is changed locally, automatically reload 
 if has("win32") || has("win16")
 else
     set winaltkeys=no
-end
+endif
 " Select all
 noremap ,a ggVG
 
@@ -442,7 +470,7 @@ end
 nnoremap Y "+y
 vnoremap Y "+ygvy
 
-" Autocenter
+" Autocenter after motion command
 nmap G Gzz
 nmap } }zz
 nmap { {zz
@@ -455,12 +483,6 @@ noremap zk zkzz
 "  endfunction
 "  nnoremap s :<C-U>exec "normal i".RepeatChar(nr2char(getchar()), v:count1) <CR>
 
-" Ctrl-j/k deletes blank line below/above, and Alt-j/k inserts.
-" nnoremap <silent><A-J> m`:silent +g/\m^\s*$/d<CR>``:noh<CR>
-" nnoremap <silent><A-K> m`:silent -g/\m^\s*$/d<CR>``:noh<CR>
-" nnoremap <silent><A-j> :set paste<CR>m`o<Esc>``:set nopaste<CR>
-" nnoremap <silent><A-k> :set paste<CR>m`O<Esc>``:set nopaste<CR>
-
 
 
 
@@ -470,11 +492,6 @@ noremap zk zkzz
 " DESACTIVATING IMAP
 let g:Imap_FreezeImap=1 
 
-" IMPORTANT: grep options
-" search in a singe file. This will confuse Latex-Suite. Set your grep
-" program to always generate a file-name.
-" set grepprg=grep\ -InsriH\ --exclude={*.vtk,tags,*.mod,*.log,*_geom.m,*_out.m,*.dat,*.pvsm,*.png,*.o,*.exe}\ --exclude-dir=*.git\ $*
-set grepprg=grep\ -Insri\ --exclude={*.vtk,tags,*.mod,*.log,*_geom.m,*_out.m,*.dat,*.pvsm,*.png,*.o,*.exe}\ --exclude-dir=*.git\ $*
 " OPTIONAL: Starting with Vim 7, the filetype of empty .tex files defaults to
 " 'plaintex' instead of 'tex', which results in vim-latex not being loaded.
 " The following changes the default filetype back to 'tex':
@@ -488,15 +505,22 @@ let g:tex_comment_nospell=1
 let g:Tex_DefaultTargetFormat = 'pdf'
 let g:Tex_MultipleCompileFormats='' 
 let g:Tex_FormatDependency_pdf = ''
+" if has("win32") || has("win16")
 let g:Tex_CompileRule_pdf = 'pdflatex -synctex=1 --shell-escape --interaction=nonstopmode $*;'
+" endif
 let g:Tex_CompileRule_dvi = 'latex -synctex=1 --interaction=nonstopmode $*;'
 let g:Tex_CompileRule_ps = 'dvips -Ppdf -o $*.ps $*.dvi;'
 let g:Tex_UseMakeFile = 1
 let g:Tex_GotoError=0 " if set to 1 then after \ll then vim will go to the next error
 
-" Inverse search
-"let g:Tex_ViewRule_pdf = '"C:\bin\SumatraPDF\SumatraPDF.exe" -inverse-search "gvim -c \":RemoteOpen +\%l \%f\""'
-let g:Tex_ViewRule_pdf = 'evince'
+
+" " Inverse search
+if has("win32") || has("win16")
+" let g:Tex_ViewRule_pdf = '"C:\Program Files\SumatraPDF\SumatraPDF.exe" -inverse-search "gvim -c \":RemoteOpen +\%l \%f\""'
+  let g:Tex_ViewRule_pdf = 'SumatraPDFPortable -inverse-search "gvim -c \":RemoteOpen +\%l \%f\""'
+else
+  let g:Tex_ViewRule_pdf = 'evince'
+endif
 
 "remember command for dynamicly changing warning level :TCLevel 3
 let g:Tex_IgnoredWarnings =
@@ -529,28 +553,53 @@ let g:Tex_Folding=2
 "let Tex_CompileRule_ps = 'dvips -Ppdf -o $*.ps $*.dvi ;echo "Rule DVI>PS defined in Main"; read A'
 "let Tex_CompileRule_pdf = 'ps2pdf $*.ps ;echo "Rule PS>PDF defined in Main"; read A'
 "let g:Tex_ProjectSourceFiles ='bib/*.bib,tex/*.tex'
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-""" Motion
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:EasyMotion_leader_key = '<Leader>'
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ Tags
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" ------Old stuff
-" map <F12> :!ctags -R --c++-kinds=+pl --fields=+iaS --extra=+q .<CR><CR>
-" set tags+=~/.vim/tags/tags_cpp
-" " add current directory's generated tags file to available tags
-" set tags+=./tags
 " ------New stuff
 " Ctaps in multi-level directory hierarchy
-" http://linux.byexamples.com/archives/385/vim-with-ctags-for-multi-level-directory-hierarchy/
-if has("win32") || has("win16")
-    map <F12> :!ctags -R --fields=+iaS --extra=+q .<CR><CR>
-else
-    map <F12> :!ctags -R --fields=+iaS --extra=+q .<CR><CR>
-end
+map <F12> :!ctags -R --fields=+iaS --extra=+q .<CR><CR>
 set tags=tags;    " the magic is the ‘;’ at end. it will make vim tags file search go up from current directory until it finds one.
+
+" --------------------------------------------------------------------------------
+" ---  Bookmarks and explorer
+" --------------------------------------------------------------------------------
+function! ShowBookMarks()
+    if has("win32") || has("win16")
+        if @% ==? "Bookmarks.lst"
+            :normal c
+        else
+            :55vsplit C:\Config\dotfiles\vim\Bookmarks.lst
+        endif
+    end
+endfunction
+function! OpenExplorer()
+    "  Open file explorer. If on a bookmark, open it. otherwise open current
+    "  directory
+    if @% ==? "Bookmarks.lst"
+        :normal ^"ey$
+        :normal c
+    else
+        let @e=getcwd()
+    endif
+    if has("win32") || has("win16")
+        :exec '!start Explorer '.@e
+    end
+endfunction
+function! OpenInTab()
+    "  Open folder in tab. 
+    if @% ==? "Bookmarks.lst"
+        :normal ^"ey$
+        :normal c
+        :exec 'tabe '.@e
+    endif
+endfunction
+noremap ,bb :call ShowBookMarks()<CR>
+noremap ,e :call OpenExplorer()<CR>
+noremap ,t :call OpenInTab()<CR>
+
+
+
 
 " --------------------------------------------------------------------------------
 " --- tagbar 
@@ -570,23 +619,6 @@ let g:tagbar_width = 30
 let g:tagbar_autofocus = 1
 let g:tagbar_indent = 1
 let g:tagbar_show_visibility = 0
-"" Taglist
-" Extending taglist to latex (see .ctagsrc)
-" let tlist_tex_settings   = 'latex;s:sections;g:graphics;l:labels'
-" let tlist_tex_settings   = 'latex;s:sections'
-" let Tlist_Auto_Highlight_Tag = 1
-" let Tlist_WinWidth=35
-" let Tlist_Compact_Format = 1
-" let Tlist_Show_One_File = 1
-" let Tlist_Display_Tag_Scope=1
-" let Tlist_Enable_Fold_Column = 0
-" let tlist_make_settings  = 'make;m:makros;t:targets'
-" " Extending taglist to matlab
-" let tlist_matlab_settings   = 'matlab;f:function;s:section'
-"" NERDTree
-" let NERDTreeMinimalUI=1
-" let NERDTreeDirArrows=1
-" nnoremap <F6> :TlistToggle <CR>
 
 nnoremap ,to :TagbarToggle <CR>
 nnoremap ,tt :TagbarShowTag <CR>
@@ -648,15 +680,6 @@ let g:tagbar_type_tex = {
         \ 'input' : 'I'
     \ },
 \ }
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-""" IDE Stuffs
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" nnoremap <F6> :NERDTreeToggle <CR>
-" Tlist_Show_Menu
-"win manager and file explorer and taglist plugins
-"let winManagerWindowLayout = 'FileExplorer|TagList'
-"
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ Programming general
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -744,21 +767,11 @@ endif
 " --- Parameters for xfce4-terminal
 " let g:matlab_behave_terminal="xfce4-terminal" 
 " let g:matlab_behave_paste_cmd="Shift+Ctrl+v"
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-""" Language specific
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-""" Fortran, PYTHON
-" see ftplugin and after/ftplugin
-
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""" }}}
 """ Shell
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""" {{{
 set shellslash    " important for vimlatex and windows
 if has("win32") || has("win16")
-    " Tagbar will fail if not using the default value for shell
-    "set shell=cmd
     " Quickly open a shell in the current directory:
     map ,s :!start cmd /k <CR>
 else
@@ -787,14 +800,6 @@ command! -complete=shellcmd -nargs=+ Shell call s:ExecuteInShell(<q-args>)
 nnoremap <leader>! :Shell
 
 " 
-" function! SyncTexForward()
-"      let execstr = "silent !okular --unique %:p:r.pdf\#src:".line(".")."%:p &"
-"      exec execstr
-" endfunction
-" nmap <Leader>f :call SyncTexForward()<CR>
-"
-set scroll=4
-
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -871,8 +876,6 @@ endfunction
 " --- Environment variables, local
 " --------------------------------------------------------------------------------
 let $PYTHONPATH='/home/manu/Config/path/PythonPath/'
-" if empty($OMNIVOR_OBJ_DIR)
-" endif
 let host=$HOSTNAME
 let $OMNIVOR_MKF_DIR='/work/libs/OmniVor/_src/_mkf/'
 let $OMNIVOR_OBJ_DIR='/work/libs/OmniVor/_src/_build/linux-amd64/'
