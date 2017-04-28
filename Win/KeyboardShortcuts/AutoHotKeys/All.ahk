@@ -299,6 +299,8 @@ Return
 ;; --------------------------------------------------------------------------------
 ;; --- Windows Keys to launch 
 ;; --------------------------------------------------------------------------------
+;; --- FuzzyRun
+#r:: Run, python C:\Work\Geekeries\fuzzy-run\fuzzy-run
 ;; --- WindowsExplorer
 #t:: Run, Explorer H:\
 ;; --- Switch to Matlab
@@ -445,11 +447,11 @@ return
 ^+;:: Send !d  ; For to address (Alt-D)
 ^0:: ; Go to file list
 Send !d ; first go to address bar
-Sleep,  10
+Sleep, 10
 Send {Enter}
-Sleep,  10
+Sleep, 10
 Send {F6}
-Sleep,  10
+Sleep, 10
 Send {F6}  
 return
 ^n:: return ; D

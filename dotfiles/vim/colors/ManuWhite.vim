@@ -52,8 +52,8 @@ hi SignColumn   guifg=#000000 guibg=#d6d3d6
 hi StatusLine   guifg=#000000 guibg=#b0b0b0 
 hi StatusLineNC guifg=#606060 guibg=#d6d3d6 
 hi VertSplit    guifg=#f0f0f0 guibg=#b0b0b0 
-hi FoldColumn   guifg=#a6a6a6 guibg=#d6d3d6 gui=bold
-hi Folded       guifg=#218a21 guibg=#e5e5e5 gui=bold,italic
+hi FoldColumn   guifg=#a6a6a6 guibg=#d6d3d6 gui=italic
+hi Folded       guifg=#218a21 guibg=#e5e5e5 gui=italic
 hi PmenuSel     guifg=#ffffff guibg=#293531
 hi Pmenu        guifg=#000000 guibg=#b0b0b0
 hi Comment      guifg=#218a21          
