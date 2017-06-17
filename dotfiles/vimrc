@@ -347,10 +347,15 @@ function! Incr()
 endfunction
 vnoremap <C-a> :call Incr()<CR>
 
+" NOTE: see autocommand, look for cwindow and lwindow in my vimrc
 " Use Makefile in current or parent directory # almost work, but problem with the tee...
 " let &makeprg = '[[ -f Makefile ]] && make || make -C .. '
 let &makeprg = 'make '
-
+" Command Make will call make and then cwindow which
+" opens a 3 line error window if any errors are found.
+" If no errors, it closes any open cwindow.
+" command -nargs=* Make silent make <args> | copen 15
+command! -nargs=* Make silent make <args>| copen 15|execute 'normal Gzb'|set nowrap|wincmd p
 " ---------------------------------------------------------------------------}
 " --- Matlab 
 " ---------------------------------------------------------------------------{
@@ -822,7 +827,8 @@ function! ShowTab() " ShowTab: toggles between showing tabs and using standard l
     let g:SeeTab_list = &list
     let g:SeeTab_listchars = &listchars
     set list
-    set listchars=tab:\|_
+"     set listchars=tab:\|_
+    set listchars=tab:▸\ ,eol:¬
   else
     let &list = g:SeeTab_list
     let &listchars = &listchars
