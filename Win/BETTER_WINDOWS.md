@@ -1,12 +1,19 @@
 
+# Use a software package manager
+Install one program to install/manage all of your other programs...
+Install Chocolatey
+
+
 # Programs to install
 WinSplit Revolution 11
 AutoHotKey
 Git  (with admin rights in Programfiles 86)
 Vim
+EveditorFree
+ContextEdit  (to add a context menu action e.g. open command here)
+ConsoleZ
 Babun
 ConEmu  (use AppData/Roaming/ConEmu.xml for config file)
-EveditorFree
 
 
 #  
@@ -60,9 +67,13 @@ git config core.autocrlf true
 
 
 # Vim
+
 edit the file _vimrc to remove the source mswin and behave mswin line
 
-help runtimepath
+In vim: type :help runtimepath to see where the _vimrc is looked for.
+
+If you want to change this location one option is to change the environment variable %HOME%
+
 
 
 
