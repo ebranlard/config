@@ -6,4 +6,19 @@
   <property name="theme" type="string" value="AAA-ManuGTK-blue"/>
   <property name="expire-timeout" type="int" value="2"/>
   <property name="fade-transparency" type="bool" value="true"/>
+  <property name="applications" type="empty">
+    <property name="known_applications" type="array">
+      <value type="string" value="Banshee"/>
+      <value type="string" value="Clementine"/>
+      <value type="string" value="Dropbox"/>
+      <value type="string" value="FileZilla"/>
+      <value type="string" value="notify-send"/>
+      <value type="string" value="OpenShot Video Editor"/>
+      <value type="string" value="Spotify"/>
+      <value type="string" value="Thunar"/>
+      <value type="string" value="thunar-volman"/>
+      <value type="string" value="Tor Browser"/>
+      <value type="string" value="Transmission"/>
+    </property>
+  </property>
 </channel>

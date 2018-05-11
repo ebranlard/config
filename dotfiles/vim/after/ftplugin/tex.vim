@@ -35,6 +35,8 @@ else
     endfunction
 endif
 
+" Forcing spell check
+set spell
 
 "if exists("did_load_tex_local_after")
        "finish

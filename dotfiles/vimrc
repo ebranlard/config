@@ -1,7 +1,9 @@
 " ---------------------------------------------------------------------------}
 " --- Macros 
 " ---------------------------------------------------------------------------{
-" Change a variable based on a value b:i   0cw=b:i:let b:i=b:i+5j
+" Change a variable based on a value b:i   0cw=b:i
+" :let b:i=b:i+5
+" j
 " ---------------------------------------------------------------------------}
 " --- Misc 
 " ---------------------------------------------------------------------------{
@@ -61,6 +63,15 @@ if has("gui_running")
         set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h10
     end
 else
+    if has("nvim")
+        set guioptions=egrltaM
+        syntax on           " syntax highlighing     !!!! should be after filetype plugin indent on
+        set background=light   " adapt colors for background
+        colorscheme ManuWhite
+        Guifont DejaVu Sans Mono for Powerline:h10
+    else
+        " Detect filetype nd use syntax highlighting syntax enable
+        syntax on           " syntax highlighing     !!!! should be after filetype plugin indent on
     " Using Escape to leave insert mode in the terminal, it will by
     augroup FastEscape
         autocmd!
@@ -81,6 +92,7 @@ else
     else
         set t_Co=8 " Explicitly tell Vim that the terminal supports 256 colors
         colorscheme koehler    " use this color scheme
+    endif
     endif
 endif
 
@@ -489,7 +501,11 @@ vmap j g<Down>
 if has("win32") || has("win16")
     set clipboard=autoselect,unnamed
 else
+    if has("nvim")
+"         set clipboard=autoselect
+    else
     set clipboard=autoselect,unnamed,unnamedplus,exclude:cons\|linux
+end
 end
 " Y will yank to the clipboard
 " noremap Y "+y          
@@ -789,6 +805,21 @@ map ,fm :call FontSizeAdjust(-1) <CR>
 " ---------------------------------------------------------------------------}
 " --- MY SIMPLE PLUGIN - SHELL
 " ---------------------------------------------------------------------------{
+"" Vim latest option :terminal
+" :belowright 15split     :terminal bash
+function! s:Term()
+    silent! execute 'belowright 15split'
+    silent! execute 'set nonu'
+    silent! execute 'terminal ++curwin ++kill=kill ++close bash'
+endfunction
+command! Term call s:Term()
+" Switch tabs shortcuts in terminal mode
+tmap <C-H> <C-W>NgT<CR>
+tmap <C-L> <C-W>Ngt<CR>
+" Kill terminal when window is closed in terminal mode
+" tmap <C-W>c <C-W>:q!<CR>
+tmap <C-W>c i<CR>exit<CR>
+
 set shellslash    " important for vimlatex and windows
 if has("win32") || has("win16")
     " Quickly open a shell in the current directory:

@@ -35,7 +35,7 @@ fi
 if [ $1 = "matlab" ]; then
     DIR="/work/code/"
     title="matterm"
-    xfce4-terminal --title "$title" -e /opt/matlab/R2013b/bin/matlab
+    xfce4-terminal --title "$title" -e "/opt/matlab/R2013b/bin/matlab -softwareopengl"
     sleep 1
     wmctrl -r "$title" -t 1
 

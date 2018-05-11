@@ -25,19 +25,56 @@
         <property name="image-style" type="int" value="0"/>
         <property name="saturation" type="double" value="1.000000"/>
         <property name="last-image-list" type="string" value="/home/manu/.config/xfce4/desktop/backdrop.list"/>
+        <property name="workspace0" type="empty">
+          <property name="color-style" type="int" value="0"/>
+          <property name="color1" type="array">
+            <value type="uint" value="27355"/>
+            <value type="uint" value="35366"/>
+            <value type="uint" value="46881"/>
+            <value type="uint" value="65535"/>
+          </property>
+          <property name="color2" type="array">
+            <value type="uint" value="15872"/>
+            <value type="uint" value="26624"/>
+            <value type="uint" value="40448"/>
+            <value type="uint" value="65535"/>
+          </property>
+          <property name="image-style" type="int" value="3"/>
+          <property name="last-image" type="string" value="/home/manu/Desktop/a20791713770bf8edd8f63_m.jpg"/>
+        </property>
+        <property name="workspace1" type="empty">
+          <property name="color-style" type="int" value="0"/>
+          <property name="color1" type="array">
+            <value type="uint" value="27355"/>
+            <value type="uint" value="35366"/>
+            <value type="uint" value="46881"/>
+            <value type="uint" value="65535"/>
+          </property>
+          <property name="color2" type="array">
+            <value type="uint" value="15872"/>
+            <value type="uint" value="26624"/>
+            <value type="uint" value="40448"/>
+            <value type="uint" value="65535"/>
+          </property>
+          <property name="image-style" type="int" value="3"/>
+          <property name="last-image" type="string" value="/home/manu/Desktop/a20791713770bf8edd8f63_m.jpg"/>
+        </property>
       </property>
       <property name="monitor1" type="empty">
-        <property name="image-path" type="string" value="/usr/share/xfce4/backdrops/xfce-transparent.png"/>
-        <property name="image-show" type="bool" value="false"/>
-        <property name="last-image" type="string" value="/usr/share/xfce4/backdrops/xfce-stripes.png"/>
-        <property name="last-single-image" type="string" value="/usr/share/xfce4/backdrops/xfce-transparent.png"/>
-        <property name="image-style" type="int" value="1"/>
+        <property name="brightness" type="empty"/>
         <property name="color1" type="array">
           <value type="uint" value="21961"/>
           <value type="uint" value="32081"/>
           <value type="uint" value="45314"/>
           <value type="uint" value="65535"/>
         </property>
+        <property name="color2" type="empty"/>
+        <property name="color-style" type="empty"/>
+        <property name="image-path" type="string" value="/usr/share/xfce4/backdrops/xfce-transparent.png"/>
+        <property name="image-show" type="bool" value="false"/>
+        <property name="last-image" type="string" value="/usr/share/xfce4/backdrops/xfce-stripes.png"/>
+        <property name="last-single-image" type="string" value="/usr/share/xfce4/backdrops/xfce-transparent.png"/>
+        <property name="image-style" type="int" value="1"/>
         <property name="last-image-list" type="string" value="/home/manu/.config/xfce4/desktop/backdrop.list"/>
       </property>
     </property>

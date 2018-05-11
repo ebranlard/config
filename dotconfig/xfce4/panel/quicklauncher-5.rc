@@ -1,5 +1,5 @@
 nb_lines=4
-nb_launcher=24
+nb_launcher=21
 extra_spacing=0
 has_tooltips=false
 has_labels=false
@@ -23,115 +23,124 @@ icon_name=/home/manu/Config/look/Icons/powerpoint2007.png
 icon_id=21
 
 [launcher_21]
+command=wine "/home/manu/.wine/drive_c/Program Files/Microsoft Office/Office12/WINWORD.EXE"
+name=
+icon_name=/home/manu/Config/look/Icons/word2007.png
+icon_id=21
+
+[launcher_20]
+command=wine "/home/manu/.wine/drive_c/Program Files/Microsoft Office/Office12/EXCEL.EXE"
+name=
+icon_name=/home/manu/Config/look/Icons/excel2007.png
+icon_id=21
+
+[launcher_19]
+command=powerpoint
+name=
+icon_name=/home/manu/Config/look/Icons/powerpoint2007.png
+icon_id=21
+
+[launcher_18]
 command=google-chrome
 name=chrome
 icon_name=/opt/google/chrome/product_logo_24.png
 icon_id=21
 
-[launcher_20]
+[launcher_17]
 command=picasa
 name=
 icon_name=/home/manu/Config/look/Icons/Picasa.png
 icon_id=21
 
-[launcher_19]
+[launcher_16]
 command=/home/manu/Config/scripts/keyboardSetup
 name=/home/manu/scripts/keyboardSetup
 icon_name=/home/manu/Config/look/Icons/input-keyboard.png
 icon_id=21
 
-[launcher_18]
+[launcher_15]
 command=icedove
 name=
 icon_name=/home/manu/Config/look/Icons/icedove.png
 icon_id=21
 
-[launcher_17]
+[launcher_14]
 command=xfce4-screenshooter
 name=
 icon_name=/home/manu/Config/look/Icons/f-spot.png
 icon_id=21
 
-[launcher_16]
+[launcher_13]
 command=nvidia-settings
 name=nvidia-settings
 icon_name=/home/manu/Config/look/Icons/nvidia-settings.png
 icon_id=21
 
-[launcher_15]
+[launcher_12]
 command=xterm -geometry 90x3+550+400 +sb -e 'sudo /etc/init.d/cups start'
 name=
 icon_name=/home/manu/Config/look/Icons/printercups.png
 icon_id=21
 
-[launcher_14]
+[launcher_11]
 command=iceweasel -new-tab localhost:631/jobs
 name=
 icon_name=/home/manu/Config/look/Icons/printer.png
 icon_id=21
 
-[launcher_13]
+[launcher_10]
 command=dropbox start
 name=
 icon_name=/home/manu/Config/look/Icons/dropbox-logo.png
 icon_id=21
 
-[launcher_12]
+[launcher_9]
 command=gvim /work/publications/phdthesis/PhDThesis.tex
 name=Cpp VortexCode\ 
 icon_name=/home/manu/Config/look/Icons/Projects/system-run.png
 icon_id=21
 
-[launcher_11]
+[launcher_8]
 command=LaunchSession.sh vortex
 name=Notes Vorticity
 icon_name=/home/manu/Config/look/Icons/Projects/application-x-bittorrent.png
 icon_id=21
 
-[launcher_10]
+[launcher_7]
 command=LaunchSession.sh momentum
 name=Notes Momentum Theory
 icon_name=/home/manu/Config/look/Icons/Projects/application-pdf.png
 icon_id=21
 
-[launcher_9]
+[launcher_6]
 command=LaunchSession.sh book
 name=Book
 icon_name=/home/manu/Config/look/Icons/x-office-address-book.png
 icon_id=21
 
-[launcher_8]
+[launcher_5]
 command=pavucontrol
 name=pavucontrol
 icon_name=/home/manu/Config/look/Icons/preferences-desktop-sound.png
 icon_id=21
 
-[launcher_7]
+[launcher_4]
 command=virtualbox -startvm WinXP
 name=virtualvox
 icon_name=/home/manu/Config/look/Icons/WinLinuxicon-32.png
 icon_id=21
 
-[launcher_6]
+[launcher_3]
 command=mathematica
 name=mathematica
 icon_name=/home/manu/Config/look/Icons/mathematica.png
 icon_id=21
 
-[launcher_5]
+[launcher_2]
 command=pysheng-gui-manu
 name=
 icon_name=/home/manu/Config/look/Icons/Gbook.png
 icon_id=21
-
-[launcher_4]
-icon_id=0
-
-[launcher_3]
-icon_id=0
-
-[launcher_2]
-icon_id=0
 
 [launcher_1]
 command=xfce4-screenshooter -f -d 0 -m -s /home/manu

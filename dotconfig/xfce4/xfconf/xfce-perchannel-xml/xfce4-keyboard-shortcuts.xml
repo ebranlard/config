@@ -30,7 +30,6 @@
       <property name="XF86AudioMute" type="string" value="PulseMediaKeys.sh mute">
         <property name="startup-notify" type="bool" value="true"/>
       </property>
-      <property name="Print" type="string" value="xfce4-screenshooter -f -d 0 -m -s /home/manu"/>
       <property name="XF86AudioRaiseVolume" type="string" value="PulseMediaKeys.sh increase"/>
       <property name="XF86AudioLowerVolume" type="string" value="PulseMediaKeys.sh decrease"/>
       <property name="XF86AudioNext" type="string" value="banshee --next"/>
@@ -62,6 +61,7 @@
       <property name="&lt;Primary&gt;&lt;Shift&gt;n" type="string" value="banshee --next"/>
       <property name="&lt;Primary&gt;&lt;Shift&gt;p" type="string" value="banshee --previous"/>
       <property name="&lt;Primary&gt;&lt;Shift&gt;space" type="string" value="banshee-toggle-play"/>
+      <property name="Print" type="string" value="xfce4-screenshooter -r -s /home/manu"/>
     </property>
   </property>
   <property name="xfwm4" type="empty">

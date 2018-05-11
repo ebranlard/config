@@ -4,10 +4,9 @@
   <property name="panels" type="array">
     <value type="int" value="0"/>
     <property name="panel-0" type="empty">
-      <property name="size" type="uint" value="55"/>
+      <property name="size" type="uint" value="54"/>
       <property name="length" type="uint" value="100"/>
       <property name="locked" type="bool" value="true"/>
-      <property name="autohide" type="bool" value="false"/>
       <property name="position" type="string" value="p=6;x=56;y=525"/>
       <property name="leave-opacity" type="uint" value="100"/>
       <property name="enter-opacity" type="uint" value="100"/>
@@ -29,6 +28,8 @@
         <value type="int" value="2"/>
         <value type="int" value="3"/>
         <value type="int" value="5"/>
+        <value type="int" value="11"/>
+        <value type="int" value="9"/>
         <value type="int" value="4"/>
         <value type="int" value="10"/>
         <value type="int" value="8"/>
@@ -36,6 +37,7 @@
         <value type="int" value="7"/>
       </property>
       <property name="nrows" type="uint" value="2"/>
+      <property name="autohide-behavior" type="uint" value="0"/>
     </property>
   </property>
   <property name="plugins" type="empty">
@@ -50,7 +52,7 @@
       <property name="show-button-title" type="bool" value="false"/>
       <property name="custom-menu-file" type="string" value="/home/manu/.config/menus/xfce-applications.menu"/>
       <property name="button-icon" type="string" value="/home/manu/Config/look/Icons/start-here5.png"/>
-      <property name="button-title" type="string" value="Xfce Menu"/>
+      <property name="button-title" type="string" value=""/>
       <property name="custom-menu" type="bool" value="false"/>
       <property name="show-generic-names" type="bool" value="false"/>
     </property>
@@ -96,18 +98,28 @@
       <property name="names-hidden" type="array">
       </property>
     </property>
-    <property name="plugin-5" type="string" value="quicklauncher"/>
-    <property name="plugin-3" type="string" value="quicklauncher"/>
     <property name="plugin-7" type="string" value="clock">
-      <property name="digital-format" type="string" value="%D - %R "/>
+      <property name="digital-format" type="string" value="%d/%m/%Y %R"/>
       <property name="mode" type="uint" value="2"/>
-      <property name="tooltip-format" type="string" value="Week %V"/>
+      <property name="tooltip-format" type="string" value=""/>
       <property name="show-frame" type="bool" value="false"/>
     </property>
-    <property name="plugin-8" type="string" value="quicklauncher"/>
     <property name="plugin-10" type="string" value="separator">
       <property name="style" type="uint" value="1"/>
       <property name="expand" type="bool" value="true"/>
+    </property>
+    <property name="plugin-3" type="string" value="quicklauncher"/>
+    <property name="plugin-5" type="string" value="quicklauncher"/>
+    <property name="plugin-8" type="string" value="quicklauncher"/>
+    <property name="plugin-9" type="string" value="launcher">
+      <property name="items" type="array">
+        <value type="string" value="14917362161.desktop"/>
+      </property>
+    </property>
+    <property name="plugin-11" type="string" value="launcher">
+      <property name="items" type="array">
+        <value type="string" value="15134421141.desktop"/>
+      </property>
     </property>
   </property>
   <property name="configver" type="int" value="2"/>

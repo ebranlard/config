@@ -9,11 +9,11 @@
 "   Remember that cterm should be put after ctermfg or ctermbg
 "   Look at help hi and the 16/8 colors. It is likely that I have a 8 color term...
 
+hi clear
 set background=light
 let g:colors_name = "ManuWhite"
 
 if version > 580
-	hi clear
 	if exists("syntax_on")
 		syntax reset
 	endif
@@ -22,23 +22,6 @@ if !has("gui_running") && &t_Co != 88 && &t_Co != 256
 	finish
 endif
 
-" sets the highlighting for the given group
-fun! <SID>X(group, fg, bg, attr)
-	if a:fg != ""
-		exec "hi ".a:group." guifg=".a:fg
-	endif
-	if a:bg != ""
-		exec "hi ".a:group." guibg=".a:bg
-	endif
-	if a:attr != ""
-		if a:attr == 'italic'
-			exec "hi ".a:group." gui=".a:attr." cterm=none"
-		else
-			exec "hi ".a:group." gui=".a:attr." cterm=".a:attr
-		endif
-	endif
-endfun
-" }}}
 
 " --------------------------------------------------------------------------------
 " ---  Background and menu colors
@@ -72,6 +55,7 @@ hi DiffAdd                    guibg=#cffdd0 gui=bold
 hi DiffDelete                 guibg=#fdc3c3 gui=bold
 hi DiffChange                 guibg=#e4e9f0 
 hi DiffText                   guibg=#c0d0f0
+hi Terminal ctermbg=black ctermfg=green guibg=#191919 guifg=green
 
 " --------------------------------------------------------------------------------
 " --- TODO

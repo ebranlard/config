@@ -65,6 +65,16 @@
 	<video-files/>
 </action>
 <action>
+	<icon>system-run</icon>
+	<name>Run-it</name>
+	<unique-id>1491409953451982-3</unique-id>
+	<command>xterm -e &quot;%f; sleep 1&quot;</command>
+	<description></description>
+	<patterns>*.sh</patterns>
+	<other-files/>
+	<text-files/>
+</action>
+<action>
 	<icon>vim</icon>
 	<name>Gvim Tab</name>
 	<unique-id>1383895217267228-1</unique-id>

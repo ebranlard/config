@@ -189,7 +189,7 @@ icon_id=21
 [launcher_14]
 command=transmission-gtk
 name=transmission
-icon_name=/usr/share/pixmaps/transmission.png
+icon_name=/usr/share/pixmaps/transmission.xpm
 icon_id=21
 
 [launcher_13]
@@ -201,7 +201,7 @@ icon_id=21
 [launcher_12]
 command=env PULSE_LATENCY_MSEC=60 skype %U
 name=
-icon_name=/usr/share/pixmaps/skype.png
+icon_name=/home/manu/Config/look/Icons/skype.png
 icon_id=21
 
 [launcher_11]
@@ -220,7 +220,7 @@ icon_id=21
 command=iceweasel
 name=
 icon_name=/usr/share/pixmaps/iceweasel.png
-icon_id=21
+icon_id=7
 
 [launcher_8]
 command=gvim
