@@ -1,2 +1,11 @@
-set runtimepath+=H:\Config\dotfiles\vim
-so H:\Config\dotfiles\vimrc
+" NOTE: For this vimrc to be picked up by VIM you need to setup the the environement variable $HOME to e.g. C:\Config\dotfiles\
+"set runtimepath+=C:\Config\dotfiles\vim
+" set viminfo+='1000,n~/.vim/viminfo
+if has("win32") || has("win16")
+    set runtimepath=C:\Config\dotfiles\vim,$VIMRUNTIME,C:\Config\dotfiles\vim\after
+    so C:\Config\dotfiles\vimrc
+"     set viminfo+=nC:\\Config\\temp\\
+"     set viminfo=%,'50
+"     set viminfo+=\"100,:100
+"     set viminfo+=nC:\\Config\\temp\\
+end

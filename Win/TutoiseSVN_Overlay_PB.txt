@@ -1,0 +1,3 @@
+The problem is windows is limited to the few first 11 or 16 keys, there (in alaphabetical order): 
+
+HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\ShellIconOverlayIdentifiers

@@ -1,3 +1,10 @@
+" ---------------------------------------------------------------------------}
+" --- Macros 
+" ---------------------------------------------------------------------------{
+" Change a variable based on a value b:i   0cw=b:i:let b:i=b:i+5j
+" ---------------------------------------------------------------------------}
+" --- Misc 
+" ---------------------------------------------------------------------------{
 set nocompatible
 set visualbell t_vb=    " turn off error beep/flash
 set novisualbell    " turn off visual bell
@@ -5,82 +12,8 @@ set novisualbell    " turn off visual bell
 "Pathogen
 execute pathogen#infect()
 " call pathogen#helptags() "run: Helptags directly
-" for personal mapping (I keep "\", while using "," as my leader, so that I'm not pulluted by all
-" the plugins commands
 let mapleader='\' 
-"
-" 
-" --------------------------------------------------------------------------------
-" --- GUI/Terminal-Specific 
-" --------------------------------------------------------------------------------
-if has("gui_running")
-    " The guioptions should be set on the same line, otherwise, menu.vim
-    " will be loaded
-    set guioptions=egrltaM
-"     set go-=m go+=M go-=T"
-"     set go-=m  "remove menu bar
-"     set go+=M  "remove menu bar
-"     set go-=T  "remove toolbar
-"     set go-=b  "remove horizontal bar
-"     set go+=a "copy and mouse selection
-    " Detect filetype nd use syntax highlighting syntax enable
-    syntax on           " syntax highlighing     !!!! should be after filetype plugin indent on
-    set background=light   " adapt colors for background
-    colorscheme ManuWhite
-    " Note: Font size is different depending on the OS
-"     set guifont=Monospace\ 10 
-    if has("gui_gtk2")
-        set guifont=DejaVu\ Sans\ Mono\ for\ Powerline
-    elseif has("gui_win32")
-        set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h10
-    end
-else
-    " Detect filetype nd use syntax highlighting syntax enable
-    syntax on           " syntax highlighing     !!!! should be after filetype plugin indent on
-    " Using Escape to leave insert mode in the terminal, it will by
-         augroup FastEscape
-             autocmd!
-             au InsertEnter * set timeoutlen=0
-             au InsertLeave * set timeoutlen=1000
-         augroup END
-         let term=$TERM
-         if term=="xterm"
-             set t_Co=256 " Explicitly tell Vim that the terminal supports 256 colors
-             colorscheme wombat256    " use this color scheme
-             set guifont=DejaVu\ Sans\ Mono\ for\ Powerline
-         elseif term=="linux"
-             set t_Co=256 " Explicitly tell Vim that the terminal supports 256 colors
-             "set t_Co=8 " Explicitly tell Vim that the terminal supports 8 colors
-             colorscheme koehler    " use this color scheme
-         elseif term=="cygwin"
-             "set t_Co=8 " Explicitly tell Vim that the terminal supports 256 colors
-             "colorscheme wombat256    " use this color scheme
-             colorscheme koehler    " use this color scheme
-         else
-             set t_Co=8 " Explicitly tell Vim that the terminal supports 256 colors
-             colorscheme koehler    " use this color scheme
-         endif
-endif
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-""" Indent 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"'autoindent'	uses the indent from the previous line.
-"'smartindent'	is like 'autoindent' but also recognizes some C syntax to
-"		increase/reduce the indent where appropriate.
-"'cindent'	Works more cleverly than the other two and is configurable to
-"		different indenting styles.
-"'indentexpr'	The most flexible of all: Evaluates an expression to compute
-"		the indent of a line.  When non-empty this method overrides
-" 		the other ones.  See |indent-expression|.
-set smartindent
-set cindent
-set tabstop=4
-set shiftwidth=4	" 4 characters for indenting
-set et " expand tab
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-""" From vimrc example
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " allow backspacing over everything in insert mode
 set backspace=indent,eol,start whichwrap+=<,>,[,]
 set history=200	" keep 50 lines of command line history
@@ -95,8 +28,6 @@ if has("autocmd")
     " Put these in an autocmd group, so that we can delete them easily.
     augroup vimrcEx
         au!
-        " For all text files set 'textwidth' to 78 characters.
-        "         autocmd FileType text setlocal textwidth=78
         " When editing a file, always jump to the last known cursor position.
         " Don't do it when the position is invalid or when inside an event handler
         " (happens when dropping a file on gvim).
@@ -105,58 +36,497 @@ if has("autocmd")
                     \   exe "normal! g`\"" |
                     \ endif
     augroup END
-else
-    set autoindent		" always set autoindenting on
 endif 
 " No end of line
 set noeol
-" Convenient command to see the difference between the current buffer and the
-" file it was loaded from, thus the changes you made.
-command! DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis | wincmd p | diffthis
 " command! Mdiff vert diffsplit
 command! -complete=file -nargs=+ Mdiff vert diffsplit <args>
 
 " filetype on
 set nospell 
-" " Cursor
-" let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-" let &t_EI = "\<Esc>]50;CursorShape=0\x7"
-" let &t_SI .= "\<Esc>[4 q"
-" " solid block
-" let &t_EI .= "\<Esc>[2 q"
-" 1 or 0 -> blinking block
-" 3 -> blinking underscore
-" Recent versions of xterm (282 or above) also support
-" 5 -> blinking vertical bar
-" 6 -> solid vertical bar
 
+
+" ---------------------------------------------------------------------------}
+" --- GUI/Terminal-Specific 
+" ---------------------------------------------------------------------------{
+if has("gui_running")
+    set guioptions=egrltaM " The guioptions should be set at once otherwise, menu.vim is loaded
+    syntax on " syntax highlighing  
+    set background=light " adapt colors for background
+    colorscheme ManuWhite
+"     set guifont=Monospace\ 10 
+    if has("gui_gtk2")
+        set guifont=DejaVu\ Sans\ Mono\ for\ Powerline
+    elseif has("gui_win32")
+        set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h10
+    end
+else
+    " Using Escape to leave insert mode in the terminal, it will by
+    augroup FastEscape
+        autocmd!
+        au InsertEnter * set timeoutlen=0
+        au InsertLeave * set timeoutlen=1000
+    augroup END
+    syntax on " syntax highlighing  
+    let term=$TERM
+    if term=="xterm"
+        set t_Co=256 " Explicitly tell Vim that the terminal supports 256 colors
+        colorscheme wombat256    " use this color scheme
+        set guifont=DejaVu\ Sans\ Mono\ for\ Powerline
+    elseif term=="linux"
+        set t_Co=256 " Explicitly tell Vim that the terminal supports 256 colors
+        colorscheme koehler    " use this color scheme
+    elseif term=="cygwin"
+        colorscheme koehler    " use this color scheme
+    else
+        set t_Co=8 " Explicitly tell Vim that the terminal supports 256 colors
+        colorscheme koehler    " use this color scheme
+    endif
+endif
+
+
+" ---------------------------------------------------------------------------}
+" --- Indent 
+" ---------------------------------------------------------------------------{
+set cindent
+set tabstop=4
+set shiftwidth=4	" 4 characters for indenting
+set et " expand tab
+
+" ---------------------------------------------------------------------------}
+" --- Sessions 
+" ---------------------------------------------------------------------------{
+"set sessionoptions=blank,tabpages,winsize,resize,winpos,sesdir,buffers  "sessionoptions, i removed folds and curdir
+if has("gui_win32")
+  set nofsync 
+  set nowritebackup  "dangerous option
+else
+  set backupdir=~/vim/tmp " save all tmp files to ./vim/tmp/
+end
+set nobackup
+set noswapfile 
+" ---------------------------------------------------------------------------}
+" --- Editor general 
+" ---------------------------------------------------------------------------{
+set number "toggle line numbering:
+"  set foldcolumn=1 " to visually see folds on the left hand side
+nnoremap ,tn :set invnumber number?<CR>
+" avoid the promt 'press enter or type command to continue'
+set shortmess=atI
+
+source $VIMRUNTIME/macros/matchit.vim 
+
+" used by CTRL-U and CTRL-D ? well, well well... this doesn't work.. fine I'll tweak C-E and C-Y
+set scroll=4
+nnoremap <C-e> 3<C-e>
+nnoremap <C-y> 3<C-y>
+set scrolloff=4   "offset between cursor and screen limit
+set previewheight=20  "used for instance by fugitive
+
+" Behavior when lines are joined with J, or new lines opened with o or enter
+if version>=704
+    autocmd FileType * setlocal formatoptions-=o formatoptions+=nqrj
+else
+    autocmd FileType * setlocal formatoptions-=o formatoptions+=nqr
+endif
+
+" When using vim in xterm, the term title will have the file name
+set title
+
+" ---------------------------------------------------------------------------}
+" --- Compilation 
+" ---------------------------------------------------------------------------{
+" Automatically open, but do not go to (if there are errors) the quickfix /
+" location list window, or close it when is has become empty.
+" Note: Must allow nesting of autocmds to enable any customizations for quickfix
+" buffers. 
+" Note: Normally, :cwindow jumps to the quickfix window if the command opens it
+" (but not if it's already open). However, as part of the autocmd, this doesn't
+" seem to happen. 
+autocmd QuickFixCmdPost [^l]* nested cwindow
+autocmd QuickFixCmdPost    l* nested lwindow
+" Jumping between quickfix results
+noremap ,n :cnext  <CR>
+noremap ,<S-N> :cprevious  <CR> 
+
+" ---------------------------------------------------------------------------}
+" --- Grep / find 
+" ---------------------------------------------------------------------------{
+" IMPORTANT: grep options
+" search in a singe file. This will confuse Latex-Suite. Set your grep
+" program to always generate a file-name.
+" set grepprg=grep\ -InsriH\ --exclude={*.vtk,tags,*.mod,*.log,*_geom.m,*_out.m,*.dat,*.pvsm,*.png,*.o,*.exe}\ --exclude-dir=*.git\ $*
+if has("win32") || has("win16")
+"     set grepprg=grep\ -ni $*
+    set grepprg=findstr\ /n\ /I\ /S 
+else
+    set grepprg=grep\ -Insri\ --exclude={*.vtk,tags,*.mod,*.log,*_geom.m,*_out.m,*.dat,*.pvsm,*.png,*.o,*.exe}\ --exclude-dir=*.git\ $*
+endif
+
+" IMPORTANT: to use :find in a "fuzzy" and "recursive" way
+set path+=**
+
+" ---------------------------------------------------------------------------}
+" --- SpellCheck 
+" ---------------------------------------------------------------------------{
+" problem with mouse
+set mousemodel=popup_setpos    
+" toggle spell check
+nnoremap ,ts :set invspell spell?<CR>    
+set spellsuggest=3
+"Doc for spell: use z= to display list of suggestions. Use 1z= to use the
+"first one
+" nnoremap <C-s> a<C-X><C-S>
+nnoremap <C-s> 1z=
+
+
+" ---------------------------------------------------------------------------}
+" --- Keywords 
+" ---------------------------------------------------------------------------{
+set isk=a-z,A-Z,48-57,_,128-167,224-235
+"set isk+=: " for latex in the ftplugin dir
+
+" ---------------------------------------------------------------------------}
+" --- Wrapping and horizontal bar 
+" ---------------------------------------------------------------------------{
+function! ToggleHorizontalScrollbar()
+    "set guioptions+=b
+    if &go =~# "b"
+        set go-=b
+    else
+        set go+=b
+    endif
+endfunc
+set lbr " line break
+noremap <F10> :set nowrap! <CR>
+noremap <F11> :call ToggleHorizontalScrollbar()<CR>
+
+" ---------------------------------------------------------------------------}
+" --- Search 
+" ---------------------------------------------------------------------------{
+" Press F3 to toggle highlighting on/off, and show current value.
+noremap <F3> :set hlsearch! hlsearch?<CR>
+set hlsearch
+set incsearch	" do incremental searching
+set ignorecase	" ignore case
+set smartcase	" but don't ignore it, when search string contains uppercase letters
+
+" " Search for the ... arguments separated with whitespace (if no '!'),
+" " or with non-word characters (if '!' added to command).
+" function! SearchMultiLine(bang, ...)
+"   if a:0 > 0
+"     let sep = (a:bang) ? '\_W\+' : '\_s\+'
+"     let @/ = join(a:000, sep)
+"   endif
+" endfunction
+" command! -bang -nargs=* -complete=tag S call SearchMultiLine(<bang>0, <f-args>)|normal! /<C-R>/<CR>
+" ---------------------------------------------------------------------------}
+" --- Completion 
+" ---------------------------------------------------------------------------{
+set completeopt=menu,longest,preview
+set showcmd		" display incomplete commands at the bottom of the screen
+set wildchar=<Tab> wildmenu wildmode=longest,list,full
+set wildcharm=<C-Z>
+set wildignore=*.o,*~,*.cmo,*.cmi,*.a,*.cmx,*.cmxa,*.aux,*.dvi,*.aut,*.bbl,*.blg,*.dvi,*.fff,*.ps,*.toc,*.ttt 
+" for an easier autocompletion of previous commands
+cnoremap <C-k> <Up>
+cnoremap <C-j> <Down>
+" ---------------------------------------------------------------------------}
+" --- Folding 
+" ---------------------------------------------------------------------------{
+"highlight Folded ctermfg=yellow ctermbg=NONE
+" set foldmethod=indent " fold indented regions
+" foldexpr is customized in after/ftplugin/ for different languages
+set foldmethod=marker    "indent " fold indented regions
+set foldminlines=1
+set foldnestmax=2
+set nofoldenable
+set foldlevel=1     " fold from the beginning
+set foldmarker=--{,--} " foldmarker
+" set foldmarker={{{,}}} " foldmarker
+function! MyFoldText()
+    let thisline = getline(v:lnum)
+    let foldsize = (v:foldend-v:foldstart)
+    return getline(v:foldstart).'    ('.foldsize.' lines)'
+endfunction
+"set foldtext=getline(v:foldstart)
+set foldtext=MyFoldText()  " can be customized later
+
+" ---------------------------------------------------------------------------}
+" --- Tabs 
+" ---------------------------------------------------------------------------{
+" noremap <C-H> :bp<CR>
+" noremap <C-L> :bn<CR>
+noremap <C-H> :tabprevious<CR>
+noremap <C-L> :tabnext<CR>
+set showtabline=2  " always tabs visible
+
+"open tag in new tab
+map <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
+" ---------------------------------------------------------------------------}
+" --- Buffers 
+" ---------------------------------------------------------------------------{
+" Buffer explorer \be
+" Bluid in features
+" smart buffer switching pressing :b tab of F10
+"nnoremap <F10> :b <C-Z>
+set hidden "current background can be put to background without writting to disk, delete buffers when not used
+set autoread   " tricky one: if a file is changed locally, automatically reload it, without asking
+" the command below will forcve opening in a new tab, or already existing tab?
+" set switchbuf+=usetab,newtab   " try that with quickfix window...
+
+
+" ---------------------------------------------------------------------------}
+" --- Windows like (mostly removed all the C-C C-V C-A mappings)
+" ---------------------------------------------------------------------------{
+" --- avoid capture of key combos from the system
+if has("win32") || has("win16")
+else
+    set winaltkeys=no
+endif
+" Select all
+noremap ,a ggVG
+
+
+" ---------------------------------------------------------------------------}
+" --- Windows manipulation 
+" ---------------------------------------------------------------------------{
+" resize in horizontal mode
+map <M-_> <C-W>-
+map <M-+> <C-W>+
+" resize in vertical mode ALT-SHIFT-[<>]: 
+map <M-<> <C-W><
+map <M->> <C-W>>
+imap <M-<> <C-W><
+imap <M->> <C-W>>
+
+imap <C-w> <C-o><C-w>
+" min win height to 0, 1 default
+set wmh=0
+
+" ---------------------------------------------------------------------------}
+" --- Programming general 
+" ---------------------------------------------------------------------------{
+" the mapping below repeat the variable on the line, puts an equal in between and a semicolon at the end, to do something like i=i+1; for languages that don't have the ++
+nmap ++ ^v$hyPa=<esc>A ;<esc>hi
+" indent all and return to current position
+nmap ,i mi<esc>gg=G<esc>`i
+" These below might be overriden in after/ftplugin
+" Remember there is \tt and \tsp
+" To avoid all the mapping loading
+" let g:loaded_AlignMapsPlugin = "v42" 
+vmap ,aa :Align! =Ip0P0 ( , ) <CR>
+vmap ,a= :Align! =Ip1P1 = <CR>
+vmap ,ac :Align! =Ip1P1 ! <CR>
+vmap ,a; :Align! =Ip0P1 ; <CR>
+vmap ,a, :Align! =Ip0P0 , <CR>
+" Function align: equal, args, semi column and comments
+vmap ,af ,a= gv ,aa gv ,a; gv ,ac
+" Statements :  equal, semicolumn and comments
+vmap ,ae ,a= gv ,a; gv ,ac
+
+
+"custom comma motion mapping
+nmap di, f,dT,
+nmap ci, f,cT,
+nmap da, f,ld2F,i,<ESC>l 
+nmap ca, f,ld2F,i,<ESC>a
+
+
+" delete Windows end of line carriet return
+
+
+" Increasing numbers in column ( extend the functionality of <C-A>, but not <C-X> yet)
+function! Incr()
+    let a = line('.') - line("'<")
+    let c = virtcol("'<")
+    if a > 0
+        execute 'normal! '.c.'|'.a."\<C-a>"
+    endif
+    normal `<
+endfunction
+vnoremap <C-a> :call Incr()<CR>
+
+" NOTE: see autocommand, look for cwindow and lwindow in my vimrc
+" Use Makefile in current or parent directory # almost work, but problem with the tee...
+" let &makeprg = '[[ -f Makefile ]] && make || make -C .. '
+let &makeprg = 'make '
+" Command Make will call make and then cwindow which
+" opens a 3 line error window if any errors are found.
+" If no errors, it closes any open cwindow.
+" command -nargs=* Make silent make <args> | copen 15
+command! -nargs=* Make silent make <args>| copen 15|execute 'normal Gzb'|set nowrap|wincmd p
+" ---------------------------------------------------------------------------}
+" --- Matlab 
+" ---------------------------------------------------------------------------{
+" let g:matlab_behave_mapping_kind = 0
+" --- Parameters for xterm
+let g:matlab_behave_terminal="xterm" 
+if has("win32") || has("win16")
+    let g:matlab_behave_paste_cmd="^v"
+else
+    let g:matlab_behave_paste_cmd="Shift+Insert"
+endif
+" --- Parameters for xfce4-terminal
+" let g:matlab_behave_terminal="xfce4-terminal" 
+" let g:matlab_behave_paste_cmd="Shift+Ctrl+v"
 " 
-" 
-" """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" """ Color Parenthesis
-" """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" " au VimEnter * RainbowParenthesesToggle
-" "au Syntax * RainbowParenthesesLoadRound
-" "au Syntax * RainbowParenthesesLoadSquare
-" "au Syntax * RainbowParenthesesLoadBraces
-"  
-" 
-" """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" """ Gitgutter
-" """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" " let g:gitgutter_realtime = 0
-" " let g:gitgutter_eager = 0
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-""" Syntastic options
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" ---------------------------------------------------------------------------}
+" --- TAB 
+" ---------------------------------------------------------------------------{
+" Tab headings just file name
+function! GuiTabLabelManu()
+    let label = ''
+    let bufnrlist = tabpagebuflist(v:lnum)
+    " Add '+' if one of the buffers in the tab page is modified
+    for bufnr in bufnrlist
+        if getbufvar(bufnr, "&modified")
+            let label = '+'
+            break
+        endif
+    endfor
+    " Append the number of windows in the tab page if more than one
+    let wincount = tabpagewinnr(v:lnum, '$')
+    if wincount > 1
+        let label .= wincount
+    endif
+    if label != ''
+        let label .= ' '
+    endif
+    let fname="%t"
+    return label . fname
+endfunction
+
+set guitablabel=%!GuiTabLabelManu()
+
+" ---------------------------------------------------------------------------}
+" ---  Command QFargs and QFdo to put QuickFix Files into argument list, or do something
+" ---------------------------------------------------------------------------{
+command! -nargs=0 -bar QFargs execute 'args ' . QuickfixFilenames()
+function! QuickfixFilenames()
+  " Building a hash ensures we get each buffer only once
+  let buffer_numbers = {}
+  for quickfix_item in getqflist()
+    let buffer_numbers[quickfix_item['bufnr']] = bufname(quickfix_item['bufnr'])
+  endfor
+  return join(values(buffer_numbers))
+endfunction
+
+" Define a command to make it easier to use
+command! -nargs=+ QFDo call QFDo(<q-args>)
+
+" Function that does the work
+function! QFDo(command)
+    " Create a dictionary so that we can
+    " get the list of buffers rather than the
+    " list of lines in buffers (easy way
+    " to get unique entries)
+    let buffer_numbers = {}
+    " For each entry, use the buffer number as 
+    " a dictionary key (won't get repeats)
+    for fixlist_entry in getqflist()
+        let buffer_numbers[fixlist_entry['bufnr']] = 1
+    endfor
+    " Make it into a list as it seems cleaner
+    let buffer_number_list = keys(buffer_numbers)
+
+    " For each buffer
+    for num in buffer_number_list
+        " Select the buffer
+        exe 'buffer' num
+        " Run the command that's passed as an argument
+        exe a:command
+        " Save if necessary
+        update
+    endfor
+endfunction
+
+" ---------------------------------------------------------------------------}
+" --- Environment variables, local 
+" ---------------------------------------------------------------------------{
+let $PYTHONPATH='/home/manu/Config/path/PythonPath/'
+let host=$HOSTNAME
+let $OMNIVOR_MKF_DIR='/work/libs/OmniVor/_src/_mkf/'
+let $OMNIVOR_OBJ_DIR='/work/libs/OmniVor/_src/_build/linux-amd64/'
+
+" ---------------------------------------------------------------------------}
+" --- Typos - spelling - abbreviations
+" ---------------------------------------------------------------------------{
+iab accross across
+iab Bernouilli Bernouilli
+iab coordiante coordinate 
+iab developped developed
+iab developpement developement
+iab developping developing
+iab Developping Developing
+iab expension expansion 
+iab fro for 
+iab gaussian Gaussian
+iab Helmoltz Helmholtz
+iab litterature literature 
+iab mentionned mentioned 
+iab occuring occurring
+iab representating representing
+iab rigourous rigorous
+iab symetry symmetry 
+iab symetric symmetric 
+iab sligthly slightly
+iab volumic volume
+iab writting writing
+
+
+
+" ---------------------------------------------------------------------------}
+" --- INSERT MODE TWEAKS and COPY PASTE TWEAKS
+" ---------------------------------------------------------------------------{
+"Dealing with long lines automaticaly...
+nmap k g<Up>
+nmap j g<Down>
+vmap k g<Up>
+vmap j g<Down>
+"  set clipboard+=unnamed,unnamedplus    "all test cut and yanked will be in the X register as well (*)
+if has("win32") || has("win16")
+    set clipboard=autoselect,unnamed
+else
+    set clipboard=autoselect,unnamed,unnamedplus,exclude:cons\|linux
+end
+" Y will yank to the clipboard
+" noremap Y "+y          
+nnoremap Y "+y
+vnoremap Y "+ygvy
+
+" Autocenter after motion command
+nmap G Gzz
+nmap } }zz
+nmap { {zz
+noremap zj zjzz
+noremap zk zkzz
+
+" insert only one character, enabling repetitions as '5s '
+"  function! RepeatChar(char, count)
+"      return repeat(a:char, a:count)
+"  endfunction
+"  nnoremap s :<C-U>exec "normal i".RepeatChar(nr2char(getchar()), v:count1) <CR>
+" ---------------------------------------------------------------------------}
+" --- TAGS 
+" ---------------------------------------------------------------------------{
+" Ctaps in multi-level directory hierarchy
+map <F12> :!ctags -R --fields=+iaS --extra=+q .<CR><CR>
+set tags=tags;    " the magic is the ‘;’ at end. it will make vim tags file search go up from current directory until it finds one.
+
+
+" ---------------------------------------------------------------------------}
+" --- PLUGIN - Syntastic 
+" ---------------------------------------------------------------------------{
 let g:syntastic_error_symbol='✗>'
 let g:syntastic_warning_symbol='⚠>'
 let g:syntastic_enable_balloons = 0
 " let g:syntastic_quiet_warnings=1
 " let g:syntastic_quiet_messages = {'level': 'warnings'}
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-""" Statusline
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" ---------------------------------------------------------------------------}
+" --- PLUGIN - Airline - Statusline 
+" ---------------------------------------------------------------------------{
 let left_sep = ''
 let left_alt_sep = ''
 let right_sep = ''
@@ -197,11 +567,9 @@ let g:airline_theme='sol'
 " --- Airline Sections
 " let g:airline_section_a='%#__accent_bold#%{airline#util#wrap(airline#parts#mode(),0)}%#__restore__#%{airline#util#append(airline#parts#paste(),0)}%{airline#util#append(airline#parts#iminsert(),0)}'
 " let g:airline_section_b='%{airline#util#wrap(airline#extensions#branch#get_head(),0)}'
-" let g:airline_section_c='%{getcwd()} -- %f -- %<%t%m %#__accent_red#%{airline#util#wrap(airline#parts#readonly(),0)}%#__restore__#'
 " let g:airline_section_c='%{getcwd()} -- %f %<%m %#__accent_red#%{airline#util#wrap(airline#parts#readonly(),0)}%#__restore__#'
 " FILETYPE and TAG
 if version >=704
-"     let g:airline_section_x='%{airline#util#prepend(airline#extensions#tagbar#currenttag(),0)}%{airline#util#wrap(airline#parts#filetype(),0)}'
 "     let g:airline_section_x='%{airline#util#prepend(airline#extensions#tagbar#currenttag(),0)}%{airline#util#wrap(airline#parts#filetype(),0)}'
     let g:airline_section_x='%{airline#util#wrap(airline#parts#filetype(),0)}'
 endif
@@ -209,272 +577,23 @@ endif
 let g:airline_section_y='%{airline#util#wrap(airline#parts#ffenc(),0)}'
 " let g:airline_section_z='%3p%%_%{g:airline_symbols.linenr}%#__accent_bold#%4l%#__restore__#:%3c'
 " let g:airline_section_warning='%{airline#util#wrap(airline#extensions#syntastic#get_warnings(),1)}'
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-""" Sessions
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set sessionoptions=blank,tabpages,winsize,resize,winpos,sesdir,buffers  "sessionoptions, i removed folds and curdir
-"  set backupdir=~/.vim/tmp,~/.tmp,~/tmp,/var/tmp,/tmp  " save all tmp files to ./vim/tmp/
-"  set directory=~/.vim/tmp,~/.tmp,~/tmp,/var/tmp,/tmp
-set nobackup
-set noswapfile
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-""" Editor general
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" line numbering
-set number "toggle line numbering:
-"  set foldcolumn=1 " to visually see folds on the left hand side
-nnoremap ,tn :set invnumber number?<CR>
-" avoid the promt 'press enter or type command to continue'
-set shortmess=atI
 
+" ---------------------------------------------------------------------------}
+" --- PLUGIN - NETRW 
+" ---------------------------------------------------------------------------{
+let g:netrw_liststyle = 0
+let g:netrw_banner = 0 "removing banner
+let g:netrw_browse_split = 4 "open in pervious window
+" let g:netrw_winsize = -25
+let g:netrw_altv=1              " open files on right
+let g:netrw_preview=1           " open previews vertically
 
-" used by CTRL-U and CTRL-D ? well, well well... this doesn't work.. fine I'll tweak C-E and C-Y
-set scroll=4
-nnoremap <C-e> 3<C-e>
-nnoremap <C-y> 3<C-y>
-set scrolloff=4   "offset between cursor and screen limit
-
-set previewheight=20  "used for instance by fugitive
-" set autochdir " always in the file directory, folder
-"autocmd BufEnter * silent! lcd %:p:h
-" ,cd = Change to Directory of Current file
-map ,cd :lcd %:p:h <CR>:pwd<CR>
-
-" disables auto comment insertion for new lines
-"  autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
-"o : comment continuation when typing o
-"j : smart joining lines with comments
-"n : recognize numbered lists 1.
-"q : allow formatting of comment paragraph
-"r : insert comment leader when pressing enter
-if version>=704
-    autocmd FileType * setlocal formatoptions-=o formatoptions+=n formatoptions+=q formatoptions+=r formatoptions+=j
-else
-    autocmd FileType * setlocal formatoptions-=o formatoptions+=n formatoptions+=q formatoptions+=r
-endif
-
-" For formatting of latex paragraph using qglp
-omap lp ?^$\\|^\s*\(\\begin\\|\\end\\|\\label\)?1<CR>//-1<CR>.<CR>
-
-" When using vim in xterm, the term title will have the file name
-set title
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-""" Folding
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-function! MyFoldText()
-    let thisline = getline(v:lnum)
-    let foldsize = (v:foldend-v:foldstart)
-    return getline(v:foldstart).'    ('.foldsize.'lines)'
-"      return getline(v:foldstart)
-endfunction
-set foldtext=MyFoldText()  " can be customized later
-" foldexpr is customized in after/ftplugin/ for different languages
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-""" Compilation
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Automatically open, but do not go to (if there are errors) the quickfix /
-" location list window, or close it when is has become empty.
-" Note: Must allow nesting of autocmds to enable any customizations for quickfix
-" buffers. 
-" Note: Normally, :cwindow jumps to the quickfix window if the command opens it
-" (but not if it's already open). However, as part of the autocmd, this doesn't
-" seem to happen. 
-autocmd QuickFixCmdPost [^l]* nested cwindow
-autocmd QuickFixCmdPost    l* nested lwindow
-" Jumping between quickfix results
-noremap ,n :cnext  <CR>
-noremap ,<S-N> :cprevious  <CR> 
-
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-""" SpellCheck
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" problem with mouse
-set mousemodel=popup_setpos    
-" toggle spell check
-nnoremap ,ts :set invspell spell?<CR>    
-set spellsuggest=3
-"Doc for spell: use z= to display list of suggestions. Use 1z= to use the
-"first one
-" nnoremap <C-s> a<C-X><C-S>
-nnoremap <C-s> 1z=
-
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-""" Keywords  
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set isk=a-z,A-Z,48-57,_,128-167,224-235
-"set isk+=: " for latex in the ftplugin dir
-
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-""" Wrapping and horizontal bar
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-function! ToggleHorizontalScrollbar()
-    "set guioptions+=b
-    if &go =~# "b"
-        set go-=b
-    else
-        set go+=b
-    endif
-endfunc
-set lbr " line break
-noremap <F10> :set nowrap! <CR>
-noremap <F11> :call ToggleHorizontalScrollbar()<CR>
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-""" Search
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Press F3 to toggle highlighting on/off, and show current value.
-noremap <F3> :set hlsearch! hlsearch?<CR>
-set hlsearch
-set incsearch	" do incremental searching
-set ignorecase	" ignore case
-set smartcase	" but don't ignore it, when search string contains uppercase letters
-
-" " Search for the ... arguments separated with whitespace (if no '!'),
-" " or with non-word characters (if '!' added to command).
-" function! SearchMultiLine(bang, ...)
-"   if a:0 > 0
-"     let sep = (a:bang) ? '\_W\+' : '\_s\+'
-"     let @/ = join(a:000, sep)
-"   endif
-" endfunction
-" command! -bang -nargs=* -complete=tag S call SearchMultiLine(<bang>0, <f-args>)|normal! /<C-R>/<CR>
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-""" Completion 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set completeopt=menu,longest,preview
-set showcmd		" display incomplete commands at the bottom of the screen
-set wildchar=<Tab> wildmenu wildmode=longest,list,full
-set wildcharm=<C-Z>
-set wildignore=*.o,*~,*.cmo,*.cmi,*.a,*.cmx,*.cmxa,*.aux,*.dvi,*.aut,*.bbl,*.blg,*.dvi,*.fff,*.ps,*.toc,*.ttt 
-" for an easier autocompletion of previous commands
-cnoremap <C-k> <Up>
-cnoremap <C-j> <Down>
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-""" Folding (overload it in after ftplugin)
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"highlight Folded ctermfg=yellow ctermbg=NONE
-"set foldtext=getline(v:foldstart)
-" set foldmethod=indent " fold indented regions
-set foldmethod=marker    "indent " fold indented regions
-set foldminlines=1
-set foldnestmax=2
-set nofoldenable
-set foldlevel=1     " fold from the beginning
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-""" Tabs
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" noremap <C-H> :bp<CR>
-" noremap <C-L> :bn<CR>
-noremap <C-H> :tabprevious<CR>
-noremap <C-L> :tabnext<CR>
-set showtabline=2  " always tabs visible
-nnoremap <silent> <A-Left> :execute 'silent! tabmove ' . (tabpagenr()-2)<CR>
-nnoremap <silent> <A-Right> :execute 'silent! tabmove ' . tabpagenr()<CR>
-
-"open tag in new tab
-map <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-""" Buffers
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Buffer explorer \be
-" Bluid in features
-" smart buffer switching pressing :b tab of F10
-"nnoremap <F10> :b <C-Z>
-set hidden "current background can be put to background without writting to disk, delete buffers when not used
-set autoread   " tricky one: if a file is changed locally, automatically reload it, without asking
-" the command below will forcve opening in a new tab, or already existing tab?
-" set switchbuf+=usetab,newtab   " try that with quickfix window...
-
-
-
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-""" Windows like (mostly removed all the C-C C-V C-A mappings)
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" --- avoid capture of key combos from the system
-if has("win32") || has("win16")
-else
-    set winaltkeys=no
-end
-" Select all
-noremap ,a ggVG
-
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-""" Windows Manipulation
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" resize in horizontal mode
-map <M-_> <C-W>-
-map <M-+> <C-W>+
-" resize in vertical mode ALT-SHIFT-[<>]: 
-map <M-<> <C-W><
-map <M->> <C-W>>
-imap <M-<> <C-W><
-imap <M->> <C-W>>
-
-imap <C-w> <C-o><C-w>
-" min win height to 0, 1 default
-set wmh=0
-
-
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-""" INSERT MODE TWEAKS and COPY PASTE TWEAKS
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"Dealing with long lines automaticaly...
-nmap k g<Up>
-nmap j g<Down>
-vmap k g<Up>
-vmap j g<Down>
-"  set clipboard+=unnamed,unnamedplus    "all test cut and yanked will be in the X register as well (*)
-if has("win32") || has("win16")
-    set clipboard=autoselect,unnamed
-else
-    set clipboard=autoselect,unnamed,unnamedplus,exclude:cons\|linux
-end
-" Y will yank to the clipboard
-" noremap Y "+y          
-nnoremap Y "+y
-vnoremap Y "+ygvy
-
-" Autocenter
-nmap G Gzz
-nmap } }zz
-nmap { {zz
-noremap zj zjzz
-noremap zk zkzz
-
-" insert only one character, enabling repetitions as '5s '
-"  function! RepeatChar(char, count)
-"      return repeat(a:char, a:count)
-"  endfunction
-"  nnoremap s :<C-U>exec "normal i".RepeatChar(nr2char(getchar()), v:count1) <CR>
-
-" Ctrl-j/k deletes blank line below/above, and Alt-j/k inserts.
-" nnoremap <silent><A-J> m`:silent +g/\m^\s*$/d<CR>``:noh<CR>
-" nnoremap <silent><A-K> m`:silent -g/\m^\s*$/d<CR>``:noh<CR>
-" nnoremap <silent><A-j> :set paste<CR>m`o<Esc>``:set nopaste<CR>
-" nnoremap <silent><A-k> :set paste<CR>m`O<Esc>``:set nopaste<CR>
-
-
-
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-""" VIM-LATEX
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" ---------------------------------------------------------------------------}
+" --- PLUGIN - VIM-LATEX 
+" ---------------------------------------------------------------------------{
 " DESACTIVATING IMAP
 let g:Imap_FreezeImap=1 
 
-" IMPORTANT: grep options
-" search in a singe file. This will confuse Latex-Suite. Set your grep
-" program to always generate a file-name.
-" set grepprg=grep\ -InsriH\ --exclude={*.vtk,tags,*.mod,*.log,*_geom.m,*_out.m,*.dat,*.pvsm,*.png,*.o,*.exe}\ --exclude-dir=*.git\ $*
-set grepprg=grep\ -Insri\ --exclude={*.vtk,tags,*.mod,*.log,*_geom.m,*_out.m,*.dat,*.pvsm,*.png,*.o,*.exe}\ --exclude-dir=*.git\ $*
 " OPTIONAL: Starting with Vim 7, the filetype of empty .tex files defaults to
 " 'plaintex' instead of 'tex', which results in vim-latex not being loaded.
 " The following changes the default filetype back to 'tex':
@@ -482,21 +601,26 @@ let g:tex_flavor='latex'
 let g:Tex_Menus=0
 let g:Tex_PromptedEnvironments='' 
 let g:tex_comment_nospell=1
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 """ Latex compilation
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:Tex_DefaultTargetFormat = 'pdf'
 let g:Tex_MultipleCompileFormats='' 
 let g:Tex_FormatDependency_pdf = ''
+" if has("win32") || has("win16")
 let g:Tex_CompileRule_pdf = 'pdflatex -synctex=1 --shell-escape --interaction=nonstopmode $*;'
+" endif
 let g:Tex_CompileRule_dvi = 'latex -synctex=1 --interaction=nonstopmode $*;'
 let g:Tex_CompileRule_ps = 'dvips -Ppdf -o $*.ps $*.dvi;'
 let g:Tex_UseMakeFile = 1
 let g:Tex_GotoError=0 " if set to 1 then after \ll then vim will go to the next error
 
-" Inverse search
-"let g:Tex_ViewRule_pdf = '"C:\bin\SumatraPDF\SumatraPDF.exe" -inverse-search "gvim -c \":RemoteOpen +\%l \%f\""'
-let g:Tex_ViewRule_pdf = 'evince'
+" " Inverse search
+if has("win32") || has("win16")
+" let g:Tex_ViewRule_pdf = '"C:\Program Files\SumatraPDF\SumatraPDF.exe" -inverse-search "gvim -c \":RemoteOpen +\%l \%f\""'
+  let g:Tex_ViewRule_pdf = 'SumatraPDFPortable -inverse-search "gvim -c \":RemoteOpen +\%l \%f\""'
+else
+  let g:Tex_ViewRule_pdf = 'evince'
+endif
 
 "remember command for dynamicly changing warning level :TCLevel 3
 let g:Tex_IgnoredWarnings =
@@ -530,31 +654,12 @@ let g:Tex_Folding=2
 "let Tex_CompileRule_pdf = 'ps2pdf $*.ps ;echo "Rule PS>PDF defined in Main"; read A'
 "let g:Tex_ProjectSourceFiles ='bib/*.bib,tex/*.tex'
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-""" Motion
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:EasyMotion_leader_key = '<Leader>'
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-""" Tags
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" ------Old stuff
-" map <F12> :!ctags -R --c++-kinds=+pl --fields=+iaS --extra=+q .<CR><CR>
-" set tags+=~/.vim/tags/tags_cpp
-" " add current directory's generated tags file to available tags
-" set tags+=./tags
-" ------New stuff
-" Ctaps in multi-level directory hierarchy
-" http://linux.byexamples.com/archives/385/vim-with-ctags-for-multi-level-directory-hierarchy/
-if has("win32") || has("win16")
-    map <F12> :!ctags -R --fields=+iaS --extra=+q .<CR><CR>
-else
-    map <F12> :!ctags -R --fields=+iaS --extra=+q .<CR><CR>
-end
-set tags=tags;    " the magic is the ‘;’ at end. it will make vim tags file search go up from current directory until it finds one.
 
-" --------------------------------------------------------------------------------
-" --- tagbar 
-" --------------------------------------------------------------------------------
+
+
+" ---------------------------------------------------------------------------}
+" --- PLUGIN - TAGBAR 
+" ---------------------------------------------------------------------------{
 """ Tag bar
 if has("win32") || has("win16")
     let g:tagbar_ctags_bin = 'C:\Bin\ctags58\ctags.exe'
@@ -570,23 +675,6 @@ let g:tagbar_width = 30
 let g:tagbar_autofocus = 1
 let g:tagbar_indent = 1
 let g:tagbar_show_visibility = 0
-"" Taglist
-" Extending taglist to latex (see .ctagsrc)
-" let tlist_tex_settings   = 'latex;s:sections;g:graphics;l:labels'
-" let tlist_tex_settings   = 'latex;s:sections'
-" let Tlist_Auto_Highlight_Tag = 1
-" let Tlist_WinWidth=35
-" let Tlist_Compact_Format = 1
-" let Tlist_Show_One_File = 1
-" let Tlist_Display_Tag_Scope=1
-" let Tlist_Enable_Fold_Column = 0
-" let tlist_make_settings  = 'make;m:makros;t:targets'
-" " Extending taglist to matlab
-" let tlist_matlab_settings   = 'matlab;f:function;s:section'
-"" NERDTree
-" let NERDTreeMinimalUI=1
-" let NERDTreeDirArrows=1
-" nnoremap <F6> :TlistToggle <CR>
 
 nnoremap ,to :TagbarToggle <CR>
 nnoremap ,tt :TagbarShowTag <CR>
@@ -648,65 +736,9 @@ let g:tagbar_type_tex = {
         \ 'input' : 'I'
     \ },
 \ }
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-""" IDE Stuffs
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" nnoremap <F6> :NERDTreeToggle <CR>
-" Tlist_Show_Menu
-"win manager and file explorer and taglist plugins
-"let winManagerWindowLayout = 'FileExplorer|TagList'
-"
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-""" Programming general
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" the mapping below repeat the variable on the line, puts an equal in between and a semicolon at the end, to do something like i=i+1; for languages that don't have the ++
-nmap ++ ^v$hyPa=<esc>A ;<esc>hi
-" indent all and return to current position
-nmap ,i mi<esc>gg=G<esc>`i
-" These below might be overriden in after/ftplugin
-" Remember there is \tt and \tsp
-" To avoid all the mapping loading
-" let g:loaded_AlignMapsPlugin = "v42" 
-vmap ,aa :Align! =Ip0P0 ( , ) <CR>
-vmap ,a= :Align! =Ip1P1 = <CR>
-vmap ,ac :Align! =Ip1P1 ! <CR>
-vmap ,a; :Align! =Ip0P1 ; <CR>
-vmap ,a, :Align! =Ip0P0 , <CR>
-" Function align: equal, args, semi column and comments
-vmap ,af ,a= gv ,aa gv ,a; gv ,ac
-" Statements :  equal, semicolumn and comments
-vmap ,ae ,a= gv ,a; gv ,ac
-
-
-"custom comma motion mapping
-nmap di, f,dT,
-nmap ci, f,cT,
-nmap da, f,ld2F,i,<ESC>l 
-nmap ca, f,ld2F,i,<ESC>a
-
-
-" delete Windows end of line carriet return
-
-
-" Increasing numbers in column ( extend the functionality of <C-A>, but not <C-X> yet)
-function! Incr()
-    let a = line('.') - line("'<")
-    let c = virtcol("'<")
-    if a > 0
-        execute 'normal! '.c.'|'.a."\<C-a>"
-    endif
-    normal `<
-endfunction
-vnoremap <C-a> :call Incr()<CR>
-
-" Use Makefile in current or parent directory # almost work, but problem with the tee...
-" let &makeprg = '[[ -f Makefile ]] && make || make -C .. '
-let &makeprg = 'make '
-
-" --------------------------------------------------------------------------------
-" ---  CtrlP
-" --------------------------------------------------------------------------------
+" ---------------------------------------------------------------------------}
+" --- PLUGIN  - CtrlP
+" ---------------------------------------------------------------------------{
 call ctrlp_bdelete#init()
 " Smart switching buffers, opening new ones and grep
 " nnoremap ,b :LustyBufferExplorer <CR>
@@ -728,37 +760,37 @@ let g:ctrlp_custom_ignore = {
             \ }
 let g:ctrlp_working_path_mode = 'a'
 let g:ctrlp_max_height = 20
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-""" Matlab (see also after plugin)
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-source $VIMRUNTIME/macros/matchit.vim 
 
-" let g:matlab_behave_mapping_kind = 0
-" --- Parameters for xterm
-let g:matlab_behave_terminal="xterm" 
-if has("win32") || has("win16")
-    let g:matlab_behave_paste_cmd="^v"
-else
-    let g:matlab_behave_paste_cmd="Shift+Insert"
-endif
-" --- Parameters for xfce4-terminal
-" let g:matlab_behave_terminal="xfce4-terminal" 
-" let g:matlab_behave_paste_cmd="Shift+Ctrl+v"
+" ---------------------------------------------------------------------------}
+" --- MY SIMPLE PLUGIN - Font 
+" ---------------------------------------------------------------------------{
+function! FontSizeAdjust(amount)
+  if has("gui_gtk2") && has("gui_running")
+    let s:pattern = '^\(.* \)\([1-9][0-9]*\)$'
+    let fontname = substitute(&guifont, s:pattern, '\1', '')
+    let cursize = substitute(&guifont, s:pattern, '\2', '')
+    let newsize = cursize + a:amount
+    let newfont = fontname . newsize
+    let &guifont = newfont
+  elseif has("gui_win32")
+    let s:pattern = '^\(.*:h\)\([1-9][0-9]*\)$'
+    let fontname = substitute(&guifont, s:pattern, '\1', '')
+    let cursize = substitute(&guifont, s:pattern, '\2', '')
+    let newsize = cursize + a:amount
+    let newfont = fontname . newsize
+    let &guifont = newfont
+  else
+    echoerr "You need to run the GTK2 version of Vim to use this function."
+  endif
+endfunction
+map ,fp :call FontSizeAdjust(1) <CR>
+map ,fm :call FontSizeAdjust(-1) <CR>
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-""" Language specific
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-""" Fortran, PYTHON
-" see ftplugin and after/ftplugin
-
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-""" Shell
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" ---------------------------------------------------------------------------}
+" --- MY SIMPLE PLUGIN - SHELL
+" ---------------------------------------------------------------------------{
 set shellslash    " important for vimlatex and windows
 if has("win32") || has("win16")
-    " Tagbar will fail if not using the default value for shell
-    "set shell=cmd
     " Quickly open a shell in the current directory:
     map ,s :!start cmd /k <CR>
 else
@@ -769,7 +801,7 @@ else
     map ,s :!xfce4-terminal &<CR><CR>
 endif
 
-function! s:ExecuteInShell(command) " {{{
+function! s:ExecuteInShell(command) 
     let command = join(map(split(a:command), 'expand(v:val)'))
     let winnr = bufwinnr('^' . command . '$')
     silent! execute  winnr < 0 ? 'below new ' . fnameescape(command) : winnr . 'wincmd w'
@@ -786,118 +818,103 @@ endfunction " }}}
 command! -complete=shellcmd -nargs=+ Shell call s:ExecuteInShell(<q-args>)
 nnoremap <leader>! :Shell
 
-" 
-" function! SyncTexForward()
-"      let execstr = "silent !okular --unique %:p:r.pdf\#src:".line(".")."%:p &"
-"      exec execstr
-" endfunction
-" nmap <Leader>f :call SyncTexForward()<CR>
-"
-set scroll=4
+" ---------------------------------------------------------------------------}
+" --- MY SIMPLE PLUGIN - Show Special characters
+" ---------------------------------------------------------------------------{
+function! ShowTab() " ShowTab: toggles between showing tabs and using standard listchars
+  if !exists("g:SeeTabEnabled")
+    let g:SeeTabEnabled = 1
+    let g:SeeTab_list = &list
+    let g:SeeTab_listchars = &listchars
+    set list
+"     set listchars=tab:\|_
+    set listchars=tab:▸\ ,eol:¬
+  else
+    let &list = g:SeeTab_list
+    let &listchars = &listchars
+    unlet g:SeeTabEnabled g:SeeTab_list g:SeeTab_listchars
+  endif
+endfunc
+com! -nargs=0 ShowTab :call ShowTab()
 
 
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-""" Tab text
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Tab headings just file name
-function! GuiTabLabelManu()
-    let label = ''
-    let bufnrlist = tabpagebuflist(v:lnum)
-    " Add '+' if one of the buffers in the tab page is modified
-    for bufnr in bufnrlist
-        if getbufvar(bufnr, "&modified")
-            let label = '+'
-            break
+" ---------------------------------------------------------------------------}
+" --- MY SIMPLE PLUGIN - Bookmarks and explorer  
+" ---------------------------------------------------------------------------{
+fun! VexToggle(dir)
+  if exists("t:vex_active")
+    call VexClose()
+  else
+    call VexOpen(a:dir)
+  endif
+endf
+fun! VexOpen(dir)
+  let vex_width = 30
+  execute "Vexplore " . a:dir
+  let t:vex_active = 1
+  wincmd H
+  call VexSize(vex_width)
+endf
+fun! VexClose()
+  let cur_win_nr = winnr()
+  if cur_win_nr ==1 
+      unlet t:vex_active
+  else
+      let target_nr = ( cur_win_nr == 1 ? winnr("#") : cur_win_nr )
+      1wincmd w
+      close
+      unlet t:vex_buf_nr
+      execute (target_nr - 1) . "wincmd w"
+      call NormalizeWidths()
+  endif
+endf
+fun! VexSize(vex_width)
+  execute "vertical resize" . a:vex_width
+  set winfixwidth
+  call NormalizeWidths()
+endf
+fun! NormalizeWidths()
+  let eadir_pref = &eadirection
+  set eadirection=hor
+  set equalalways! equalalways!
+  let &eadirection = eadir_pref
+endf
+function! ToggleBookMarks()
+    if has("win32") || has("win16")
+        if expand("%:t") ==? "Bookmarks.lst"
+            :normal c
+        else
+            :55vsplit C:\Config\dotfiles\vim\Bookmarks.lst
         endif
-    endfor
-    " Append the number of windows in the tab page if more than one
-    let wincount = tabpagewinnr(v:lnum, '$')
-    if wincount > 1
-        let label .= wincount
+    end
+endfunction
+function! OpenExplorer()
+    "  Open file explorer. If on a bookmark, open it. otherwise open current directory
+    if expand("%:t") ==? "Bookmarks.lst"
+        :normal ^"ey$
+        :normal c
+    else
+        let @e=getcwd()
     endif
-    if label != ''
-        let label .= ' '
+    if has("win32") || has("win16")
+        :exec '!start Explorer '.@e
+    end
+endfunction
+function! OpenInTab()
+    "  Open folder in tab. 
+    if expand("%:t") ==? "Bookmarks.lst"
+        :normal ^"ey$
+        :normal c
+        :exec 'tabe '
+        :call VexOpen(@e)
+"         :exec 'tabe '.@e
     endif
-    let fname="%t"
-    return label . fname
 endfunction
 
-set guitablabel=%!GuiTabLabelManu()
+noremap ,bb :call ToggleBookMarks()<CR>
+noremap ,ee :call VexToggle(getcwd())<CR>
+noremap ,e :call OpenExplorer()<CR>
+noremap ,t :call OpenInTab()<CR>
+" ,cd = Change to Directory of Current file
+map ,cd :lcd %:p:h <CR>:pwd<CR>
 
-" --------------------------------------------------------------------------------
-" --- Command QFargs and QFdo to put QuickFix Files into argument list, or do something
-" --------------------------------------------------------------------------------
-command! -nargs=0 -bar QFargs execute 'args ' . QuickfixFilenames()
-function! QuickfixFilenames()
-  " Building a hash ensures we get each buffer only once
-  let buffer_numbers = {}
-  for quickfix_item in getqflist()
-    let buffer_numbers[quickfix_item['bufnr']] = bufname(quickfix_item['bufnr'])
-  endfor
-  return join(values(buffer_numbers))
-endfunction
-
-" Define a command to make it easier to use
-command! -nargs=+ QFDo call QFDo(<q-args>)
-
-" Function that does the work
-function! QFDo(command)
-    " Create a dictionary so that we can
-    " get the list of buffers rather than the
-    " list of lines in buffers (easy way
-    " to get unique entries)
-    let buffer_numbers = {}
-    " For each entry, use the buffer number as 
-    " a dictionary key (won't get repeats)
-    for fixlist_entry in getqflist()
-        let buffer_numbers[fixlist_entry['bufnr']] = 1
-    endfor
-    " Make it into a list as it seems cleaner
-    let buffer_number_list = keys(buffer_numbers)
-
-    " For each buffer
-    for num in buffer_number_list
-        " Select the buffer
-        exe 'buffer' num
-        " Run the command that's passed as an argument
-        exe a:command
-        " Save if necessary
-        update
-    endfor
-endfunction
-
-" --------------------------------------------------------------------------------
-" --- Environment variables, local
-" --------------------------------------------------------------------------------
-let $PYTHONPATH='/home/manu/Config/path/PythonPath/'
-" if empty($OMNIVOR_OBJ_DIR)
-" endif
-let host=$HOSTNAME
-let $OMNIVOR_MKF_DIR='/work/libs/OmniVor/_src/_mkf/'
-let $OMNIVOR_OBJ_DIR='/work/libs/OmniVor/_src/_build/linux-amd64/'
-
-" --------------------------------------------------------------------------------
-" --- Typos - spelling - abbreviations
-" --------------------------------------------------------------------------------
-iab accross across
-iab Bernouilli Bernouilli
-iab coordiante coordinate 
-iab developped developed
-iab developpement developement
-iab developping developing
-iab Developping Developing
-iab expension expansion 
-iab fro for 
-iab gaussian Gaussian
-iab Helmoltz Helmholtz
-iab litterature literature 
-iab mentionned mentioned 
-iab occuring occurring
-iab representating representing
-iab rigourous rigorous
-iab symetry symmetry 
-iab symetric symmetric 
-iab sligthly slightly
-iab volumic volume
-iab writting writing

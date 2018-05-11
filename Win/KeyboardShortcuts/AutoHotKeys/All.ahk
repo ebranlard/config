@@ -5,6 +5,13 @@ SendMode Input  ; Recommended for new scripts due to its superior speed and reli
 SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 
 ;; --------------------------------------------------------------------------------
+;; --- Global variables 
+;; --------------------------------------------------------------------------------
+gvim:="C:\Program Files (x86)\Vim\vim80\gvim.exe"
+diff:="C:\Program Files (x86)\WinMerge\WinMergeU.exe"
+InsertMode:=0
+
+;; --------------------------------------------------------------------------------
 ;; --- Move Windows  
 ;; --------------------------------------------------------------------------------
 ;; --- Home
@@ -292,8 +299,14 @@ Return
 ;; --------------------------------------------------------------------------------
 ;; --- Windows Keys to launch 
 ;; --------------------------------------------------------------------------------
+;; --- FuzzyRun
+#r:: Run, python C:\Work\Geekeries\fuzzy-run\fuzzy-run
 ;; --- WindowsExplorer
 #t:: Run, Explorer H:\
+;; --- Switch to Matlab
+#m:: Run, wmctrl -a MATLAB ,,Hide
+;; --- Switch to Gvim
+#g:: Run, wmctrl -a gvim ,,Hide
 ;; --- 
 ;; #t:: Run, Explorer C:\Users\emmbr
 ;; --- WindowsRun (doesnt work in windows 8 )
@@ -352,7 +365,7 @@ LWin:: Send {Esc}
 ^+k::Send {Up}
 ^+n::Send {Down}
 ;; ^+k::Send {Up}
-/::Send ^f
+^/::Send ^f
 ^+h::Send +^{Tab}
 ^+l::Send  ^{Tab}
 ^+;:: Send ^l
@@ -364,13 +377,83 @@ LWin:: Send {Esc}
 ;; --------------------------------------------------------------------------------
 ;; --- Explorer 
 ;; --------------------------------------------------------------------------------
+
+
 #IfWinActive ahk_class CabinetWClass
-^j::Send {Down}
-^k::Send {Up}
-^+j::Send {Down}
-^+k::Send {Up}
+
+;; ---  Insert mode togle with i/ctrl-[ and navigation with jk
+^[:: InsertMode:=0
+i:: 
+if InsertMode=0
+    InsertMode:=1
+else
+    Send i
+return
+j::
+if InsertMode=0
+    Send {Down}
+else
+    Send j
+return
+k::
+if InsertMode=0
+    Send {Up}
+else
+    Send k
+return
++j::
+if InsertMode=0
+    Send !{Down}
+else
+    Send J
+return
++k::
+if InsertMode=0
+    Send !{Up}
+else
+    Send K
+return
+0:: 
+if InsertMode=0
+   Send {Home}
+else
+    Send 0
+return
+x:: 
+if InsertMode=0
+   Send {Del}
+else
+    Send x
+return
+h::
+if InsertMode=0
+    Send {Left}
+else
+    Send h
+return
+l::
+if InsertMode=0
+    Send {Right}
+else
+    Send l
+return
+^j::Send ^{Down}
+^k::Send ^{Up}
+^+j::Send ^+{Down}
+^+k::Send ^+{Up}
 /::Send ^f
+::: Send !d  ; For to address (Alt-D)
+^;:: Send !d  ; For to address (Alt-D)
 ^+;:: Send !d  ; For to address (Alt-D)
+^0:: ; Go to file list
+Send !d ; first go to address bar
+Sleep, 10
+Send {Enter}
+Sleep, 10
+Send {F6}
+Sleep, 10
+Send {F6}  
+return
 ^n:: return ; D
 ^o:: Send !{Left} ; 
 ^i:: Send !{Right} ; 
@@ -378,14 +461,73 @@ LWin:: Send {Esc}
 ^u:: Send {PgUp}  ; 
 ^d:: Send {PgDn}  ;
 ^+n:: Send ^n
-, & s:: Send !fP
-#IfWinActive
+^backspace::Send +{F10}  ; Open Context menu
+^e::Send {F2} ; rename
+; --- Edit a file in vim
+^]::
+Clipboard =  ; Start blank for ClipWait detection to work.
+Send ^c
+ClipWait 2
+if ErrorLevel 
+  return ; Nothing found on clipboard.
+StringReplace,Clipboard,Clipboard,`r`n," ",A
+Run, %gvim%  -p "%Clipboard%"
+return
+; --- Diff it
+^m::
+Clipboard =  ; Start blank for ClipWait detection to work.
+Send ^c
+ClipWait 2
+if ErrorLevel  ; Nothing found on clipboard.
+   return
+StringReplace,Clipboard,Clipboard,`r`n," ",A
+Run, %diff%  "%Clipboard%"
+return
+; ---- Open Terminal
+, & s:: Send !fP  ; open a terminal
+^s::  Send !fP
+;; ControlGetText, address , edit1,ahk_class CabinetWClass
+;; Run, cmd.exe, %address%
+;; return
+;; ^s:: 
+;; Send {Shift Down}{AppsKey}{Shift Up}
+;; Sleep 10
+;; Send w{enter}
+;; return
+#IfWinActive ; explorer
 
+;; #ifwinactive, ahk_class CabinetWClass
+;; #p:: 
+;; address:=
+;; ControlGetText, address , edit1,ahk_class CabinetWClass
+;; if (address == "")
+;;     MsgBox "Empty"
+;; 
+;; MsgBox % address
+;; ;; Run, cmd.exe, %address%
+;; return
+;; #ifwinactive ; Restores to normal behaviour, if needed
+
+;; --------------------------------------------------------------------------------
+;; --- Excel
+;; --------------------------------------------------------------------------------
+#IfWinActive ahk_exe EXCEL.EXE
+^h::Send {Left}
+^l::Send {Right}
+^j::Send {Down}
+^k::Send {Up}
+^+h::Send {Left}
+^+l::Send {Right}
+^+j::Send {Down}
+^+k::Send {Up}
+^e::Send {F2}
+^backspace::Send +{F10}
+#IfWinActive
 ;; --------------------------------------------------------------------------------
 ;; --- Console 
 ;; --------------------------------------------------------------------------------
 #IfWinActive ahk_class ConsoleWindowClass
-#esc::Send !{Space}c
+#esc::Send !{Space}c   ; close console
 #IfWinActive
 
 
