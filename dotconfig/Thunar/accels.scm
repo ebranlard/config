@@ -32,6 +32,7 @@
 ; (gtk_accel_path "<Actions>/ThunarWindow/view-side-pane-tree" "<Primary>e")
 ; (gtk_accel_path "<Actions>/ThunarActions/uca-action-1380194857928128-31" "")
 ; (gtk_accel_path "<Actions>/ThunarStandardView/restore" "")
+; (gtk_accel_path "<Actions>/ThunarActions/uca-action-1491409953451982-3" "")
 ; (gtk_accel_path "<Actions>/ThunarBookmarks/ea376b8d97058b9bc6ba86434d113bbf" "")
 ; (gtk_accel_path "<Actions>/ThunarWindow/open-network" "")
 ; (gtk_accel_path "<Actions>/ThunarActions/uca-action-1380194857928118-30" "")
