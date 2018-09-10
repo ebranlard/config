@@ -1,87 +1,166 @@
-a2ps
-acetoneiso
-acroread
-apt-show-versions
-avidemux
-banshee
-brasero
-bzip2
-ctags
-doxygen
-easytag
-evince-gtk
-filezilla
-firmware-iwlwifi
-flashplugin-nonfree
-frozen-bubble
-ftp
-gfortran
-gimp
-git
-gitk
-gnuplot
-gpart
-gpicview
-vim-gtk
-vim-ruby
-gzip
-icedove
-iceowl-extension
-iceweasel
-imagemagick
-inkscape
-lazarus
-less
-meld
-octave
-openconnect
-vpnc
-p7zip
-p7zip-full
-p7zip-rar
-paraview
-pavucontrol
-pavumeter
-pulseaudio
-pulseaudio-module-gconf
-pulseaudio-module-x11
-pulseaudio-module-zeroconf
-pulseaudio-utils
-r-base
-rhythmbox
-subversion
-sysv-rc-conf
-tagtool
-texlive-base
-texlive-binaries
-texlive-extra-utils
-texlive-font-utils
-texlive-generic-extra
-texlive-latex-base
-texlive-pstricks
-texlive-science
-timidity
-thunar-media-tags-plugin 
-thunar-archive-plugin
-transmission-gtk
-unzip
-valgrind
-vim-gtk
-virtualbox
-virtualbox-dkms
-wicd
-wicd-daemon
-wicd-gtk
-wmctrl
-xclip
-xdotool
-xfce4-panel
-xfce4-power-manager
-xfce4-power-manager-data
-xfce4-power-manager-plugins
-xfce4-quicklauncher-plugin
-xfce4-screenshooter
-xfce4-taskmanager
-xfce4-terminal
-xfce4-volumed
-zip
+#!/bin/bash
+ 
+if [[ $EUID -ne 0 ]]; then
+    echo "This script must be run as root"
+    exit 1
+fi
+
+# Getting the directory where this script is stored
+# path=`pwd`
+path="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+chmod +x Setup*
+chmod +x update
+chmod +x scripts/*
+chmod +x dotfiles/vim/SetupVim.sh
+
+
+
+echo "---------------------------------------------------------"
+echo "--- SOFTWARE INSTALL"
+echo "---------------------------------------------------------"
+echo -n "Perform Software install (y/n)? "; read answer
+if [ "$answer" != "${answer#[Yy]}" ] ;  
+then
+    ### essentials
+    echo -n "Install essential tools (y/n)? "; read answer
+    if [ "$answer" != "${answer#[Yy]}" ] ;  
+    then
+      apt-get install -m sudo git aptitude vim-gtk wmctrl xclip xdotool xfce4-quicklauncher-plugin
+    fi
+
+    ### Desktop
+    #echo -n "Install desktop tools? (y/n)"
+    #read answer
+    #if [ "$answer" != "${answer#[Yy]}" ] ;  
+    #then
+    #   apt-get install filezilla
+    #fi
+fi
+
+echo "---------------------------------------------------------"
+echo "--- ROOT SETUP"
+echo "---------------------------------------------------------"
+echo -n "Perform Root setup (y/n)? "; read answer
+if [ "$answer" != "${answer#[Yy]}" ] ; then
+
+    # --------------------------------------------------------------------------------
+    # --- Policies and conf files 
+    # --------------------------------------------------------------------------------
+    # Policies
+    # ln -s $path/profiles/policies/ /etc/polkit-1/localauthority/55-mylocal.d
+
+    # Issue
+    #cp $path/profiles/issue /etc/
+
+    # init-functions
+    # cp /lib/lsb/init-functions /lib/lsb/init-functions-bak
+    # cp $path/profiles/init-functions /lib/lsb/
+
+
+    # udev policies (to avoid being shown in Thunar)
+    # cp $path/profiles/udevrules/* /etc/udev/rules.d/
+
+
+    # grub 
+    # mv /etc/default/grub /etc/default/grub-bak
+    # ln -s $path/profiles/grub/etcdefaultgrub /etc/default/grub
+    #update grub
+    # Creating and linking some folders
+    mkdir -p /opt
+    mkdir -p /usr/share/icons
+    rm /usr/share/icons/IconsManu*
+    ln -s $path/look/IconsManu2012 /usr/share/icons/IconsManu2012
+    #texmf
+    rm -f /etc/texmf/texmf.d/12-*
+    ln -s $path/profiles/texmf/12-TexmfHome.cnf /etc/texmf/texmf.d/
+    #rm /m 
+    #ln -s /media/HomeStorage/Music/ /m
+
+    # Whisper credentials
+    #         echo "username=WIN/ebra
+    #         password=" >> /usr/local/etc/whisper.credentials
+
+    # Sorting underscores first
+    update-locale LC_COLLATE=C
+
+    #sudoers
+    sudo cp -f $path/profiles/sudoers.d/* /etc/sudoers.d/
+    sudo chmod 440 /etc/sudoers.d/*
+
+
+    echo -n "Install dotfiles for root (y/n)? "; read answer
+    if [ "$answer" != "${answer#[Yy]}" ] ; then
+        rm  /root/.bashrc /root/.bash_profile /root/.bash_logout /root/.vimrc /root/.vim 
+        ln -s $path/dotfiles/bashrc_root.bash /root/.bashrc
+        ln -s $path/dotfiles/bash_profile_root.bash /root/.bash_profile
+        ln -s $path/dotfiles/bash_logout /root/.bash_logout
+        ln -s $path/dotfiles/vimrc /root/.vimrc
+        ln -s $path/dotfiles/vim /root/.vim
+    fi
+
+    # --------------------------------------------------------------------------------
+    # --- FSTAB 
+    # --------------------------------------------------------------------------------
+    echo -n "Add fstab lines (y/n)? "; read answer
+    if [ "$answer" != "${answer#[Yy]}" ] ; then
+        cp /etc/fstab /etc/fstab.bak 
+        # Prepare fstab for win drives
+        if [[ `cat /etc/fstab |grep DataWin|wc -l` == 1 ]] ; then
+            mkdir /media/DataWin /media/Win
+            echo "
+            # Win /dev/sda
+            #UUID=   /media/Win      ntfs-3g defaults,noauto,umask=007,uid=1000,gid=1000       0       0
+            # DataWin /dev/sda
+            #UUID=   /media/DataWin      ntfs-3g defaults,umask=007,uid=1000,gid=1000       0       0
+            " >> /etc/fstab
+        fi
+        # Storages
+        if [[ `cat /etc/fstab |grep HomeStorage|wc -l` == 1 ]] ; then
+            mkdir /media/WorkStorage /media/HomeStorage
+            echo "
+            # Prepare fstab for Storage drives
+            ## Work Storage
+            # UUID=1105BE213AEBE2F6 /media/WorkStorage      ntfs-3g defaults,users,noauto,umask=007,uid=1000,gid=1000       0       0
+            ## Home Storage
+            # UUID=843671A53671993E /media/HomeStorage      ntfs-3g defaults,users,noauto,umask=007,uid=1000,gid=1000       0       0
+            " >> /etc/fstab
+        fi
+    fi # fstab
+    echo "[DONE] Root setup"
+fi
+
+
+echo "---------------------------------------------------------"
+echo "--- USER SETUP"
+echo "---------------------------------------------------------"
+echo -n "Perform User setup (y/n)? "; read answer
+if [ "$answer" != "${answer#[Yy]}" ] ; then
+    echo -n "Enter main username: "
+    read USER
+
+    echo -n "Give special access to this user (y/n)? "; read answer
+    if [ "$answer" != "${answer#[Yy]}" ] ; then
+        # Adding user to sudo
+        addgroup $USER sudo
+        chown -R $USER: /usr/share/icons/
+        chown -R $USER: /opt
+    fi
+
+
+    echo -n "Install dotfiles (y/n)? "; read answer
+    if [ "$answer" != "${answer#[Yy]}" ] ; then
+        sudo -H -u $USER ./_SetupDotFiles
+    fi
+
+    echo -n "Setup vim (y/n)? "; read answer
+    if [ "$answer" != "${answer#[Yy]}" ] ; then
+        cd dotfiles/vim/
+        sudo -H -u $USER ./SetupVim.sh
+        cd $path
+    fi
+
+
+    echo "[DONE] User setup"
+fi
+

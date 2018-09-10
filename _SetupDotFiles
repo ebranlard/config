@@ -1,6 +1,10 @@
 #!/bin/bash
 
 #!!! Should not be run as root (for now)
+if [[ $EUID == 0 ]]; then
+    echo "This script should not be run as root"
+    exit 1
+fi
 
 
 # Getting the directory where this script is stored
@@ -12,15 +16,19 @@ echo "PATH: " $path
 cd ~
 
 # Moving existing dofiles to a backup folder
+echo ""
+echo "Performing backup..."
 BKP_FOLDER=_bkp_dotfiles
 echo "Backup Folder: $BKP_FOLDER"
 mkdir -p $BKP_FOLDER 
-mv .xinitrc .xsessionrc .bashrc .bash_logout .bash_profile .ctags .vimrc .vim .gitconfig .profile $BKP_FOLDER
+mv -f .xinitrc .xsessionrc .bashrc .bash_logout .bash_profile .ctags .vimrc .vim .gitconfig .profile $BKP_FOLDER
 # Moving existing dotconfig to a backup folder
-mv .config/Templates .config/xfce4 .config/Thunar $BKP_FOLDER
+mv -f .config/Templates .config/xfce4 .config/Thunar $BKP_FOLDER
 # Moving existing dotfolders to a backup folder
-mv .themes .fonts $BKP_FOLDER
+mv -f .themes .fonts $BKP_FOLDER
 
+echo ""
+echo "Linking dotfiles and folders..."
 # Linking dotfiles
 ln -s $path/dotfiles/xinitrc .xinitrc
 ln -s $path/dotfiles/xsessionrc .xsessionrc
@@ -34,11 +42,14 @@ ln -s $path/dotfiles/profile .profile
 ln -s $path/dotfiles/vim .vim
 # Linking .config folders
 mkdir -p .config
+rm -rf .config/xfce4
+rm -rf .config/Thunar
 ln -s $path/dotconfig/xfce4 .config/xfce4
 ln -s $path/dotconfig/Thunar .config/Thunar
 
 
-
+echo ""
+echo "Host specific files..."
 if [ $HOSTNAME == 'work' ]
 then
     echo "Work"
@@ -50,12 +61,15 @@ then
 else
     ln -s $path/dotfiles/gitconfig .gitconfig
 fi
+
 # Fonts
+echo ""
+echo "Setting up fonts, looks, templates..."
+ln -s $path/profiles/templates .config/Templates
+ln -s $path/look/themes .themes
 ln -s $path/fonts .fonts
 fc-cache -vf ~/.fonts
 
-# templates
-ln -s $path/profiles/templates .config/Templates
 
-# look
-ln -s $path/look/themes .themes
+echo ""
+echo "[DONE] Dot files for $USER"
