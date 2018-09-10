@@ -1,49 +1,72 @@
 
-# Use a software package manager
-Install one program to install/manage all of your other programs...
-Install Chocolatey
-
-
 # Programs to install
-WinSplit Revolution 11
-AutoHotKey
-Git  (with admin rights in Programfiles 86)
-Vim
-EveditorFree
-ContextEdit  (to add a context menu action e.g. open command here)
-ConsoleZ
-Babun
-ConEmu  (use AppData/Roaming/ConEmu.xml for config file)
+chocolatey (package manager)
+    choco install -y git autohotkey vim  winmerge consolez vlc inkscape contextconsole treesizefree
+    sumatrapdf
+    cutepdf
+    dropbox
+    gimp
+    virtualbox
+    astrogrep
 
+    chocolateygui
 
-#  
+Not on chocalatey:
+    Wox (QuickLaunch)
+    EveditorFree
+    ContextEdit  (to add a context menu action e.g. open command here)
 
+My Tools:
+    wmctrl
+    xdotools
+    SwitchAndPasteToMatlab
 
 # Windows Config:
 
-## TaskBar Config:
+## Taskbar: 
+### TaskBar Config:
 Right click on task bar:
 - unlock
 - Use small buttons
 - Never combine
 
-## Add QuickLaunch to TaskBar
+### Add QuickLaunch to TaskBar
 Right-click the taskbar and select Toolbars-->New Toolbar.
 (default Quick Launch is at: User\AppData\Roaming\Microsoft\Internet Explorer\Quick Launch)
 
-## Disable Full path in title bar (and hence task bar) for Explorer 
+## Explorer 
+### Remove "user folders" under "This PC"
+See my reg files in Config\Win
+For isntance: 
+    [-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{B4BFCC3A-DB2C-424C-B029-7FE99A87C641}]
+    [-HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{B4BFCC3A-DB2C-424C-B029-7FE99A87C641}]
+
+### Disable Full path in title bar (and hence task bar) for Explorer 
 Folder Options>View> Uncheck "Display the full path in the title bar"
 
+## Fonts
+Install Config\Fonts\DejaVuSansMono (select all and run as admin to install)
+    
+## Speed up Windows
+### File Indexing
+Unselect all the location that are indexed
+### Power Perfomances
+Set on High performance power plan
+### Disable visual effects, and transparency
+- Go to Advanced System settings, then Visual Tab, and select "Adjust for best Performance" (I keep smooth fonts)
+- Go to Color and themes> Colors > Disable transparency
 
 
-# WinSplit Revolution
-Configuration is stored in:
-"C:\Users\ebra\AppData\Roaming\Winsplit Revolution\"
+
+# Firefox with AdBlockPlus plugin
+Install adblock plus
 
 
-# HotKeys
+# AutoHotKeys
 
-- Install AutoHotKeys
+- Install AutoHotKeys.  No need to patch for windows 10 (autohotkey installed with Chocolatey)
+- Go to Config\Win\Autohotkey and ru nthe script copy.bat This Puts your scripts in:
+	C:\Users\%USER%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup
 
 - For windows 8 and higher, it may be best to enable UIAccess on the autohotkey.exe file. Download EnableUiAccess from:  https://autohotkey.com/board/topic/70449-enable-interaction-with-administrative-programs/ 
 Unzip the files, and run the main script. Select AutohotKey.exe, overwrite it. 
@@ -54,25 +77,31 @@ Unzip the files, and run the main script. Select AutohotKey.exe, overwrite it.
 Run, Notepad,
 return
 
-- Put Your scripts in:
-C:\Users\ebra\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup
 
+# Vim
+- Some help:
+In vim: type :help runtimepath to see where the _vimrc_ is looked for.
 
+- Change $HOME
+If you want to change this location one option is to change the environment variable %HOME%
+Set the the environement variable $HOME to e.g. C:\Config\dotfiles\
 
+- Edit the "default vimrc"
+In program files
+edit the file _vimrc_to remove the source mswin and behave mswin line
 
-
+- Debug startup time
+gvim --staartuptime VimStartup.log
 
 # Git
 git config core.autocrlf true
 
 
-# Vim
 
-edit the file _vimrc to remove the source mswin and behave mswin line
 
-In vim: type :help runtimepath to see where the _vimrc is looked for.
-
-If you want to change this location one option is to change the environment variable %HOME%
+# WinSplit Revolution
+Configuration is stored in:
+"C:\Users\ebra\AppData\Roaming\Winsplit Revolution\"
 
 
 
@@ -100,10 +129,6 @@ install apt-cyg /bin
 ## Cygwin and ConEmu (see ConEmu)
 
 
-
-
-
-
 # ConEmu
 ## ConEmu and Babun (see babun)
 
@@ -129,15 +154,12 @@ https://www.reddit.com/r/customization/comments/19t8ow/making_windows_feel_more_
 http://www.instructables.com/id/Give-Your-Computer-A-Cool-Linux-Feel/
 
 
-
 http://windowspager.sourceforge.
 net/
 
 http://lifehacker.com/lifehacker-pack-for-windows-our-list-of-the-best-windo-787533613
 
-
 http://answers.microsoft.com/en-us/windows/forum/windows_7-desktop/how-do-i-change-the-windows-7-keyboard-shortcuts/0110d32d-66c0-4ce7-8682-eeb896e80c3f?page=2
-
 
 https://www.google.dk/search?q=Manage+windows+shortcutsw&ie=utf-8&oe=utf-8&gws_rd=cr&ei=ppVhVo2jIsOcygP-y6zYCg
 

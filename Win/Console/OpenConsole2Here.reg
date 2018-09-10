@@ -1,23 +1,24 @@
 Windows Registry Editor Version 5.00
 
 [HKEY_CLASSES_ROOT\*\shell\Console2]
-@="Open Console Here"
+@="Open ConsoleZ Here"
 "Icon"="C:\\Config\\look\\Icons\\terminal.ico"
 
 [HKEY_CLASSES_ROOT\*\shell\Console2\command]
-@="C:\\Bin\\Console2\\Console.exe"
+@="C:\\ProgramData\\chocolatey\\lib\\ConsoleZ\\tools\\Console.exe"
+;@="C:\\Bin\\Console2\\Console.exe"
 
 [HKEY_CLASSES_ROOT\Directory\shell\Console2]
-@="Open Console Here"
+@="Open ConsoleZ Here"
 "Icon"="C:\\Config\\look\\Icons\\terminal.ico"
 
 [HKEY_CLASSES_ROOT\Directory\shell\Console2\command]
-@="C:\\Bin\\Console2\\Console.exe"
+@="C:\\ProgramData\\chocolatey\\lib\\ConsoleZ\\tools\\Console.exe"
 
 [HKEY_CLASSES_ROOT\Directory\Background\shell\Console2]
-@="Open Console Here"
+@="Open ConsoleZ Here"
 "Icon"="C:\\Config\\look\\Icons\\terminal.ico"
 
 [HKEY_CLASSES_ROOT\Directory\Background\shell\Console2\command]
-@="C:\\Bin\\Console2\\Console.exe"
+@="C:\\ProgramData\\chocolatey\\lib\\ConsoleZ\\tools\\Console.exe"
 
