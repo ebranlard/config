@@ -8,10 +8,12 @@ chocolatey (package manager)
     gimp
     virtualbox
     astrogrep
+    pdfsam
 
     chocolateygui
 
 Not on chocalatey:
+    Briss: for pdf cropping
     Wox (QuickLaunch)
     EveditorFree
     ContextEdit  (to add a context menu action e.g. open command here)

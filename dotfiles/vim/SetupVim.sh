@@ -16,8 +16,10 @@ git clone https://github.com/vim-scripts/LargeFile
 git clone https://github.com/vim-airline/vim-airline-themes
 git clone https://github.com/bling/vim-airline
 # SnipMate and requirements
+git clone https://github.com/tomtom/tlib_vim.git
 git clone https://github.com/MarcWeber/vim-addon-mw-utils.git 
 git clone https://github.com/garbas/vim-snipmate.git
+git clone https://github.com/honza/vim-snippets.git
 #
 git clone https://github.com/elmanuelito/vim-matlab-behave
 git clone https://github.com/elmanuelito/vim-simple-comment

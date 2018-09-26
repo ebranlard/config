@@ -109,7 +109,7 @@ set et " expand tab
 " --- Sessions 
 " ---------------------------------------------------------------------------{
 "set sessionoptions=blank,tabpages,winsize,resize,winpos,sesdir,buffers  "sessionoptions, i removed folds and curdir
-if has("gui_win32")
+if has("win32") || has("win16")
   set nofsync 
   set nowritebackup  "dangerous option
 else
@@ -792,7 +792,7 @@ if version>=801
     " Switch tabs shortcuts in terminal mode
     tmap <C-H> <C-W>NgT<CR>
     tmap <C-L> <C-W>Ngt<CR>
-    " Kill terminal when window is closed in terminal mode
+    " Kill terminal when window is closed in terminal mod
     " tmap <C-W>c <C-W>:q!<CR>
     tmap <C-W>c i<CR>exit<CR>
 endif
@@ -800,7 +800,14 @@ endif
 set shellslash    " important for vimlatex and windows
 if has("win32") || has("win16")
     " Quickly open a shell in the current directory:
-    map ,s :!start cmd /k <CR>
+    "map ,s :!start cmd /k <CR>
+    map ,s :!start C:\ProgramData\chocolatey\bin\Console.exe <cr>
+    "map ,l :!start debian -c "bash" 
+    let b:cwd = getcwd()
+    let b:cwd = substitute(b:cwd, "C:", "/mnt/c","")
+    let b:cwd = substitute(b:cwd, "\\", "/","g")
+    let b:cmd_launch = "start debian -c \"cd ".b:cwd." && bash\""
+    map ,l :!<c-r>=b:cmd_launch <cr><cr>
 else
     set shell=bash
     " set shell+=\ -i    " to make the shell interactive (and hence load bashrc) otherwise use bash_profile

@@ -18,7 +18,7 @@ InsertMode:=0
 ;; --- Home
 ;;lB := 110
 ; --- Work
-lB := 100
+lB := 102
 
 SysGet, nMon, MonitorCount
 SysGet, Mon1, Monitor, 1
@@ -317,6 +317,7 @@ Return
 ;; --- WindowClose.ahk
 ;; --------------------------------------------------------------------------------
 #esc::Send !{F4}
+!esc::return
 
 ;; --------------------------------------------------------------------------------
 ;; --- Windows Keys Win+...
@@ -378,24 +379,25 @@ Lwin::Send !{F4}
 ;; ---  Browser
 ;; --------------------------------------------------------------------------------
 #If WinActive("ahk_class IEFrame") || WinActive("ahk_class MozillaWindowClass")
-^j::Send {Down}
-^k::Send {Up}
-^n::Send {Down}
-^p::Send {Up}
+;;^j::Send {Down}
+;;^k::Send {Up}
+;;^n::Send {Down}
+;;^p::Send {Up}
 ^+j::Send {Down}
 ^+k::Send {Up}
-^+n::Send {Down}
+;;^+n::Send {Down}
 ;; ^+k::Send {Up}
 ^/::Send ^f
 ^+h::Send +^{Tab}
 ^+l::Send  ^{Tab}
 ^+;:: Send ^l
-^o:: Send !{Left}  ; Back
-^i:: Send !{Right} ; Forward
-^u:: Send {PgUp}  ; 
-^d:: Send {PgDn}  ;
+;;^o:: Send !{Left}  ; Back
+;;^i:: Send !{Right} ; Forward
+;;^u:: Send {PgUp}  ; 
+;;^d:: Send {PgDn}  ;
+^w:: return
+;;^+[:: Send +{Esc}
 #If
-
 ;; --------------------------------------------------------------------------------
 ;; --- Explorer 
 ;; --------------------------------------------------------------------------------
@@ -539,7 +541,7 @@ open_terminal_explorer(){
 ;; --------------------------------------------------------------------------------
 ;; --- Console 
 ;; --------------------------------------------------------------------------------
-#IfWinActive ahk_class ConsoleWindowClass
+#IfWinActive ahk_exe cmd.exe
 #esc::Send !{Space}c   ; close console
 ^k::Send {Up}
 ^j::Send {Down}
@@ -550,6 +552,9 @@ open_terminal_explorer(){
 ^j::Send {Down}
 #IfWinActive
 
+#IfWinActive ahk_exe debian.EXE
+#esc::Send ^d   ; close console
+#IfWinActive
 
 ;; --------------------------------------------------------------------------------
 ;; ---  WindowSwitcher (If Windows 8 and no UI Access)
