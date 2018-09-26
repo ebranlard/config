@@ -113,7 +113,7 @@ if has("win32") || has("win16")
   set nofsync 
   set nowritebackup  "dangerous option
 else
-  set backupdir=~/vim/tmp " save all tmp files to ./vim/tmp/
+  set backupdir=~/.vim/tmp " save all tmp files to ./vim/tmp/
 end
 set nobackup
 set noswapfile 

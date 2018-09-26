@@ -1,4 +1,5 @@
 #!/bin/bash
+mkdir -p tmp
 mkdir -p bundle
 cd bundle
 

@@ -1,7 +1,0 @@
-#!/bin/bash
-
-# Getting the directory where this script is stored
-path="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-
-sudo cp -f $path/profiles/sudoers.d/* /etc/sudoers.d/
-sudo chmod 440 /etc/sudoers.d/*
