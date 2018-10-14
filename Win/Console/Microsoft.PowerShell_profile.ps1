@@ -8,3 +8,9 @@ function Prompt
     write-host " >" -NoNewline -ForegroundColor White
     return " "
 }
+
+function lg {
+   git status $args
+}
+
+Set-Alias la dir

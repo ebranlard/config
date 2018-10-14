@@ -1,13 +1,10 @@
 " Name: ManuWhite
 " Description: Color highlighting theme, with light background, ressembles the one from matlab
 " Maintainer: E. Branlard  (my last name at gmail dot com)
-" Created: 2011
-" Revisions:
-"    October 2013 : using functions from wombat256 to make it 256 compatible
 " Development Note: 
 "   Use plugin hexHighlight to directly visual colors in vim.
 "   Remember that cterm should be put after ctermfg or ctermbg
-"   Look at help hi and the 16/8 colors. It is likely that I have a 8 color term...
+"   Look at help hi and the 16/8 colors. Now only supporting 256 gui
 
 hi clear
 set background=light
@@ -26,8 +23,11 @@ endif
 " --------------------------------------------------------------------------------
 " ---  Background and menu colors
 " --------------------------------------------------------------------------------
+" call HexHighlight()
 hi Normal       guifg=#000000 guibg=#F0F0F0 
 hi Cursor       guifg=#000000 guibg=#909090
+"hi CursorColumn guifg=#000000 guibg=#909090
+hi ColorColumn guifg=#000000 guibg=#e5e5e5
 hi Visual                     guibg=#D0D0D0
 hi MatchParen   guifg=#7b0000 guibg=#c5d2fc gui=bold,underline
 hi LineNr       guifg=#000000 guibg=#d6d3d6 

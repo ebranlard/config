@@ -379,6 +379,7 @@ Lwin::Send !{F4}
 ;; ---  Browser
 ;; --------------------------------------------------------------------------------
 #If WinActive("ahk_class IEFrame") || WinActive("ahk_class MozillaWindowClass")
+^n::Send {Down}
 ;;^j::Send {Down}
 ;;^k::Send {Up}
 ;;^n::Send {Down}
@@ -403,65 +404,69 @@ Lwin::Send !{F4}
 ;; --------------------------------------------------------------------------------
 #IfWinActive ahk_class CabinetWClass
 ;; ---  Insert mode togle with i/ctrl-[ and navigation with jk
-^[:: InsertMode:=0
-i:: 
-    if InsertMode=0
-        InsertMode:=1
-    else
-        Send i
-    return
-j::
-    if InsertMode=0
-        Send {Down}
-    else
-        Send j
-    return
-k::
-    if InsertMode=0
-        Send {Up}
-    else
-        Send k
-    return
-+j::
-    if InsertMode=0
-        Send !{Down}
-    else
-        Send J
-    return
-+k::
-    if InsertMode=0
-        Send !{Up}
-    else
-        Send K
-    return
-0:: 
-    if InsertMode=0
-       Send {Home}
-    else
-        Send 0
-    return
-x:: 
-    if InsertMode=0
-       Send {Del}
-    else
-        Send x
-    return
-h::
-    if InsertMode=0
-        Send {Left}
-    else
-        Send h
-    return
-l::
-if InsertMode=0
-    Send {Right}
-else
-    Send l
-return
-^j::Send ^{Down}
-^k::Send ^{Up}
-^+j::Send ^+{Down}
-^+k::Send ^+{Up}
+;; ^[:: InsertMode:=0
+;; i:: 
+;;     if InsertMode=0
+;;         InsertMode:=1
+;;     else
+;;         Send i
+;;     return
+;; j::
+;;     if InsertMode=0
+;;         Send {Down}
+;;     else
+;;         Send j
+;;     return
+;; k::
+;;     if InsertMode=0
+;;         Send {Up}
+;;     else
+;;         Send k
+;;     return
+;; +j::
+;;     if InsertMode=0
+;;         Send !{Down}
+;;     else
+;;         Send J
+;;     return
+;; +k::
+;;     if InsertMode=0
+;;         Send !{Up}
+;;     else
+;;         Send K
+;;     return
+;; 0:: 
+;;     if InsertMode=0
+;;        Send {Home}
+;;     else
+;;         Send 0
+;;     return
+;; x:: 
+;;     if InsertMode=0
+;;        Send {Del}
+;;     else
+;;         Send x
+;;     return
+;; h::
+;;     if InsertMode=0
+;;         Send {Left}
+;;     else
+;;         Send h
+;;     return
+;; l::
+;; if InsertMode=0
+;;     Send {Right}
+;; else
+;;     Send l
+;; return
+;; ^j::Send ^{Down}
+;; ^k::Send ^{Up}
+;; ^+j::Send ^+{Down}
+;; ^+k::Send ^+{Up}
+^j::Send {Down}
+^k::Send {Up}
+^+j::Send {Down}
+^+k::Send {Up}
 /::Send ^f
 ::: Send !d  ; For to address (Alt-D)
 ^;:: Send !d  ; For to address (Alt-D)
@@ -482,7 +487,6 @@ return
 ^u:: Send {PgUp}  ; 
 ^d:: Send {PgDn}  ;
 ^+n:: Send ^n
-^backspace::Send +{F10}  ; Open Context menu
 ^e::Send {F2} ; rename
 ; --- Edit a file in vim
 ^]::
@@ -522,6 +526,7 @@ open_terminal_explorer(){
 ;; ^s::  Send !fP
 #IfWinActive ; explorer
 
+^backspace::Send +{F10}  ; Open Context menu
 ;; --------------------------------------------------------------------------------
 ;; --- Excel
 ;; --------------------------------------------------------------------------------
@@ -537,6 +542,15 @@ open_terminal_explorer(){
 ^e::Send {F2}
 ^backspace::Send +{F10}
 #IfWinActive
+;; --------------------------------------------------------------------------------}
+;; --- Vim! 
+;; --------------------------------------------------------------------------------{
+;; #IfWinActive ahk_class Vim
+esc::         MsgBox, 0, , STUPID STUPID STUPID STUPID STUPID STUPID STUPID STUPID STUPID, 0.1
+;; ^c::          MsgBox, 0, , STUPID STUPID STUPID STUPID STUPID STUPID STUPID STUPID STUPID, 0.1
+;; backspace::   MsgBox, 0, , STUPID STUPID STUPID STUPID STUPID STUPID STUPID STUPID STUPID, 0.1
+;; #IfWinActive
+
 
 ;; --------------------------------------------------------------------------------
 ;; --- Console 

@@ -4,6 +4,7 @@ au! BufNewFile,BufRead *.cu  setf c
 
 
 au! BufNewFile,BufRead *.fst setf fast
+au! BufNewFile,BufRead *.dvr setf fast
 au! BufNewFile,BufRead *.dat setf fast
 au! BufNewFile,BufRead *.sum setf fast
 
