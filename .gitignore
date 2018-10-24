@@ -29,6 +29,23 @@ dotfiles/gitignore-work
 NTUA*
 
 dotfiles/vim/.netrwhist
+dotfiles/.Table_preferences
+dotfiles/.bash_history
+dotfiles/.cache/
+dotfiles/.conda/
+dotfiles/.config/
+dotfiles/.gitconfig
+dotfiles/.ipython/
+dotfiles/.jupyter/migrated
+dotfiles/.jupyter/nbconfig/
+dotfiles/.matplotlib/
+dotfiles/.octave_hist
+dotfiles/.pylint.d/
+dotfiles/.ssh/
+dotfiles/.viminfo
+dotfiles/_viminfo
+dotfiles/clcache/
+dotfiles/vim/Bookmarks.lst
 
 profiles/Firefox-profile/
 profiles/_FluxBox/

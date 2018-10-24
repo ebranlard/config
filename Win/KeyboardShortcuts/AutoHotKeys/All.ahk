@@ -546,11 +546,15 @@ open_terminal_explorer(){
 ;; --- Vim! 
 ;; --------------------------------------------------------------------------------{
 ;; #IfWinActive ahk_class Vim
-esc::         MsgBox, 0, , STUPID STUPID STUPID STUPID STUPID STUPID STUPID STUPID STUPID, 0.1
+;;esc::         MsgBox, 0, , STUPID STUPID STUPID STUPID STUPID STUPID STUPID STUPID STUPID, 0.1
 ;; ^c::          MsgBox, 0, , STUPID STUPID STUPID STUPID STUPID STUPID STUPID STUPID STUPID, 0.1
 ;; backspace::   MsgBox, 0, , STUPID STUPID STUPID STUPID STUPID STUPID STUPID STUPID STUPID, 0.1
 ;; #IfWinActive
 
+#IfWinActive ahk_exe octave-gui.exe
+^k::Send {Up}
+^j::Send {Down}
+#IfWinActive 
 
 ;; --------------------------------------------------------------------------------
 ;; --- Console 
