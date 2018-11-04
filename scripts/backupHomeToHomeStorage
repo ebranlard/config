@@ -9,18 +9,20 @@ then
     DEST=/media/HomeStorage/_backups
     SRC=/home/manu
     if [ -d $DEST ] ; then
-        ##############
-        # W1
-        ##############
-        #with delete propagation
-        rsync $OPTS --delete $SRC/Admin/    $DEST/H1/Admin
-        rsync $OPTS --delete $SRC/Dropbox/  $DEST/H1/Dropbox
-        rsync $OPTS --delete $SRC/Music/    $DEST/H1/Music
-        rsync $OPTS --delete $SRC/Pictures/ $DEST/H1/Pictures
-        rsync $OPTS --delete $SRC/Projects/ $DEST/H1/Projects
-        rsync $OPTS --delete $SRC/Salsa/    $DEST/H1/Salsa
+#         ##############
+#         # W1
+#         ##############
+#         #with delete propagation
+        rsync $OPTS --delete $SRC/Admin/     $DEST/H1/Admin
+        rsync $OPTS --delete $SRC/Dropbox/   $DEST/H1/Dropbox
+        rsync $OPTS --delete $SRC/Music/     $DEST/H1/Music
+        rsync $OPTS --delete $SRC/Pictures/  $DEST/H1/Pictures
+        rsync $OPTS --delete $SRC/Projects/  $DEST/H1/Projects
+        rsync $OPTS --delete $SRC/Salsa/     $DEST/H1/Salsa
         echo `date` >> $DEST/H1/DateSync
 
+        rsync $OPTS --delete $SRC/Work-Dong/ $DEST/Work-Dong
+        echo `date` >> $DEST/Work-Dong/DateSync
         ##############
         # WC 
         ##############

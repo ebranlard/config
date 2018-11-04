@@ -2,20 +2,8 @@
 LastActiveMode=THUNAR_RENAMER_MODE_BOTH
 LastActiveRenamer=ThunarSbrInsertRenamer
 
-[ThunarSbrNumberRenamer]
-TextMode=THUNAR_SBR_TEXT_MODE_TN
-Mode=THUNAR_SBR_NUMBER_MODE_123
-Start=1
-Text=CottetContent
-
 [ThunarSbrCaseRenamer]
 Mode=THUNAR_SBR_CASE_RENAMER_MODE_LOWER
-
-[ThunarSbrRemoveRenamer]
-EndOffsetMode=THUNAR_SBR_OFFSET_MODE_LEFT
-StartOffset=0
-EndOffset=2
-StartOffsetMode=THUNAR_SBR_OFFSET_MODE_LEFT
 
 [ThunarSbrDateRenamer]
 Offset=0
@@ -29,15 +17,27 @@ ReplaceSpaces=FALSE
 Format=TAG_RENAMER_FORMAT_ARTIST_TRACK_TITLE
 Text=
 
+[ThunarSbrNumberRenamer]
+TextMode=THUNAR_SBR_TEXT_MODE_TN
+Mode=THUNAR_SBR_NUMBER_MODE_123
+Start=1
+Text=Lisbeth_
+
 [ThunarSbrReplaceRenamer]
 Regexp=FALSE
-Replacement=W2
+Replacement=_
 CaseSensitive=TRUE
-Pattern=W2_Z
+Pattern=\ 
+
+[ThunarSbrRemoveRenamer]
+EndOffsetMode=THUNAR_SBR_OFFSET_MODE_LEFT
+StartOffset=0
+EndOffset=6
+StartOffsetMode=THUNAR_SBR_OFFSET_MODE_LEFT
 
 [ThunarSbrInsertRenamer]
 Offset=0
 Mode=THUNAR_SBR_INSERT_MODE_INSERT
 OffsetMode=THUNAR_SBR_OFFSET_MODE_LEFT
-Text=13_
+Text=Lea_
 
