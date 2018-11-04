@@ -34,7 +34,7 @@ BWhite='\[\e[1;37m\]'       # White
 
 export PS1="$BYellow\u$BGreen@$BYellow\h:$BGreen\w $BYellow\$ $Color_Off"
 
-if [ $HOSTNAME == 'dong' ]
+if [ $HOSTNAME == 'debian' ]
 then
     # nothing so far
     export PATH=$PATH

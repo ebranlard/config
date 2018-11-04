@@ -1,4 +1,3 @@
-:: This script needs administrative acces to create symlinks
 @echo off
 :: --------------------------------------------------------------------------------
 :: --- MAIN DIRECTORIES 

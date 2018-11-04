@@ -3,6 +3,12 @@ au! BufNewFile,BufRead *.oin setf oin
 au! BufNewFile,BufRead *.cu  setf c
 
 
+au! BufNewFile,BufRead *.fst setf fast
+au! BufNewFile,BufRead *.dvr setf fast
+au! BufNewFile,BufRead *.dat setf fast
+au! BufNewFile,BufRead *.sum setf fast
+
+
 au! BufNewFile,BufRead *.inf setf master
 au! BufNewFile,BufRead *.mas setf master
 au! BufNewFile,BufRead *.bld setf deflex_basic

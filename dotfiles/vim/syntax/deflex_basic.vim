@@ -12,7 +12,7 @@ endif
 syn case match
 
 "Todo
-syn keyword masterTodo TODO FIXME XXX NOTE HACK
+syn keyword masterTodo TODO FIXME XXX NOTE HACK todo Todo
 
 "Todo
 syn match masterKeyword "^-\a*\s"

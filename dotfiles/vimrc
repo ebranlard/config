@@ -72,27 +72,27 @@ else
     else
         " Detect filetype nd use syntax highlighting syntax enable
         syntax on           " syntax highlighing     !!!! should be after filetype plugin indent on
-    " Using Escape to leave insert mode in the terminal, it will by
-    augroup FastEscape
-        autocmd!
-        au InsertEnter * set timeoutlen=0
-        au InsertLeave * set timeoutlen=1000
-    augroup END
-    syntax on " syntax highlighing  
-    let term=$TERM
-    if term=="xterm"
-        set t_Co=256 " Explicitly tell Vim that the terminal supports 256 colors
-        colorscheme wombat256    " use this color scheme
-        set guifont=DejaVu\ Sans\ Mono\ for\ Powerline
-    elseif term=="linux"
-        set t_Co=256 " Explicitly tell Vim that the terminal supports 256 colors
-        colorscheme koehler    " use this color scheme
-    elseif term=="cygwin"
-        colorscheme koehler    " use this color scheme
-    else
-        set t_Co=8 " Explicitly tell Vim that the terminal supports 256 colors
-        colorscheme koehler    " use this color scheme
-    endif
+        " Using Escape to leave insert mode in the terminal, it will by
+        augroup FastEscape
+            autocmd!
+            au InsertEnter * set timeoutlen=0
+            au InsertLeave * set timeoutlen=1000
+        augroup END
+        syntax on " syntax highlighing  
+        let term=$TERM
+        if term=="xterm"
+            set t_Co=256 " Explicitly tell Vim that the terminal supports 256 colors
+            colorscheme wombat256    " use this color scheme
+            set guifont=DejaVu\ Sans\ Mono\ for\ Powerline
+        elseif term=="linux"
+            set t_Co=256 " Explicitly tell Vim that the terminal supports 256 colors
+            colorscheme koehler    " use this color scheme
+        elseif term=="cygwin"
+            colorscheme koehler    " use this color scheme
+        else
+            set t_Co=8 " Explicitly tell Vim that the terminal supports 256 colors
+            colorscheme koehler    " use this color scheme
+        endif
     endif
 endif
 
@@ -109,7 +109,7 @@ set et " expand tab
 " --- Sessions 
 " ---------------------------------------------------------------------------{
 "set sessionoptions=blank,tabpages,winsize,resize,winpos,sesdir,buffers  "sessionoptions, i removed folds and curdir
-if has("gui_win32")
+if has("win32") || has("win16")
   set nofsync 
   set nowritebackup  "dangerous option
 else
@@ -455,38 +455,12 @@ function! QFDo(command)
 endfunction
 
 " ---------------------------------------------------------------------------}
-" --- Environment variables, local 
+" --- Environment variables, local, TODO cleaner
 " ---------------------------------------------------------------------------{
-let $PYTHONPATH='/home/manu/Config/path/PythonPath/'
 let host=$HOSTNAME
-let $OMNIVOR_MKF_DIR='/work/libs/OmniVor/_src/_mkf/'
-let $OMNIVOR_OBJ_DIR='/work/libs/OmniVor/_src/_build/linux-amd64/'
-
-" ---------------------------------------------------------------------------}
-" --- Typos - spelling - abbreviations
-" ---------------------------------------------------------------------------{
-iab accross across
-iab Bernouilli Bernouilli
-iab coordiante coordinate 
-iab developped developed
-iab developpement developement
-iab developping developing
-iab Developping Developing
-iab expension expansion 
-iab fro for 
-iab gaussian Gaussian
-iab Helmoltz Helmholtz
-iab litterature literature 
-iab mentionned mentioned 
-iab occuring occurring
-iab representating representing
-iab rigourous rigorous
-iab symetry symmetry 
-iab symetric symmetric 
-iab sligthly slightly
-iab volumic volume
-iab writting writing
-
+" let $PYTHONPATH='/home/manu/Config/path/PythonPath/'
+" let $OMNIVOR_MKF_DIR='/work/libs/OmniVor/_src/_mkf/'
+" let $OMNIVOR_OBJ_DIR='/work/libs/OmniVor/_src/_build/linux-amd64/'
 
 
 " ---------------------------------------------------------------------------}
@@ -504,8 +478,8 @@ else
     if has("nvim")
 "         set clipboard=autoselect
     else
-    set clipboard=autoselect,unnamed,unnamedplus,exclude:cons\|linux
-end
+        set clipboard=autoselect,unnamed,unnamedplus,exclude:cons\|linux
+    end
 end
 " Y will yank to the clipboard
 " noremap Y "+y          
@@ -538,6 +512,7 @@ set tags=tags;    " the magic is the ‘;’ at end. it will make vim tags file 
 let g:syntastic_error_symbol='✗>'
 let g:syntastic_warning_symbol='⚠>'
 let g:syntastic_enable_balloons = 0
+" let g:syntastic_matlab_exec="mlint"
 " let g:syntastic_quiet_warnings=1
 " let g:syntastic_quiet_messages = {'level': 'warnings'}
 " ---------------------------------------------------------------------------}
@@ -771,7 +746,7 @@ let g:ctrlp_by_filename = 0
 let g:ctrlp_max_depth = 5
 let g:ctrlp_custom_ignore = {
             \ 'dir':  '\v[\/]\.(git|hg|svn)$',
-            \ 'file': '\v\.(dat|vtk|exe|so|dll|pyc|fig|pdf|png|mod)$',
+            \ 'file': '\v\.(vtk|exe|so|dll|pyc|fig|pdf|png|mod)$',
             \ 'link': 'some_bad_symbolic_links',
             \ }
 let g:ctrlp_working_path_mode = 'a'
@@ -806,24 +781,33 @@ map ,fm :call FontSizeAdjust(-1) <CR>
 " --- MY SIMPLE PLUGIN - SHELL
 " ---------------------------------------------------------------------------{
 "" Vim latest option :terminal
-" :belowright 15split     :terminal bash
-function! s:Term()
-    silent! execute 'belowright 15split'
-    silent! execute 'set nonu'
-    silent! execute 'terminal ++curwin ++kill=kill ++close bash'
-endfunction
-command! Term call s:Term()
-" Switch tabs shortcuts in terminal mode
-tmap <C-H> <C-W>NgT<CR>
-tmap <C-L> <C-W>Ngt<CR>
-" Kill terminal when window is closed in terminal mode
-" tmap <C-W>c <C-W>:q!<CR>
-tmap <C-W>c i<CR>exit<CR>
+if version>=801
+    " :belowright 15split     :terminal bash
+    function! s:Term()
+        silent! execute 'belowright 15split'
+        silent! execute 'set nonu'
+        silent! execute 'terminal ++curwin ++kill=kill ++close bash'
+    endfunction
+    command! Term call s:Term()
+    " Switch tabs shortcuts in terminal mode
+    tmap <C-H> <C-W>NgT<CR>
+    tmap <C-L> <C-W>Ngt<CR>
+    " Kill terminal when window is closed in terminal mod
+    " tmap <C-W>c <C-W>:q!<CR>
+    tmap <C-W>c i<CR>exit<CR>
+endif
 
 set shellslash    " important for vimlatex and windows
 if has("win32") || has("win16")
     " Quickly open a shell in the current directory:
-    map ,s :!start cmd /k <CR>
+    "map ,s :!start cmd /k <CR>
+    map ,s :!start C:\ProgramData\chocolatey\bin\Console.exe <cr>
+    "map ,l :!start debian -c "bash" 
+    let b:cwd = getcwd()
+    let b:cwd = substitute(b:cwd, "C:", "/mnt/c","")
+    let b:cwd = substitute(b:cwd, "\\", "/","g")
+    let b:cmd_launch = "start debian -c \"cd ".b:cwd." && bash\""
+    map ,l :!<c-r>=b:cmd_launch <cr><cr>
 else
     set shell=bash
     " set shell+=\ -i    " to make the shell interactive (and hence load bashrc) otherwise use bash_profile
@@ -948,4 +932,31 @@ noremap ,e :call OpenExplorer()<CR>
 noremap ,t :call OpenInTab()<CR>
 " ,cd = Change to Directory of Current file
 map ,cd :lcd %:p:h <CR>:pwd<CR>
+
+
+
+" ---------------------------------------------------------------------------}
+" --- Typos - spelling - abbreviations
+" ---------------------------------------------------------------------------{
+iab accross across
+iab Bernouilli Bernouilli
+iab coordiante coordinate 
+iab developped developed
+iab developpement developement
+iab developping developing
+iab Developping Developing
+iab expension expansion 
+iab fro for 
+iab gaussian Gaussian
+iab Helmoltz Helmholtz
+iab litterature literature 
+iab mentionned mentioned 
+iab occuring occurring
+iab representating representing
+iab rigourous rigorous
+iab symetry symmetry 
+iab symetric symmetric 
+iab sligthly slightly
+iab volumic volume
+iab writting writing
 
