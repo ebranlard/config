@@ -376,6 +376,8 @@ command! -nargs=* Make silent make <args>| copen 15|execute 'normal Gzb'|set now
 let g:matlab_behave_terminal="xterm" 
 if has("win32") || has("win16")
     let g:matlab_behave_paste_cmd="^v"
+    let g:matlab_behave_window_name="octave-gui"
+    let g:matlab_behave_software = "octave"
 else
     let g:matlab_behave_paste_cmd="Shift+Insert"
 endif
@@ -574,11 +576,12 @@ let g:airline_section_y='%{airline#util#wrap(airline#parts#ffenc(),0)}'
 " ---------------------------------------------------------------------------{
 let g:netrw_liststyle = 0
 let g:netrw_banner = 0 "removing banner
-let g:netrw_browse_split = 4 "open in pervious window
+"let g:netrw_browse_split = 4 "open in pervious window
+let g:netrw_browse_split = 0 "use the same window
 " let g:netrw_winsize = -25
 let g:netrw_altv=1              " open files on right
 let g:netrw_preview=1           " open previews vertically
-
+" g:netrw_winsize
 " ---------------------------------------------------------------------------}
 " --- PLUGIN - VIM-LATEX 
 " ---------------------------------------------------------------------------{
@@ -899,7 +902,8 @@ function! ToggleBookMarks()
         if expand("%:t") ==? "Bookmarks.lst"
             :normal c
         else
-            :55vsplit C:\Config\dotfiles\vim\Bookmarks.lst
+            ":55vsplit C:\Config\dotfiles\vim\Bookmarks.lst
+            :tabe C:\Config\dotfiles\vim\Bookmarks.lst
         endif
     end
 endfunction

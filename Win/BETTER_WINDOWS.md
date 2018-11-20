@@ -25,6 +25,9 @@ My Tools:
 
 # Windows Config:
 
+## Mouse
+Copy paste with mouse, see my AutoHostKey setup
+
 ## Taskbar: 
 ### TaskBar Config:
 Right click on task bar:

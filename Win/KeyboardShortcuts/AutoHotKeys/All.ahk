@@ -308,6 +308,49 @@ send_screen(motion){
         WinRestore A
    Else WinMaximize A
 Return
+
+;; --------------------------------------------------------------------------------}
+;; --- Copy/Paste with mouse 
+;; --------------------------------------------------------------------------------{
+cos_mousedrag_treshold := 20 ; pixels
+                            
+;; #IfWinNotActive ahk_class ConsoleWindowClass
+;; ~lButton::
+;;   MouseGetPos, cos_mousedrag_x, cos_mousedrag_y
+;;   keywait lbutton
+;;   mousegetpos, cos_mousedrag_x2, cos_mousedrag_y2
+;;   if (abs(cos_mousedrag_x2 - cos_mousedrag_x) > cos_mousedrag_treshold
+;;     or abs(cos_mousedrag_y2 - cos_mousedrag_y) > cos_mousedrag_treshold)
+;;   {
+;;     wingetclass cos_class, A
+;;     ;;MsgBox %cos_class%
+;;     if (cos_class == "Emacs")
+;;       sendinput !w
+;;     else if (cos_class == "Console_2_Main")
+;;         return
+;;     else if (cos_class == "CabinetWClass")
+;;         return
+;;     else if (cos_class == "ConsoleWindowClass")
+;;         return
+;;     else
+;;        sendinput ^c
+;;   }
+;;   return
+;;   
+;; ~mbutton::
+;;   WinGetClass cos_class, A
+;;   if (cos_class == "Emacs")
+;;     SendInput ^y
+;;   else
+;;     SendInput ^v
+;;   return
+;; #IfWinNotActive
+;; 
+;; ;; clipx
+;; ^mbutton::
+;;   sendinput ^+{insert}
+;;   return
+
 ;; --------------------------------------------------------------------------------
 ;; --- NoCapsLock.ahk
 ;; --------------------------------------------------------------------------------
@@ -513,7 +556,7 @@ open_terminal_explorer(){
     global cmd
     Send ^l
     ControlGetText, edittext , edit1, ahk_class CabinetWClass
-    ;;MsgBox %edittext%
+    ;MsgBox %edittext%
     if substr(edittext,2,1) <> ":"
         return
     ;; Run, %comspec%,%edittext%

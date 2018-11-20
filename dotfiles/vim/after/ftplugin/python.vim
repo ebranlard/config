@@ -6,6 +6,8 @@ set softtabstop=4
 set cursorcolumn
 set colorcolumn=95
 
+" default is  = .,w,b,u,t,i (but includes are too slow)
+setlocal complete-=i
 
 """ Folding
 set foldmethod=indent
