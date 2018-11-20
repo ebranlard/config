@@ -1,4 +1,5 @@
 #!/bin/bash
+# Setup the dotfiles (using symbolink links) and install vim packages
 
 #!!! Should not be run as root (for now)
 if [[ $EUID == 0 ]]; then
@@ -73,3 +74,12 @@ fc-cache -vf ~/.fonts
 
 echo ""
 echo "[DONE] Dot files for $USER"
+
+
+echo -n "Setup vim (y/n)? "; read answer
+if [ "$answer" != "${answer#[Yy]}" ] ; then
+    cd $path/dotfiles/vim/
+    ./SetupVim.sh
+    cd $path
+    echo "[DONE] Setting up vim"
+fi

@@ -31,6 +31,7 @@ else
     function! Tex_ForwardSearchLaTeX()
       let cmd = 'evince_forward_search ' . fnamemodify(Tex_GetMainFileName(), ":p:r") .  '.pdf ' . line(".") . ' ' . expand("%:p")
     "   let cmd
+"       echo cmd
       let output = system(cmd)
     endfunction
 endif

@@ -1,10 +1,10 @@
-delay=1
-region=3
+delay=0
+region=1
 action=1
 show_save_dialog=1
 show_mouse=1
 close=0
-screenshot_dir=file:/home/manu/Peru/_Selfies
-app=gpicview
+screenshot_dir=file:///home/manu
+app=none
 last_user=
 
