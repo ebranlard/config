@@ -2,14 +2,15 @@
 PATH="$PATH:$HOME/Config/scripts"
 PYTHONPATH="$PYTHONPATH:$HOME/Config/path/PythonPath"
 
-
-export PATH="/home/manu/.pyenv/bin:$PATH"
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
+if [ -x "$(command -v pyenv)" ]; then
+    export PATH="/home/manu/.pyenv/bin:$PATH"
+    eval "$(pyenv init -)"
+    eval "$(pyenv virtualenv-init -)"
+fi;
 
 
 # Set user-defined locale (en_US.UTF-8)
-export LANG=$(locale -uU)
+export LANG=$(locale -uU 2>/dev/null)
 # X specific commands
 if xset q &>/dev/null; then
     # restart x
@@ -21,3 +22,4 @@ if xset q &>/dev/null; then
     # x problems Ctrl+Alt+/
     setxkbmap -option grab:break_actions
 fi
+

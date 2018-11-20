@@ -147,20 +147,11 @@ if [ "$answer" != "${answer#[Yy]}" ] ; then
         chown -R $USER: /opt
     fi
 
-
     echo -n "Install dotfiles (y/n)? "; read answer
     if [ "$answer" != "${answer#[Yy]}" ] ; then
+        # NOTE: vim files installed as well
         sudo -H -u $USER ./_SetupDotFiles
     fi
-
-    echo -n "Setup vim (y/n)? "; read answer
-    if [ "$answer" != "${answer#[Yy]}" ] ; then
-        cd dotfiles/vim/
-        sudo -H -u $USER ./SetupVim.sh
-        cd $path
-    fi
-
-
     echo "[DONE] User setup"
 fi
 
