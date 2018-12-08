@@ -1,3 +1,8 @@
+# Avoid loading bashrc on scp
+if [ -z "${PS1}" ]; then
+    return
+fi
+
 if [ ! -z ${BASHRC_LOADED} ]; then
     echo "Reloading bashrc";
 fi
