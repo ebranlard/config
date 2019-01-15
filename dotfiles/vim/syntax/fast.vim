@@ -1,12 +1,16 @@
 " Vim syntax file
-" Language:	Typical input file for fast
+" Language:	Typical input file for FAST
 " Maintainer:	E. Branlard
 " Last Change:	Sept 2018
 " Installation: 
-"   Put the following 3 lines in a file called custom.vim in
-"   the folder ftdetect of the vim config directory
+"  - Put this file in the syntax folder (e.g. ~/.vim/syntax) 
+"  - Put the following 3 lines in a file called custom.vim in
+"   the folder ftdetect (e.g. ~/.vim/ftdetect/custom.vim)
 "   au! BufNewFile,BufRead *.fst setf fast
+"   au! BufNewFile,BufRead *.fstf setf fast
+"   au! BufNewFile,BufRead *.dvr setf fast
 "   au! BufNewFile,BufRead *.dat setf fast
+"   au! BufNewFile,BufRead *.inp setf fast
 "   au! BufNewFile,BufRead *.sum setf fast
 " URL:
 
