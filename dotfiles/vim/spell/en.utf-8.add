@@ -86,3 +86,8 @@ off
 on
 undeformed
 OpenFAST
+discretized
+spanwise
+Guyan
+Bampton
+DOF

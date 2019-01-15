@@ -39,6 +39,9 @@ endif
 " Forcing spell check
 set spell
 
+" Got annoyed by lated folding lately
+set nofoldenable
+
 "if exists("did_load_tex_local_after")
        "finish
 "endif

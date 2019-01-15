@@ -172,7 +172,7 @@ if has("win32") || has("win16")
 "     set grepprg=grep\ -ni $*
     set grepprg=findstr\ /n\ /I\ /S 
 else
-    set grepprg=grep\ -Insri\ --exclude={*.vtk,tags,*.mod,*.log,*_geom.m,*_out.m,*.dat,*.pvsm,*.png,*.o,*.exe}\ --exclude-dir=*.git\ $*
+    set grepprg=grep\ -Insri\ --exclude={*.vtk,tags,*.mod,*.log,*_geom.m,*_out.m,*.dat,*.pvsm,*.png,*.o,*.exe,*.outb}\ --exclude-dir=*.git\ $*
 endif
 
 " IMPORTANT: to use :find in a "fuzzy" and "recursive" way
@@ -514,6 +514,7 @@ set tags=tags;    " the magic is the ‘;’ at end. it will make vim tags file 
 let g:syntastic_error_symbol='✗>'
 let g:syntastic_warning_symbol='⚠>'
 let g:syntastic_enable_balloons = 0
+let g:syntastic_disabled_filetypes=['tex']
 " let g:syntastic_matlab_exec="mlint"
 " let g:syntastic_quiet_warnings=1
 " let g:syntastic_quiet_messages = {'level': 'warnings'}
@@ -751,7 +752,7 @@ let g:ctrlp_by_filename = 0
 let g:ctrlp_max_depth = 5
 let g:ctrlp_custom_ignore = {
             \ 'dir':  '\v[\/]\.(git|hg|svn)$',
-            \ 'file': '\v\.(vtk|exe|so|dll|pyc|fig|pdf|png|mod)$',
+            \ 'file': '\v\.(vtk|exe|so|dll|pyc|fig|pdf|png|mod|outb|out)$',
             \ 'link': 'some_bad_symbolic_links',
             \ }
 let g:ctrlp_working_path_mode = 'a'
