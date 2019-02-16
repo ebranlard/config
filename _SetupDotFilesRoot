@@ -1,0 +1,37 @@
+#!/bin/bash
+# Setup the dotfiles (using symbolink links) and install vim packages
+
+#!!! Should not be run as root (for now)
+if [[ $EUID == 0 ]]; then
+    echo "This script should not be run as root"
+    exit 1
+fi
+
+
+# Getting the directory where this script is stored
+path="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+echo "USER: " $USERNAME $USER
+echo "PATH: " $path
+
+# Moving existing dofiles to a backup folder
+echo ""
+echo "Performing backup..."
+BKP_FOLDER=/root/_bkp_dotfiles
+echo "Backup Folder: $BKP_FOLDER"
+sudo mkdir -p $BKP_FOLDER 
+sudo mv -f /root/.bashrc /root/.bash_logout /root/.bash_profile /root/.vimrc /root/.vim $BKP_FOLDER
+
+echo ""
+echo "Linking dotfiles and folders..."
+# Linking dotfiles
+sudo ln -s $path/dotfiles/bashrc_root.bash   /root/.bashrc
+sudo ln -s $path/dotfiles/bash_profile.bash  /root/.bash_profile
+sudo ln -s $path/dotfiles/bash_logout        /root/.bash_logout
+sudo ln -s $path/dotfiles/vimrc              /root/.vimrc
+# Linking dotfolders
+sudo ln -s $path/dotfiles/vim                /root/.vim
+echo ""
+echo "[DONE] Dot files for $USER"
+
+
