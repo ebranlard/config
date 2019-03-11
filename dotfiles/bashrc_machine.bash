@@ -64,6 +64,10 @@ then
 elif [ $HOSTNAME == 'login3' ]
 then
     alias ls='ls -F --group-directories-first'
+elif [ $HOSTNAME == 'el2' ]
+then
+    echo "Eagle"
+    alias ls='ls -F --group-directories-first --color=always'
 else
     alias ls='ls -F --color=always '
     echo "No bashrc specific commands for this hosts."
