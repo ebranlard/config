@@ -1,12 +1,55 @@
-# \begin{}...\end{}
-snippet begin
-	\begin{${1:env}}
-		${2}
-	\end{$1}
+####################################################################
+#  MANU Perso
+snippet fra
+	\frac{${1}
+snippet bf
+	\textbf{${1}
+snippet it
+	\textit{${1}
+snippet ref
+	\autoref{${1}}${2}
+# Equation
+snippet eq
+	\begin{align}
+		${1}  %\label{eq:}
+	\end{align}
 # Tabular
 snippet tab
-	\begin{${1:tabular}}{${2:c}}
-	${3}
+	% ----------------------------------- TABLE --------------------------------------
+	\begin{table}[!htb]\centering
+	    \caption{${1}}
+	    \label{tab:${2}}
+	    \begin{tabular}{cc}
+	        \textbf{${3}} & \textbf{} \\\\
+	        & \\\\
+	    \end{tabular}
+	\end{table}
+	% --------------------------------------------------------------------------------
+# FIGURE
+snippet fig
+	% ---------------------------------- FIGURE --------------------------------------
+	\noindent\begin{figure}[!htb]\centering%
+	    \includegraphics[width=0.5\textwidth]{${1}}
+	    \caption{${2}}%
+	    \label{fig:${3}}%
+	\end{figure}
+	% --------------------------------------------------------------------------------
+# Itemize
+snippet item
+	\begin{itemize}
+		\item ${1}
+		\item 
+	\end{itemize}
+#lislisting
+snippet lst
+	\begin{lstlisting}
+		${1}
+	\end{lstlisting}
+####################################################################
+# \begin{}...\end{}
+snippet beg
+	\begin{${1}}
+		${2}
 	\end{$1}
 # Align(ed)
 snippet ali
@@ -19,11 +62,6 @@ snippet gat
 	\begin{gather${1:ed}}
 		${2}
 	\end{gather$1}
-# Equation
-snippet eq
-	\begin{align}
-		${1}  %\label{eq:}
-	\end{align}
 # Unnumbered Equation
 snippet \
 	\\[
@@ -34,11 +72,6 @@ snippet enum
 	\begin{enumerate}
 		\item ${1}
 	\end{enumerate}
-# Itemize
-snippet item
-	\begin{itemize}
-		\item ${1}
-	\end{itemize}
 # Description
 snippet desc
 	\begin{description}
@@ -113,12 +146,3 @@ snippet section
 	${1:Section}~\ref{${2:sec:}}${3}
 snippet page
 	${1:page}~\pageref{${2}}${3}
-####################################################################
-#  MANU Perso
-snippet ref
-	\autoref{${1}}${2}
-
-snippet eq*
-	\begin{equation*}
-		${1}
-	\end{equation*}

@@ -1,7 +1,7 @@
 
 # Programs to install
 chocolatey (package manager)
-    choco install -y git autohotkey vim  winmerge consolez vlc inkscape contextconsole treesizefree
+    choco install -y git autohotkey vim  winmerge conemu vlc inkscape treesizefree
     sumatrapdf
     cutepdf
     dropbox
@@ -16,14 +16,21 @@ Not on chocalatey:
     Briss: for pdf cropping
     Wox (QuickLaunch)
     EveditorFree
-    ContextEdit  (to add a context menu action e.g. open command here)
 
 My Tools:
     wmctrl
     xdotools
     SwitchAndPasteToMatlab
 
+Console tools:
+    ConEmu, ConsoleZ, Babun
+
 # Windows Config:
+
+## Context menu
+The BEST is to use the registry files locates in ContextMenu/ 
+
+Alternatively ContextEdit can be used, but it doesn't have the background of the shell
 
 ## Mouse
 Copy paste with mouse, see my AutoHostKey setup
@@ -131,24 +138,6 @@ wget
 apt-cyg (from github), within Cygwin type:
 lynx -source rawgit.com/transcode-open/apt-cyg/master/apt-cyg > apt-cyg
 install apt-cyg /bin
-## Cygwin and ConEmu (see ConEmu)
-
-
-# ConEmu
-## ConEmu and Babun (see babun)
-
-In ConEmu
-    Go to Settings>Startup>Tasks
-    Create a new task
-        Task parameters - /icon "%userprofile%.babun\cygwin\bin\mintty.exe" /dir "%userprofile%"
-        Commands %userprofile%\.babun\cygwin\bin\mintty.exe -
-
-Then babun is available in the "Create new console" menu.
-
-
-
-
-
 
 
 # Links
