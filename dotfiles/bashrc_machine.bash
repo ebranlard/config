@@ -21,7 +21,6 @@ Blue='\[\e[0;34m\]'         # Blue
 Purple='\[\e[0;35m\]'       # Purple
 Cyan='\[\e[0;36m\]'         # Cyan
 White='\[\e[0;37m\]'        # White
-
 # Bold
 BBlack='\[\e[1;30m\]'       # Black
 BRed='\[\e[1;31m\]'         # Red
@@ -32,7 +31,42 @@ BPurple='\[\e[1;35m\]'      # Purple
 BCyan='\[\e[1;36m\]'        # Cyan
 BWhite='\[\e[1;37m\]'       # White
 
-export PS1="$BYellow\u$BGreen@$BYellow\h:$BGreen\w $BYellow\$ $Color_Off"
+RED="\033[0;31m"
+YELLOW="\033[0;33m"
+GREEN="\033[0;32m"
+OCHRE="\033[38;5;95m"
+BLUE="\033[0;34m"
+WHITE="\033[0;37m"
+RESET="\033[0m"
+
+
+function git_clr {
+    local git_status="$(git status 2> /dev/null)"
+    if [[ ! $git_status =~ "working directory clean" ]]; then
+        echo -e $RED
+    elif [[ $git_status =~ "Your branch is ahead of" ]]; then
+        echo -e $YELLOW
+    elif [[ $git_status =~ "nothing to commit" ]]; then
+        echo -e $GREEN
+    else
+        echo -e $WHITE
+    fi
+}
+
+function git_ps1 {
+    local git_status="$(git status 2> /dev/null)"
+    local on_branch="On branch ([^${IFS}]*)"
+    local on_commit="HEAD detached at ([^${IFS}]*)"
+    if [[ $git_status =~ $on_branch ]]; then
+        local branch_or_commit="("${BASH_REMATCH[1]}") "
+    elif [[ $git_status =~ $on_commit ]]; then
+        local branch_or_commit="("${BASH_REMATCH[1]}") "
+    else 
+        local branch_or_commit=""
+    fi
+    echo "$branch_or_commit"
+}
+export PS1="\[\$(git_clr)\]\$(git_ps1)$BYellow\u$BGreen@$BYellow\h:$BGreen\w $BYellow\$ $Color_Off"
 
 
 # --------------------------------------------------------------------------------
@@ -64,10 +98,11 @@ then
 elif [ $HOSTNAME == 'login3' ]
 then
     alias ls='ls -F --group-directories-first'
-elif [ $HOSTNAME == 'el2' ]
+elif [ $HOSTNAME == 'el1' ] || [ $HOSTNAME == 'el2' ]
 then
     echo "Eagle"
     alias ls='ls -F --group-directories-first --color=always'
+    alias conda2='export PATH="$HOME/_env/anaconda2/bin:$PATH"'
 else
     alias ls='ls -F --color=always '
     echo "No bashrc specific commands for this hosts."
