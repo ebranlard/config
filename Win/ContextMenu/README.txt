@@ -1,3 +1,7 @@
+Conclusion:
+The best is still to use the registry files.
+
+
 # FileTypes
 CompressedFolders
 Folders

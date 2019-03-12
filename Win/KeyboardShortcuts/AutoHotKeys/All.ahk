@@ -9,7 +9,8 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 ;; --------------------------------------------------------------------------------
 gvim:="C:\Program Files (x86)\Vim\vim81\gvim.exe"
 diff:="C:\Program Files (x86)\WinMerge\WinMergeU.exe /r"
-cmd:="C:\ProgramData\chocolatey\bin\Console.exe"
+;; cmd:="C:\ProgramData\chocolatey\bin\Console.exe"
+cmd:="C:\Program Files\ConEmu\ConEmu64.exe" 
 InsertMode:=0
 
 ;; --------------------------------------------`-----------------------------------
@@ -612,6 +613,12 @@ open_terminal_explorer(){
 ^k::Send {Up}
 ^j::Send {Down}
 #IfWinActive
+
+#IfWinActive ahk_exe ConEmu64.exe
+^k::Send {Up}
+^j::Send {Down}
+#IfWinActive
+
 
 #IfWinActive ahk_exe debian.EXE
 #esc::Send ^d   ; close console

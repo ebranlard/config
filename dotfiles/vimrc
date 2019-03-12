@@ -53,7 +53,11 @@ set nospell
 " ---------------------------------------------------------------------------{
 if has("gui_running")
     set guioptions=egrltaM " The guioptions should be set at once otherwise, menu.vim is loaded
+    " Syntac highlighing options
     syntax on " syntax highlighing  
+    syntax sync minlines=200
+    set redrawtime=12000
+    "syntac sync fromstart " fix syntax temporarly
     set background=light " adapt colors for background
     colorscheme ManuWhite
 "     set guifont=Monospace\ 10 
@@ -514,7 +518,9 @@ set tags=tags;    " the magic is the ‘;’ at end. it will make vim tags file 
 let g:syntastic_error_symbol='✗>'
 let g:syntastic_warning_symbol='⚠>'
 let g:syntastic_enable_balloons = 0
-let g:syntastic_disabled_filetypes=['tex']
+let g:syntastic_mode_map = {
+    \ "mode": "active",
+    \ "passive_filetypes": ["tex"] }
 " let g:syntastic_matlab_exec="mlint"
 " let g:syntastic_quiet_warnings=1
 " let g:syntastic_quiet_messages = {'level': 'warnings'}
@@ -573,6 +579,10 @@ let g:airline_section_y='%{airline#util#wrap(airline#parts#ffenc(),0)}'
 " let g:airline_section_warning='%{airline#util#wrap(airline#extensions#syntastic#get_warnings(),1)}'
 
 " ---------------------------------------------------------------------------}
+" --- PLUGIN - VIM-MARKDOWN 
+" ---------------------------------------------------------------------------{
+let g:markdown_fenced_languages = ['python', 'fortran', 'bash=sh']
+" ---------------------------------------------------------------------------}
 " --- PLUGIN - NETRW 
 " ---------------------------------------------------------------------------{
 let g:netrw_liststyle = 0
@@ -589,6 +599,17 @@ let g:netrw_preview=1           " open previews vertically
 " DESACTIVATING IMAP
 let g:Imap_FreezeImap=1 
 
+
+" Indentation options
+" Note: indentantion removed see ~/indent/tex.vim
+" let g:tex_indent_items = 1
+" let g:tex_indent_brace = 1
+" let g:tex_max_scan_line = 60
+" let g:tex_itemize_env = 'itemize\|description\|enumerate\|thebibliography'
+" let g:tex_items = '\\bibitem\|\\item'
+" let g:tex_noindent_env = 'document\|verbatim\|lstlisting'
+
+
 " OPTIONAL: Starting with Vim 7, the filetype of empty .tex files defaults to
 " 'plaintex' instead of 'tex', which results in vim-latex not being loaded.
 " The following changes the default filetype back to 'tex':
@@ -601,8 +622,10 @@ let g:tex_comment_nospell=1
 let g:Tex_DefaultTargetFormat = 'pdf'
 let g:Tex_MultipleCompileFormats='' 
 let g:Tex_FormatDependency_pdf = ''
+let Tex_ProjectSourceFiles ='bib/*.bib,tex/*.tex,pre/*.tex'
+let g:Tex_CompileRule_pdf = 'make pdf'
 " if has("win32") || has("win16")
-let g:Tex_CompileRule_pdf = 'pdflatex -synctex=1 --shell-escape --interaction=nonstopmode $*;'
+" let g:Tex_CompileRule_pdf = 'pdflatex -synctex=1 --shell-escape --interaction=nonstopmode $*;'
 " endif
 let g:Tex_CompileRule_dvi = 'latex -synctex=1 --interaction=nonstopmode $*;'
 let g:Tex_CompileRule_ps = 'dvips -Ppdf -o $*.ps $*.dvi;'
@@ -612,7 +635,7 @@ let g:Tex_GotoError=0 " if set to 1 then after \ll then vim will go to the next 
 " " Inverse search
 if has("win32") || has("win16")
 " let g:Tex_ViewRule_pdf = '"C:\Program Files\SumatraPDF\SumatraPDF.exe" -inverse-search "gvim -c \":RemoteOpen +\%l \%f\""'
-  let g:Tex_ViewRule_pdf = 'SumatraPDFPortable -inverse-search "gvim -c \":RemoteOpen +\%l \%f\""'
+  let g:Tex_ViewRule_pdf = 'SumatraPDF -inverse-search "gvim -c \":RemoteOpen +\%l \%f\""'
 else
   let g:Tex_ViewRule_pdf = 'evince'
 endif
@@ -807,7 +830,8 @@ set shellslash    " important for vimlatex and windows
 if has("win32") || has("win16")
     " Quickly open a shell in the current directory:
     "map ,s :!start cmd /k <CR>
-    map ,s :!start C:\ProgramData\chocolatey\bin\Console.exe <cr>
+    "map ,s :!start C:\ProgramData\chocolatey\bin\Console.exe <cr>
+    map ,s :!start "C:/Program Files/ConEmu/ConEmu64.exe" <cr>
     "map ,l :!start debian -c "bash" 
     let b:cwd = getcwd()
     let b:cwd = substitute(b:cwd, "C:", "/mnt/c","")
