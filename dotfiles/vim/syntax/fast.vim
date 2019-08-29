@@ -4,15 +4,19 @@
 " Last Change:	Sept 2018
 " Installation: 
 "  - Put this file in the syntax folder (e.g. ~/.vim/syntax) 
-"  - Put the following 3 lines in a file called custom.vim in
+"  - Put the following lines in a file called custom.vim in
 "   the folder ftdetect (e.g. ~/.vim/ftdetect/custom.vim)
+"
 "   au! BufNewFile,BufRead *.fst setf fast
 "   au! BufNewFile,BufRead *.fstf setf fast
+"   au! BufNewFile,BufRead *.ffsf setf fast
+"   au! BufNewFile,BufRead *.fmas setf fast
 "   au! BufNewFile,BufRead *.dvr setf fast
 "   au! BufNewFile,BufRead *.dat setf fast
 "   au! BufNewFile,BufRead *.inp setf fast
 "   au! BufNewFile,BufRead *.sum setf fast
-" URL:
+"
+" URL: https://github.com/ebranlard/config/dotfiles/vim/syntax
 
 if version < 600
   syntax clear
