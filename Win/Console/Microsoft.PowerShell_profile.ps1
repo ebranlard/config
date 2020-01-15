@@ -15,6 +15,11 @@ function lg {
 }
 
 Set-Alias la dir
+Set-Alias mkae make
+
+function eagle {
+    ssh -X ebranlar@eagle.hpc.nrel.gov $args
+}
 
 
 
