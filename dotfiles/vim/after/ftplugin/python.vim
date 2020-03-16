@@ -57,6 +57,10 @@ set foldtext=MyFoldTextPython()  " can be customized later
 " --------------------------------------------------------------------------------
 vmap ,ac :Align! =Ip1P1 # <CR>
 
+" --- Python compiler (located in/compiler/python.vim), so that :make will work with the quickfix
+if !exists("current_compiler")
+  compiler python
+endi
 
 
 " --------------------------------------------------------------------------------

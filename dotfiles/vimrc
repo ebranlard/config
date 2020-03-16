@@ -366,7 +366,7 @@ vnoremap <C-a> :call Incr()<CR>
 " NOTE: see autocommand, look for cwindow and lwindow in my vimrc
 " Use Makefile in current or parent directory # almost work, but problem with the tee...
 " let &makeprg = '[[ -f Makefile ]] && make || make -C .. '
-let &makeprg = 'make '
+" let &makeprg = 'make '
 " Command Make will call make and then cwindow which
 " opens a 3 line error window if any errors are found.
 " If no errors, it closes any open cwindow.

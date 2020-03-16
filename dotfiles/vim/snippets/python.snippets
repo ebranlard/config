@@ -103,11 +103,13 @@ snippet exc
 	    pass
 
 snippet fig
-	fig,ax = plt.subplots(1,1)
+	fig,ax = plt.subplots(1, 1, sharey=False, figsize=(6.4,4.8)) # (6.4,4.8)
+	fig.subplots_adjust(left=0.12, right=0.80, top=0.88, bottom=0.11, hspace=0.20, wspace=0.20)
 	ax.plot(    , label='')
 	ax.set_xlabel('')
 	ax.set_ylabel('')
 	ax.legend()
+	ax.tick_params(direction='in')
 	plt.show()
 
 snippet init

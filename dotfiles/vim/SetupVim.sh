@@ -12,6 +12,7 @@ git clone https://github.com/vim-latex/vim-latex.git
 git clone https://github.com/d11wtq/ctrlp_bdelete.vim.git
 git clone https://github.com/scrooloose/syntastic.git
 git clone https://github.com/tpope/vim-surround.git
+git clone https://github.com/tpope/vim-dispath.git
 git clone https://github.com/vim-scripts/LargeFile
 # Airline and requirements
 git clone https://github.com/vim-airline/vim-airline-themes
