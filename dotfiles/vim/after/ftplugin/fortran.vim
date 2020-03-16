@@ -11,6 +11,9 @@ hi link fortranTab NONE
 " to avoid line return
 set textwidth=0
 
+" OpenFAST Dev...
+set shiftwidth=3
+
 """ Folding
 function! FortranFolds()
     let thisline = getline(v:lnum)
@@ -39,7 +42,7 @@ if s:extfname ==? "f90"
     if version>703
         set cc=132
     endif
-    set textwidth=132
+    "set textwidth=132
 else
     let fortran_fixed_source=1
     unlet! fortran_free_source
@@ -47,7 +50,7 @@ else
     if version>703
         set cc=73
     endif
-    set textwidth=73
+    "set textwidth=73
 endif
 
 " gfotran: suitable error format for quickfix window

@@ -323,6 +323,8 @@ set wmh=0
 " ---------------------------------------------------------------------------}
 " --- Programming general 
 " ---------------------------------------------------------------------------{
+" "star" will jump to the next occurence, with the mapping below, this is avoided
+nmap <silent> * "syiw<Esc>: let @/ = @s<CR>
 " the mapping below repeat the variable on the line, puts an equal in between and a semicolon at the end, to do something like i=i+1; for languages that don't have the ++
 nmap ++ ^v$hyPa=<esc>A ;<esc>hi
 " indent all and return to current position
