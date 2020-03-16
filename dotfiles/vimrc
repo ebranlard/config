@@ -243,7 +243,7 @@ set completeopt=menu,longest,preview
 set showcmd		" display incomplete commands at the bottom of the screen
 set wildchar=<Tab> wildmenu wildmode=longest,list,full
 set wildcharm=<C-Z>
-set wildignore=*.o,*~,*.cmo,*.cmi,*.a,*.cmx,*.cmxa,*.aux,*.dvi,*.aut,*.bbl,*.blg,*.dvi,*.fff,*.ps,*.toc,*.ttt 
+set wildignore=*.o,*.obj,*~,*.cmo,*.cmi,*.a,*.cmx,*.cmxa,*.aux,*.dvi,*.aut,*.bbl,*.blg,*.dvi,*.fff,*.ps,*.toc,*.ttt 
 " for an easier autocompletion of previous commands
 cnoremap <C-k> <Up>
 cnoremap <C-j> <Down>
@@ -868,21 +868,20 @@ nnoremap <leader>! :Shell
 " ---------------------------------------------------------------------------}
 " --- MY SIMPLE PLUGIN - Show Special characters
 " ---------------------------------------------------------------------------{
-function! ShowTab() " ShowTab: toggles between showing tabs and using standard listchars
-  if !exists("g:SeeTabEnabled")
-    let g:SeeTabEnabled = 1
-    let g:SeeTab_list = &list
-    let g:SeeTab_listchars = &listchars
-    set list
-"     set listchars=tab:\|_
-    set listchars=tab:▸\ ,eol:¬
+set encoding=utf-8
+function! ShowChars() " ShowTab: toggles between showing tabs and using standard listchars
+  if !exists("g:SeeCharsEnabled")
+    let g:SeeCharsEnabled = 1
+    set list " Important for listchars to work!
+    set listchars=nbsp:•,precedes:<,extends:>,tab:▸\ ,eol:¬
+"     set listchars=tab:→\ ,nbsp:␣,trail:•,extends:⟩,precedes:⟨
   else
-    let &list = g:SeeTab_list
-    let &listchars = &listchars
-    unlet g:SeeTabEnabled g:SeeTab_list g:SeeTab_listchars
+    set nolist " Important for listchars to work!
+    set listchars=nbsp:•
+    unlet g:SeeCharsEnabled
   endif
 endfunc
-com! -nargs=0 ShowTab :call ShowTab()
+com! -nargs=0 ShowChars :call ShowChars()
 
 
 " ---------------------------------------------------------------------------}
