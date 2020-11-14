@@ -31,7 +31,7 @@ syn keyword tTodo TODO FIXME XXX NOTE HACK todo
 " syn keyword oBool true false T F
 
 " syn match oParam '^[\ a-zA-Z0-9]*'
-syn match tComment "^#.*$" contains=hTodo
+syn match tComment "^#.*$" contains=tTodo
 
 
 " syn match EmptyLines /^$/

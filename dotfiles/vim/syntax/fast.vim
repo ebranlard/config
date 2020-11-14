@@ -31,17 +31,18 @@ syn keyword fastTodo TODO Todo todo FIXME FixMe XXX NOTE Note HACK Hack hack
 "Author !XXXXX
 syn match fastAUTHOR "\v![a-zA-Z]+"
 "Keywords
-syn keyword fastKeyword True False true false TRUE FALSE FATAL default END
+syn keyword fastKeyword True False true false TRUE FALSE FATAL default END 
+syn match fastKeyword  "^[a-zA-Z].*:"
 " Preproc (NOT USED YET)
 syn match   fastPreproc	"^#.*"  contains=fastTodo
 " Comment
 syn match   fastComment	"^--.*" contains=fastTodo
 syn match   fastComment	"^==.*"  contains=fastTodo
-syn match   fastComment	"^![\ \.].*" 
+syn match   fastComment	"^![\ \.].*"  contains=fastTodo
 " Units
-syn region fastUnit start='(' end=')'
+syn region fastUnit start='(' end=')' contains=fastTodo
 " Replace
-syn region fastReplace start='{' end='}'
+syn region fastReplace start='{' end='}'  contains=fastTodo
 " String
 syn match  fastString	"\"[a-zA-Z0-9\-\/\_\.]*\""
 " Regular int like number with - + or nothing in front

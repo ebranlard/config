@@ -29,6 +29,10 @@ function eagle {
 # Add Git executables to the mix.
 # [System.Environment]::SetEnvironmentVariable("PATH", $Env:Path + ";" + (Join-Path $pathToPortableGit "\bin") + ";" + $scripts, "Process")
 
+$myPath = "C:\Bin\msys64\mingw64\bin"
+[System.Environment]::SetEnvironmentVariable("PATH", $myPath + ";" + $Env:Path, "Process")
+
+
 # Setup Home so that Git doesn't freak out.
 [System.Environment]::SetEnvironmentVariable("HOME", (Join-Path $Env:HomeDrive $Env:HomePath), "Process")
 

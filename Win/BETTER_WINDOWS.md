@@ -1,5 +1,27 @@
 
 # Programs to install
+
+Msys2 (shell and package manager):
+    pacman -S mingw-w64-x86_64-{gcc,cmake,make,gcc-gfortran,openblas,lapack} 
+
+
+    set PATH=c:\msys64\mingw64\bin;%PATH%
+
+    If you need to set the path each time you launch cmd:
+
+    reg add "HKCU\Software\Microsoft\Command Processor" /v AutoRun ^
+      /t REG_EXPAND_SZ /d "%"USERPROFILE"%\init.cmd" /f
+
+    where init.cmd contains the following
+        SET USER_PATH=c:\whatever
+        SET PATH=%USER_PATH%;%PATH%
+
+        
+
+
+
+
+
 chocolatey (package manager)
     choco install -y git autohotkey vim  winmerge conemu vlc inkscape treesizefree
     sumatrapdf
