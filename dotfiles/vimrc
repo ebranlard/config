@@ -56,7 +56,7 @@ if has("gui_running")
     " Syntac highlighing options
     syntax on " syntax highlighing  
     syntax sync minlines=200
-    set redrawtime=12000
+    set redrawtime=20000
     "syntac sync fromstart " fix syntax temporarly
     set background=light " adapt colors for background
     colorscheme ManuWhite

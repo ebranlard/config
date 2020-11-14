@@ -99,7 +99,12 @@ set efm=%A%f:%l.%c:,%C,%C\ %.%#,%ZError:\ %m,%ZWarning:\ %m,%f:(%.%#):%m,%f:%l:%
 " --------------------------------------------------------------------------------
 " --- Align 
 " --------------------------------------------------------------------------------
-vmap ,ad :Align! =Ip1P1 :: !<<CR>     
+vmap ,aS :Align! =Ip1P1 :: !<<CR>     
 vmap ,av :Align! =Ip1P1 :: !<CR>     
 vmap ,ac :Align! =Ip1P1 !<CR>
 vmap ,au :Align! =Ip1P1 only:<CR>
+vmap ,aD :Align! =Ip0P0 dimension( <CR>     
+vmap ,aI :Align! =Ip1P0 intent( <CR>     
+
+vmap ,ad ,aI gv ,aS
+
