@@ -107,7 +107,7 @@ syn match fortranConditional	"\<if\>"
 syn match fortranConditionalOb	"\<if\s*(.*)\s*\d\+\s*,\s*\d\+\s*,\s*\d\+\s*$"
 syn match fortranRepeat		"\<do\>"
 
-syn keyword fortranTodo		contained todo fixme hack
+syn keyword fortranTodo		contained NOTE note KEEP TODO todo fixme hack
 
 "Catch errors caused by too many right parentheses
 syn region fortranParen transparent start="(" end=")" contains=ALLBUT,fortranParenError,@fortranCommentGroup,cIncluded,@spell

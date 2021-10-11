@@ -16,6 +16,9 @@ function lg {
 
 Set-Alias la dir
 Set-Alias mkae make
+Set-Alias gti git
+Set-Alias pyton python
+Set-Alias py python
 
 function eagle {
     ssh -X ebranlar@eagle.hpc.nrel.gov $args

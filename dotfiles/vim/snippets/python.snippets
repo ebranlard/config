@@ -94,12 +94,15 @@ snippet pdb
 	import pdb; pdb.set_trace()
 snippet np
 	import numpy as np
-
+snippet os
+	import os
 snippet pd
 	import pandas as pd
-
 snippet plt
 	import matplotlib.pyplot as plt
+
+snippet rc
+	from welib.tools.figure import defaultRC; defaultRC();
 snippet exc
 	try:
 	    from pybra.clean_exceptions import *
@@ -113,8 +116,22 @@ snippet fig
 	ax.set_xlabel('')
 	ax.set_ylabel('')
 	ax.legend()
-	ax.tick_params(direction='in')
 	plt.show()
+
+snippet unit
+	import unittest
+	import numpy as np	
+	from mymodule import *
+
+	MyDir=os.path.dirname(__file__)
+
+	class Test(unittest.TestCase):
+	    def test_${1:one}(self):
+	        ${2}	
+	        np.testing.assert_almost_equal(0, 0, 5)
+
+	if __name__ == '__main__':
+	    unittest.main()
 
 snippet init
 	import numpy as np

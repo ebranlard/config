@@ -1,0 +1,5 @@
+
+
+jupyter-vim-binding
+    https://github.com/lambdalisue/jupyter-vim-binding
+    C:\Users\XXX\AppData\Roaming\jupyter\nbextensions\

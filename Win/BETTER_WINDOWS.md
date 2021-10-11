@@ -16,7 +16,14 @@ Msys2 (shell and package manager):
         SET USER_PATH=c:\whatever
         SET PATH=%USER_PATH%;%PATH%
 
-        
+
+In Bin\
+    FreeFileSync
+    WebPlotDigitizer        
+    UnxUtils
+    briss-0.9 (pdf crop)
+    msys64
+    GNUMake3.81
 
 
 

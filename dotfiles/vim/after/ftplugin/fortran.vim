@@ -31,7 +31,7 @@ setlocal foldexpr=FortranFolds()
 "  setlocal foldtext=FortranFoldText()
 
 let s:extfname = expand("%:e")
-if s:extfname ==? "f90"
+if (s:extfname ==? "f90") || (s:extfname ==? "f95")
     let fortran_free_source=1
     unlet! fortran_fixed_source
     let g:fortran_have_tabs=1 
@@ -73,6 +73,11 @@ endif
 " command! Gfortran set efm=%E%f:%l.%c:,%E%f:%l:,%C,%C%p%*[0123456789^],%ZError:\ %m,%C%.%#
 command! Ifort compiler ifort
 command! Gfortran compiler gfortran
+
+" Below we rely on vim-dispatch plugin
+map ,m :w<cr>:Make<CR><CR>
+
+
 " ifort: suitable error format for quickfix window
 " set efm=%E%.%#rror:\ %f\\,\ line\ %l:\ %m,\%-C%.%#,\%-Z\%p^
 " let isf="@,48-57,/,.,-,_,+,#,^,,$,%,~,="
