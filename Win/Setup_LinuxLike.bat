@@ -1,4 +1,4 @@
-:: This script needs administrative acces to create symlinks
+:: This script needs administrative access to create symlinks
 @echo off
 
 :: --------------------------------------------------------------------------------
@@ -30,13 +30,13 @@ mklink /H "%FIL%" "%SCRIPT_DIR%\KeyboardShortcuts\AutoHotKeys\All.ahk"
 :: --------------------------------------------------------------------------------
 :: ---  WinSplitRevolution
 :: --------------------------------------------------------------------------------
-echo ------------------------ Setting up WinSplitRev ------------------------------
-set FIL=%USERPROFILE%\AppData\Roaming\Winsplit Revolution\hotkeys.xml
-del %FIL% > nul 2>&1
-mklink /H "%FIL%" "%SCRIPT_DIR%\KeyboardShortcuts\WindSplitRevolution\hotkeys.xml"
-set FIL=%USERPROFILE%\AppData\Roaming\Winsplit Revolution\layout.xml
-del %FIL% > nul 2>&1
-mklink /H "%FIL%" "%SCRIPT_DIR%\KeyboardShortcuts\WindSplitRevolution\layout.xml"
+::echo ------------------------ Setting up WinSplitRev ------------------------------
+::set FIL=%USERPROFILE%\AppData\Roaming\Winsplit Revolution\hotkeys.xml
+::del %FIL% > nul 2>&1
+::mklink /H "%FIL%" "%SCRIPT_DIR%\KeyboardShortcuts\WindSplitRevolution\hotkeys.xml"
+::set FIL=%USERPROFILE%\AppData\Roaming\Winsplit Revolution\layout.xml
+::del %FIL% > nul 2>&1
+::mklink /H "%FIL%" "%SCRIPT_DIR%\KeyboardShortcuts\WindSplitRevolution\layout.xml"
 
 
 :: --------------------------------------------------------------------------------
@@ -58,25 +58,25 @@ mklink /H "%FIL%" "%DOT_DIR%\gitconfig"
 :: --------------------------------------------------------------------------------
 :: --- Vim 
 :: --------------------------------------------------------------------------------
-echo ----------------------------- Setting up Vim ---------------------------------
-set DIR=%USERPROFILE%\vimfiles
-rmdir "%DIR%" > nul 2>&1
-mklink /D "%DIR%" "%DOT_DIR%\vim\"
-
-set FIL=%USERPROFILE%\vimfiles\vimrc
-del %FIL% > nul 2>&1
-mklink /H "%FIL%" "%DOT_DIR%\vimrc"
+:: echo ----------------------------- Setting up Vim ---------------------------------
+::set DIR=%USERPROFILE%\vimfiles
+::rmdir "%DIR%" > nul 2>&1
+::mklink /D "%DIR%" "%DOT_DIR%\vim\"
+::
+::set FIL=%USERPROFILE%\vimfiles\vimrc
+::del %FIL% > nul 2>&1
+::mklink /H "%FIL%" "%DOT_DIR%\vimrc"
 
 
 :: --------------------------------------------------------------------------------
 :: ---  Babun/Cygwin
 :: --------------------------------------------------------------------------------
-echo --------------------------- Setting up Babun ---------------------------------
-:: del %HOME_DIR%\.bash_profile  > nul 2>&1
-:: del %HOME_DIR%\.bashrc        > nul 2>&1
-:: del %HOME_DIR%\.profile       > nul 2>&1
-rmdir %HOME_DIR%\Config       > nul 2>&1
-mklink /D "%HOME_DIR%\Config"        "%USERPROFILE%\Config"
+::echo --------------------------- Setting up Babun ---------------------------------
+:::: del %HOME_DIR%\.bash_profile  > nul 2>&1
+:::: del %HOME_DIR%\.bashrc        > nul 2>&1
+:::: del %HOME_DIR%\.profile       > nul 2>&1
+::rmdir %HOME_DIR%\Config       > nul 2>&1
+::mklink /D "%HOME_DIR%\Config"        "%USERPROFILE%\Config"
 :: mklink /D "%HOME_DIR%\.bashrc"       "%DOT_DIR%\bashrc_user.bash"    
 :: mklink /D "%HOME_DIR%\.bash_profile" "%DOT_DIR%\bash_profile.bash" 
 :: mklink /D "%HOME_DIR%\.profile"       "%DOT_DIR%\profile" 
@@ -93,7 +93,7 @@ mklink /D "%HOME_DIR%\Config"        "%USERPROFILE%\Config"
 :: mklink /D "%FIL%" "%DOT_DIR%\vimrc"
 
 :: UserDir
-mklink /D "%HOME_DIR%\Home"        "%USERPROFILE%"
+::mklink /D "%HOME_DIR%\Home"        "%USERPROFILE%"
 
 echo "Run SetupDotFiles within cygwin to finish config"
 

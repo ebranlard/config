@@ -7,7 +7,7 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 ;; --------------------------------------------------------------------------------
 ;; --- Global variables 
 ;; --------------------------------------------------------------------------------
-gvim:="C:\Program Files (x86)\Vim\vim81\gvim.exe"
+gvim:="C:\Program Files (x86)\Vim\vim82\gvim.exe"
 diff:="C:\Program Files (x86)\WinMerge\WinMergeU.exe /r"
 ;; cmd:="C:\ProgramData\chocolatey\bin\Console.exe"
 cmd:="C:\Program Files\ConEmu\ConEmu64.exe" 

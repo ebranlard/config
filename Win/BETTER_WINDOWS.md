@@ -1,5 +1,13 @@
 
+
+
+
 # Programs to install
+EveditorFree
+SumatraPdf
+ConEmu
+
+
 
 Msys2 (shell and package manager):
     pacman -S mingw-w64-x86_64-{gcc,cmake,make,gcc-gfortran,openblas,lapack} 
@@ -26,9 +34,6 @@ In Bin\
     GNUMake3.81
 
 
-
-
-
 chocolatey (package manager)
     choco install -y git autohotkey vim  winmerge conemu vlc inkscape treesizefree
     sumatrapdf
@@ -43,8 +48,6 @@ chocolatey (package manager)
 
 Not on chocalatey:
     Briss: for pdf cropping
-    Wox (QuickLaunch)
-    EveditorFree
 
 My Tools:
     wmctrl
@@ -55,6 +58,19 @@ Console tools:
     ConEmu, ConsoleZ, Babun
 
 # Windows Config:
+
+
+## Power shell
+Run: 
+
+    Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
+
+
+Then copy paste the .ps1 file in folder Console
+
+
+
+
 
 ## Context menu
 The BEST is to use the registry files locates in ContextMenu/ 
