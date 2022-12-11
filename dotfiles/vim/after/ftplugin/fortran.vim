@@ -80,7 +80,7 @@ map ,m :w<cr>:Make<CR><CR>
 
 " ifort: suitable error format for quickfix window
 " set efm=%E%.%#rror:\ %f\\,\ line\ %l:\ %m,\%-C%.%#,\%-Z\%p^
-" let isf="@,48-57,/,.,-,_,+,#,^,,$,%,~,="
+" let isfname="@,48-57,/,.,-,_,+,#,^,,$,%,~,="
 " set efm=%f(%l):%m,%C\ %.%#,%-Z\-%#%p^
 " set efm=%f(%l):%m,%-G$.%#
 

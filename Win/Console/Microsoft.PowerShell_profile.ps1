@@ -14,14 +14,36 @@ function lg {
    git status $args
 }
 
+function pydat {
+    C:\Users\ebranlar\AppData\Local\pyDatView\Python\pythonw.exe "C:\Users\ebranlar\AppData\Local\pyDatView\pyDatView.launch.pyw" $args
+}
+
+
+
 Set-Alias la dir
 Set-Alias mkae make
 Set-Alias gti git
 Set-Alias pyton python
 Set-Alias py python
 
+function listpath {$Env:Path -split ';'}
+
+Set-Alias -Name path -Value listpath
+
+
 function eagle {
-    ssh -X ebranlar@eagle.hpc.nrel.gov $args
+    echo "Running: ssh -m hmac-sha2-512 ebranlar@eagle.hpc.nrel.gov $args"
+    ssh -m hmac-sha2-512 ebranlar@eagle.hpc.nrel.gov $args
+}
+
+function myscp {
+    echo "NOTE: scp -o MACs=hmac-sha2-512 ebranlar@eagle.hpc.nrel.gov:SRC DEST"
+    scp "-o MACs=hmac-sha2-512" $args
+}
+
+
+function gap {
+    git commit --amend --no-edit; git push --force
 }
 
 
@@ -31,10 +53,17 @@ function eagle {
 # $scripts = "D:\shared_tools\scripts"
 # Add Git executables to the mix.
 # [System.Environment]::SetEnvironmentVariable("PATH", $Env:Path + ";" + (Join-Path $pathToPortableGit "\bin") + ";" + $scripts, "Process")
+# [System.Environment]::SetEnvironmentVariable("PATH", $Env:Path + ";" + (Join-Path $pathToPortableGit "\bin") + ";" + $scripts, "Process")
 
 $myPath = "C:\Bin\msys64\mingw64\bin"
 [System.Environment]::SetEnvironmentVariable("PATH", $myPath + ";" + $Env:Path, "Process")
 
+$myPath = "C:\Bin\UnxUtils\usr\local\wbin\"
+[System.Environment]::SetEnvironmentVariable("PATH", $myPath + ";" + $Env:Path, "Process")
+
+
+[System.Environment]::SetEnvironmentVariable("HOMEDRIVE", "C:/", "Process")
+[System.Environment]::SetEnvironmentVariable("HOMEPATH", "Config/dotfiles", "Process")
 
 # Setup Home so that Git doesn't freak out.
 [System.Environment]::SetEnvironmentVariable("HOME", (Join-Path $Env:HomeDrive $Env:HomePath), "Process")

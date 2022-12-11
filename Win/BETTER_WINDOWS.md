@@ -1,4 +1,26 @@
 
+EnvironmentalVariable HomeDrive is "U", set it to "C"
+
+Install fonts (sdouble clicks on fonts in Config/fonts
+
+put _vimrc in parent directory of vim82
+
+Download "zip" version of autohotkey 1.x
+Run Copy script
+
+
+How to set Path in Windows without admin rights.
+1. From Start menu open Control Panel
+2. In Control panel Go to User Accounts
+3. In the user Accounts, Click on “Change my environment variables”
+
+
+
+
+# Import Windows setup
+
+System > Settings > Multitasking , turn off "When I snap a window, show what can snap next to it"
+
 
 
 
@@ -10,6 +32,19 @@ ConEmu
 
 
 Msys2 (shell and package manager):
+
+    pacman -Su mingw-w64-x86_64-gcc mingw-w64-x86_64-gcc-fortran mingw-w64-x86_64-cmake mingw-w64-x86_64-openblas mingw-w64-x86_64-lapack
+
+     mingw-w64-x86_64-make
+
+    pacman -Su mingw-w64-x86_64-gcc
+    pacman -Su mingw-w64-x86_64-make
+    pacman -Su mingw-w64-x86_64-gcc-fortran
+    pacman -Su mingw-w64-x86_64-cmake
+    pacman -Su mingw-w64-x86_64-openblas
+    pacman -Su mingw-w64-x86_64-lapack
+
+
     pacman -S mingw-w64-x86_64-{gcc,cmake,make,gcc-gfortran,openblas,lapack} 
 
 
@@ -115,24 +150,28 @@ Set on High performance power plan
 
 
 
-# Firefox with AdBlockPlus plugin
+# Chrome with AdBlockPlus plugin
 Install adblock plus
 
 
 # AutoHotKeys
 
-- Install AutoHotKeys.  No need to patch for windows 10 (autohotkey installed with Chocolatey)
-- Go to Config\Win\Autohotkey and ru nthe script copy.bat This Puts your scripts in:
-	C:\Users\%USER%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup
+- Download AutohotKey to C:/Bin/
 
-- For windows 8 and higher, it may be best to enable UIAccess on the autohotkey.exe file. Download EnableUiAccess from:  https://autohotkey.com/board/topic/70449-enable-interaction-with-administrative-programs/ 
-Unzip the files, and run the main script. Select AutohotKey.exe, overwrite it. 
+- See All.htk in Win/Shortcuts/
+
+- Right click on script, open with, select autohotkey.exe
+
+- Copy script 
+
 
 - Create some scripts (Right click, new script.) 
  Example of script (Ctrl-Z lauches notepad):
-#z::
-Run, Notepad,
-return
+    #z::
+    Run, Notepad,
+    return
+
+
 
 
 # Vim
@@ -156,13 +195,17 @@ git config core.autocrlf true
 
 
 
+
+
+
+---------------------------------------------------------------------------
+OLD
+---------------------------------------------------------------------------
+# OLD
+
 # WinSplit Revolution
 Configuration is stored in:
 "C:\Users\ebra\AppData\Roaming\Winsplit Revolution\"
-
-
-
-
 
 # Babun
 
@@ -183,23 +226,4 @@ wget
 apt-cyg (from github), within Cygwin type:
 lynx -source rawgit.com/transcode-open/apt-cyg/master/apt-cyg > apt-cyg
 install apt-cyg /bin
-
-
-# Links
-http://lifehacker.com/how-to-get-the-best-linux-features-on-windows-1569195729
-
-https://www.reddit.com/r/customization/comments/19t8ow/making_windows_feel_more_like_ubuntulinux/
-
-http://www.instructables.com/id/Give-Your-Computer-A-Cool-Linux-Feel/
-
-
-http://windowspager.sourceforge.
-net/
-
-http://lifehacker.com/lifehacker-pack-for-windows-our-list-of-the-best-windo-787533613
-
-http://answers.microsoft.com/en-us/windows/forum/windows_7-desktop/how-do-i-change-the-windows-7-keyboard-shortcuts/0110d32d-66c0-4ce7-8682-eeb896e80c3f?page=2
-
-https://www.google.dk/search?q=Manage+windows+shortcutsw&ie=utf-8&oe=utf-8&gws_rd=cr&ei=ppVhVo2jIsOcygP-y6zYCg
-
 

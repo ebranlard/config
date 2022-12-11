@@ -45,18 +45,15 @@ import weio
 
 
 # --- Replacements that are context dependent, we'll throw a warning
+
 REP_CONTEXT={
-'high thrust'             : ['high-thrust',  'if adjective'],
-'first order'             : ['first-order',  'if adjective'],
-'second order'            : ['second-order', 'if adjective'],
-'tower top'               : ['tower-top'   , 'if adjective'],
-'near wake'               : ['near-wake',    'if adjective'],
-'far wake'                : ['far-wake',     'if adjective'],
-'low thrust'              : ['low-thrust',   'if adjective'],
-'high thrust'             : ['high-thrust',  'if adjective'],
 'consist in'              : ['consist of'  , 'followed by -ing verb'], 
+'consists in'             : ['consists of'  , 'followed by -ing verb'], 
+'consisted in'            : ['consisted of'  , 'followed by -ing verb'], 
 ' etc'                    : ['removed'     , 'when used with for instance or example'], 
 'referred to as '         : ['needing quotes' , ''], 
+'which'                   : ['that', 'unless in comes straight after a comma maybe']
+
 # in the particular case X -> in the particular case of X
 # may (may implies permission) -> can, could, might, will (imply ability)
 #  - similar to
@@ -64,27 +61,51 @@ REP_CONTEXT={
 # 'high computational cost' : 'high-computational-cost',
 # 'GE 1.5-MW'               : 'GE 1.5-MW', # <- HYPHEN
 }
+REP_CONTEXT_ADJ={
+'boundary layer'         : 'boundary-layer',
+'far wake'               : 'far-wake',    
+'first order'            : 'first-order', 
+'flow field'             : 'flow-field',
+'high thrust'            : 'high-thrust', 
+'hub height'             : 'hub-height',
+'low thrust'             : 'low-thrust',  
+'near wake'              : 'near-wake',   
+'rotor plane'            : 'rotor-plane',
+'second order'           : 'second-order',
+'steady state'           : 'steady-state',
+'tower top'              : 'tower-top'   ,
+'time domain'            : 'time-domain',
+}
+for k,v in REP_CONTEXT_ADJ.items():
+    REP_CONTEXT[k] = [v, 'if adjective']
+    REP_CONTEXT[v] = [k, 'if noun']
 # --- Replacements that are recommendations, preferred "Synonymes":
 REP_RECOM={
-'for example': 'such as',
-'yet'                : 'however',
-'seen'               : 'observed, shown',
-'paper'              : 'work, article',
-'paragraph'          : 'section',
-'since'              : 'because',
-'due to'             : 'because of, as a result of',
-'which in turn'      : 'resulting',
-'From Fig it is seen': 'Fig shows',
-'hence'              : 'thereby',
-'wind farm'          : 'wind plant',
-'extends on'         : 'extends xxx',
 '2 , 6'              : 'two six',
-'more discussion'    : 'further discussion',
 'about $'            : 'approximately',
 'but also'           : 'as well as',
-'mostly'             : 'primarily',
 'consisting of'      : 'Comprising (e.g. 111 turbines)',
+'due to'             : 'because of, as a result of',
+'extends on'         : 'extends xxx',
+'for example'        : 'such as',
+'From Fig it is seen': 'Fig shows',
 'indeed'             : '(remove it)',
+'hence'              : 'thereby',
+'more discussion'    : 'further discussion',
+'mostly'             : 'primarily',
+'proceed to'         : '(remove it)',
+'paper'              : 'work, article',
+'paragraph'          : 'section',
+'onshore'            : 'land-based',
+'RPM'                : 'rpm',
+'since'              : 'because',
+'seen'               : 'observed, shown',
+'thanks to'          : 'because of',
+'Thanks to'          : 'Because of',
+'upperscript'        : 'superscript',
+'yet'                : 'however',
+'wind farm'          : 'wind plant',
+'which in turn'      : 'resulting',
 }
 
 # --- Replacements where the first letter may be an uppercase 
@@ -102,29 +123,32 @@ REP_CAP={
 # 'low computational cost' : 'low-computational-cost',
 # 'high computational cost' : 'high-computational-cost',
 # --- Need Hyphen
-'full scale'             : 'full-scale',
-'tip speed'              : 'tip-speed',
-'reduced order'          : 'reduced-order',
+' MW'                    : '-MW',
+'cost prohibitive'       : 'cost-prohibitive',
+'deep array'             : 'deep-array',
 'free stream'            : 'free-stream',
-'real time'              : 'real-time',
-'three dimensional'      : 'three-dimensional',
-'no flow through'        : 'no-flow-through',
-'large scale'            : 'large-scale',
-'low speed'              : 'low-speed',
-'high speed'             : 'high-speed',
-'state space'            : 'state-space',
-'steady state'           : 'steady-state',
+'full scale'             : 'full-scale',
 'full velocity field'    : 'full-velocity field',
 'ground effect'          : 'ground-effect',
-'well captured'          : 'well-captured',
-'speed up'               : 'speed-up',
-'deep array'             : 'deep-array',
-'cost prohibitive'       : 'cost-prohibitive',
-'open source'            : 'open-source',
+'high speed'             : 'high-speed',
+'horizontal axis'        : 'horizontal-axis',
+'large scale'            : 'large-scale',
+'large eddy'             : 'large-eddy',
 'left hand side'         : 'left-hand side',
+'low speed'              : 'low-speed',
+'no flow through'        : 'no-flow-through',
+'open source'            : 'open-source',
+'real time'              : 'real-time',
+'reduced order'          : 'reduced-order',
 'right hand side'        : 'right-hand side',
+'speed up'               : 'speed-up',
+'standalone'             : 'stand-alone',
+'state space'            : 'state-space',
 'subgrid scale'          : 'subgrid-scale',
-' MW'                    : '-MW',
+'tip speed'              : 'tip-speed',
+'three dimensional'      : 'three-dimensional',
+'vertical axis'          : 'vertical-axis',
+'well captured'          : 'well-captured',
 # --- No space or hyphen
 'axi symmetric'          : 'axisymmetric',
 'life time'              : 'lifetime',
@@ -147,14 +171,12 @@ REP_CAP={
 'several-fold'           : 'severalfold',
 'sub-cycling'            : 'subcycling',
 'two-fold'               : 'twofold',
-# --- No Hyphen
-'hub-height'             : 'hub height',
-'boundary-layer'         : 'boundary layer',
+# No Hyphen
+'curled-wake'            : 'curled wake',
+'digital-twin'           : 'digital twin',
+'finite-difference'      : 'finite difference',
 'fully-coupled'          : 'fully coupled',
 'life-cycle'             : 'life cycle',
-'digital-twin'           : 'digital twin',
-'flow-field'             : 'flow field',
-'rotor-plane'            : 'rotor plane',
 # --- Math
 'is written $'           : 'is written as $',
 'are written $'          : 'are written as $',
@@ -174,6 +196,8 @@ REP_CAP={
 'Then '    : 'Then, ',
 'Finally ' : 'Finally, ',
 'In this section ' : 'In this section, ',
+'e.g. ' : 'e.g.,',
+'i.e. ' : 'i.e.,',
 # --- Ortho/language:
 'modelling'     : 'modeling',
 'modelled'      : 'modeled',
@@ -185,12 +209,17 @@ REP_CAP={
 'compared to each other':'compared',
 'equation of motions':'equations of motion',
 'equations of motions':'equations of motion',
+'well captured':'captured well',
+# --- Capitalization
+'github'       : 'GitHub',
 # --- Figure
 'shown in the right': 'shown on the right',
 'given in the right': 'given on the right',
 'shown in the left': 'shown on the left',
 'given in the left': 'given on the left',
 }
+
+
 
 # --- Replacements where first letter shouldn't be capitalized
 REP_NOCAP={
@@ -207,6 +236,7 @@ def replace_in_file(infile, outfile):
     # Perform replacements
     DONE  = dict()
     RECOM = dict()
+    RECOM_ADJ = dict()
     for i,l in enumerate(lines):
         #print(l)
         # Items where first letter may be capitalized

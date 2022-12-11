@@ -121,9 +121,10 @@ snippet fig
 snippet unit
 	import unittest
 	import numpy as np	
+	import os as os
 	from mymodule import *
 
-	MyDir=os.path.dirname(__file__)
+	scriptDir=os.path.dirname(__file__)
 
 	class Test(unittest.TestCase):
 	    def test_${1:one}(self):

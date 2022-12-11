@@ -7,3 +7,48 @@ snippet date
 	`strftime("%Y-%m-%d")`
 snippet ddate
 	`strftime("%B %d, %Y")`
+
+snippet ignore:
+	# --- PROJECT SPECIFIC
+	${1}
+	# --- MISC
+	_*
+	.DS_Store
+	# --- LARGE DATA
+	*.exe
+	*.dll
+	*.zip
+	*.mat
+	# --- PICS 
+	*.png
+	*.pdf
+	# --- PROGRAMMING
+	tags
+	*.obj
+	*.res
+	*.lib
+	*.a
+	# --- LATEX
+	*.aux
+	*.bbl
+	*.blg
+	*.log
+	*.out
+	*.pdf
+	*.gz
+	figs_svgtex/
+	# --- PYTHON
+	*.pyc
+	*.pyd
+	__pycache*
+	*.egg-info*
+	*.ipynb_checkpoints*
+	*.ipynb
+	!__*__.py
+	# --- FAST
+	*.sum
+	*.ech
+	*.out
+	*.outb
+	*.vtk
+	

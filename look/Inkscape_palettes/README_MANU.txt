@@ -1,2 +1,1 @@
-# :Program Files/Inkscape/share/palettes
-mklink /d 
+SEE SCRIPT C:\Config\look\InscapePalettes.bat

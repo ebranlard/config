@@ -7,11 +7,10 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 ;; --------------------------------------------------------------------------------
 ;; --- Global variables 
 ;; --------------------------------------------------------------------------------
-gvim:="C:\Program Files (x86)\Vim\vim82\gvim.exe"
-diff:="C:\Program Files (x86)\WinMerge\WinMergeU.exe /r"
+gvim:="C:\Bin\Vim\vim82\gvim.exe"
+diff:="C:\Program Files\WinMerge\WinMergeU.exe /r"
 ;; cmd:="C:\ProgramData\chocolatey\bin\Console.exe"
-cmd:="C:\Program Files\ConEmu\ConEmu64.exe" 
-InsertMode:=0
+cmd:="C:\Bin\ConEmu\ConEmu.exe" 
 
 ;; --------------------------------------------`-----------------------------------
 ;; --- Move Windows  
@@ -37,8 +36,6 @@ if (lMW > 1920) {
     lMW:=lMW/2
     rMW:=lMW
 }
-
-
 
 move_window(motion){
     global lMW, lMH, rMW, rMH, lB
@@ -211,21 +208,6 @@ move_window(motion){
     WinActivate ahk_id %activeWindow%  ;Needed - otherwise another window may overlap it
     return
 }
-;; TODO try to use this to get the workarea right
-;; SnapToLeft() {
-;;     WinGet, HWND, ID, A
-;;     WinRestore, ahk_id %HWND%
-;;     WinGetPos, X, Y, W, H, ahk_id %HWND%
-;;     if (X != 0) {
-;;         SysGet, MP, MonitorPrimary
-;;         SysGet, MWA, MonitorWorkArea, %MP%
-;;         NewWidth := W + X
-;;         WinMove, ahk_id %HWND%,,0,%Y%,%NewWidth%,%H%
-;;     }
-;;     return
-;; }
-
-
 
 ;; #a:: move_window("L")
 ;; #d:: move_window("R")
@@ -239,59 +221,9 @@ move_window(motion){
 #c:: move_window("BR")
 #z:: move_window("BL")
 
-
 ;; --------------------------------------------------------------------------------
 ;; --- SwitchMonitor.ahk
 ;; --------------------------------------------------------------------------------
-
-send_screen(motion){
-    global lMW, lMH, rMW, rMH, lB
-    activeWindow := WinActive("A")
-    borderThreshold := -10
-    if ( activeWindow = 0 ) {
-        return
-    }
-    WinGet, minMax, MinMax, ahk_id %activeWindow%
-    WinGetPos, x, y, width, height, ahk_id %activeWindow%
-   
-    if (motion = "R") {
-        ; Sending to right
-        if (x < lMW  ) {
-            newY := y
-            newX := lMW + 1
-            xScale :=1
-            yScale :=1
-            newWidth := width * xScale
-            newHeight := height * yScale
-            WinMove, ahk_id %activeWindow%, , %newX%, %newY%, %newWidth%, %newHeight%
-            WinActivate ahk_id %activeWindow%  ;Needed - otherwise another window may overlap it
-        }
-    }else {
-        ; Sending to left
-        if (x > lMW-10  ) {
-          newY := y
-          newX := x - lMW + border
-          if (newX<lB) {
-            newX:=lB
-          }
-          xScale := lMW / rMW
-          yScale := lMH / rMH
-          xScale :=1
-          yScale :=1
-          newWidth := width * xScale
-          newHeight := height * yScale
-          WinMove, ahk_id %activeWindow%, , %newX%, %newY%, %newWidth%, %newHeight%
-          WinActivate ahk_id %activeWindow%  ;Needed - otherwise another window may overlap it
-            }
-    }
-    return
-}
-
-
-;; #1:: send_screen("L")
-;; #2:: send_screen("R")
-;; #1:: SendEvent #!{Left}
-;; #2:: SendEvent #!{Right}
 #1:: Send, {LWin Down}{LShift Down}{Right}{LShift Up}{LWin Up}
 #2:: Send, {LWin Down}{LShift Down}{Left}{LShift Up}{LWin Up}
 ;; --------------------------------------------------------------------------------
@@ -299,7 +231,6 @@ send_screen(motion){
 ;; --------------------------------------------------------------------------------
 #F1:: Send !{Space}m{Left}
 #F2:: Send !{Space}s{Right}{Down}
-
 ;; --------------------------------------------------------------------------------
 ;; --- WindowToggleMaximize.ahk
 ;; --------------------------------------------------------------------------------
@@ -309,48 +240,6 @@ send_screen(motion){
         WinRestore A
    Else WinMaximize A
 Return
-
-;; --------------------------------------------------------------------------------}
-;; --- Copy/Paste with mouse 
-;; --------------------------------------------------------------------------------{
-cos_mousedrag_treshold := 20 ; pixels
-                            
-;; #IfWinNotActive ahk_class ConsoleWindowClass
-;; ~lButton::
-;;   MouseGetPos, cos_mousedrag_x, cos_mousedrag_y
-;;   keywait lbutton
-;;   mousegetpos, cos_mousedrag_x2, cos_mousedrag_y2
-;;   if (abs(cos_mousedrag_x2 - cos_mousedrag_x) > cos_mousedrag_treshold
-;;     or abs(cos_mousedrag_y2 - cos_mousedrag_y) > cos_mousedrag_treshold)
-;;   {
-;;     wingetclass cos_class, A
-;;     ;;MsgBox %cos_class%
-;;     if (cos_class == "Emacs")
-;;       sendinput !w
-;;     else if (cos_class == "Console_2_Main")
-;;         return
-;;     else if (cos_class == "CabinetWClass")
-;;         return
-;;     else if (cos_class == "ConsoleWindowClass")
-;;         return
-;;     else
-;;        sendinput ^c
-;;   }
-;;   return
-;;   
-;; ~mbutton::
-;;   WinGetClass cos_class, A
-;;   if (cos_class == "Emacs")
-;;     SendInput ^y
-;;   else
-;;     SendInput ^v
-;;   return
-;; #IfWinNotActive
-;; 
-;; ;; clipx
-;; ^mbutton::
-;;   sendinput ^+{insert}
-;;   return
 
 ;; --------------------------------------------------------------------------------
 ;; --- NoCapsLock.ahk
@@ -366,23 +255,22 @@ cos_mousedrag_treshold := 20 ; pixels
 ;; --------------------------------------------------------------------------------
 ;; --- Windows Keys Win+...
 ;; --------------------------------------------------------------------------------
-#h::return
+;; #h::return
+#l::return
+;; ^!l:: SendEvent #l  ; Lock
 ;;#k::return
 ;; --- FuzzyRun / Wox CtrlAlt Space or Alt Space or Win+r 
 ;#r:: Run, python C:\Work\Geekeries\fuzzy-run\fuzzy-run
-#r:: Send ^!{Space}
-#Space:: Send ^!{Space}
+;; #r:: Send ^!{Space}
+;; #Space:: Send ^!{Space}
 ;; --- WindowsExplorer
-#t:: Run, Explorer H:\
+#t:: Run, Explorer C:\Work
 ;; --- Switch to Matlab
-#m:: Run, wmctrl -a MATLAB ,,Hide
+#m:: Run, wmctrl -a MATLAB  ; ,,Hide
 ;; --- Switch to Gvim
-#g:: Run, wmctrl -a gvim ,,Hide
-;; --- 
-;; #t:: Run, Explorer C:\Users\emmbr
-;; --- WindowsRun (doesnt work in windows 8 )
-;; shell:=ComObjCreate("Shell.Application")
-;; #r::shell.FileRun()
+#g:: Run, wmctrl -a gvim    ;,,Hide
+;; --- Switch to ConEmu
+#h:: Run, wmctrl -a ConEmu    ;,,Hide
 ;; --------------------------------------------------------------------------------
 ;; --- WindowsSearch/WindowsMenu
 ;; --------------------------------------------------------------------------------
@@ -401,16 +289,13 @@ LWin::
 	{
 		return
 	} else {
-        ;; WOX
         Send ^!{Space}
-        ;; Windows
-;;         Send, {LWin down}
-;;         Send, {LWin up}
     }
-    return
+;;     return
 ;; #IfWinActive, Search Panea
 ;; #IfWinActive ahk_class ImmersiveLauncher
 #IfWinActive ahk_class Windows.UI.Core.CoreWindow
+^[::Send {Esc}
 ^n::Send {Down}
 ^p::Send {Up}
 ^j::Send {Down}
@@ -422,99 +307,38 @@ Lwin::Send !{F4}
 ;; --------------------------------------------------------------------------------
 ;; ---  Browser
 ;; --------------------------------------------------------------------------------
-#If WinActive("ahk_class IEFrame") || WinActive("ahk_class MozillaWindowClass")
-^n::Send {Down}
-;;^j::Send {Down}
-;;^k::Send {Up}
+;; #If WinActive("ahk_class IEFrame") || WinActive("ahk_class MozillaWindowClass")
 ;;^n::Send {Down}
-;;^p::Send {Up}
-^+j::Send {Down}
-^+k::Send {Up}
-;;^+n::Send {Down}
+;; ;;^j::Send {Down}
+;; ;;^k::Send {Up}
+;; ;;^n::Send {Down}
+;; ;;^p::Send {Up}
+;; ^+j::Send {Down}
 ;; ^+k::Send {Up}
-^/::Send ^f
-^+h::Send +^{Tab}
-^+l::Send  ^{Tab}
-^+;:: Send ^l
-;;^o:: Send !{Left}  ; Back
-;;^i:: Send !{Right} ; Forward
-;;^u:: Send {PgUp}  ; 
-;;^d:: Send {PgDn}  ;
-^w:: return
-;;^+[:: Send +{Esc}
-#If
+;; ;;^+n::Send {Down}
+;; ;; ^+k::Send {Up}
+;; ^/::Send ^f
+;; ^+h::Send +^{Tab}
+;; ^+l::Send  ^{Tab}
+;; ^+;:: Send ^l
+;; ;;^o:: Send !{Left}  ; Back
+;; ;;^i:: Send !{Right} ; Forward
+;; ;;^u:: Send {PgUp}  ; 
+;; ;;^d:: Send {PgDn}  ;
+;; ^w:: return
+;; ;;^+[:: Send +{Esc}
+;; #If
 ;; --------------------------------------------------------------------------------
 ;; --- Explorer 
 ;; --------------------------------------------------------------------------------
 #IfWinActive ahk_class CabinetWClass
-;; ---  Insert mode togle with i/ctrl-[ and navigation with jk
-;; ^[:: InsertMode:=0
-;; i:: 
-;;     if InsertMode=0
-;;         InsertMode:=1
-;;     else
-;;         Send i
-;;     return
-;; j::
-;;     if InsertMode=0
-;;         Send {Down}
-;;     else
-;;         Send j
-;;     return
-;; k::
-;;     if InsertMode=0
-;;         Send {Up}
-;;     else
-;;         Send k
-;;     return
-;; +j::
-;;     if InsertMode=0
-;;         Send !{Down}
-;;     else
-;;         Send J
-;;     return
-;; +k::
-;;     if InsertMode=0
-;;         Send !{Up}
-;;     else
-;;         Send K
-;;     return
-;; 0:: 
-;;     if InsertMode=0
-;;        Send {Home}
-;;     else
-;;         Send 0
-;;     return
-;; x:: 
-;;     if InsertMode=0
-;;        Send {Del}
-;;     else
-;;         Send x
-;;     return
-;; h::
-;;     if InsertMode=0
-;;         Send {Left}
-;;     else
-;;         Send h
-;;     return
-;; l::
-;; if InsertMode=0
-;;     Send {Right}
-;; else
-;;     Send l
-;; return
-;; ^j::Send ^{Down}
-;; ^k::Send ^{Up}
-;; ^+j::Send ^+{Down}
-;; ^+k::Send ^+{Up}
+^[:: Send {Esc}
 ^j::Send {Down}
 ^k::Send {Up}
 ^+j::Send {Down}
 ^+k::Send {Up}
 /::Send ^f
-::: Send !d  ; For to address (Alt-D)
-^;:: Send !d  ; For to address (Alt-D)
-^+;:: Send !d  ; For to address (Alt-D)
+::: Send !d    ; Go to address (Alt-D)
 ^0:: ; Go to file list
     Send !d ; first go to address bar
     Sleep, 10
@@ -524,14 +348,14 @@ Lwin::Send !{F4}
     Sleep, 10
     Send {F6}  
     return
-^n:: return ; D
-^o:: Send !{Left} ; 
-^i:: Send !{Right} ; 
-^p:: SendEvent !{Up}  ; Needs event because explorer doesnt like send (input mode)
+;; ^n:: return ; D
+^o:: Send !{Left}  ; Go to previous folder in history
+^i:: Send !{Right} ; Got to next folder in history
+^p:: SendEvent !{Up}  ; Go to parent directory, Needs event because explorer doesnt like send (input mode)
 ^u:: Send {PgUp}  ; 
 ^d:: Send {PgDn}  ;
-^+n:: Send ^n
-^e::Send {F2} ; rename
+^+n:: Send ^n     ; new window of explorer
+^e::Send {F2}     ; rename file
 ; --- Edit a file in vim
 ^]::
     Clipboard =  ; Start blank for ClipWait detection to work.
@@ -568,6 +392,9 @@ open_terminal_explorer(){
 , & s:: open_terminal_explorer()
 ;; , & s:: Send !fP  ; open a terminal
 ;; ^s::  Send !fP
+;; FAT FINGERS
+F1::Send {F2}
+
 #IfWinActive ; explorer
 
 ^backspace::Send +{F10}  ; Open Context menu
@@ -590,7 +417,7 @@ open_terminal_explorer(){
 ;; --- Vim! 
 ;; --------------------------------------------------------------------------------{
 ;; #IfWinActive ahk_class Vim
-;;esc::         MsgBox, 0, , STUPID STUPID STUPID STUPID STUPID STUPID STUPID STUPID STUPID, 0.1
+;; esc::         MsgBox, 0, , STUPID STUPID STUPID STUPID STUPID STUPID STUPID STUPID STUPID, 0.1
 ;; ^c::          MsgBox, 0, , STUPID STUPID STUPID STUPID STUPID STUPID STUPID STUPID STUPID, 0.1
 ;; backspace::   MsgBox, 0, , STUPID STUPID STUPID STUPID STUPID STUPID STUPID STUPID STUPID, 0.1
 ;; #IfWinActive
@@ -609,57 +436,17 @@ open_terminal_explorer(){
 ^j::Send {Down}
 #IfWinActive
 
-#IfWinActive ahk_class Console_2_Main
+#IfWinActive ahk_exe ConEmu.exe
 ^k::Send {Up}
 ^j::Send {Down}
 #IfWinActive
-
-#IfWinActive ahk_exe ConEmu64.exe
-^k::Send {Up}
-^j::Send {Down}
-#IfWinActive
-
 
 #IfWinActive ahk_exe debian.EXE
 #esc::Send ^d   ; close console
 #IfWinActive
-
 ;; --------------------------------------------------------------------------------
-;; ---  WindowSwitcher (If Windows 8 and no UI Access)
-;; --------------------------------------------------------------------------------
-;; --------------------------------------------------------------------------------
-;; ;; task_switch() {
-;; ;; run, "C:\Users\ebra\Config\Win\KeyboardShortcuts\Window Switcher" ; must be in script directory otherwise include path 
-;; ;; WinWait, Task Switching,, 2
-;; ;; KeyWait, LCtrl
-;; ;; Send, {Enter}
-;; ;; return
-;; ;; }
-;; ;; LCtrl & j:: task_switch() return
-;; ;; LCtrl & k:: task_switch() return
-;; ;;  
-;; ;; #IfWinActive, Task Switching
-;; ;; LCtrl & k::Send, {Right}
-;; ;; LCtrl & j::Send, {Left}
-;; 
-;; --------------------------------------------------------------------------------
-;; ---  WindowSwitcher (works on all platform and windows 8 if you use EnableUIAccess)
+;; ---  WindowSwitcher 
 ;; --------------------------------------------------------------------------------
 LWin & k::AltTab
 LWin & j::ShiftAltTab
-
-
-;; --------------------------------------------------------------------------------
-;; --- Wox quick launch
-;; --------------------------------------------------------------------------------
-#IfWinActive ahk_exe Wox.exe
-^+::Send ^h
-^h::Send {Left}
-^l::Send {Right}
-^x::Send {Del}
-^c::
-   Send ^a
-   Send {Del}
-   return
-#IfWinActive
 

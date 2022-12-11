@@ -10,41 +10,41 @@ snippet ref
 	\autoref{${1}}${2}
 # Equation
 snippet eq
-	\begin{align}
-		${1}  %\label{eq:}
-	\end{align}
+	\\begin{align}
+		${1}  %label{eq:}
+	\\end{align}
 # Tabular
 snippet tab
 	% ----------------------------------- TABLE --------------------------------------
-	\begin{table}[!htb]\centering
-	    \caption{${1}}
-	    \label{tab:${2}}
-	    \begin{tabular}{cc}
-	        \textbf{${3}} & \textbf{} \\\\
+	\\begin{table}[!htb]\\centering
+	    \\caption{${1}}
+	    \\label{tab:${2}}
+	    \\begin{tabular}{cc}
+	        \\textbf{${3}} & \\textbf{} \\\\
 	        & \\\\
-	    \end{tabular}
-	\end{table}
+	    \\end{tabular}
+	\\end{table}
 	% --------------------------------------------------------------------------------
 # FIGURE
 snippet fig
 	% ---------------------------------- FIGURE --------------------------------------
-	\noindent\begin{figure}[!htb]\centering%
-	    \includegraphics[width=0.5\textwidth]{${1}}
-	    \caption{${2}}%
-	    \label{fig:${3}}%
-	\end{figure}
+	\\noindent\\begin{figure}[!htb]\\centering%
+	    \\includegraphics[width=0.5\\textwidth]{${1}}
+	    \\caption{${2}}%
+	    \\label{fig:${3}}%
+	\\end{figure}
 	% --------------------------------------------------------------------------------
 # Itemize
 snippet item
-	\begin{itemize}
-		\item ${1}
-		\item 
-	\end{itemize}
+	\\begin{itemize}
+		\\item ${1}
+		\\item 
+	\\end{itemize}
 #lislisting
 snippet lst
-	\begin{lstlisting}
+	\\begin{lstlisting}
 		${1}
-	\end{lstlisting}
+	\\end{lstlisting}
 ####################################################################
 # \begin{}...\end{}
 snippet beg
@@ -53,10 +53,10 @@ snippet beg
 	\end{$1}
 # Align(ed)
 snippet ali
-	\begin{align}
-		${1}&=    \\ %\label{eq:}
-		&=           %\label{eq:} 
-	\end{align}
+	\\begin{align}
+		${1}&=    \\ %label{eq:}
+		&=           %label{eq:} 
+	\\end{align}
 # Gather(ed)
 snippet gat
 	\begin{gather${1:ed}}

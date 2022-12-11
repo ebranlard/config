@@ -40,6 +40,7 @@ if has("autocmd")
     augroup END
 endif 
 " No end of line
+" set binary
 set noeol
 " command! Mdiff vert diffsplit
 command! -complete=file -nargs=+ Mdiff vert diffsplit <args>
@@ -72,7 +73,7 @@ else
         syntax on           " syntax highlighing     !!!! should be after filetype plugin indent on
         set background=light   " adapt colors for background
         colorscheme ManuWhite
-        Guifont DejaVu Sans Mono for Powerline:h10
+        set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h10
     else
         " Detect filetype nd use syntax highlighting syntax enable
         syntax on           " syntax highlighing     !!!! should be after filetype plugin indent on
@@ -227,6 +228,9 @@ set incsearch	" do incremental searching
 set ignorecase	" ignore case
 set smartcase	" but don't ignore it, when search string contains uppercase letters
 
+" g* creates a jump, instead add current word to search
+nnoremap <silent> g* :let @/=expand('<cword>') <bar> set hls <cr>
+
 " " Search for the ... arguments separated with whitespace (if no '!'),
 " " or with non-word characters (if '!' added to command).
 " function! SearchMultiLine(bang, ...)
@@ -247,6 +251,10 @@ set wildignore=*.o,*.obj,*~,*.cmo,*.cmi,*.a,*.cmx,*.cmxa,*.aux,*.dvi,*.aut,*.bbl
 " for an easier autocompletion of previous commands
 cnoremap <C-k> <Up>
 cnoremap <C-j> <Down>
+nmap <C-k> <Up>
+nmap <C-j> <Down>
+map <C-k> <Up>
+map <C-j> <Down>
 " ---------------------------------------------------------------------------}
 " --- Folding 
 " ---------------------------------------------------------------------------{
@@ -297,6 +305,8 @@ set autoread   " tricky one: if a file is changed locally, automatically reload 
 " ---------------------------------------------------------------------------{
 " --- avoid capture of key combos from the system
 if has("win32") || has("win16")
+    " add space to filename 
+"     set isfname="@,48-57,/,\,.,-,_,+,,,#,$,%,{,},[,],:,@-@,!,~,="
 else
     set winaltkeys=no
 endif
@@ -479,15 +489,12 @@ nmap k g<Up>
 nmap j g<Down>
 vmap k g<Up>
 vmap j g<Down>
-"  set clipboard+=unnamed,unnamedplus    "all test cut and yanked will be in the X register as well (*)
-if has("win32") || has("win16")
+if has("nvim")
+    set clipboard+=unnamedplus
+elseif has("win32") || has("win16")
     set clipboard=autoselect,unnamed
 else
-    if has("nvim")
-"         set clipboard=autoselect
-    else
-        set clipboard=autoselect,unnamed,unnamedplus,exclude:cons\|linux
-    end
+    set clipboard=autoselect,unnamed,unnamedplus,exclude:cons\|linux
 end
 " Y will yank to the clipboard
 " noremap Y "+y          
@@ -784,6 +791,11 @@ let g:ctrlp_working_path_mode = 'a'
 let g:ctrlp_max_height = 20
 
 " ---------------------------------------------------------------------------}
+" --- PLUGIN  - snipmate
+" ---------------------------------------------------------------------------{
+let g:snipMate = { 'snippet_version': 1 }
+
+" ---------------------------------------------------------------------------}
 " --- MY SIMPLE PLUGIN - Font 
 " ---------------------------------------------------------------------------{
 function! FontSizeAdjust(amount)
@@ -828,12 +840,14 @@ if version>=801
     tmap <C-W>c i<CR>exit<CR>
 endif
 
-set shellslash    " important for vimlatex and windows
+set shellslash    " important for vimlatex and windows. NOTE: I have now
+"                   " commented it since SumatraPDF received a file name with
+"                   " single quotes and didn't like that.
 if has("win32") || has("win16")
     " Quickly open a shell in the current directory:
     "map ,s :!start cmd /k <CR>
     "map ,s :!start C:\ProgramData\chocolatey\bin\Console.exe <cr>
-    map ,s :!start "C:/Program Files/ConEmu/ConEmu64.exe" <cr>
+    map ,s :!start "C:/Bin/ConEmu/ConEmu.exe" <cr>
     "map ,l :!start debian -c "bash" 
     let b:cwd = getcwd()
     let b:cwd = substitute(b:cwd, "C:", "/mnt/c","")
