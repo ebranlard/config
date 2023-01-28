@@ -2,8 +2,8 @@
 if not defined PROMPT (
     set "PROMPT=$P$G"
 )
-set "PROMPT=(py36) %PROMPT%"
-set PYTHONHOME=C:\Bin\Python\Python36
+set "PROMPT=(py37) %PROMPT%"
+set PYTHONHOME=C:\Bin\Python\Python37
 set PYTHONSCRIPT=%PYTHONHOME%\Scripts
 set PYTHONPATH=%PYTHONHOME%\Lib
 set PATH=%PYTHONHOME%;%PYTHONSCRIPT%;%PATH%

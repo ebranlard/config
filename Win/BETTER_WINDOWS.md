@@ -103,7 +103,8 @@ Run:
 
 Then copy paste the .ps1 file in folder Console
 
-
+## CMD (command line)
+See README.md under Console/
 
 
 

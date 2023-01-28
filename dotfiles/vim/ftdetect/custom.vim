@@ -1,4 +1,4 @@
-au! BufNewFile,BufRead *.htc setf htc
+au! BufNewFile,BufRead *.htc,*.orient,*.constr,*.mbdy,*.setup setf htc
 au! BufNewFile,BufRead *.oin setf oin
 au! BufNewFile,BufRead *.cu  setf c
 
