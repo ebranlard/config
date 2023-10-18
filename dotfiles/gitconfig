@@ -14,3 +14,6 @@
 [user]
 	name = Emmanuel Branlard
 	email = emmanuel.branlard@nrel.gov
+
+[push]
+	default = simple

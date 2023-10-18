@@ -98,11 +98,16 @@ then
 elif [ $HOSTNAME == 'login3' ]
 then
     alias ls='ls -F --group-directories-first'
-elif [ $HOSTNAME == 'el1' ] || [ $HOSTNAME == 'el2' ]
+elif [ $HOSTNAME == 'el1' ] || [ $HOSTNAME == 'el2' ] || [ $HOSTNAME == 'el3' ]
 then
     echo "Eagle"
     alias ls='ls -F --group-directories-first --color=always'
-    alias conda2='export PATH="$HOME/_env/anaconda2/bin:$PATH"'
+    #export PATH="$HOME/_env/anaconda2/bin:$PATH"
+    export PATH="$HOME/_env/anaconda3/bin:$PATH"
+    #source activate py3
+
+
+
 else
     alias ls='ls -F --color=always '
     echo "No bashrc specific commands for this hosts."

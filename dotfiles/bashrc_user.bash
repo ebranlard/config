@@ -1,4 +1,5 @@
 # Avoid loading bashrc on scp
+# NOTE: the line above make it bashrc crash, which is good otherwisht my scp fails
 if [ -z "${PS1}" ]; then
     return
 fi
