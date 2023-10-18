@@ -36,3 +36,5 @@ dotfiles/clcache/
 profiles/grub/
 
 Win/QuickLaunch/*.lnk
+
+*.uuid

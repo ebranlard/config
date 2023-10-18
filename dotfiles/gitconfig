@@ -5,7 +5,10 @@
 
 [core]
 	pager = less -F -X
-	autocrlf = true
+    # ON LINUX
+	autocrlf = false
+    # ON WINDOWS
+    #autocrlf = true
 
 [help]
 	autocorrect = 1
