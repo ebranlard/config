@@ -2,7 +2,13 @@ Conclusion:
 The best is still to use the registry files.
 
 
+# Main reg Adresses
+[HKEY_CLASSES_ROOT\*\shell\YOURNAME]
+[HKEY_CLASSES_ROOT\Directory\Background\shell\YOURNAME]
+[HKEY_CLASSES_ROOT\Folder\shell\YOURNAME]
+
 # FileTypes
+Directory
 CompressedFolders
 Folders
 

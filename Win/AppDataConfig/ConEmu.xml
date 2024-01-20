@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <key name="Software">
 	<key name="ConEmu">
-		<key name=".Vanilla" modified="2021-10-12 16:56:48" build="190310">
+		<key name=".Vanilla" modified="2024-01-20 16:48:38" build="230724">
 			<value name="Language" type="string" data="en"/>
 			<value name="StartType" type="hex" data="02"/>
 			<value name="CmdLine" type="string" data=""/>
@@ -99,8 +99,8 @@
 			<value name="SingleInstance" type="hex" data="00"/>
 			<value name="ShowHelpTooltips" type="hex" data="00"/>
 			<value name="Multi" type="hex" data="01"/>
-			<value name="Multi.ShowButtons" type="hex" data="01"/>
-			<value name="Multi.ShowSearch" type="hex" data="01"/>
+			<value name="Multi.ShowButtons" type="hex" data="00"/>
+			<value name="Multi.ShowSearch" type="hex" data="00"/>
 			<value name="Multi.NumberInCaption" type="hex" data="00"/>
 			<value name="Multi.CloseConfirmFlags" type="hex" data="04"/>
 			<value name="Multi.NewConfirm" type="hex" data="00"/>
@@ -150,11 +150,11 @@
 			<value name="Cascaded" type="hex" data="01"/>
 			<value name="IntegralSize" type="hex" data="00"/>
 			<value name="WindowMode" type="dword" data="0000051f"/>
-			<value name="ConWnd X" type="long" data="464"/>
-			<value name="ConWnd Y" type="long" data="46"/>
-			<value name="LastMonitor" type="string" data="141,0,1920,1080"/>
-			<value name="ConWnd Width" type="dword" data="0000006b"/>
-			<value name="ConWnd Height" type="dword" data="0000001d"/>
+			<value name="ConWnd X" type="long" data="960"/>
+			<value name="ConWnd Y" type="long" data="0"/>
+			<value name="LastMonitor" type="string" data="0,0,1920,1032"/>
+			<value name="ConWnd Width" type="dword" data="0000006f"/>
+			<value name="ConWnd Height" type="dword" data="0000001a"/>
 			<value name="16bit Height" type="ulong" data="0"/>
 			<value name="QuakeStyle" type="hex" data="00"/>
 			<value name="Restore2ActiveMon" type="hex" data="00"/>
@@ -226,7 +226,7 @@
 			<value name="Anti-aliasing2" type="hex" data="00"/>
 			<value name="FixFarBordersRanges" type="string" data="2013-25C4;"/>
 			<value name="ExtendUCharMap" type="hex" data="01"/>
-			<value name="EnhanceGraphics" type="hex" data="00"/>
+			<value name="EnhanceGraphics" type="hex" data="01"/>
 			<value name="EnhanceButtons" type="hex" data="00"/>
 			<value name="PartBrush75" type="hex" data="C8"/>
 			<value name="PartBrush50" type="hex" data="96"/>
@@ -336,7 +336,7 @@
 			<value name="TabFontHeight" type="long" data="13"/>
 			<value name="SaveAllEditors" type="string" data=""/>
 			<value name="ToolbarAddSpace" type="long" data="0"/>
-			<value name="TabConsole" type="string" data="&lt;%c&gt; %f"/>
+			<value name="TabConsole" type="string" data="%c %f"/>
 			<value name="TabModifiedSuffix" type="string" data="[*]"/>
 			<value name="TabSkipWords" type="string" data="Administrator:|Администратор:"/>
 			<value name="TabPanels" type="string" data="&lt;%c&gt; %s"/>
@@ -415,7 +415,7 @@
 			<value name="Update.DownloadPath" type="string" data="%TEMP%\ConEmu"/>
 			<value name="Update.LeavePackages" type="hex" data="00"/>
 			<value name="Update.PostUpdateCmd" type="string" data="echo Last successful update&gt;ConEmuUpdate.info &amp;&amp; date /t&gt;&gt;ConEmuUpdate.info &amp;&amp; time /t&gt;&gt;ConEmuUpdate.info"/>
-			<key name="HotKeys" modified="2021-10-12 16:56:48" build="190310">
+			<key name="HotKeys" modified="2024-01-20 16:48:38" build="230724">
 				<value name="KeyMacroVersion" type="hex" data="02"/>
 				<value name="Multi.Modifier" type="dword" data="000000a2"/>
 				<value name="Multi.ArrowsModifier" type="dword" data="0000005b"/>
@@ -610,6 +610,9 @@
 				<value name="DndLKey" type="hex" data="00"/>
 				<value name="DndRKey" type="hex" data="A2"/>
 				<value name="WndDragKey" type="dword" data="00121101"/>
+				<value name="SetFocusParent" type="dword" data="0000a01b"/>
+				<value name="Key.EditMenu" type="dword" data="00000000"/>
+				<value name="Key.EditMenu2" type="dword" data="00000000"/>
 			</key>
 			<key name="Tasks" modified="2021-10-12 16:56:48" build="190310">
 				<value name="Count" type="long" data="12"/>
@@ -729,6 +732,10 @@
 			<key name="Colors" modified="2021-10-12 16:56:48" build="190310">
 				<value name="Count" type="long" data="0"/>
 			</key>
+			<value name="AnsiLogCodes" type="hex" data="00"/>
+			<value name="ResetTerminalConfirm" type="hex" data="01"/>
+			<value name="AutoReloadEnvironment" type="hex" data="01"/>
+			<value name="StatusBar.Hide.InputGrouping" type="hex" data="00"/>
 		</key>
 	</key>
 </key>

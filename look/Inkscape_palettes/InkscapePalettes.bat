@@ -12,12 +12,13 @@ set PALDIR="C:\Bin\Inkscape\share\inkscape\palettes"
 :: Inkscape 0.9
 :: set PALDIR="C:\Bin\Inkscape\share\palettes"
 
+copy C:\Config\look\Inkscape_palettes\*.gpl %PALDIR%
 
 ::# 1 Delete inscape palette diretory
-rename %PALDIR% %PARDIR%_bkp
+:: rename %PALDIR% %PARDIR%_bkp
 
-::  2 create a softlink
-cd ..
-mklink /d %PALDIR% "C:\Config\look\Inkscape_palettes"
+:: ::  2 create a softlink
+:: cd ..
+:: mklink /d %PALDIR% "C:\Config\look\Inkscape_palettes"
 
 pause

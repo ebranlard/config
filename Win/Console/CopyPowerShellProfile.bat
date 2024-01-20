@@ -1,4 +1,8 @@
 @echo off
+
+::Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
+
+
 :: Convenient varibles: %USERNAME% %USERPROFILE%
 set SCRIPT_DIR=C:\Config\Win\Console
 set DIR=%USERPROFILE%\Documents\WindowsPowerShell

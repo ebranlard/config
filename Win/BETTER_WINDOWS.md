@@ -1,52 +1,40 @@
-
-EnvironmentalVariable HomeDrive is "U", set it to "C"
-
-Install fonts (sdouble clicks on fonts in Config/fonts
-
-put _vimrc in parent directory of vim82
-
-Download "zip" version of autohotkey 1.x
-Run Copy script
-
-
-How to set Path in Windows without admin rights.
-1. From Start menu open Control Panel
-2. In Control panel Go to User Accounts
-3. In the user Accounts, Click on “Change my environment variables”
-
-
-
-
-# Import Windows setup
-
-System > Settings > Multitasking , turn off "When I snap a window, show what can snap next to it"
-
-
-
-
 # Programs to install
-EveditorFree
-SumatraPdf
-ConEmu
+In Bin\
+    Git  (see below for config)
+    Eveditor
+    Autohotkey v1
+    Python  (add to path)
+    msys64  (add to path)
+    EveditorFree
+    SumatraPdf
+    ConEmu
+    Inkscape
+    Msys2 (See below)
 
+    WebPlotDigitizer        
+    UnxUtils
+    FreeFileSync
+    briss-0.9 (pdf crop)
 
+chocolatey (package manager)
+    choco install -y git autohotkey vim  winmerge conemu vlc inkscape treesizefree
+    sumatrapdf
+    cutepdf
+    dropbox
+    gimp
+    virtualbox
+    astrogrep
+    pdfsam
+    chocolateygui
 
-Msys2 (shell and package manager):
+Not on chocalatey:
+    Briss: for pdf cropping
 
+!-------------------------------------------------------------------------------
+!-- APPLICATIONS CONFIG
+!-------------------------------------------------------------------------------
+# Msys2
     pacman -Su mingw-w64-x86_64-gcc mingw-w64-x86_64-gcc-fortran mingw-w64-x86_64-cmake mingw-w64-x86_64-openblas mingw-w64-x86_64-lapack
-
-     mingw-w64-x86_64-make
-
-    pacman -Su mingw-w64-x86_64-gcc
-    pacman -Su mingw-w64-x86_64-make
-    pacman -Su mingw-w64-x86_64-gcc-fortran
-    pacman -Su mingw-w64-x86_64-cmake
-    pacman -Su mingw-w64-x86_64-openblas
-    pacman -Su mingw-w64-x86_64-lapack
-
-
-    pacman -S mingw-w64-x86_64-{gcc,cmake,make,gcc-gfortran,openblas,lapack} 
-
 
     set PATH=c:\msys64\mingw64\bin;%PATH%
 
@@ -60,61 +48,68 @@ Msys2 (shell and package manager):
         SET PATH=%USER_PATH%;%PATH%
 
 
-In Bin\
-    FreeFileSync
-    WebPlotDigitizer        
-    UnxUtils
-    briss-0.9 (pdf crop)
-    msys64
-    GNUMake3.81
+
+# Git
+git config --global core.sshCommand C:/Windows/System32/OpenSSH/ssh.exe
+git config core.autocrlf true
 
 
-chocolatey (package manager)
-    choco install -y git autohotkey vim  winmerge conemu vlc inkscape treesizefree
-    sumatrapdf
-    cutepdf
-    dropbox
-    gimp
-    virtualbox
-    astrogrep
-    pdfsam
+## SSH
+ssh-keygen -t ed25519 -C "elmanuelito.github@gmail.com"
 
-    chocolateygui
+! NOTE: in a elevated command prompt
+Get-Service -Name ssh-agent | Set-Service -StartupType Manual
+Start-Service ssh-agent
+ssh-add PATHTO/.ssh/id_ed25519
 
-Not on chocalatey:
-    Briss: for pdf cropping
+! THEN SET OPENSSH AS DEFAULT
+git config --global core.sshCommand C:/Windows/System32/OpenSSH/ssh.exe
 
-My Tools:
-    wmctrl
-    xdotools
-    SwitchAndPasteToMatlab
+! Add key to github.com
+cat ~/.ssh/id_ed25519.pub | clip
+github.com > settings > SSH
 
-Console tools:
-    ConEmu, ConsoleZ, Babun
 
+# Vim
+put _vimrc in parent directory of vim82
+
+    - Some help:
+    In vim: type :help runtimepath to see where the _vimrc_ is looked for.
+
+    - Change $HOME
+    If you want to change this location one option is to change the environment variable %HOME%
+    Set the the environement variable $HOME to e.g. C:\Config\dotfiles\
+
+    - Edit the "default vimrc"
+    In program files
+    edit the file _vimrc_to remove the source mswin and behave mswin line
+
+    - Debug startup time
+    gvim --staartuptime VimStartup.log
+
+
+
+!-------------------------------------------------------------------------------
+!-- WINDOWS CONFIG
+!-------------------------------------------------------------------------------
 # Windows Config:
 
+# Import Windows setup
 
-## Power shell
+System > Settings > Multitasking , turn off "When I snap a window, show what can snap next to it"
+
+
+## Power shell PowerShell
 Run: 
 
     Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
 
-
 Then copy paste the .ps1 file in folder Console
-
-## CMD (command line)
-See README.md under Console/
-
-
 
 ## Context menu
 The BEST is to use the registry files locates in ContextMenu/ 
 
 Alternatively ContextEdit can be used, but it doesn't have the background of the shell
-
-## Mouse
-Copy paste with mouse, see my AutoHostKey setup
 
 ## Taskbar: 
 ### TaskBar Config:
@@ -128,6 +123,8 @@ Right-click the taskbar and select Toolbars-->New Toolbar.
 (default Quick Launch is at: User\AppData\Roaming\Microsoft\Internet Explorer\Quick Launch)
 
 ## Explorer 
+See folder ContextMenu/
+
 ### Remove "user folders" under "This PC"
 See my reg files in Config\Win
 For isntance: 
@@ -154,77 +151,23 @@ Set on High performance power plan
 # Chrome with AdBlockPlus plugin
 Install adblock plus
 
-
 # AutoHotKeys
 
-- Download AutohotKey to C:/Bin/
-
+- Download AutohotKey v1 to C:/Bin/
 - See All.htk in Win/Shortcuts/
-
 - Right click on script, open with, select autohotkey.exe
-
 - Copy script 
-
-
 - Create some scripts (Right click, new script.) 
  Example of script (Ctrl-Z lauches notepad):
     #z::
     Run, Notepad,
     return
 
+# Misc
+    Install fonts (sdouble clicks on fonts in Config/fonts
 
-
-
-# Vim
-- Some help:
-In vim: type :help runtimepath to see where the _vimrc_ is looked for.
-
-- Change $HOME
-If you want to change this location one option is to change the environment variable %HOME%
-Set the the environement variable $HOME to e.g. C:\Config\dotfiles\
-
-- Edit the "default vimrc"
-In program files
-edit the file _vimrc_to remove the source mswin and behave mswin line
-
-- Debug startup time
-gvim --staartuptime VimStartup.log
-
-# Git
-git config core.autocrlf true
-
-
-
-
-
-
-
----------------------------------------------------------------------------
-OLD
----------------------------------------------------------------------------
-# OLD
-
-# WinSplit Revolution
-Configuration is stored in:
-"C:\Users\ebra\AppData\Roaming\Winsplit Revolution\"
-
-# Babun
-
-## Babun and ConEmu (see ConEmu)
-
-# Cygwin
-
-## Packages to add
-vim
-ssh
-make 
-gcc-fortran
-dos2unix
-unix2dos
-git git-gui git-svn git-completion
-wget
-
-apt-cyg (from github), within Cygwin type:
-lynx -source rawgit.com/transcode-open/apt-cyg/master/apt-cyg > apt-cyg
-install apt-cyg /bin
+    How to set Path in Windows without admin rights.
+    1. From Start menu open Control Panel
+    2. In Control panel Go to User Accounts
+    3. In the user Accounts, Click on “Change my environment variables”
 

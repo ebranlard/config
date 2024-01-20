@@ -281,6 +281,8 @@ set foldtext=MyFoldText()  " can be customized later
 " ---------------------------------------------------------------------------{
 " noremap <C-H> :bp<CR>
 " noremap <C-L> :bn<CR>
+noremap <C-S-H> :tabprevious<CR>
+noremap <C-S-L> :tabnext<CR>
 noremap <C-H> :tabprevious<CR>
 noremap <C-L> :tabnext<CR>
 set showtabline=2  " always tabs visible
@@ -644,7 +646,9 @@ let g:Tex_GotoError=0 " if set to 1 then after \ll then vim will go to the next 
 " " Inverse search
 if has("win32") || has("win16")
 " let g:Tex_ViewRule_pdf = '"C:\Program Files\SumatraPDF\SumatraPDF.exe" -inverse-search "gvim -c \":RemoteOpen +\%l \%f\""'
+"   let g:Tex_ViewRule_pdf = 'C:\Bin\SumatraPDF\SumatraPDF -inverse-search "gvim -c \":RemoteOpen +\%l \%f\""'
   let g:Tex_ViewRule_pdf = 'SumatraPDF -inverse-search "gvim -c \":RemoteOpen +\%l \%f\""'
+"   let g:Tex_ViewRule_pdf = 'SumatraPDF '
 else
   let g:Tex_ViewRule_pdf = 'evince'
 endif
