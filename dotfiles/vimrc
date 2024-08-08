@@ -22,6 +22,16 @@ set history=200	" keep 50 lines of command line history
 "set ruler		" show the cursor position all the time
 ""  set cursorline
 set mouse=a
+" --- Cursor Block and vertical line in insert
+" 0: blinking block
+" 1: blinking block
+" 2: steady block
+" 3: blinking underline
+" 4: steady underling
+" 5: blinking bar (xterm)
+" 6: steady bar (xterm)
+let &t_EI = "\e[1 q"
+let &t_SI = "\e[5 q"
 
 " Only do this part when compiled with support for autocommands.
 if has("autocmd")
