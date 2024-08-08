@@ -1,13 +1,3 @@
-function MyPrompt
-{
-    $currentDirectory = $(Get-Location)
-    #write-host "$Env:username" -NoNewline -ForegroundColor Yellow
-    #write-host "@" -NoNewline -ForegroundColor Green
-    #write-host "PS:" -NoNewline -ForegroundColor Yellow
-    write-host "$(Convert-Path $currentDirectory)" -NoNewline -ForegroundColor Green
-    write-host " >" -NoNewline -ForegroundColor White
-    return " "
-}
 
 ## ---  Aliases
 function lg {
@@ -74,6 +64,14 @@ $CurrentUser.Groups | foreach {
     if ($_.value -eq "S-1-5-32-544") {
         $UserType = "Admin" } 
     }
+
+function MyPrompt
+{
+    write-host "$(Convert-Path $(Get-Location))" -NoNewline -ForegroundColor Green
+    write-host "" -ForegroundColor White
+    write-host "$" -NoNewLine -ForegroundColor White
+    return " "
+}
 
 function Prompt {
     $status_string = ""

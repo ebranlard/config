@@ -394,8 +394,10 @@ command! -nargs=* Make silent make <args>| copen 15|execute 'normal Gzb'|set now
 let g:matlab_behave_terminal="xterm" 
 if has("win32") || has("win16")
     let g:matlab_behave_paste_cmd="^v"
-    let g:matlab_behave_window_name="octave-gui"
-    let g:matlab_behave_software = "octave"
+"     let g:matlab_behave_window_name="octave-gui"
+"     let g:matlab_behave_software = "octave"
+    let g:matlab_behave_window_name="MATLAB"
+    let g:matlab_behave_software = "matlab"
 else
     let g:matlab_behave_paste_cmd="Shift+Insert"
 endif

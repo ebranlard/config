@@ -52,6 +52,7 @@ REP_CONTEXT={
 'consisted in'            : ['consisted of'  , 'followed by -ing verb'], 
 ' etc'                    : ['removed'     , 'when used with for instance or example'], 
 'referred to as '         : ['needing quotes' , ''], 
+' so-called '             : ['no quote after' , ''], 
 'which'                   : ['that', 'unless in comes straight after a comma maybe']
 
 # in the particular case X -> in the particular case of X
@@ -72,6 +73,7 @@ REP_CONTEXT_ADJ={
 'near wake'              : 'near-wake',   
 'rotor plane'            : 'rotor-plane',
 'second order'           : 'second-order',
+'smaller scale'          : 'smaller-scale',
 'steady state'           : 'steady-state',
 'tower top'              : 'tower-top'   ,
 'time domain'            : 'time-domain',
@@ -149,8 +151,12 @@ REP_CAP={
 'three dimensional'      : 'three-dimensional',
 'vertical axis'          : 'vertical-axis',
 'well captured'          : 'well-captured',
+'$x$ axis'               : '$x$-axis',
+'$y$ axis'               : '$y$-axis',
+'$z$ axis'               : '$z$-axis',
 # --- No space or hyphen
 'axi symmetric'          : 'axisymmetric',
+'build up'               : 'buildup',
 'life time'              : 'lifetime',
 'non rotating'           : 'nonrotating',
 'non expanding'          : 'nonexpanding',
@@ -181,6 +187,8 @@ REP_CAP={
 'is written $'           : 'is written as $',
 'are written $'          : 'are written as $',
 'be written $'           : 'be written as $',
+'expressed as:'          : 'expressed as',
+'as function of:'        : 'as a function of',
 # '$x$-axis'               : 'x-axis',
 # '$y$-axis'               : 'y-axis',
 # '$z$-axis'               : 'z-axis',
@@ -210,13 +218,17 @@ REP_CAP={
 'equation of motions':'equations of motion',
 'equations of motions':'equations of motion',
 'well captured':'captured well',
-# --- Capitalization
+'damaged equivalent':'damage equivalent',
+'the need of':'the need for',
+# --- capitalization
 'github'       : 'GitHub',
 # --- Figure
 'shown in the right': 'shown on the right',
 'given in the right': 'given on the right',
 'shown in the left': 'shown on the left',
 'given in the left': 'given on the left',
+# --- Misc
+'LES simulation': 'LES',
 }
 
 

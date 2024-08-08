@@ -26,6 +26,9 @@ git clone https://github.com/ebranlard/vim-simple-comment
 git clone https://github.com/ebranlard/vim-simple-compile
 git clone https://github.com/ebranlard/vim-tagbar-manu
 
+# OpenFOAM
+git clone https://github.com/lervag/vim-foam
+
 # git clone https://github.com/kien/rainbow_parentheses.vim
 # git clone https://github.com/honza/vim-snippets.git # Snippets stored in my vim/snippet directory directly
 

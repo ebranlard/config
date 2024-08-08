@@ -1,3 +1,6 @@
+
+set shiftwidth=2 " number of characters for indenting
+
 " call IMAP('`w', 'YIHA', 'tex')
 " call IMAP('EAL', "\\begin{align}\<CR><++>&=<++>\\\\ \<CR><++>&=<++>\<CR>\\end{align}\<CR><++>", 'tex')    
 
@@ -24,12 +27,8 @@ let @+=''
 let @*=''
 
 
-" function! Tex_ForwardSearchLaTeX()
-
-
-
 if has("win32") || has("win16")
-    set noshellslash
+    set noshellslash " >>>> COMMENTED BY EMMANUEL FOR FILE PATH COMPLETION
 "     function! Tex_ForwardSearchLaTeX()
 "     let s:target = 'pdf'
 "     "let execString .= Tex_Stringformat('start %s %s -forward-search %s %s', viewer, target_file, sourcefileFull, linenr)

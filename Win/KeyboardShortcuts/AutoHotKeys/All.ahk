@@ -7,10 +7,19 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 ;; --------------------------------------------------------------------------------
 ;; --- Global variables 
 ;; --------------------------------------------------------------------------------
-gvim:="C:\Bin\Vim\vim90\gvim.exe"
+gvim:="C:\Bin\Vim\vim91\gvim.exe"
 diff:="C:\Bin\WinMerge\WinMergeU.exe /r"
 ;; cmd:="C:\ProgramData\chocolatey\bin\Console.exe"
 cmd:="C:\Bin\ConEmu\ConEmu64.exe" 
+
+
+;; --------------------------------------------------------------------------------
+;; --- Mouse 
+;; --------------------------------------------------------------------------------
+<^+M::
+MouseMove, 500, 500
+return
+
 
 ;; --------------------------------------------`-----------------------------------
 ;; --- Move Windows  
@@ -442,6 +451,11 @@ F1::Send {F2}
 #IfWinActive
 
 #IfWinActive ahk_exe ConEmu64.exe
+^k::Send {Up}
+^j::Send {Down}
+#IfWinActive
+
+#IfWinActive ahk_exe WindowsTerminal.exe
 ^k::Send {Up}
 ^j::Send {Down}
 #IfWinActive
