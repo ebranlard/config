@@ -1,0 +1,69 @@
+Windows Registry Editor Version 5.00
+
+; --------------------------------------------------------------------------------}
+; ---  EXPLORER
+; --------------------------------------------------------------------------------{
+; Restores classic right-click menu in Windows 11 by disabling modern shell extension
+[HKEY_CURRENT_USER\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32]
+@=""
+
+; Toggle show extensions (0 = show, 1 = hide)
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced]
+"HideFileExt"=dword:00000000
+
+; Toggle show protected OS files (1 = show, 0 = hide)
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced]
+"ShowSuperHidden"=dword:00000001
+
+; Show hidden files, folders, and drives (1 = show, 2 = don't show)
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced]
+"Hidden"=dword:00000001
+
+; No System Sounds!
+[HKEY_CURRENT_USER\AppEvents\Schemes]
+"Default"=".None"
+
+
+; --------------------------------------------------------------------------------}
+; --- TASKBAR
+; --------------------------------------------------------------------------------{
+
+; Hides the search box on the taskbar
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Search]
+"SearchboxTaskbarMode"=dword:00000000
+
+; Hides the Task View button on the taskbar
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced]
+"ShowTaskViewButton"=dword:00000000
+
+; Combines taskbar buttons when the taskbar is full (0=always combine, 1=combine when full, 2=never combine)
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced]
+"TaskbarGlomLevel"=dword:00000002
+
+; Same as above but for multi-monitor taskbars
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced]
+"MMTaskbarGlomLevel"=dword:00000002
+
+; Enables small taskbar icons
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced]
+"TaskbarSmallIcons"=dword:00000001
+
+; Hides the touch keyboard icon from the taskbar
+[HKEY_CURRENT_USER\Software\Microsoft\TabletTip\1.7]
+"TipbandDesiredVisibility"=dword:00000000
+
+;; Enables the new rounded corner style for the taskbar (Windows 11)
+;[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced]
+;"TaskbarSD"=dword:00000001
+
+; Aligns taskbar to the center (0=center, 1=left)
+;[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced]
+;"TaskbarAl"=dword:00000000
+
+;; Disables showing seconds in the system clock
+;[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced]
+;"ShowSecondsInSystemClock"=dword:00000000
+
+;; Uses modern tray clock instead of legacy Win32 tray clock
+;[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\ImmersiveShell]
+;"UseWin32TrayClockExperience"=dword:00000000

@@ -1,0 +1,56 @@
+GIMP Palette
+Name: AAA_Manu
+Columns: 4
+0   0   0   # 
+125 125 125 # Gray
+255 255 255 # White
+
+63  63  153 # MathematicBlue
+61  153 86  # MathematicaRed
+138 42  93  # ManuDarkRed
+198 106 1   # ManuDarkOrange
+
+159 159 204 # MathematicLightBlue
+229 229 241 # MathematicSuperLightBlue
+158 204 170 # MathematicLightGreen
+204 158 184 # MathematicLightRed
+255 212 96  # ManuLightOrange
+
+0   62  184 # Blue
+ 88 143 0   # Green
+184 0   58  # Red
+184 143 0   # Yellow
+
+0   0   255 # Blue
+0   153 0   # Green
+255 0   0   # Red
+204 204 0   # Yellow
+
+60  86  146 # DarkRainbow_Start
+66  99  115
+70  113 85
+83  127 67
+111 144 62
+154 168 66
+193 188 74
+216 190 80
+217 164 80
+202 115 73
+186 61  58
+
+31 78 121
+31 94 170
+149 198 107
+
+250 240 215 # beige
+255 217 192 # peach
+246 214 214 # red light
+223 110 110 # red 
+246 247 196 # yellow
+140 192 222 # bleue1
+204 238 188 # green
+158 210 190 # green2
+126 170 146 # green3
+27 156 133  # green4
+62 142 126  # green5
+

@@ -80,6 +80,7 @@ set spell
 " Got annoyed by latex folding lately
 set nofoldenable
 set foldmethod=marker
+set foldtext=MyFoldText() " Otherwise overwritten by tex pluggin
 
 "if exists("did_load_tex_local_after")
        "finish

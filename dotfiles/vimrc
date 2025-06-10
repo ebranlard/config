@@ -257,7 +257,7 @@ set completeopt=menu,longest,preview
 set showcmd		" display incomplete commands at the bottom of the screen
 set wildchar=<Tab> wildmenu wildmode=longest,list,full
 set wildcharm=<C-Z>
-set wildignore=*.o,*.obj,*~,*.cmo,*.cmi,*.a,*.cmx,*.cmxa,*.aux,*.dvi,*.aut,*.bbl,*.blg,*.dvi,*.fff,*.ps,*.toc,*.ttt 
+set wildignore=*.o,*.obj,*~,*.cmo,*.cmi,*.a,*.cmx,*.cmxa,*.aux,*.dvi,*.aut,*.bbl,*.blg,*.dvi,*.fff,*.ps,*.toc,*.ttt,*.gz,*.synctex
 " for an easier autocompletion of previous commands
 cnoremap <C-k> <Up>
 cnoremap <C-j> <Down>
@@ -278,12 +278,17 @@ set nofoldenable
 set foldlevel=1     " fold from the beginning
 set foldmarker=--{,--} " foldmarker
 " set foldmarker={{{,}}} " foldmarker
-function! MyFoldText()
+function MyFoldText()
     let thisline = getline(v:lnum)
-    let foldsize = (v:foldend-v:foldstart)
-    return getline(v:foldstart).'    ('.foldsize.' lines)'
+    let indent_level = indent(v:foldstart)
+    let indent = repeat(' ',indent_level)
+    let nLines = (v:foldend-v:foldstart)
+    "let comment = substitute(getline(v:foldstart),"^ *\" *","",1)
+    "let linetext = substitute(getline(v:foldstart+1),"^ *","",1)
+    "let foldText = '+ ' . comment . ': ' . nLines .  ' ' . v:foldstart . '     '
+    let foldText =  getline(v:foldstart).'     ('.nLines.' lines)'
+    return indent . foldText
 endfunction
-"set foldtext=getline(v:foldstart)
 set foldtext=MyFoldText()  " can be customized later
 
 " ---------------------------------------------------------------------------}

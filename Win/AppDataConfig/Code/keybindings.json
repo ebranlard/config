@@ -1,0 +1,246 @@
+// Place your key bindings in this file to override the defaults
+//"command": "workbench.action.terminal.toggleTerminal"
+// --- MOVING AROUND SHORTCUTS
+// Ctrl + B : Toggle the sidebar visibility.
+//F6: Cycle focus between the editor, terminal, and other panels.
+//Ctrl + 1: Editor
+//Ctrl + Shift + E: Focus on the Explorer (file view).
+//Ctrl + Shift + G: Focus on the Source Control view.
+//Ctrl + Shift + D: Focus on the Run and Debug view.
+//Ctrl + Shift + X: Focus on the Extensions view.
+//Ctrl + Shift + M: Problems
+//Ctrl + ` : Terminal
+//Ctrl + Shift + Y: Debug console
+//Ctrl + Shift + U: Output console
+// --- SHORT CUTS
+[
+    {
+        "key": "ctrl+h",
+        "command": "workbench.action.previousEditor"
+    },
+    {
+        "key": "ctrl+l",
+        "command": "workbench.action.nextEditor"
+    },
+    {
+        "key": "ctrl+w l",
+        "command": "workbench.action.focusNextPart"
+    },
+    {
+        "key": "f6",
+        "command": "-workbench.action.focusNextPart"
+    },
+    {
+        "key": "ctrl+w h",
+        "command": "workbench.action.focusPreviousPart"
+    },
+    {
+        "key": "shift+f6",
+        "command": "-workbench.action.focusPreviousPart"
+    },
+    {
+        "key": "ctrl+shift+l",
+        "command": "workbench.action.nextPanelView"
+    },
+    {
+        "key": "ctrl+shift+h",
+        "command": "workbench.action.previousPanelView"
+    },
+    {
+        "key": "ctrl+j", // Replace with your preferred key for moving down
+        "command": "workbench.action.quickOpenNavigateNext",
+        "when": "inQuickOpen"
+    },
+    {
+        "key": "ctrl+n", // Replace with your preferred key for moving down
+        "command": "workbench.action.quickOpenNavigateNext",
+        "when": "inQuickOpen"
+    },
+    {
+        "key": "ctrl+k", // Replace with your preferred key for moving up
+        "command": "workbench.action.quickOpenNavigatePrevious",
+        "when": "inQuickOpen"
+    },
+    {
+        "key": "ctrl+p", // Replace with your preferred key for moving up
+        "command": "workbench.action.quickOpenNavigatePrevious",
+        "when": "inQuickOpen"
+    },
+    {
+    "key": "ctrl+k",
+    "command": "workbench.action.terminal.sendSequence",
+    "args": { "text": "\u001b[A" }, // Up arrow
+    "when": "terminalFocus"
+    },
+    {
+    "key": "ctrl+j",
+    "command": "workbench.action.terminal.sendSequence",
+    "args": { "text": "\u001b[B" }, // Down arrow
+    "when": "terminalFocus"
+    },
+    {
+        "key": "ctrl+w",
+        "command": "-workbench.action.closeGroup",
+        "when": "activeEditorGroupEmpty && multipleEditorGroups"
+    },
+    {
+        "key": "ctrl+w",
+        "command": "-workbench.action.closeActiveEditor"
+    },
+    {
+        "key": "ctrl+k w",
+        "command": "-workbench.action.closeEditorsInGroup"
+    },
+    {
+        "key": "ctrl+k ctrl+w",
+        "command": "-workbench.action.closeAllEditors"
+    },
+    {
+        "key": "ctrl+k ctrl+shift+w",
+        "command": "-workbench.action.closeAllGroups"
+    },
+    {
+        "key": "ctrl+shift+w",
+        "command": "-workbench.action.closeWindow"
+    },
+    {
+        "key": "ctrl+w",
+        "command": "-workbench.action.terminal.killEditor",
+        "when": "terminalEditorFocus && terminalFocus && terminalHasBeenCreated || terminalEditorFocus && terminalFocus && terminalProcessSupported"
+    },
+    {
+        "key": "ctrl+w c",
+        "command": "workbench.action.closePanel"
+    },
+    {
+        "key": "ctrl+w e",
+        "command": "workbench.view.explorer",
+        "when": "viewContainer.workbench.view.explorer.enabled"
+    },
+    {
+        "key": "ctrl+shift+e",
+        "command": "-workbench.view.explorer",
+        "when": "viewContainer.workbench.view.explorer.enabled"
+    },
+    {
+        "key": "ctrl+l",
+        "command": "-workbench.action.chat.newEditSession",
+        "when": "chatEditingParticipantRegistered && chatIsEnabled && inChat"
+    },
+    {
+        "key": "ctrl+l",
+        "command": "-workbench.action.chat.newChat",
+        "when": "chatIsEnabled && inChat && !config.chat.unifiedChatView && chatLocation != 'editing-session'"
+    },
+    {
+        "key": "ctrl+l",
+        "command": "-expandLineSelection",
+        "when": "textInputFocus"
+    },
+    {
+        "key": "ctrl+l",
+        "command": "-notebook.centerActiveCell",
+        "when": "notebookEditorFocused"
+    },
+    {
+        "key": "ctrl+shift+t",
+        "command": "-workbench.action.reopenClosedEditor"
+    },
+    {
+        "key": "ctrl+shift+t",
+        "command": "workbench.action.terminal.toggleTerminal",
+        "when": "terminal.active"
+    },
+    {
+        "key": "ctrl+`",
+        "command": "-workbench.action.terminal.toggleTerminal",
+        "when": "terminal.active"
+    },
+    {
+        "key": "ctrl+shift+c",
+        "command": "workbench.action.chat.open",
+        "when": "!chatSetupHidden"
+    },
+    {
+        "key": "ctrl+alt+i",
+        "command": "-workbench.action.chat.open",
+        "when": "!chatSetupHidden"
+    },
+    {
+        "key": "ctrl+shift+e",
+        "command": "workbench.action.focusFirstEditorGroup"
+    },
+    {
+        "key": "ctrl+1",
+        "command": "-workbench.action.focusFirstEditorGroup"
+    },
+    {
+        "key": "ctrl+shift+1",
+        "command": "-editor.action.replaceOne",
+        "when": "editorFocus && findWidgetVisible"
+    },
+    {
+        "key": "ctrl+shift+1",
+        "command": "-search.action.replace",
+        "when": "isEditableItem && matchFocus && replaceActive && searchViewletVisible"
+    },
+    {
+        "key": "ctrl+shift+1",
+        "command": "-search.action.replaceAllInFile",
+        "when": "fileMatchFocus && isEditableItem && replaceActive && searchViewletVisible"
+    },
+    {
+        "key": "ctrl+shift+1",
+        "command": "-search.action.replaceAllInFolder",
+        "when": "folderMatchFocus && isEditableItem && replaceActive && searchViewletVisible"
+    },
+    {
+        "key": "ctrl+b",
+        "command": "-extension.vim_ctrl+b",
+        "when": "editorTextFocus && vim.active && vim.use<C-b> && !inDebugRepl && vim.mode != 'Insert'"
+    },
+    {
+        "key": "ctrl+t",
+        "command": "-workbench.action.showAllSymbols"
+    },
+    {
+        "key": "ctrl+t",
+        "command": "-extension.vim_ctrl+t",
+        "when": "editorTextFocus && vim.active && vim.use<C-t> && !inDebugRepl"
+    },
+    {
+        "key": "ctrl+f4",
+        "command": "-workbench.action.closeActiveEditor"
+    },
+    {
+        "key": "ctrl+shift+c",
+        "command": "-workbench.action.terminal.openNativeConsole",
+        "when": "!terminalFocus"
+    },
+    //{
+        //"key": "ctrl+shift+z", // Replace with your preferred key combination
+        //"command": "workbench.action.terminal.openNativeConsole",
+        //"args": {
+            //"cwd": "C:/" // Opens the terminal in the current file's directory
+////            "cwd": "${fileDirname}" // Opens the terminal in the current file's directory
+        //}
+    //},
+    {
+        "key": "ctrl+shift+s",
+        "command": "-workbench.action.files.saveAs"
+    },
+    {
+        "key": "ctrl+shift+s",
+        "command": "-workbench.action.files.saveLocalFile",
+        "when": "remoteFileDialogVisible"
+    },
+    {
+        "key": "ctrl+shift+z",
+        "command": "-redo"
+    },
+    {
+        "key": "ctrl+shift+s", 
+        "command": "workbench.action.tasks.runTask",
+        "args": "Manu Open Terminal"
+    }
+]

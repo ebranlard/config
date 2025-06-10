@@ -26,6 +26,8 @@ git clone https://github.com/ebranlard/vim-simple-comment
 git clone https://github.com/ebranlard/vim-simple-compile
 git clone https://github.com/ebranlard/vim-tagbar-manu
 
+git clone https://github.com/chrisbra/Colorizer
+
 # OpenFOAM
 git clone https://github.com/lervag/vim-foam
 

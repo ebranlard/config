@@ -60,50 +60,6 @@ C:\Bin\Strawberry\c\bin;
 C:\Bin\Strawberry\perl\site\bin;
 C:\Bin\Git\usr\bin;
 C:\Bin\Git\mingw64\bin;
-
-
-! --------------------------------------------------------------------------------}
-! --- Windows defender and other windows annoyances
-! --------------------------------------------------------------------------------{
-# Windows exe from commandline
-taskschd
-services.msc 
-gpedit
-appwiz.cpl :c
-# Work watch dog:
-Quest KACE   >
-Pola Alto global protect  (VPN?) > Service Name PanGPS
-# Disable in task scheduler
-regedit 
-    HKLM\SOFTWARE\Policies\Microsoft\Windows Defender
-
-taskschd
-   Task Schuler Library > Microsoft >  Windows > Windows Defender > Disable
-
-services.msc 
-
-
-gpedit
-
-
-    Computer Configuration\Administrative Templates\Microsoft Windows Defender
-
-Widgets remove: 
-
-  -  gpedit
-    Computer Configuration\Administrative Templates\Windows Components\Widgets
-
-  - See reg file in Admin folder
-Follow the below steps in GPO to resolve the misconfiguration. Configure the policy value for 
-Computer Configuration >> Windows Settings >> Security Settings >> Local Policies >> Security Options >> "User Account Control: Run all administrators in Admin Approval Mode" > "Enabled"
-Computer Configuration >> Windows Settings >> Security Settings >> Local Policies >> Security Options >> "User Account Control: Only elevate UIAccess applications > Enabled
-Computer Configuration >> Windows Settings >> Security Settings >> Local Policies >> Security Options >> "User Account Control: Detect application installations > Enabled
-Computer Configuration >> Windows Settings >> Security Settings >> Local Policies >> Security Options >> "User Account Control: Behavior of the elevation prompt >"Automatically deny elevation requests". 
-Computer Configuration >> Windows Settings >> Security Settings >> Local Policies >> Security Options >> "User Account Control: Virtualize file and registry write > Enabled
-Computer Configuration >> Windows Settings >> Security Settings >> Local Policies >> Security Options >> "User Account Control: Admin Approval Mode for the Built-in > Enable
-Computer Configuration >> Windows Settings >> Security Settings >> Local Policies >> Security Options >> "User Account Control: Behavior of the elevation prompt for a d> Prompt
-
-
 !-------------------------------------------------------------------------------
 !-- APPLICATIONS CONFIG
 !-------------------------------------------------------------------------------
@@ -247,4 +203,51 @@ Install adblock plus
     1. From Start menu open Control Panel
     2. In Control panel Go to User Accounts
     3. In the user Accounts, Click on “Change my environment variables”
+
+
+
+
+
+! --------------------------------------------------------------------------------}
+! --- Windows defender and other windows annoyances
+! --------------------------------------------------------------------------------{
+# Windows exe from commandline
+taskschd
+services.msc 
+gpedit
+appwiz.cpl :c
+# Work watch dog:
+Tenable Nessus Agent
+Quest KACE   >
+Pola Alto global protect  (VPN?) > Service Name PanGPS
+# Disable in task scheduler
+regedit 
+    HKLM\SOFTWARE\Policies\Microsoft\Windows Defender
+
+taskschd
+   Task Schuler Library > Microsoft >  Windows > Windows Defender > Disable
+
+services.msc 
+
+
+gpedit
+
+
+    Computer Configuration\Administrative Templates\Microsoft Windows Defender
+
+Widgets remove: 
+
+  -  gpedit
+    Computer Configuration\Administrative Templates\Windows Components\Widgets
+
+  - See reg file in Admin folder
+Follow the below steps in GPO to resolve the misconfiguration. Configure the policy value for 
+Computer Configuration >> Windows Settings >> Security Settings >> Local Policies >> Security Options >> "User Account Control: Run all administrators in Admin Approval Mode" > "Enabled"
+Computer Configuration >> Windows Settings >> Security Settings >> Local Policies >> Security Options >> "User Account Control: Only elevate UIAccess applications > Enabled
+Computer Configuration >> Windows Settings >> Security Settings >> Local Policies >> Security Options >> "User Account Control: Detect application installations > Enabled
+Computer Configuration >> Windows Settings >> Security Settings >> Local Policies >> Security Options >> "User Account Control: Behavior of the elevation prompt >"Automatically deny elevation requests". 
+Computer Configuration >> Windows Settings >> Security Settings >> Local Policies >> Security Options >> "User Account Control: Virtualize file and registry write > Enabled
+Computer Configuration >> Windows Settings >> Security Settings >> Local Policies >> Security Options >> "User Account Control: Admin Approval Mode for the Built-in > Enable
+Computer Configuration >> Windows Settings >> Security Settings >> Local Policies >> Security Options >> "User Account Control: Behavior of the elevation prompt for a d> Prompt
+
 
