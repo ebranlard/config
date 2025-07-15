@@ -1,0 +1,18 @@
+Windows Registry Editor Version 5.00
+
+
+; 4. Ressources for foreground apps
+; Makes system more responsive to foreground apps by lowering scheduler bias
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile]
+"SystemResponsiveness"=dword:0000000a  ; Decimal 10 instead of 20
+
+;[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\PriorityControl]
+;"Win32PrioritySeparation"=dword:00000026
+
+; 3. Faster Shutdown
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control]
+"WaitToKillServiceTimeout"="2000"
+
+; Stop startup delays (disable boot delay)
+;"SvsDisableStartupDelay"=dword:00000001
+

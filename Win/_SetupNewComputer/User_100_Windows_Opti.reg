@@ -1,0 +1,29 @@
+Windows Registry Editor Version 5.00
+
+; 3. Faster shutdown (reduce wait time for services)
+[HKEY_CURRENT_USER\Control Panel\Desktop]
+"WaitToKillAppTimeout"="2000"
+"AutoEndTasks"="1"
+
+
+; 2. Disable startup delay for user startup programs
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Serialize]
+"StartupDelayInMSec"=dword:00000000
+
+
+; 5. Disable visual effects (turn off animations and transparency)
+; Disables window animations, shadows, menu fade, etc.
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects]
+"VisualFXSetting"=dword:00000002
+
+; Alternative per-element approach under Performance Options:
+;[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects]
+;"AnimateMinMax"=dword:00000000
+;"FadeListBox"=dword:00000000
+;"ComboBoxAnimation"=dword:00000000
+;"CursorShadow"=dword:00000000
+;"ListBoxSmoothScrolling"=dword:00000000
+;"MenuAnimation"=dword:00000000
+;"SelectionFade"=dword:00000000
+;"ToolTipAnimation"=dword:00000000
+;"ToolTipFade"=dword:00000000

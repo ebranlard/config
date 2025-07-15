@@ -57,7 +57,7 @@ if (lMW > 1920) {
 
 move_window(motion){
     global lMW, lMH, rMW, rMH, lB
-    MsgBox, % "Motion " . motion . lMW
+    ;;MsgBox, % "Motion " . motion . lMW
 
     ;; --------------------------------------------------------------------------------
     ;; --- Getting info about active window 
@@ -350,6 +350,12 @@ Lwin::Send !{F4}
 ;; --- Explorer 
 ;; --------------------------------------------------------------------------------
 #IfWinActive ahk_class CabinetWClass
+; tabs
+^+h::Send ^+{Tab}
+^+l::Send ^{Tab}
+^h::Send ^+{Tab}
+^l::Send ^{Tab}
+;
 ^[:: Send {Esc}
 ^j::Send {Down}
 ^k::Send {Up}
@@ -463,7 +469,7 @@ F1::Send {F2}
 ^k::Send {Up}
 ^j::Send {Down}
 #IfWinActive
-
+; Windows terminal
 #IfWinActive ahk_exe WindowsTerminal.exe
 ^k::Send {Up}
 ^j::Send {Down}
