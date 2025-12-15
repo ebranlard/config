@@ -1,0 +1,43 @@
+
+
+# Reduce CPU usage during scans (not real-time protection):
+
+Set-MpPreference -ScanAvgCPULoadFactor 30
+
+Get-MpPreference | Select ScanAvgCPULoadFactor
+
+Note: does not seem to work
+
+# Add exclusionc:w
+
+Add-MpPreference -ExclusionPath "C:\Path\To\Exclude"
+
+Get-MpPreference | Select-Object -ExpandProperty ExclusionPath
+
+
+
+# Tools to figure out what's going on:
+
+eventvwr.msc
+    Applications and Services Logs → Microsoft → Windows → Windows Defender → Operational
+
+    ID 1000–1116: Scanning started/completed
+    ID 5007: Settings changes
+    ID 1116: Detection events
+
+resmon
+   select exe > select Disk  to see which files are being accessed
+
+taskschd.msc
+    Task Scheduler Library → Microsoft → Windows → Windows Defender
+
+
+start ms-settings:
+    Open Windows Security>Virus & threat protection> Manage settings > Scroll down to Exclusions > click Add or remove exclusions.
+
+
+gpedit.msc
+    Computer Configuration → Administrative Templates → Windows Components → Microsoft Defender Antivirus → Scan
+    “Specify the maximum percentage of CPU utilization during a scan.”
+
+     

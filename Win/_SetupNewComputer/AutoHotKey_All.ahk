@@ -477,7 +477,8 @@ F1::Send {F2}
 ^+l::Send ^{Tab}
 ^h::Send ^+{Tab}
 ^l::Send ^{Tab}
-^t::Send ^+t
+^t::Send ^+d
+^+t::Send ^+d
 #IfWinActive
 
 #IfWinActive ahk_exe debian.EXE

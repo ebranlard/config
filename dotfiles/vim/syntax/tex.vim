@@ -561,7 +561,7 @@ else
 endif
 syn case ignore
 " >>>> MANU CHANGE
-syn keyword texTodo		contained		combak	fixme	todo	xxx FIXME XXX NOTE HACK TODO
+syn keyword texTodo		contained		combak	fixme	todo	xxx FIXME XXX NOTE HACK TODO REFERENCE REF
 syn case match
 if s:extfname == "dtx"
  syn match texComment		"\^\^A.*$"	contains=@texCommentGroup

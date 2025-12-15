@@ -23,10 +23,16 @@ Windows Registry Editor Version 5.00
 [HKEY_CURRENT_USER\AppEvents\Schemes]
 "Default"=".None"
 
+[HKEY_CURRENT_USER\AppEvents\Schemes]
+@=".None"
+
 
 ; --------------------------------------------------------------------------------}
 ; --- TASKBAR
 ; --------------------------------------------------------------------------------{
+; Aligns the taskbar to the left
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced]
+"TaskbarAl"=dword:00000000
 
 ; Hides the search box on the taskbar
 [HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Search]

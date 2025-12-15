@@ -658,6 +658,7 @@ let g:Tex_CompileRule_pdf = 'make pdf'
 let g:Tex_CompileRule_dvi = 'latex -synctex=1 --interaction=nonstopmode $*;'
 let g:Tex_CompileRule_ps = 'dvips -Ppdf -o $*.ps $*.dvi;'
 let g:Tex_UseMakeFile = 1
+let g:Tex_UsePython = 0 " 07/2025 This lead to issues, so I set it to 0
 let g:Tex_GotoError=0 " if set to 1 then after \ll then vim will go to the next error
 
 " " Inverse search
@@ -868,7 +869,9 @@ if has("win32") || has("win16")
     " Quickly open a shell in the current directory:
     "map ,s :!start cmd /k <CR>
     "map ,s :!start C:\ProgramData\chocolatey\bin\Console.exe <cr>
-    map ,s :!start "C:/Bin/ConEmu/ConEmu.exe" <cr>
+    "map ,s :!start "C:/Bin/ConEmu/ConEmu.exe" <cr>
+    "map ,s :!start wt.exe -d "%:p:h" <cr>
+    map ,s :execute '!start wt.exe -d "' . getcwd() . '"'<CR>
     "map ,l :!start debian -c "bash" 
     let b:cwd = getcwd()
     let b:cwd = substitute(b:cwd, "C:", "/mnt/c","")
@@ -908,11 +911,16 @@ function! ShowChars() " ShowTab: toggles between showing tabs and using standard
   if !exists("g:SeeCharsEnabled")
     let g:SeeCharsEnabled = 1
     set list " Important for listchars to work!
-    set listchars=nbsp:•,precedes:<,extends:>,tab:▸\ ,eol:¬
+    set listchars=nbsp:•,precedes:◄,extends:►,tab:▸\ ,eol:¬,trail:·
+"     set listchars=nbsp:•,precedes:◄,extends:►,tab:▸\ ,eol:¬,trail:·,space:␣
 "     set listchars=tab:→\ ,nbsp:␣,trail:•,extends:⟩,precedes:⟨
+"     set listchars+=leadmultispace:¶,multispace:¶
+    syntax match UnicodeSpecial "[^\x00-\x7F]" containedin=ALL
+    highlight UnicodeSpecial guibg=#000000 guifg=#FF5555 ctermfg=Red gui=bold
   else
     set nolist " Important for listchars to work!
     set listchars=nbsp:•
+    syntax clear UnicodeSpecial
     unlet g:SeeCharsEnabled
   endif
 endfunc
