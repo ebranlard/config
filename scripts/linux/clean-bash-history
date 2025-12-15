@@ -16,7 +16,7 @@
 #############################################################
 # forbidden_commands = ['ls','la','ll','lg','su','cd','rm','mv','fg','bg','make','bash','clear','man','git status','git add','git rm','git commit -m','git commit -a','git init','git checkout','git push','git diff','api','aps','apc','ref','sudo cp','sudo rm','cat','gfortran','locate','groups','gitk','history','gvim','vim','f','touch','mkdir','cp','python','pwd','echo','chmod']
 #'rm','mv',
-forbidden_commands = ['ls','la','ll','cd','rm','mv','git commit -m','git commit -a','git checkout','ref','sudo cp','sudo rm','cat','locate','groups','gitk','history','f','touch','mkdir','cp','python','pwd','echo','chmod']
+forbidden_commands = ['ls','la','ll','lg','cd','rm','mv','git commit -m','git commit -a','git checkout','ref','sudo cp','sudo rm','cat','locate','groups','gitk','history','f','touch','mkdir','cp','python','pwd','echo','chmod', 'qq', 'sbatch', 'scancel', 'git add .', 'git log']
 
 
 import argparse
@@ -49,7 +49,7 @@ def main(argv):
 
     ## show values ##
     if args.user==None:
-        print 'No specific user provided, using current user'
+        print('No specific user provided, using current user')
         BASHFILE   =os.path.expanduser('~/.bash_history')
     else:
         BASHFILE   ='/home/'+args.user.strip()+'/.bash_history'
@@ -107,13 +107,13 @@ def main(argv):
 
     # Print summary
     nRemoved=nLineTotal-nKept
-    print ''
-    print 'Bash history cleaned.'
-    print ''
-    print 'Lines before:',nLineTotal
-    print 'Lines after :',nKept
-    print 'Duplicates  :',nDuplicate
-    print 'Removed     :',nRemoved
+    print('')
+    print('Bash history cleaned.')
+    print('')
+    print('Lines before:',nLineTotal)
+    print('Lines after :',nKept)
+    print('Duplicates  :',nDuplicate)
+    print('Removed     :',nRemoved)
 
 
 if __name__ == "__main__":

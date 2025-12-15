@@ -1,3 +1,4 @@
 vimrc*
 bundle
 .netrwhist
+tmp/*

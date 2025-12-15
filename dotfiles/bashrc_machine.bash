@@ -3,9 +3,6 @@
 # export PYTHONPATH="$PYTHONPATH:$HOME/Config/path/PythonPath"
 # export PATH="$PATH:$HOME/Config/scrits"
 
-alias ls='ls -F --color=always --group-directories-first'
-alias grep='grep --color=auto'
-
 # --------------------------------------------------------------------------------
 # --- PROMPT
 # --------------------------------------------------------------------------------
@@ -66,7 +63,6 @@ function git_ps1 {
     fi
     echo "$branch_or_commit"
 }
-export PS1="\[\$(git_clr)\]\$(git_ps1)$BYellow\u$BGreen@$BYellow\h:$BGreen\w $BYellow\$ $Color_Off"
 
 
 # --------------------------------------------------------------------------------
@@ -84,6 +80,9 @@ then
 
     export PATH=$PATH:/work/lib/OmniVor/_src/_bin/linux-amd64
     export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
+
+    export PS1="\[\$(git_clr)\]\$(git_ps1)$BYellow\u$BGreen@$BYellow\h:$BGreen\w $BYellow\$ $Color_Off"
+
 elif [ $HOSTNAME == 'olympe' ]
 then
 
@@ -106,9 +105,18 @@ then
     export PATH="$HOME/_env/anaconda3/bin:$PATH"
     #source activate py3
 
+elif [ $HOSTNAME == 'kl1' ] || [ $HOSTNAME == 'kl2' ] || [ $HOSTNAME == 'kl3' ] || [ $HOSTNAME == 'kl4' ]
+then
+    echo "------------- Kestrel--------------"
+    export EXAWIND_MANAGER=/scratch/ebranlar/exawind-manager
 
-
+    echo ""
+    echo "source ${EXAWIND_MANAGER}/start.sh && spack-start"
+    echo "spack env list"
+    echo "spack env activate exawind-cpu"
+    echo "spack load nalu-wind"
+    echo "-----------------------------------"
+    alias qq='squeue -o "%.12i %.40j     %.2t %.10M %.6D %R" -u ebranlar'
 else
-    alias ls='ls -F --color=always '
     echo "No bashrc specific commands for this hosts."
 fi
