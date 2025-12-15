@@ -13,10 +13,11 @@
 [help]
 	autocorrect = 1
 
-
 [user]
 	name = Emmanuel Branlard
 	email = ebranlard@umass.edu
 
 [push]
 	default = simple
+[init]
+	defaultBranch = main

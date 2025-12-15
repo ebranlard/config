@@ -38,6 +38,10 @@ RESET="\033[0m"
 
 
 function git_clr {
+    if [[ $(pwd) == /mnt/c* ]]; then
+        echo -e $WHITE
+        return
+    fi
     local git_status="$(git status 2> /dev/null)"
     if [[ ! $git_status =~ "working directory clean" ]]; then
         echo -e $RED
@@ -51,6 +55,10 @@ function git_clr {
 }
 
 function git_ps1 {
+    if [[ $(pwd) == /mnt/c* ]]; then
+        echo "(/mnt/c)"
+        return
+    fi
     local git_status="$(git status 2> /dev/null)"
     local on_branch="On branch ([^${IFS}]*)"
     local on_commit="HEAD detached at ([^${IFS}]*)"
@@ -68,43 +76,29 @@ function git_ps1 {
 # --------------------------------------------------------------------------------
 # --- Host specific commands
 # --------------------------------------------------------------------------------
-if [ $HOSTNAME == 'debian' ]
+if [ $HOSTNAME == 'ECS-198268' ]
 then
-    # nothing so far
-    export PATH=$PATH
+    echo "------------- WORK ---------------"
+    export SPACK_ROOT=~/spack
+    echo "SPACK_ROOT      : $SPACK_ROOT"
+    echo "source $SPACK_ROOT/share/spack/setup-env.sh"
+    #echo "cd ${SPACK_BUILD_ROOT/configs && ./setup-spack.sh"
 
-elif [ $HOSTNAME == 'work' ]
-then
-    source /opt/intel/bin/compilervars.sh intel64
-    alias vtune='source /opt/intel/vtune_amplifier_xe_2013/amplxe-vars.sh'
-
-    export PATH=$PATH:/work/lib/OmniVor/_src/_bin/linux-amd64
-    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
-
-    export PS1="\[\$(git_clr)\]\$(git_ps1)$BYellow\u$BGreen@$BYellow\h:$BGreen\w $BYellow\$ $Color_Off"
-
-elif [ $HOSTNAME == 'olympe' ]
-then
-
-    UNAME=`uname -a |awk -F_ '{print $1}'|awk '{print $1}'`
-    if [ "$UNAME" == 'CYGWIN' ] 
-    then
-        echo "-"$UNAME"-"
-    else
-        source /opt/intel/bin/compilervars.sh intel64
-        export PATH=$PATH:/home/manu/Work-tmp/omnivor/_src/_bin/linux-amd64
-    fi
-elif [ $HOSTNAME == 'login3' ]
-then
-    alias ls='ls -F --group-directories-first'
-elif [ $HOSTNAME == 'el1' ] || [ $HOSTNAME == 'el2' ] || [ $HOSTNAME == 'el3' ]
-then
-    echo "Eagle"
-    alias ls='ls -F --group-directories-first --color=always'
-    #export PATH="$HOME/_env/anaconda2/bin:$PATH"
-    export PATH="$HOME/_env/anaconda3/bin:$PATH"
-    #source activate py3
-
+    echo "Sourcing spack+nalu-wind"
+    PS1='(spack) '"${PS1:-}"
+    export PS1
+    source $SPACK_ROOT/share/spack/setup-env.sh
+    #    erzakih nalu-wind@2.3.0 arch=linux-ubuntu24.04-skylake %gcc@13.3.0 # TRILINOS
+    #    v5qmfpn nalu-wind@2.3.0 arch=linux-ubuntu24.04-skylake %gcc@13.3.0 # SHARED
+    spack load nalu-wind/v
+    #     source /opt/intel/bin/compilervars.sh intel64
+    #     alias vtune='source /opt/intel/vtune_amplifier_xe_2013/amplxe-vars.sh'
+    # 
+    #     export PATH=$PATH:/work/lib/OmniVor/_src/_bin/linux-amd64
+    #     export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
+    # 
+    #     export PS1="\[\$(git_clr)\]\$(git_ps1)$BYellow\u$BGreen@$BYellow\h:$BGreen\w $BYellow\$ $Color_Off"
+    echo "-----------------------------------"
 elif [ $HOSTNAME == 'kl1' ] || [ $HOSTNAME == 'kl2' ] || [ $HOSTNAME == 'kl3' ] || [ $HOSTNAME == 'kl4' ]
 then
     echo "------------- Kestrel--------------"
@@ -118,5 +112,6 @@ then
     echo "-----------------------------------"
     alias qq='squeue -o "%.12i %.40j     %.2t %.10M %.6D %R" -u ebranlar'
 else
-    echo "No bashrc specific commands for this hosts."
+    echo "No bashrc specific commands for this host: >$HOSTNAME<."
 fi
+
