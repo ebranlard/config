@@ -72,6 +72,8 @@ function git_ps1 {
     echo "$branch_or_commit"
 }
 
+# export PS1="\[\$(git_clr)\]\$(git_ps1)$BYellow\u$BGreen@$BYellow\h:$BGreen\w $BYellow\$ $Color_Off"
+# export PS1="$BYellow\u$BGreen@$BYellow\h:$BGreen\w $BYellow\$ $Color_Off"
 
 # --------------------------------------------------------------------------------
 # --- Host specific commands
@@ -99,12 +101,29 @@ then
     # 
     #     export PS1="\[\$(git_clr)\]\$(git_ps1)$BYellow\u$BGreen@$BYellow\h:$BGreen\w $BYellow\$ $Color_Off"
     echo "-----------------------------------"
+elif [ $HOSTNAME == 'login1' ] || [ $HOSTNAME == 'login2' ] || [ $HOSTNAME == 'login3' ] || [ $HOSTNAME == 'login4' ] 
+then
+    echo "------------- Unity ---------------"
+    export EXAWIND_MANAGER=/work/pi_ebranlard_umass_edu/exawind-manager/
+    echo "> Commands for exawind:"
+    echo ""
+    echo "module load  intel-oneapi-compilers/2024.1.0"
+    echo "module load mpich/4.2.1"
+    echo "module load python"
+    echo "module load python/3.12.3"
+    echo ""
+    echo "source ${EXAWIND_MANAGER}/start.sh && spack-start"
+    echo "spack env activate -d ${EXAWIND_MANAGER}/environments/exawind-cpu"
+    echo "spack load exawind"
+    echo ""
+    echo "-----------------------------------"
+    alias qq='squeue -o "%.12i %.40j     %.2t %.10M %.6D %R" -u ebranlard_umass_edu'
+
 elif [ $HOSTNAME == 'kl1' ] || [ $HOSTNAME == 'kl2' ] || [ $HOSTNAME == 'kl3' ] || [ $HOSTNAME == 'kl4' ]
 then
     echo "------------- Kestrel--------------"
     export EXAWIND_MANAGER=/scratch/ebranlar/exawind-manager
-
-    echo ""
+    echo "> Commands for exawind:"
     echo "source ${EXAWIND_MANAGER}/start.sh && spack-start"
     echo "spack env list"
     echo "spack env activate exawind-cpu"
